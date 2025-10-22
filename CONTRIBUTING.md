@@ -158,7 +158,7 @@ Semantic versioning and releases are automated in CI using `python-semantic-rele
 
 PR titles are validated automatically and must follow this format:
 
-```
+```text
 <type>(<optional scope>): <description>
 ```
 
