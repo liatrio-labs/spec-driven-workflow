@@ -43,33 +43,83 @@
 
 **Important:** The slash command generator and MCP server functionality have been extracted into a separate repository: **[Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager)**.
 
-### Quick Migration Guide
+### What Changed
 
-- **Old command:** `sdd-commands` (from `spec-driven-workflow`)
-- **New command:** `slash-man` (from `slash-command-manager`)
+- **Old CLI entry point:** `sdd-commands` (from `spec-driven-workflow`)
+- **New CLI entry point:** `slash-man` (from `slash-command-manager`)
+- **Old MCP server:** `spec-driven-workflow-mcp`
+- **New MCP server:** `slash-command-manager-mcp`
 
-### Installation
+### Quick Migration Steps
 
-Install Slash Command Manager:
+#### 1. Install Slash Command Manager
 
 ```bash
 # Via uvx (recommended)
 uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-man generate --yes
 
-# Or install locally
+# Or from source
 git clone https://github.com/liatrio-labs/slash-command-manager.git
 cd slash-command-manager
 pip install -e .
 slash-man generate --yes
 ```
 
-**This repository now focuses on:**
+#### 2. Update Your Scripts and CI/CD
 
-- The SDD workflow prompts (`prompts/`)
-- Documentation and workflow guidance
-- Reference materials
+Replace any references to `sdd-commands` with `slash-man`:
 
-The generator CLI and MCP server remain available via the [Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager) repository.
+```bash
+# Old
+sdd-commands generate --yes
+
+# New
+slash-man generate --yes
+```
+
+If you were installing from the old repository:
+
+```bash
+# Old
+uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow sdd-commands generate --yes
+
+# New
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-man generate --yes
+```
+
+#### 3. MCP Server Configuration
+
+If you use the MCP server, update your configuration:
+
+```bash
+# Old
+uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow spec-driven-workflow-mcp
+
+# New
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager-mcp
+```
+
+### Backward Compatibility
+
+**⚠️ Breaking Changes:**
+
+- The `sdd-commands` CLI entry point is no longer available from this repository
+- The `spec-driven-workflow-mcp` server entry point is no longer available from this repository
+- Package dependencies (`fastmcp`, `questionary`, `typer`, etc.) are no longer included in `spec-driven-workflow`
+
+**✅ No Breaking Changes:**
+
+- The SDD workflow prompts (`prompts/`) remain unchanged and continue to work as before
+- Generated slash command files are compatible with both old and new versions
+- All functionality is preserved, just in a separate package
+
+### This Repository Now Focuses On
+
+- **SDD workflow prompts** (`prompts/`) — The three core prompts for spec-driven development
+- **Documentation and workflow guidance** — Usage patterns, best practices, and examples
+- **Reference materials** — Example specs, task lists, and workflow documentation
+
+The generator CLI and MCP server are now maintained in the [Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager) repository with independent versioning and release cycles.
 
 ## Highlights
 
