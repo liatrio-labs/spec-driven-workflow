@@ -20,7 +20,8 @@
 1. Install the workflow prompts as slash commands in all your [local AI tools](#supported-ai-tools):
 
     ```bash
-    uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow sdd-commands generate --yes
+    # Use Slash Command Manager (new location)
+    uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-man generate --yes
     ```
 
 2. In your AI tool of choice, use `/generate-spec` with your idea:
@@ -37,6 +38,38 @@
     - Use `/manage-tasks` → Execute tasks one-by-one with proof artifacts
 
 4. **SHIP IT** 🚢💨
+
+## ⚠️ Migration Notice: Generator and MCP Functionality Moved
+
+**Important:** The slash command generator and MCP server functionality have been extracted into a separate repository: **[Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager)**.
+
+### Quick Migration Guide
+
+- **Old command:** `sdd-commands` (from `spec-driven-workflow`)
+- **New command:** `slash-man` (from `slash-command-manager`)
+
+### Installation
+
+Install Slash Command Manager:
+
+```bash
+# Via uvx (recommended)
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-man generate --yes
+
+# Or install locally
+git clone https://github.com/liatrio-labs/slash-command-manager.git
+cd slash-command-manager
+pip install -e .
+slash-man generate --yes
+```
+
+**This repository now focuses on:**
+
+- The SDD workflow prompts (`prompts/`)
+- Documentation and workflow guidance
+- Reference materials
+
+The generator CLI and MCP server remain available via the [Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager) repository.
 
 ## Highlights
 
@@ -163,34 +196,49 @@ The slash command generator currently supports the following AI coding assistant
 | VS Code      | `~/.config/Code/User/prompts`                    |
 | Windsurf     | `~/.codeium/windsurf/global_workflows`           |
 
-For full setup and agent-specific details, see [docs/slash-command-generator.md](./docs/slash-command-generator.md).
+For full setup and agent-specific details, see the [Slash Command Manager documentation](https://github.com/liatrio-labs/slash-command-manager).
 
 #### Slash Command Installation
 
-Generate slash commands for your AI coding assistant and use the prompts as native commands:
+Generate slash commands for your AI coding assistant using Slash Command Manager:
 
 ```bash
-# Clone and install locally
-git clone https://github.com/liatrio-labs/spec-driven-workflow.git
-cd spec-driven-workflow
-uv sync
-uv run sdd-commands generate --yes
+# Via uvx (recommended)
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-man generate --yes
 
-# Or run directly from the git repo via uvx
-uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow sdd-commands generate --yes
+# Or install locally
+git clone https://github.com/liatrio-labs/slash-command-manager.git
+cd slash-command-manager
+pip install -e .
+slash-man generate --yes
 ```
 
 This will auto-detect your configured AI assistants (Claude Code, Cursor, Windsurf, etc.) and generate command files in your home directory.
 
-**Note**: Once available on PyPI, you'll be able to run `uvx spec-driven-workflow sdd-commands generate --yes` for a one-liner installation.
+**Note**: Once available on PyPI, you'll be able to run `uvx slash-command-manager slash-man generate --yes` for a one-liner installation.
 
-See [docs/slash-command-generator.md](./docs/slash-command-generator.md) for details.
+See the [Slash Command Manager README](https://github.com/liatrio-labs/slash-command-manager) for details.
 
 ### Option 3: MCP Server (Advanced)
 
 Run the prompts as an MCP server for programmatic access. This option is most useful for custom integrations and tools that support MCP.
 
+**Installation and Usage:**
+
+```bash
+# Via uvx (recommended)
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager-mcp
+
+# Or install locally
+git clone https://github.com/liatrio-labs/slash-command-manager.git
+cd slash-command-manager
+pip install -e .
+python server.py
+```
+
 > Note: MCP prompt support is not uniformly supported across AI tools. See [docs/mcp-prompt-support.md](./docs/mcp-prompt-support.md) for details.
+>
+> **Migration:** The MCP server has been moved to [Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager). This repository retains the prompts for reference, but the server implementation is now in the separate repository.
 
 ### Workflow Essentials
 
@@ -211,33 +259,7 @@ uv sync
 
 ### Run the MCP Server
 
-**STDIO (local development):**
-
-```bash
-# From local clone
-uvx fastmcp run server.py
-
-# Or run directly from the git repo via uvx
-uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow spec-driven-workflow-mcp
-```
-
-**With MCP Inspector:**
-
-```bash
-uvx fastmcp dev server.py
-```
-
-**HTTP Transport:**
-
-```bash
-# Use fastmcp CLI for HTTP transport
-uvx fastmcp run server.py --transport http --port 8000
-
-# Or run directly from the git repo via uvx
-uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow spec-driven-workflow-mcp --transport http --port 8000
-```
-
-**Note**: Once available on PyPI, you'll be able to run `uvx spec-driven-workflow` for a one-liner installation with optional `--transport` and `--port` arguments. The `fastmcp run` approach remains available for development and advanced options.
+The MCP server has been moved to the [Slash Command Manager](https://github.com/liatrio-labs/slash-command-manager) repository. See that repository's documentation for installation and usage instructions.
 
 See [docs/operations.md](docs/operations.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for advanced configuration, deployment, and contribution guidelines.
 
