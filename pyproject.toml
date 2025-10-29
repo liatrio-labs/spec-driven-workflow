@@ -20,21 +20,12 @@ dev = [
     "ty>=0.0.1a21",
 ]
 
+# Note: This repository no longer publishes as a Python package.
+# It is now docs-only (prompts and documentation).
+# Build system retained for tooling compatibility only.
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[project.scripts]
-spec-driven-workflow = "server:main"
-sdd-commands = "slash_commands.cli:main"
-
-[tool.hatch.build.targets.wheel]
-packages = ["mcp_server", "slash_commands"]
-
-[tool.hatch.build.targets.wheel.force-include]
-"server.py" = "server.py"
-"__version__.py" = "__version__.py"
-"prompts/" = "prompts/"
 
 
 # --- Ruff (linter + formatter) ---
