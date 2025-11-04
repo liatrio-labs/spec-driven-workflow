@@ -48,7 +48,7 @@
 - **Old CLI entry point:** `sdd-commands` (from `spec-driven-workflow`)
 - **New CLI entry point:** `slash-man` (from `slash-command-manager`)
 - **Old MCP server:** `spec-driven-workflow-mcp`
-- **New MCP server:** `slash-command-manager-mcp`
+- **New MCP server:** `slash-command-manager`
 
 ### Quick Migration Steps
 
@@ -96,7 +96,7 @@ If you use the MCP server, update your configuration:
 uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow spec-driven-workflow-mcp
 
 # New
-uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager-mcp
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager
 ```
 
 ### Backward Compatibility
@@ -277,7 +277,7 @@ Run the prompts as an MCP server for programmatic access. This option is most us
 
 ```bash
 # Via uvx (recommended)
-uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager-mcp
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager slash-command-manager
 
 # Or install locally
 git clone https://github.com/liatrio-labs/slash-command-manager.git
