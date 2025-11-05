@@ -141,8 +141,14 @@ If the feature involves existing systems, briefly review the codebase and existi
 - Relevant existing components or features
 - Integration constraints or dependencies
 - Files that might need modification or extension
+- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
+  - Project documentation (README.md, CONTRIBUTING.md, docs/)
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
+  - Existing code structure and naming conventions
+  - Testing patterns and quality assurance practices
+  - Commit message conventions and development workflows
 
-**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable.
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
 
 ## Step 4: Spec Generation
 
@@ -197,6 +203,16 @@ Generate a comprehensive specification using this exact structure:
 
 [Focus on UI/UX requirements and visual design. Link to mockups or describe interface requirements. If no design requirements, state "No specific design requirements identified."]
 
+## Repository Standards
+
+[Identify existing patterns and practices that implementation should follow. Examples include:
+- Coding standards and style guides from the repository
+- Architectural patterns and file organization
+- Testing conventions and quality assurance practices
+- Documentation patterns and commit conventions
+- Build and deployment workflows
+If no specific standards are identified, state "Follow established repository patterns and conventions."]
+
 ## Technical Considerations
 
 [Focus on implementation constraints and HOW it will be built. Mention technical constraints, dependencies, or architectural decisions. If no technical constraints, state "No specific technical constraints identified."]
@@ -244,6 +260,7 @@ Iterate based on feedback until the user is satisfied.
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
 - Skip the clarifying questions phase, even if the prompt seems clear
+- Ignore existing repository patterns and conventions
 
 **ALWAYS:**
 
@@ -253,6 +270,7 @@ Iterate based on feedback until the user is satisfied.
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts and demo criteria for each work unit
+- Follow identified repository standards and patterns in all requirements
 
 ## What Comes Next
 

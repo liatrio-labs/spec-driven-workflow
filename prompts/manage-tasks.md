@@ -84,6 +84,8 @@ For each parent task, follow this structured workflow with built-in verification
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
 [ ] Confirm demo criteria for current parent task
+[ ] Review repository standards and patterns identified in spec
+[ ] Verify required tools and dependencies are available
 ```
 
 ### Phase 2: Sub-Task Execution
@@ -94,10 +96,11 @@ For each parent task, follow this structured workflow with built-in verification
 For each sub-task in the parent task:
 
 1. **Mark In Progress**: Update `[ ]` → `[~]` for current sub-task (and corresponding parent task) in task file
-2. **Implement**: Complete the sub-task work
-3. **Test**: Verify implementation works as expected
-4. **Mark Complete**: Update `[~]` → `[x]` for current sub-task
-5. **Save Task File**: Immediately save changes to task file
+2. **Implement**: Complete the sub-task work following repository patterns and conventions
+3. **Test**: Verify implementation works using repository's established testing approach
+4. **Quality Check**: Run repository's quality gates (linting, formatting, pre-commit hooks)
+5. **Mark Complete**: Update `[~]` → `[x]` for current sub-task
+6. **Save Task File**: Immediately save changes to task file
 
 **VERIFICATION**: Confirm sub-task is marked `[x]` before proceeding to next sub-task
 ```
@@ -109,7 +112,8 @@ For each sub-task in the parent task:
 
 When all sub-tasks are `[x]`, complete these steps IN ORDER:
 
-[ ] **Run Test Suite**: Execute `pytest`, `npm test`, or equivalent
+[ ] **Run Test Suite**: Execute repository's test command (e.g., `pytest`, `npm test`, `cargo test`, etc.)
+[ ] **Quality Gates**: Run repository's quality checks (linting, formatting, pre-commit hooks)
 [ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/`
    - **File naming**: `[spec-number]-task-[task-number]-proofs.md` (e.g., `03-task-01-proofs.md`)
    - **Include all evidence**: CLI output, test results, screenshots, configuration examples
@@ -118,7 +122,7 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
    - **Verify creation**: Confirm the markdown file exists and contains all required evidence
 [ ] **Verify Demo Criteria**: Confirm all demo requirements are met
 [ ] **Stage Changes**: `git add .`
-[ ] **Create Commit**: Use conventional format with task reference
+[ ] **Create Commit**: Use repository's commit format and conventions
 
     ```bash
     git add .
@@ -135,8 +139,9 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
 1. **Verify Proof File**: Confirm `[spec-number]-task-[task-number]-proofs.md` exists and contains evidence
 2. **Verify Git Commit**: Run `git log --oneline -1` and confirm commit is present
 3. **Verify Task File**: Confirm parent task is marked `[x]` in the task file
+4. **Verify Pattern Compliance**: Confirm implementation follows repository standards
 
-**Only after ALL THREE verifications pass may you proceed to the next parent task**
+**Only after ALL FOUR verifications pass may you proceed to the next parent task**
 **CRITICAL VERIFICATION**: All items must be checked before moving to next parent task
 
 ```
@@ -151,12 +156,15 @@ After each parent task completion, verify:
 [ ] Task file shows parent task as `[x]`
 [ ] Proof artifacts exist in correct directory with proper naming
 [ ] Git commit created with proper format (verify with `git log --oneline -1`)
-[ ] All tests are passing
+[ ] All tests are passing using repository's test approach
 [ ] Demo criteria are satisfied
 [ ] Commit message includes task reference and spec number
+[ ] Repository quality gates pass (linting, formatting, etc.)
+[ ] Implementation follows identified repository patterns and conventions
 
 **PROOF ARTIFACT VERIFICATION**: Confirm files exist and contain expected content
 **COMMIT VERIFICATION**: Confirm git history shows the commit before proceeding
+**PATTERN COMPLIANCE VERIFICATION**: Confirm repository standards are followed
 
 **If any item fails, fix it before proceeding to next parent task**
 ```
@@ -309,9 +317,12 @@ Implementation is successful when:
 
 - All parent tasks are marked `[x]` in task file
 - Proof artifacts exist for each parent task
-- Git commits follow conventional format with proper frequency
-- All tests pass and demo criteria are met
+- Git commits follow repository format with proper frequency
+- All tests pass using repository's testing approach
+- Demo criteria are met
+- Repository quality gates pass consistently
 - Task file accurately reflects final status
+- Implementation follows established repository patterns and conventions
 
 ## What Comes Next
 

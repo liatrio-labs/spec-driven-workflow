@@ -111,6 +111,7 @@ Before generating any tasks, you must follow this reasoning process:
    - Files that will need modification
    - Testing patterns and infrastructure
    - Contribution patterns and conventions
+   - **Repository Standards**: Identify coding standards, build processes, quality gates, and development workflows from project documentation and configuration
 4. **Define Demoable Units:** Identify thin, end-to-end vertical slices. Each parent task must be demonstrable.
 5. **Evaluate Scope:** Ensure tasks are appropriately sized (not too large, not too small)
 
@@ -168,7 +169,9 @@ After user confirmation in Phase 3, update the file with this complete structure
 ### Notes
 
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
-- Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
+- Use the repository's established testing command and patterns (e.g., `npx jest [optional/path/to/test/file]`, `pytest [path]`, `cargo test`, etc.).
+- Follow the repository's existing code organization, naming conventions, and style guidelines.
+- Adhere to identified quality gates and pre-commit hooks.
 
 ## Tasks
 
@@ -209,6 +212,7 @@ Write tasks and sub-tasks for a **junior developer** who:
 - Needs clear, actionable steps without ambiguity
 - Will be implementing tasks independently
 - Relies on demo criteria to verify completion
+- Must follow established repository patterns and conventions
 
 ## Quality Checklist
 
@@ -222,6 +226,8 @@ Before finalizing your task list, verify:
 - [ ] Sub-tasks are actionable and unambiguous
 - [ ] Relevant files are comprehensive and accurate
 - [ ] Format follows the exact structure specified above
+- [ ] Repository standards and patterns are identified and incorporated
+- [ ] Implementation will follow established coding conventions and workflows
 
 ## What Comes Next
 

@@ -74,6 +74,7 @@ If no spec is provided, follow this exact sequence:
 - **GATE B:** Coverage Matrix has **no `Unknown`** entries for Functional Requirements → **REQUIRED**.
 - **GATE C:** All Proof Artifacts are accessible and functional → **REQUIRED**.
 - **GATE D:** All changed files are either in "Relevant Files" list OR explicitly justified in git commit messages → **REQUIRED**.
+- **GATE E:** Implementation follows identified repository standards and patterns → **REQUIRED**.
 
 ## Evaluation Rubric (score each 0–3 to guide severity)
 
@@ -84,6 +85,7 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 - **R3 File Integrity:** All changed files are listed in "Relevant Files" and vice versa.
 - **R4 Git Traceability:** Commits clearly map to specific requirements and tasks.
 - **R5 Evidence Quality:** Evidence includes specific file paths, line numbers, and artifact outputs.
+- **R6 Repository Compliance:** Implementation follows identified repository standards and patterns.
 
 ## Validation Process (step-by-step chain-of-thought)
 
@@ -108,17 +110,19 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 - **First**, identify all files changed since the spec was created
 - **Then**, map each changed file to the "Relevant Files" list (or note justification)
 - **Next**, extract all Functional Requirements and Demoable Units from the Spec
+- **Also**, parse Repository Standards from the Spec
 - **Finally**, parse all Proof Artifacts from the task list
 
 ### Step 4 — Evidence Verification
 
-For each Functional Requirement and Demoable Unit:
+For each Functional Requirement, Demoable Unit, and Repository Standard:
 
 1) Pose a verification question (e.g., "Is FR-3 implemented in the changed files?").
 2) Verify with independent checks:
    - Search changed files for requirement implementation (glob/grep)
    - Test each Proof Artifact (URLs, CLI commands, test references)
    - Verify file content matches requirement specifications
+   - Check repository pattern compliance
 3) Record **evidence** (file paths + line ranges, artifact outputs, commit references).
 4) Mark each item **Verified**, **Failed**, or **Unknown**.
 
@@ -140,7 +144,13 @@ For each Functional Requirement and Demoable Unit:
    - Demo Criteria are satisfied by the implementation
    - Code structure follows spec specifications
 
-4) **Git Traceability**
+4) **Repository Compliance**: Implementation follows identified repository patterns and conventions
+   - Verify coding standards compliance
+   - Check testing pattern adherence
+   - Validate quality gate passage
+   - Confirm workflow convention compliance
+
+5) **Git Traceability**
    - Commits clearly relate to specific tasks/requirements
    - Implementation story is coherent through commit history
    - No unrelated or unexpected changes
@@ -152,6 +162,8 @@ For each Functional Requirement and Demoable Unit:
 - Functional Requirements with no implementation evidence
 - Git commits unrelated to spec implementation
 - Any `Unknown` entries in the Coverage Matrix
+- Repository pattern violations (coding standards, quality gates, workflows)
+- Implementation that ignores identified repository conventions
 
 ## Output (single human-readable Markdown report)
 
@@ -163,7 +175,7 @@ For each Functional Requirement and Demoable Unit:
 
 ### 2) Coverage Matrix (required)
 
-Provide two tables (edit as needed):
+Provide three tables (edit as needed):
 
 #### Functional Requirements
 
@@ -171,6 +183,15 @@ Provide two tables (edit as needed):
 | --- | --- | --- |
 | FR-1 | Verified | `src/feature/x.ts#L10-L58`; commit `abc123` |
 | FR-2 | Failed | No implementation found in changed files |
+
+#### Repository Standards
+
+| Standard Area | Status (Verified/Failed/Unknown) | Evidence & Compliance Notes |
+| --- | --- | --- |
+| Coding Standards | Verified | Follows repository's style guide and conventions |
+| Testing Patterns | Verified | Uses repository's established testing approach |
+| Quality Gates | Verified | Passes all repository quality checks |
+| Documentation | Failed | Missing required documentation patterns |
 
 #### Proof Artifacts
 
