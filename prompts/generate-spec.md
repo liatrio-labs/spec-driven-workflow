@@ -211,8 +211,8 @@ Iterate based on feedback until the user is satisfied.
 ## Output Requirements
 
 **Format:** Markdown (`.md`)
-**Location:** `./docs/specs/`
-**Filename:** `[n]-spec-[feature-name].md` (Where `n` is a zero-padded 2-digit sequence starting from 01, e.g., `01-spec-user-authentication.md`)
+**Location:** `./docs/specs/[n]-spec-[feature-name]/` (Where `n` is a zero-padded 2-digit sequence starting from 01, e.g., `01-spec-user-authentication/`)
+**Filename:** `[n]-spec-[feature-name].md`
 
 ## Critical Constraints (Negative Instructions)
 
@@ -249,7 +249,7 @@ Once this spec is complete and approved, the user should run `/generate-task-lis
    - **Demoable Units** focus on tangible progress and WHAT will be shown
    - **Functional Requirements** focus on system behavior and WHAT the system must do
    - **Technical Considerations** focus on implementation constraints and HOW it will be built
-6. Save to `./docs/specs/[n]-spec-[feature-name].md`
+6. Save to `./docs/specs/[n]-spec-[feature-name]/[n]-spec-[feature-name].md`
 7. Review with user and refine until satisfied
 8. Guide user to the next workflow step (`/generate-task-list-from-spec`)
 9. Stop working once user confirms spec is complete
