@@ -32,9 +32,10 @@ If the user did not include an initial input or reference for the spec, ask the 
 
 1. **Initial Assessment** - Evaluate the user input for scope appropriateness
 2. **Clarifying Questions** - Gather detailed requirements through structured inquiry
-3. **Scope Validation** - Ensure the feature is appropriately sized
-4. **Spec Generation** - Create the detailed specification document
-5. **Review and Refine** - Validate completeness and clarity with the user
+3. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
+4. **Scope Validation** - Ensure the feature is appropriately sized considering requirements and context
+5. **Spec Generation** - Create the detailed specification document
+6. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Initial Scope Assessment
 
@@ -108,11 +109,22 @@ Adapt your questions based on the user's input. Use the following common areas t
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
-## Step 3: Scope Validation
+## Step 3: Context Assessment (Optional)
 
-After gathering initial responses, validate that the scope remains appropriate. If the answers revealed additional complexity, reassess whether the feature needs to be split or refined.
+If the feature involves existing systems, briefly review the codebase and existing docs to understand:
 
-## Step 4: Spec Generation
+- Current architecture patterns and conventions
+- Relevant existing components or features
+- Integration constraints or dependencies
+- Files that might need modification or extension
+
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable.
+
+## Step 4: Scope Validation
+
+After gathering initial responses and context, validate that the scope remains appropriate. Consider both the user requirements and the existing codebase context. If the answers revealed additional complexity or constraints, reassess whether the feature needs to be split or refined.
+
+## Step 5: Spec Generation
 
 Generate a comprehensive specification using this exact structure:
 
@@ -185,7 +197,7 @@ FR3. [Requirement 3 - clear, testable, unambiguous]
 - [Question 2]
 ```
 
-## Step 5: Review and Refinement
+## Step 6: Review and Refinement
 
 After generating the spec, present it to the user and ask:
 
@@ -229,9 +241,10 @@ Once this spec is complete and approved, the user should run `/generate-task-lis
 
 1. Assess scope appropriateness using the provided examples
 2. Ask clarifying questions with numbered/lettered options
-3. Validate scope based on user responses
-4. Generate spec using the exact structure provided
-5. Save to `./docs/specs/[n]-spec-[feature-name].md`
-6. Review with user and refine until satisfied
-7. Guide user to the next workflow step (`/generate-task-list-from-spec`)
-8. Stop working once user confirms spec is complete
+3. Review existing codebase for relevant context (optional)
+4. Validate scope based on user responses and context
+5. Generate spec using the exact structure provided
+6. Save to `./docs/specs/[n]-spec-[feature-name].md`
+7. Review with user and refine until satisfied
+8. Guide user to the next workflow step (`/generate-task-list-from-spec`)
+9. Stop working once user confirms spec is complete
