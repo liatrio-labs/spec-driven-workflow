@@ -110,13 +110,12 @@ For each sub-task in the parent task:
 When all sub-tasks are `[x]`, complete these steps IN ORDER:
 
 [ ] **Run Test Suite**: Execute `pytest`, `npm test`, or equivalent
-[ ] **Create Proof Artifacts**: Generate ALL proof artifacts specified in the task's demo criteria in `./docs/specs/[spec-directory]/[n]-proofs/`
-   - Follow exactly what the task list specifies for demo artifacts
-   - **Use task number in naming**: For Task 1.0 use `01-`, Task 2.0 use `02-`, etc.
-   - **Naming format**: `[spec-number]-[task-number]-[artifact-name].[ext]` (e.g., `03-01-unified-help.txt` for Task 1.0)
-   - Include CLI output, test results, screenshots, or any other evidence required
-   - **Execute commands immediately**: `command > artifact.txt` or `screenshot-tool > artifact.png`
-   - **Verify creation**: `ls -la ./docs/specs/[spec-directory]/[n]-proofs/`
+[ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[spec-directory]/[n]-proofs/`
+   - **File naming**: `[spec-number]-task-[task-number]-proofs.md` (e.g., `03-task-01-proofs.md`)
+   - **Include all evidence**: CLI output, test results, screenshots, configuration examples
+   - **Format**: Use markdown code blocks with clear section headers
+   - **Execute commands immediately**: Capture command output directly in the markdown file
+   - **Verify creation**: Confirm the markdown file exists and contains all required evidence
 [ ] **Verify Demo Criteria**: Confirm all demo requirements are met
 [ ] **Stage Changes**: `git add .`
 [ ] **Create Commit**: Use conventional format with task reference
@@ -133,8 +132,7 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
 [ ] **Save Task File**: Commit the updated task file
 
 **BLOCKING VERIFICATION**: Before proceeding to next parent task, you MUST:
-
-1. **Verify Proof Artifacts**: Run `ls -la ./docs/specs/[spec-directory]/[n]-proofs/` and confirm files exist
+1. **Verify Proof File**: Confirm `[spec-number]-task-[task-number]-proofs.md` exists and contains evidence
 2. **Verify Git Commit**: Run `git log --oneline -1` and confirm commit is present
 3. **Verify Task File**: Confirm parent task is marked `[x]` in the task file
 
@@ -201,21 +199,22 @@ Each parent task must include artifacts that:
 For each parent task completion:
 
 [ ] **Directory Ready**: `./docs/specs/[spec-directory]/[n]-proofs/` exists
-[ ] **Review Task Requirements**: Check what demo artifacts the task specifically requires
-[ ] **Create Required Artifacts**: Generate ALL proof artifacts specified in the task's demo criteria
-[ ] **Use Task Number in Naming**:
-   - Task 1.0 artifacts: Use `01-` prefix (e.g., `03-01-unified-help.txt`)
-   - Task 2.0 artifacts: Use `02-` prefix (e.g., `03-02-server-startup.txt`)
-   - Task 3.0 artifacts: Use `03-` prefix (e.g., `03-03-config-validation.txt`)
-   - Task 4.0 artifacts: Use `04-` prefix (e.g., `03-04-entry-points.txt`)
-[ ] **Verify Content**: Confirm artifacts contain the evidence required by the task
-[ ] **Validate Demo Criteria**: Ensure artifacts demonstrate the demo requirements are met
+[ ] **Review Task Requirements**: Check what demo evidence the task specifically requires
+[ ] **Create Single Proof File**: Create `[spec-number]-task-[task-number]-proofs.md`
+[ ] **Include All Evidence in One File**:
+   - ## CLI Output section with command results
+   - ## Test Results section with test output
+   - ## Screenshots section with image references
+   - ## Configuration section with config examples
+   - ## Demo Validation section showing criteria met
+[ ] **Format with Markdown**: Use code blocks, headers, and clear organization
+[ ] **Verify File Content**: Ensure the markdown file contains all required evidence
 
-**TASK-DRIVEN VERIFICATION**: Artifacts must match exactly what the task specifies
-**NAMING VERIFICATION**: Confirm files use correct task number prefix
-**CONTENT VERIFICATION**: Ensure artifacts provide evidence for the specific demo criteria in the task
+**SIMPLE VERIFICATION**: One file per task, all evidence included
+**CONTENT VERIFICATION**: Check the markdown file contains required sections
+**DEMO VERIFICATION**: Ensure file demonstrates all demo criteria are met
 
-**Proof artifacts must be created BEFORE the parent task commit**
+**The single markdown proof file must be created BEFORE the parent task commit**
 ```
 
 ## Git Workflow Protocol
