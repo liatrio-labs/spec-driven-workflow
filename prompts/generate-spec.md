@@ -141,60 +141,60 @@ Generate a comprehensive specification using this exact structure:
 
 ## User Stories
 
-[Detail 3-5 user narratives using the format: "As a [type of user], I want to [perform an action] so that [benefit]."]
+[Focus on user motivation and WHY they need this. Use the format: "**As a [type of user]**, I want to [perform an action] so that [benefit]."]
 
 ## Demoable Units of Work
 
-[Define 2-4 small, end-to-end vertical slices. For each slice include:]
+[Focus on tangible progress and WHAT will be demonstrated. Define 2-4 small, end-to-end vertical slices using the format below.]
 
-### [Work Unit 1]: [Title]
+### [Unit 1]: [Title]
 **Purpose:** [What this slice accomplishes and who it serves]
 **Demo Criteria:** [What will be shown to verify working value]
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
 
-### [Work Unit 2]: [Title]
+### [Unit 2]: [Title]
 **Purpose:** [What this slice accomplishes and who it serves]
 **Demo Criteria:** [What will be shown to verify working value]
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
 
 ## Functional Requirements
 
-[Numbered list of specific functionalities. Each should start with "The system shall..." or "The user shall..."]
+[Focus on system behavior and WHAT the system must do. Each should start with "The system shall..." or "The user shall..."]
 
-FR1. [Requirement 1 - clear, testable, unambiguous]
-FR2. [Requirement 2 - clear, testable, unambiguous]
-FR3. [Requirement 3 - clear, testable, unambiguous]
+1. [**Requirement 1**: clear, testable, unambiguous]
+2. [**Requirement 2**: clear, testable, unambiguous]
+3. [**Requirement 3**: clear, testable, unambiguous]
 
 ## Non-Goals (Out of Scope)
 
 [Clearly state what this feature will NOT include to manage expectations and prevent scope creep.]
 
-- [Specific exclusion 1]
-- [Specific exclusion 2]
-- [Specific exclusion 3]
+1. [**Specific exclusion 1**: description]
+2. [**Specific exclusion 2**: description]
+3. [**Specific exclusion 3**: description]
 
 ## Design Considerations
 
-[Link to mockups, describe UI/UX requirements, or mention relevant components/styles. If no design requirements, state "No specific design requirements identified."]
+[Focus on UI/UX requirements and visual design. Link to mockups or describe interface requirements. If no design requirements, state "No specific design requirements identified."]
 
 ## Technical Considerations
 
-[Mention known technical constraints, dependencies, or suggestions. If no technical constraints, state "No specific technical constraints identified."]
+[Focus on implementation constraints and HOW it will be built. Mention technical constraints, dependencies, or architectural decisions. If no technical constraints, state "No specific technical constraints identified."]
 
 ## Success Metrics
 
 [How will success be measured? Include specific metrics where possible.]
 
-- [Metric 1 with target if applicable]
-- [Metric 2 with target if applicable]
-- [Metric 3 with target if applicable]
+1. [**Metric 1**: with target if applicable]
+2. [**Metric 2**: with target if applicable]
+3. [**Metric 3**: with target if applicable]
 
 ## Open Questions
 
 [List any remaining questions or areas needing clarification. If none, state "No open questions at this time."]
 
-- [Question 1]
-- [Question 2]
+1. [Question 1]
+2. [Question 2]
 ```
 
 ## Step 6: Review and Refinement
@@ -244,6 +244,11 @@ Once this spec is complete and approved, the user should run `/generate-task-lis
 3. Review existing codebase for relevant context (optional)
 4. Validate scope based on user responses and context
 5. Generate spec using the exact structure provided
+   - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
+   - **User Stories** focus on motivation and WHY
+   - **Demoable Units** focus on tangible progress and WHAT will be shown
+   - **Functional Requirements** focus on system behavior and WHAT the system must do
+   - **Technical Considerations** focus on implementation constraints and HOW it will be built
 6. Save to `./docs/specs/[n]-spec-[feature-name].md`
 7. Review with user and refine until satisfied
 8. Guide user to the next workflow step (`/generate-task-list-from-spec`)
