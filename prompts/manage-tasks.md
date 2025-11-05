@@ -80,7 +80,7 @@ For each parent task, follow this structured workflow with built-in verification
 ```markdown
 ## PRE-WORK CHECKLIST (Complete before starting any sub-task)
 
-[ ] Locate task file: `./docs/specs/[spec-directory]/[n]-tasks-[spec-name].md`
+[ ] Locate task file: `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
 [ ] Confirm demo criteria for current parent task
@@ -110,7 +110,7 @@ For each sub-task in the parent task:
 When all sub-tasks are `[x]`, complete these steps IN ORDER:
 
 [ ] **Run Test Suite**: Execute `pytest`, `npm test`, or equivalent
-[ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[spec-directory]/[n]-proofs/`
+[ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/`
    - **File naming**: `[spec-number]-task-[task-number]-proofs.md` (e.g., `03-task-01-proofs.md`)
    - **Include all evidence**: CLI output, test results, screenshots, configuration examples
    - **Format**: Use markdown code blocks with clear section headers
@@ -171,8 +171,8 @@ After each parent task completion, verify:
 
 ### File Location Requirements
 
-- **Task List**: `./docs/specs/[spec-directory]/[n]-tasks-[spec-name].md`
-- **Proof Artifacts**: `./docs/specs/[spec-directory]/[n]-proofs/`
+- **Task List**: `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
+- **Proof Artifacts**: `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/`
 - **Naming Convention**: `[spec]-[task]-[artifact-type].[ext]`
 
 ### File Update Protocol
@@ -198,7 +198,7 @@ Each parent task must include artifacts that:
 
 For each parent task completion:
 
-[ ] **Directory Ready**: `./docs/specs/[spec-directory]/[n]-proofs/` exists
+[ ] **Directory Ready**: `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/` exists
 [ ] **Review Task Requirements**: Check what demo evidence the task specifically requires
 [ ] **Create Single Proof File**: Create `[spec-number]-task-[task-number]-proofs.md`
 [ ] **Include All Evidence in One File**:
@@ -312,3 +312,7 @@ Implementation is successful when:
 - Git commits follow conventional format with proper frequency
 - All tests pass and demo criteria are met
 - Task file accurately reflects final status
+
+## What Comes Next
+
+Once this task implementation is complete and all proof artifacts are created, instruct the user to run `/validate-spec-implementation` to verify the implementation meets all spec requirements. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.

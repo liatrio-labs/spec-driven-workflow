@@ -96,7 +96,7 @@ Before generating any tasks, you must follow this reasoning process:
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `./docs/specs/[spec-directory]/`
+- **Location:** `./docs/specs/[n]-spec-[feature-name]/`
 - **Filename:** `[n]-tasks-[feature-name].md` (e.g., if the Spec is `01-spec-user-profile-editing.md`, save as `01-tasks-user-profile-editing.md`)
 
 ## Process
@@ -121,7 +121,7 @@ Before generating any tasks, you must follow this reasoning process:
    - Have clear completion criteria
    - Follow logical dependencies
    - Be implementable in a reasonable timeframe
-2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[spec-directory]/[n]-tasks-[feature-name].md` before proceeding
+2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md` before proceeding
 3. **Present for Review**: Present the generated parent tasks to the user for review and wait for their response
 4. **Wait for Confirmation**: Pause and wait for user to respond with "Generate sub tasks"
 
@@ -131,7 +131,7 @@ Wait for explicit user confirmation before generating sub-tasks. Then:
 
 1. **Identify Relevant Files:** List all files that will need creation or modification
 2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
-3. **Update Task List:** Update the existing `./docs/specs/[spec-directory]/[n]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+3. **Update Task List:** Update the existing `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
 
 ## Phase 2 Output Format (Parent Tasks Only)
 
