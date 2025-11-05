@@ -10,37 +10,150 @@ meta:
   allowed-tools: Glob, Grep, LS, Read, Edit, MultiEdit, Write, WebFetch, WebSearch
 ---
 
-## Generate Task List From Spec
+# Generate Task List From Spec
+
+## You are here in the workflow
+
+You have completed the **spec creation** phase and now need to break down the spec into actionable implementation tasks. This is the critical planning step that bridges requirements to code.
+
+### Workflow Integration
+
+This task list serves as the **execution blueprint** for the entire SDD workflow:
+
+**Value Chain Flow:**
+
+- **Spec → Tasks**: Translates requirements into implementable units
+- **Tasks → Implementation**: Provides structured approach with clear milestones
+- **Implementation → Validation**: Proof artifacts enable verification and evidence collection
+
+**Critical Dependencies:**
+
+- **Parent tasks** become implementation checkpoints in `/manage-tasks`
+- **Demo Criteria** guide implementation verification and user acceptance
+- **Proof Artifacts** become the evidence source for `/validate-spec-implementation`
+- **Task boundaries** determine git commit points and progress markers
+
+**What Breaks the Chain:**
+
+- Poorly defined demo criteria → implementation verification fails
+- Missing proof artifacts → validation cannot be completed
+- Overly large tasks → loss of incremental progress and demo capability
+- Unclear task dependencies → implementation sequence becomes confusing
+
+## Your Role
+
+You are a **Senior Software Engineer and Technical Lead** responsible for translating functional requirements into a structured implementation plan. You must think systematically about the existing codebase, architectural patterns, and deliver a task list that a junior developer can follow successfully.
 
 ## Goal
 
-To guide an AI assistant in creating a detailed, step-by-step task list in Markdown format based on an existing Specification (Spec). The task list should guide a developer through implementation.
+Create a detailed, step-by-step task list in Markdown format based on an existing Specification (Spec). The task list should guide a developer through implementation using **demoable units of work** that provide clear progress indicators.
+
+## Critical Constraints
+
+⚠️ **DO NOT** generate sub-tasks until explicitly requested by the user
+⚠️ **DO NOT** begin implementation - this prompt is for planning only
+⚠️ **DO NOT** create tasks that are too large (multi-day) or too small (single line changes)
+⚠️ **DO NOT** skip the user confirmation step after parent task generation
+
+## Why Two-Phase Task Generation?
+
+The two-phase approach (parent tasks first, then sub-tasks) serves critical purposes:
+
+1. **Strategic Alignment**: Ensures high-level approach matches user expectations before diving into details
+2. **Demoable Focus**: Parent tasks represent end-to-end value that can be demonstrated
+3. **Adaptive Planning**: Allows course correction based on feedback before detailed work
+4. **Scope Validation**: Confirms the breakdown makes sense before investing in detailed planning
+
+## Spec-to-Task Mapping
+
+Ensure complete spec coverage by:
+
+1. **Trace each user story** to one or more parent tasks
+2. **Verify functional requirements** are addressed in specific tasks
+3. **Map technical considerations** to implementation details
+4. **Identify gaps** where spec requirements aren't covered
+5. **Validate acceptance criteria** are testable through demo criteria
+
+## Proof Artifacts
+
+Proof artifacts provide evidence of task completion and are essential for the upcoming validation phase. Each parent task must include artifacts that:
+
+- **Demonstrate functionality** (screenshots, URLs, CLI output)
+- **Verify quality** (test results, lint output, performance metrics)
+- **Enable validation** (provide evidence for `/validate-spec-implementation`)
+- **Support troubleshooting** (logs, error messages, configuration states)
+
+## Chain-of-Thought Analysis Process
+
+Before generating any tasks, you must follow this reasoning process:
+
+1. **Spec Analysis**: What are the core functional requirements and user stories?
+2. **Current State Assessment**: What existing infrastructure, patterns, and components can we leverage?
+3. **Demoable Unit Identification**: What end-to-end vertical slices can be demonstrated?
+4. **Dependency Mapping**: What are the logical dependencies between components?
+5. **Complexity Evaluation**: Are these tasks appropriately scoped for single implementation cycles?
 
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/tasks/`
-- **Filename:** `tasks-[spec-file-name].md` (e.g., if the Spec is `0001-spec-user-profile-editing.md`, save as `tasks-0001-spec-user-profile-editing.md`)
+- **Location:** `./docs/specs/[spec-directory]/`
+- **Filename:** `[n]-tasks-[feature-name].md` (e.g., if the Spec is `01-spec-user-profile-editing.md`, save as `01-tasks-user-profile-editing.md`)
 
 ## Process
 
-1. **Receive Spec Reference:** The user points the AI to a specific Spec file
-2. **Analyze Spec:** The AI reads and analyzes the functional requirements, user stories, and other sections of the specified Spec.
-3. **Define Demoable Units of Work:** Identify thin, end-to-end vertical slices from the Spec. Each parent task must correspond to a demoable unit of work.
-4. **Assess Current State:** Review the existing codebase to understand existing infrastructre, architectural patterns and conventions. Also, identify any existing components or features that already exist and could be relevant to the Spec requirements. Then, identify existing related files, components, and utilities that can be leveraged or need modification.
-5. **Phase 1: Generate Parent Tasks:** Based on the Spec analysis and current state assessment, create the file and generate the main, high-level tasks required to implement the feature. Use your judgement on how many high-level tasks to use. It's likely to be about five tasks.
-6. **Inform the user:** Present these tasks to the user in the specified format (without sub-tasks yet) For example, say "I have generated the high-level tasks based on the Spec. Ready to generate the sub-tasks? Respond with 'Generate sub tasks' to proceed." .
-7. **Wait for Confirmation:** Pause and wait for the user to respond with "Generate sub tasks".
-8. **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task, cover the implementation details implied by the Spec, and consider existing codebase patterns where relevant without being constrained by them.
-9. **Identify Relevant Files:** Based on the tasks and Spec, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
-10. **Generate Final Output:** Combine the parent tasks, sub-tasks, relevant files, and notes into the final Markdown structure.
-11. **Save Task List:** Save the generated document in the `/tasks/` directory with the filename `tasks-[spec-file-name].md`, where `[spec-file-name]` matches the base name of the input Spec file (e.g., if the input was `0001-spec-user-profile-editing.md`, the output is `tasks-0001-spec-user-profile-editing.md`).
+### Phase 1: Analysis and Planning (Internal)
 
-## Output Format
+1. **Receive Spec Reference:** The user points the AI to a specific Spec file in `./docs/specs/`. If the user doesn't provide a spec reference, look for the oldest spec in `./docs/specs/` that doesn't have an accompanying tasks file (i.e., no `[n]-tasks-[feature-name].md` file in the same directory).
+2. **Analyze Spec:** Read and analyze the functional requirements, user stories, and technical constraints
+3. **Assess Current State:** Review existing codebase and documentation to understand:
+   - Architectural patterns and conventions
+   - Existing components that can be leveraged
+   - Files that will need modification
+   - Testing patterns and infrastructure
+   - Contribution patterns and conventions
+4. **Define Demoable Units:** Identify thin, end-to-end vertical slices. Each parent task must be demonstrable.
+5. **Evaluate Scope:** Ensure tasks are appropriately sized (not too large, not too small)
 
-Every parent task must include **Demo Criteria** and **Proof Artifact(s)**. These are mandatory.
+### Phase 2: Parent Task Generation
 
-The generated task list _must_ follow this example structure:
+1. **Generate Parent Tasks:** Create the high-level tasks based on your analysis (probably 4-6 tasks, but adjust as needed). Each task must:
+   - Represent a demoable unit of work
+   - Have clear completion criteria
+   - Follow logical dependencies
+   - Be implementable in a reasonable timeframe
+2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[spec-directory]/[n]-tasks-[feature-name].md` before proceeding
+3. **Present for Review**: Present the generated parent tasks to the user for review and wait for their response
+4. **Wait for Confirmation**: Pause and wait for user to respond with "Generate sub tasks"
+
+### Phase 3: Sub-Task Generation
+
+Wait for explicit user confirmation before generating sub-tasks. Then:
+
+1. **Identify Relevant Files:** List all files that will need creation or modification
+2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
+3. **Update Task List:** Update the existing `./docs/specs/[spec-directory]/[n]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+
+## Phase 2 Output Format (Parent Tasks Only)
+
+When generating parent tasks in Phase 2, use this structure WITHOUT sub-tasks:
+
+```markdown
+## Tasks
+
+- [ ] 1.0 Parent Task Title
+  - Demo Criteria: "Open /path and complete X end-to-end; acceptance: Y visible/returned"
+  - Proof Artifact(s): "URL: https://..., CLI: command & expected output, Test: MyFeature.test.ts"
+- [ ] 2.0 Parent Task Title
+  - Demo Criteria: "User can perform Z with persisted state"
+  - Proof Artifact(s): "Screenshot of flow; link to test suite section"
+- [ ] 3.0 Parent Task Title
+  - Demo Criteria: "Configuration is verifiable via command/output"
+  - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
+```
+
+## Phase 3 Output Format (Complete with Sub-Tasks)
+
+After user confirmation in Phase 3, update the file with this complete structure:
 
 ```markdown
 ## Relevant Files
@@ -68,22 +181,60 @@ The generated task list _must_ follow this example structure:
   - Demo Criteria: "User can perform Z with persisted state"
   - Proof Artifact(s): "Screenshot of flow; link to test suite section"
   - [ ] 2.1 [Sub-task description 2.1]
+  - [ ] 2.2 [Sub-task description 2.2]
 - [ ] 3.0 Parent Task Title (may not require sub-tasks if purely structural or configuration)
   - Demo Criteria: "Configuration is verifiable via command/output"
   - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
+  - [ ] 3.1 [Sub-task description 3.1]
+  - [ ] 3.2 [Sub-task description 3.2]
 ```
 
 ## Interaction Model
 
-The process explicitly requires a pause after generating parent tasks to get user confirmation ("Go") before proceeding to generate the detailed sub-tasks. This ensures the high-level plan aligns with user expectations before diving into details.
+**Critical:** This is a two-phase process that requires explicit user confirmation:
+
+1. **Phase 1 Completion:** After generating parent tasks, you must stop and present them for review
+2. **Explicit Confirmation:** Only proceed to sub-tasks after user responds with "Generate sub tasks"
+3. **No Auto-progression:** Never automatically proceed to sub-tasks or implementation
+
+**Example interaction:**
+> "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes demo criteria and proof artifacts. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Respond with 'Generate sub tasks' to continue."
 
 ## Target Audience
 
-Assume the primary reader of the task list is a **junior developer** who will implement the feature with awareness of the existing codebase context.
+Write tasks and sub-tasks for a **junior developer** who:
 
-## After Subtask Generation
+- Understands the programming language and framework
+- Is familiar with the existing codebase structure
+- Needs clear, actionable steps without ambiguity
+- Will be implementing tasks independently
+- Relies on demo criteria to verify completion
 
-- Prompt the user to review the generated task list and provide feedback.
-- Wait for instructions on next steps.
-- DO NOT begin implementation; that will be handled through other means.
-- Prioritize execution so each completed parent task yields a demoable increment with Demo Criteria and Proof Artifact(s) verified.
+## Quality Checklist
+
+Before finalizing your task list, verify:
+
+- [ ] Each parent task is demoable and has clear completion criteria
+- [ ] Demo Criteria are specific and measurable
+- [ ] Proof Artifacts are appropriate for each task
+- [ ] Tasks are appropriately scoped (not too large/small)
+- [ ] Dependencies are logical and sequential
+- [ ] Sub-tasks are actionable and unambiguous
+- [ ] Relevant files are comprehensive and accurate
+- [ ] Format follows the exact structure specified above
+
+## What Comes Next
+
+Once this task list is complete and approved, instruct the user to run `/manage-tasks` to begin implementation. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
+
+## Final Instructions
+
+1. Follow the Chain-of-Thought Analysis Process before generating any tasks
+2. Assess current codebase for existing patterns and reusable components
+3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
+4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
+5. Ensure every parent task has specific Demo Criteria and Proof Artifacts
+6. Identify all relevant files for creation/modification
+7. Review with user and refine until satisfied
+8. Guide user to the next workflow step (`/manage-tasks`)
+9. Stop working once user confirms task list is complete
