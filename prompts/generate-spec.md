@@ -155,7 +155,7 @@ If the feature involves existing systems, briefly review the codebase and existi
 Generate a comprehensive specification using this exact structure:
 
 ```markdown
-# [n]-spec-[feature-name].md
+# [NN]-spec-[feature-name].md
 
 ## Introduction/Overview
 

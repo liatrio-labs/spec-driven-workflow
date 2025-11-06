@@ -237,7 +237,7 @@ Once this task list is complete and approved, instruct the user to run `/manage-
 
 1. Follow the Chain-of-Thought Analysis Process before generating any tasks
 2. Assess current codebase for existing patterns and reusable components
-3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
+3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
 5. Ensure every parent task has specific Demo Criteria and Proof Artifacts
 6. Identify all relevant files for creation/modification

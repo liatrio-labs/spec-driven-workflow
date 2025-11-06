@@ -80,7 +80,7 @@ For each parent task, follow this structured workflow with built-in verification
 ```markdown
 ## PRE-WORK CHECKLIST (Complete before starting any sub-task)
 
-[ ] Locate task file: `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
+[ ] Locate task file: `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
 [ ] Confirm demo criteria for current parent task
@@ -206,7 +206,7 @@ Each parent task must include artifacts that:
 
 For each parent task completion:
 
-[ ] **Directory Ready**: `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/` exists
+[ ] **Directory Ready**: `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` exists
 [ ] **Review Task Requirements**: Check what demo evidence the task specifically requires
 [ ] **Create Single Proof File**: Create `[spec-number]-task-[task-number]-proofs.md`
 [ ] **Include All Evidence in One File**:

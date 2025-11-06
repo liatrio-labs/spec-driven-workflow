@@ -60,8 +60,8 @@ Validate that the **code changes** conform to the Spec and Task List by verifyin
 
 If no spec is provided, follow this exact sequence:
 
-1. Scan `./docs/specs/` for directories matching pattern `[n]-spec-[feature-name]/`
-2. Identify spec directories with corresponding `[n]-tasks-[feature-name].md` files
+1. Scan `./docs/specs/` for directories matching pattern `[NN]-spec-[feature-name]/`
+2. Identify spec directories with corresponding `[NN]-tasks-[feature-name].md` files
 3. Select the spec with:
    - Highest sequence number where task list exists
    - At least one incomplete parent task (`[ ]` or `[~]`)
