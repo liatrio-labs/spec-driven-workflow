@@ -52,7 +52,7 @@ Create a detailed, step-by-step task list in Markdown format based on an existin
 
 ⚠️ **DO NOT** generate sub-tasks until explicitly requested by the user
 ⚠️ **DO NOT** begin implementation - this prompt is for planning only
-⚠️ **DO NOT** create tasks that are too large (multi-day) or too small (single line changes)
+⚠️ **DO NOT** create tasks that are too large (multi-day) or too small (single-line changes)
 ⚠️ **DO NOT** skip the user confirmation step after parent task generation
 
 ## Why Two-Phase Task Generation?
@@ -96,8 +96,8 @@ Before generating any tasks, you must follow this reasoning process:
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `./docs/specs/[n]-spec-[feature-name]/`
-- **Filename:** `[n]-tasks-[feature-name].md` (e.g., if the Spec is `01-spec-user-profile-editing.md`, save as `01-tasks-user-profile-editing.md`)
+- **Location:** `./docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
+- **Filename:** `[NN]-tasks-[feature-name].md` (e.g., if the Spec is `01-spec-user-profile-editing.md`, save as `01-tasks-user-profile-editing.md`)
 
 ## Process
 

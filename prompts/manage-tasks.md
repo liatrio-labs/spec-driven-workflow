@@ -114,7 +114,7 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
 
 [ ] **Run Test Suite**: Execute repository's test command (e.g., `pytest`, `npm test`, `cargo test`, etc.)
 [ ] **Quality Gates**: Run repository's quality checks (linting, formatting, pre-commit hooks)
-[ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/`
+[ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` (where `[NN]` is a two-digit, zero-padded number, e.g., `01`, `02`, etc.)
    - **File naming**: `[spec-number]-task-[task-number]-proofs.md` (e.g., `03-task-01-proofs.md`)
    - **Include all evidence**: CLI output, test results, screenshots, configuration examples
    - **Format**: Use markdown code blocks with clear section headers
@@ -179,9 +179,9 @@ After each parent task completion, verify:
 
 ### File Location Requirements
 
-- **Task List**: `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md`
-- **Proof Artifacts**: `./docs/specs/[n]-spec-[feature-name]/[n]-proofs/`
-- **Naming Convention**: `[spec]-[task]-[artifact-type].[ext]`
+- **Task List**: `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
+- **Proof Artifacts**: `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` (where `[NN]` matches the spec number)
+- **Naming Convention**: `[NN]-task-[TT]-[artifact-type].[ext]` (e.g., `03-task-01-proofs.md` where NN is spec number, TT is task number)
 
 ### File Update Protocol
 

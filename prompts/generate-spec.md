@@ -247,8 +247,8 @@ Iterate based on feedback until the user is satisfied.
 ## Output Requirements
 
 **Format:** Markdown (`.md`)
-**Directory:** Create `./docs/specs/[n]-spec-[feature-name]/` (Where `n` is a zero-padded 2-digit sequence starting from 01, e.g., `01-spec-user-authentication/`)
-**Full Path:** `./docs/specs/[n]-spec-[feature-name]/[n]-spec-[feature-name].md`
+**Directory:** Create `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number starting from 01 (e.g., `01`, `02`, `03`). For example, `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
+**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
 **Example:** For feature "user authentication", create directory `01-spec-user-authentication/` and save file as `01-spec-user-authentication.md` inside it
 
 ## Critical Constraints (Negative Instructions)

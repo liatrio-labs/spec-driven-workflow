@@ -114,24 +114,18 @@ All specs, tasks, and proofs should be stored in `./docs/specs`. Simple director
 ./docs/specs/
 ├── 01-spec-feature-name
     ├── 01-spec-feature-name.md
-    ├── tasks-01-spec-feature-name.md
+    ├── 01-tasks-feature-name.md
     └── 01-proofs/
-        ├── 01-01-demo.png
-        ├── 01-01-cli-output.txt
-        ├── 01-01-test-results.json
-        ├── 01-02-demo.png
-        ├── 01-02-cli-output.txt
-        ├── 01-02-test-results.json
+        ├── 01-01-proofs.md
+        ├── 01-02-proofs.md
+        ├── 01-03-proofs.md
 ├── 02-spec-another-feature
     ├── 02-spec-another-feature.md
-    ├── tasks-02-spec-another-feature.md
+    ├── 02-tasks-another-feature.md
     └── 02-proofs/
-        ├── 02-01-demo.png
-        ├── 02-01-cli-output.txt
-        ├── 02-01-test-results.json
-        ├── 02-02-demo.png
-        ├── 02-02-cli-output.txt
-        ├── 02-02-test-results.json
+        ├── 02-01-proofs.md
+        ├── 02-02-proofs.md
+        ├── 02-03-proofs.md
 ```
 
 **Key Principles:**
@@ -140,7 +134,7 @@ All specs, tasks, and proofs should be stored in `./docs/specs`. Simple director
 - **Co-located artifacts**: Proofs are organized by task number within each spec
 - **Team-managed lifecycle**: Teams determine when to archive specs, tasks, and proofs as they see fit
 - **Clear traceability**: Easy to see which proofs belong to which tasks and specs
-- **Consistent naming**: Proof artifacts follow `[spec]-[task]-[artifact]` pattern (e.g., 01-01-demo.png)
+- **Consistent naming**: Proof artifacts follow single markdown file pattern `[spec]-[task]-proofs.md` containing all evidence as markdown code blocks
 
 ### Simplify numbering system
 
