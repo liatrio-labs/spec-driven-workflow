@@ -103,7 +103,7 @@ Before generating any tasks, you must follow this reasoning process:
 
 ### Phase 1: Analysis and Planning (Internal)
 
-1. **Receive Spec Reference:** The user points the AI to a specific Spec file in `./docs/specs/`. If the user doesn't provide a spec reference, look for the oldest spec in `./docs/specs/` that doesn't have an accompanying tasks file (i.e., no `[n]-tasks-[feature-name].md` file in the same directory).
+1. **Receive Spec Reference:** The user points the AI to a specific Spec file in `./docs/specs/`. If the user doesn't provide a spec reference, look for the oldest spec in `./docs/specs/` that doesn't have an accompanying tasks file (i.e., no `[NN]-tasks-[feature-name].md` file in the same directory).
 2. **Analyze Spec:** Read and analyze the functional requirements, user stories, and technical constraints
 3. **Assess Current State:** Review existing codebase and documentation to understand:
    - Architectural patterns and conventions
@@ -122,7 +122,7 @@ Before generating any tasks, you must follow this reasoning process:
    - Have clear completion criteria
    - Follow logical dependencies
    - Be implementable in a reasonable timeframe
-2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md` before proceeding
+2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` before proceeding
 3. **Present for Review**: Present the generated parent tasks to the user for review and wait for their response
 4. **Wait for Confirmation**: Pause and wait for user to respond with "Generate sub tasks"
 
@@ -132,7 +132,7 @@ Wait for explicit user confirmation before generating sub-tasks. Then:
 
 1. **Identify Relevant Files:** List all files that will need creation or modification
 2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
-3. **Update Task List:** Update the existing `./docs/specs/[n]-spec-[feature-name]/[n]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
 
 ## Phase 2 Output Format (Parent Tasks Only)
 

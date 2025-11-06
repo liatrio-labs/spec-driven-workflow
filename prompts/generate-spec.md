@@ -289,7 +289,7 @@ Follow this exact sequence:
    - **Demoable Units** focus on tangible progress and WHAT will be shown
    - **Functional Requirements** focus on system behavior and WHAT the system must do
    - **Technical Considerations** focus on implementation constraints and HOW it will be built
-5. **Save**: Create directory `./docs/specs/[n]-spec-[feature-name]/` and save file as `[n]-spec-[feature-name].md` inside it
+5. **Save**: Create directory `./docs/specs/[NN]-spec-[feature-name]/` and save file as `[NN]-spec-[feature-name].md` inside it
 6. **Review and Refine**: Validate completeness and clarity with the user
 7. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
 8. **Stop**: Stop working once user confirms spec is complete

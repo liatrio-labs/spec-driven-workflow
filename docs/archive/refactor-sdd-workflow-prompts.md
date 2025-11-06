@@ -42,7 +42,7 @@ Based on prompt engineering best practices for spec-driven development, the work
 **generate-task-list-from-spec.md:**
 
 - Add explanation of why parent tasks are generated first
-- Add guidance on how to evaluate top level tasks against the spec
+- Add guidance on how to evaluate top-level tasks against the spec
 - Enhance the "Generate sub tasks" interaction with clearer context
 - Add "DO NOT generate sub-tasks until explicitly requested" constraint
 - Add clear guidance on "What happens next" section after task generation, including when to move to task implementation and how to do it
@@ -134,7 +134,7 @@ All specs, tasks, and proofs should be stored in `./docs/specs`. Simple director
 - **Co-located artifacts**: Proofs are organized by task number within each spec
 - **Team-managed lifecycle**: Teams determine when to archive specs, tasks, and proofs as they see fit
 - **Clear traceability**: Easy to see which proofs belong to which tasks and specs
-- **Consistent naming**: Proof artifacts follow single markdown file pattern `[spec]-[task]-proofs.md` containing all evidence as markdown code blocks
+- **Consistent naming**: Proof artifacts follow single Markdown file pattern `[spec]-[task]-proofs.md` containing all evidence as Markdown code blocks
 
 ### Simplify numbering system
 
