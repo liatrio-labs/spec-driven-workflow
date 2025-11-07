@@ -2,6 +2,93 @@
 
 <!-- version list -->
 
+## v1.8.0 (2025-11-07)
+
+### Bug Fixes
+
+- Address additional PR review feedback - placeholder consistency and grammar
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Address PR review feedback - proof artifact structure and placeholder consistency
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Complete [n] → [NN] placeholder consistency across all prompt files
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **workflow**: Enhance validation prompt and standardize next-step guidance
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+### Chores
+
+- Tweak pre-commit ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+### Documentation
+
+- Add comprehensive spec-driven workflow refactoring plan
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Move refactor spec to archive
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+### Features
+
+- Add validation prompt ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Enhance generate-spec prompt with research-based improvements and workflow guidance
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Refactor manage-tasks prompt with research-backed workflow engineering
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **workflow**: Integrate repository pattern compliance across spec-driven workflow
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+### Refactoring
+
+- Move context assessment earlier in spec-driven workflow
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Refine spec template to reduce verbosity and duplication
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- Update spec output structure to use subdirectories
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **spec**: Fix prompt flow inconsistencies and enhance workflow integration
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **tasks**: Fix two-phase process by separating output formats
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **workflow**: Comprehensive spec-driven workflow prompt refactoring
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **workflow**: Simplify proof artifacts to single markdown file per task
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+- **workflow**: Update validation prompt to use new directory structure
+  ([#26](https://github.com/liatrio-labs/spec-driven-workflow/pull/26),
+  [`72578a2`](https://github.com/liatrio-labs/spec-driven-workflow/commit/72578a2598dbeb6b25489b83a064096fefd198ca))
+
+
 ## v1.7.0 (2025-10-24)
 
 ### Bug Fixes
