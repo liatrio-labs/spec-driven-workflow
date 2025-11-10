@@ -23,15 +23,15 @@
     uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow sdd-generate-commands generate --yes
     ```
 
-2. *(Optional, first time)* Run `/generate-context` to analyze your existing codebase:
+0. *(Optional, first time)* Run `/generate-context` to analyze your existing codebase:
 
     ```text
     /generate-context
     ```
 
-    → AI analyzes your codebase → Context document created in `docs/001-SYSTEM.md` (or `002-SYSTEM.md`, etc.)
+    → AI analyzes your codebase → Context document created in `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`, `002-SYSTEM.md`, etc.)
 
-3. In your AI tool of choice, use `/generate-spec` with your idea:
+1. In your AI tool of choice, use `/generate-spec` with your idea:
 
     ```text
     /generate-spec I want to add user authentication to my app
@@ -39,12 +39,12 @@
 
     → AI asks clarifying questions → You provide answers → Spec created in `tasks/0001-spec-user-auth.md`
 
-4. Continue the flow:
+2. Continue the flow:
 
     - Run `/generate-task-list-from-spec` → Task list created in `tasks/tasks-0001-spec-user-auth.md`
     - Use `/manage-tasks` → Execute tasks one-by-one with proof artifacts
 
-5. **SHIP IT** 🚢💨
+3. **SHIP IT** 🚢💨
 
 ## Highlights
 
@@ -121,6 +121,8 @@ Four prompts in `/prompts` define the full lifecycle. Use them sequentially to m
 - Bakes in commit hygiene, validation steps, and communication rituals so handoffs stay tight.
 
 ### Detailed SDD Workflow Diagram
+
+> **Note:** This diagram shows the core workflow (stages 1-3). The optional context generation phase (stage 0: `/generate-context`) precedes this flow when analyzing an existing codebase.
 
 ```mermaid
 sequenceDiagram
