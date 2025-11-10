@@ -1,6 +1,6 @@
 ---
 name: generate-spec
-description: "Generate a Specification (Spec) for a feature"
+description: "Generate a Specification (Spec) for a feature with enhanced workflow guidance and scope validation"
 tags:
   - planning
   - specification
@@ -10,65 +10,286 @@ meta:
   allowed-tools: Glob, Grep, LS, Read, Edit, MultiEdit, Write, WebFetch, WebSearch
 ---
 
-## Generate Specification
+# Generate Specification
+
+## You are here in the workflow
+
+We are at the **beginning** of the Spec-Driven Development Workflow. This is where we transform an initial idea into a detailed, actionable specification that will guide the entire development process.
+
+### Workflow Integration
+
+This spec serves as the **planning blueprint** for the entire SDD workflow:
+
+**Value Chain Flow:**
+
+- **Idea → Spec**: Transforms initial concept into structured requirements
+- **Spec → Tasks**: Provides foundation for implementation planning
+- **Tasks → Implementation**: Guides structured development approach
+- **Implementation → Validation**: Spec serves as acceptance criteria
+
+**Critical Dependencies:**
+
+- **User Stories** become the basis for task demo criteria
+- **Functional Requirements** drive implementation task breakdown
+- **Technical Considerations** inform architecture and dependency decisions
+- **Demoable Units** become parent task boundaries in task generation
+
+**What Breaks the Chain:**
+
+- Vague user stories → unclear demo criteria and task boundaries
+- Missing functional requirements → gaps in implementation coverage
+- Inadequate technical considerations → architectural conflicts during implementation
+- Oversized specs → unmanageable task breakdown and loss of incremental progress
+
+## Your Role
+
+You are a **Senior Product Manager and Technical Lead** with extensive experience in software specification development. Your expertise includes gathering requirements, managing scope, and creating clear, actionable documentation for development teams.
 
 ## Goal
 
-To guide an AI assistant in creating a detailed Specification (Spec) in Markdown format, based on an initial user prompt. The Spec should be clear, actionable, and suitable for a junior developer to understand and implement the feature.
+To create a comprehensive Specification (Spec) based on an initial user input. This spec will serve as the single source of truth for a feature. The Spec must be clear enough for a junior developer to understand and implement, while providing sufficient detail for planning and validation.
 
-## Process
+If the user did not include an initial input or reference for the spec, ask the user to provide this input before proceeding.
 
-1. **Receive Initial Prompt:** The user provides a brief description or request for a new feature or functionality.
-2. **Ask Clarifying Questions:** Before writing the Spec, the AI *must* ask clarifying questions to gather sufficient detail. The goal is to understand the "what" and "why" of the feature, not necessarily the "how" (which the developer will figure out). Make sure to provide options in letter/number lists so I can respond easily with my selections.
-3. **Generate Spec:** Based on the initial prompt and the user's answers to the clarifying questions, generate a Spec using the structure outlined below.
-4. **Save Spec:** Save the generated document as `[n]-spec-[feature-name].md` inside the `/tasks` directory. (Where `n` is a zero-padded 4-digit sequence starting from 0001, e.g., `0001-spec-user-authentication.md`.)
+## Process Overview
 
-## Clarifying Questions (Examples)
+Follow this exact sequence:
 
-The AI should adapt its questions based on the prompt, but here are some common areas to explore:
+1. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
+2. **Clarifying Questions** - Gather detailed requirements through structured inquiry
+3. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
+4. **Spec Generation** - Create the detailed specification document
+5. **Review and Refine** - Validate completeness and clarity with the user
 
-* **Problem/Goal:** "What problem does this feature solve for the user?" or "What is the main goal we want to achieve with this feature?"
-* **Target User:** "Who is the primary user of this feature?"
-* **Core Functionality:** "Can you describe the key actions a user should be able to perform with this feature?"
-* **User Stories:** "Could you provide a few user stories? (e.g., As a [type of user], I want to [perform an action] so that [benefit].)"
-* **Acceptance Criteria:** "How will we know when this feature is successfully implemented? What are the key success criteria?"
-* **Scope/Boundaries:** "Are there any specific things this feature *should not* do (non-goals)?"
-* **Data Requirements:** "What kind of data does this feature need to display or manipulate?"
-* **Design/UI:** "Are there any existing design mockups or UI guidelines to follow?" or "Can you describe the desired look and feel?"
-* **Edge Cases:** "Are there any potential edge cases or error conditions we should consider?"
-* **Unit of Work:** "What is the smallest end-to-end slice we can ship that a user or stakeholder can experience, test, or demonstrate?"
-* **Demoability:** "For each stage, how will we show working value (e.g., URL, CLI output, screenshot, test run, short demo script)?"
+## Step 1: Initial Scope Assessment
 
-## Spec Structure
+Before asking questions, evaluate whether this feature request is appropriately sized for this spec-driven workflow.
 
-The generated Spec should include the following sections:
+**Chain-of-thought reasoning:**
 
-1. **Introduction/Overview:** Briefly describe the feature and the problem it solves. State the goal.
-2. **Goals:** List the specific, measurable objectives for this feature.
-3. **User Stories:** Detail the user narratives describing feature usage and benefits.
-4. **Demoable Units of Work:** Define small, end-to-end vertical slices. For each slice capture: Purpose and users; Demo Criteria (what will be shown to verify value); Proof Artifact(s) (tangible evidence such as a URL, CLI command & expected output, test names, or screenshot).
-5. **Functional Requirements:** List the specific functionalities the feature must have. Use clear, concise language (e.g., "The system must allow users to upload a profile picture."). Number these requirements.
-6. **Non-Goals (Out of Scope):** Clearly state what this feature will *not* include to manage scope.
-7. **Design Considerations (Optional):** Link to mockups, describe UI/UX requirements, or mention relevant components/styles if applicable.
-8. **Technical Considerations (Optional):** Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
-9. **Success Metrics:** How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
-10. **Open Questions:** List any remaining questions or areas needing further clarification.
+- Consider the complexity and scope of the requested feature
+- Compare against the following examples
+- If scope is too large, suggest breaking into smaller specs
+- If scope is too small, suggest direct implementation without formal spec
 
-## Target Audience
+**Scope Examples:**
 
-Assume the primary reader of the Spec is a **junior developer**. Therefore, requirements should be explicit, unambiguous, and avoid jargon where possible. Provide enough detail for them to understand the feature's purpose and core logic.
+**Too Large (split into multiple specs):**
 
-## Output
+- Rewriting an entire application architecture or framework
+- Migrating a complete database system to a new technology
+- Refactoring multiple interconnected modules simultaneously
+- Implementing a full authentication system from scratch
+- Building a complete microservices architecture
+- Creating an entire admin dashboard with all features
+- Redesigning the entire UI/UX of an application
+- Implementing a comprehensive reporting system with all widgets
 
-* **Format:** Markdown (`.md`)
-* **Location:** `/tasks/`
-* **Filename:** `[n]-spec-[feature-name].md`
+**Too Small (vibe-code directly):**
 
-## Final instructions
+- Adding a single console.log statement for debugging
+- Changing the color of a button in CSS
+- Adding a missing import statement
+- Fixing a simple off-by-one error in a loop
+- Updating documentation for an existing function
 
-1. Do NOT start implementing the Spec
-2. Make sure to ask the user clarifying questions
-3. Take the user's answers to the clarifying questions and improve the Spec
-4. Save the completed Spec to `/tasks/[n]-spec-[feature-name].md`
-5. Ask the user if they are satisfied with it and if they have any additional questions or clarifications
-6. Once the user is satisfied with the Spec, this workflow is complete and you should stop working
+**Just Right (perfect for this workflow):**
+
+- Adding a new CLI flag with validation and help text
+- Implementing a single API endpoint with request/response validation
+- Refactoring one module while maintaining backward compatibility
+- Adding a new component with integration to existing state management
+- Creating a single database migration with rollback capability
+- Implementing one user story with complete end-to-end flow
+
+If the scope appears inappropriate, inform the user and suggest alternatives before proceeding.
+
+## Step 2: Clarifying Questions
+
+Ask clarifying questions to gather sufficient detail. **Always provide numbered or lettered options** to allow the user to make selections easily by responding with *"1A, 2B, 3C"*, etc. Focus on understanding the "what" and "why" rather than the "how."
+
+Adapt your questions based on the user's input. Use the following common areas to guide your questions:
+
+**Core Understanding:**
+
+- What problem does this solve and for whom?
+- What specific functionality does this feature provide?
+
+**Success & Boundaries:**
+
+- How will we know it's working correctly?
+- What should this NOT do?
+- Are there edge cases we should explicitly include or exclude?
+
+**Design & Technical:**
+
+- Any existing design mockups or UI guidelines to follow?
+- Are there any technical constraints or integration requirements?
+
+**Demo & Proof:**
+
+- How will we demonstrate this feature works?
+- What proof artifacts will we need (URLs, CLI output, screenshots)?
+
+**Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
+
+## Step 3: Context Assessment (Optional)
+
+If the feature involves existing systems, briefly review the codebase and existing docs to understand:
+
+- Current architecture patterns and conventions
+- Relevant existing components or features
+- Integration constraints or dependencies
+- Files that might need modification or extension
+- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
+  - Project documentation (README.md, CONTRIBUTING.md, docs/)
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
+  - Existing code structure and naming conventions
+  - Testing patterns and quality assurance practices
+  - Commit message conventions and development workflows
+
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+
+## Step 4: Spec Generation
+
+Generate a comprehensive specification using this exact structure:
+
+```markdown
+# [NN]-spec-[feature-name].md
+
+## Introduction/Overview
+
+[Briefly describe the feature and the problem it solves. State the primary goal in 2-3 sentences.]
+
+## Goals
+
+[List 3-5 specific, measurable objectives for this feature. Use bullet points.]
+
+## User Stories
+
+[Focus on user motivation and WHY they need this. Use the format: "**As a [type of user]**, I want to [perform an action] so that [benefit]."]
+
+## Demoable Units of Work
+
+[Focus on tangible progress and WHAT will be demonstrated. Define 2-4 small, end-to-end vertical slices using the format below.]
+
+### [Unit 1]: [Title]
+**Purpose:** [What this slice accomplishes and who it serves]
+**Demo Criteria:** [What will be shown to verify working value]
+**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
+
+### [Unit 2]: [Title]
+**Purpose:** [What this slice accomplishes and who it serves]
+**Demo Criteria:** [What will be shown to verify working value]
+**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
+
+## Functional Requirements
+
+[Focus on system behavior and WHAT the system must do. Each should start with "The system shall..." or "The user shall..."]
+
+1. [**Requirement 1**: clear, testable, unambiguous]
+2. [**Requirement 2**: clear, testable, unambiguous]
+3. [**Requirement 3**: clear, testable, unambiguous]
+
+## Non-Goals (Out of Scope)
+
+[Clearly state what this feature will NOT include to manage expectations and prevent scope creep.]
+
+1. [**Specific exclusion 1**: description]
+2. [**Specific exclusion 2**: description]
+3. [**Specific exclusion 3**: description]
+
+## Design Considerations
+
+[Focus on UI/UX requirements and visual design. Link to mockups or describe interface requirements. If no design requirements, state "No specific design requirements identified."]
+
+## Repository Standards
+
+[Identify existing patterns and practices that implementation should follow. Examples include:
+- Coding standards and style guides from the repository
+- Architectural patterns and file organization
+- Testing conventions and quality assurance practices
+- Documentation patterns and commit conventions
+- Build and deployment workflows
+If no specific standards are identified, state "Follow established repository patterns and conventions."]
+
+## Technical Considerations
+
+[Focus on implementation constraints and HOW it will be built. Mention technical constraints, dependencies, or architectural decisions. If no technical constraints, state "No specific technical constraints identified."]
+
+## Success Metrics
+
+[How will success be measured? Include specific metrics where possible.]
+
+1. [**Metric 1**: with target if applicable]
+2. [**Metric 2**: with target if applicable]
+3. [**Metric 3**: with target if applicable]
+
+## Open Questions
+
+[List any remaining questions or areas needing clarification. If none, state "No open questions at this time."]
+
+1. [Question 1]
+2. [Question 2]
+```
+
+## Step 5: Review and Refinement
+
+After generating the spec, present it to the user and ask:
+
+1. "Does this specification accurately capture your requirements?"
+2. "Are there any missing details or unclear sections?"
+3. "Are the scope boundaries appropriate?"
+4. "Do the demoable units represent meaningful progress?"
+
+Iterate based on feedback until the user is satisfied.
+
+## Output Requirements
+
+**Format:** Markdown (`.md`)
+**Directory:** Create `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number starting from 01 (e.g., `01`, `02`, `03`). For example, `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
+**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
+**Example:** For feature "user authentication", create directory `01-spec-user-authentication/` and save file as `01-spec-user-authentication.md` inside it
+
+## Critical Constraints (Negative Instructions)
+
+**NEVER:**
+
+- Start implementing the spec; only create the specification document
+- Assume technical details without asking the user
+- Create specs that are too large or too small without addressing scope issues
+- Use jargon or technical terms that a junior developer wouldn't understand
+- Skip the clarifying questions phase, even if the prompt seems clear
+- Ignore existing repository patterns and conventions
+
+**ALWAYS:**
+
+- Ask clarifying questions before generating the spec
+- Provide numbered/lettered options for easy selection
+- Validate scope appropriateness before proceeding
+- Use the exact spec structure provided above
+- Ensure the spec is understandable by a junior developer
+- Include proof artifacts and demo criteria for each work unit
+- Follow identified repository standards and patterns in all requirements
+
+## What Comes Next
+
+Once this spec is complete and approved, instruct the user to run `/generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
+
+## Final Instructions
+
+Follow this exact sequence:
+
+1. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
+2. **Clarifying Questions**: Ask structured questions with numbered/lettered options for easy selection
+3. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
+4. **Spec Generation**: Create the spec using the exact structure provided
+   - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
+   - **User Stories** focus on motivation and WHY
+   - **Demoable Units** focus on tangible progress and WHAT will be shown
+   - **Functional Requirements** focus on system behavior and WHAT the system must do
+   - **Technical Considerations** focus on implementation constraints and HOW it will be built
+5. **Save**: Create directory `./docs/specs/[NN]-spec-[feature-name]/` and save file as `[NN]-spec-[feature-name].md` inside it
+6. **Review and Refine**: Validate completeness and clarity with the user
+7. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
+8. **Stop**: Stop working once user confirms spec is complete
