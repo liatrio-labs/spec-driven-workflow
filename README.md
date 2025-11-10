@@ -29,7 +29,7 @@
     /generate-context
     ```
 
-    → AI analyzes your codebase → Context document created in `docs/001-SYSTEM.md`
+    → AI analyzes your codebase → Context document created in `docs/001-SYSTEM.md` (or `002-SYSTEM.md`, etc.)
 
 3. In your AI tool of choice, use `/generate-spec` with your idea:
 
@@ -79,7 +79,7 @@ All prompts live in `prompts/` and are designed for use inside your preferred AI
 - Want to document technical decisions and design rationale
 - Setting up context for multiple specs in the same project
 
-This prompt performs comprehensive codebase analysis and generates a `docs/00N-SYSTEM.md` file documenting architecture, tech stack, patterns, and conventions that inform all subsequent spec development.
+This prompt performs comprehensive codebase analysis and generates a `docs/00N-SYSTEM.md` file (where N is a sequential number: 001, 002, etc.) documenting architecture, tech stack, patterns, and conventions that inform all subsequent spec development.
 
 ### Core SDD Workflow
 
@@ -101,7 +101,7 @@ Four prompts in `/prompts` define the full lifecycle. Use them sequentially to m
 
 - **When to use:** Working with an existing codebase or starting multiple specs in the same project
 - **What it does:** Analyzes existing codebase architecture, extracts patterns and conventions, and documents technical decisions
-- **Output:** Creates `docs/00N-SYSTEM.md` with comprehensive codebase context that informs all subsequent spec generation
+- **Output:** Creates `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`) with comprehensive codebase context that informs all subsequent spec generation
 - **Skip when:** Starting a greenfield project or the AI already has sufficient context about your codebase
 
 ### Stage 1 — Generate the Spec ([prompts/generate-spec.md](./prompts/generate-spec.md))
@@ -161,7 +161,7 @@ sequenceDiagram
 
 ## Core Artifacts
 
-- **Codebase Context (Optional):** `docs/00N-SYSTEM.md` — comprehensive codebase analysis documenting architecture, patterns, conventions, and technical decisions that inform spec development.
+- **Codebase Context (Optional):** `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`, `002-SYSTEM.md`) — comprehensive codebase analysis documenting architecture, patterns, conventions, and technical decisions that inform spec development.
 - **Specs:** `tasks/000X-spec-<feature>.md` — canonical requirements, demo slices, and success metrics.
 - **Task Lists:** `tasks/tasks-000X-spec-<feature>.md` — parent/subtask checklist with relevant files and proof artifacts.
 - **Status Keys:** `[ ]` not started, `[~]` in progress, `[x]` complete, mirroring the manage-tasks guidance.
