@@ -73,6 +73,7 @@ All prompts live in `prompts/` and are designed for use inside your preferred AI
 ### Optional Pre-Setup
 
 **`generate-context`** (`prompts/generate-context.md`): **Optional first step** for analyzing existing codebases before starting spec development. Use this when:
+
 - Working with an existing codebase the AI hasn't seen before
 - Need to understand repository architecture, patterns, and conventions
 - Want to document technical decisions and design rationale
