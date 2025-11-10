@@ -175,10 +175,10 @@ The SDD workflow can be used in three ways, from simplest to most automated:
 
 ### Option 1: Manual Copy-Paste (No Tooling Required)
 
-0. **Optional: Generate codebase context (first time only):** If working with an existing codebase, copy or reference `prompts/generate-context.md` to analyze the repository and generate a comprehensive context document in `/docs`. This step helps the AI understand your codebase architecture and patterns for all subsequent specs.
-1. **Kick off a spec:** Copy or reference `prompts/generate-spec.md` inside your preferred AI chat. Provide the feature idea, answer the clarifying questions, and review the generated spec before saving it under `/tasks`.
-2. **Plan the work:** Point the assistant to the new spec and walk through `prompts/generate-task-list-from-spec.md`. Approve parent tasks first, then request the detailed subtasks and relevant files. Commit the result to `/tasks`.
-3. **Execute with discipline:** Follow `prompts/manage-tasks.md` while implementing. Update statuses as you work, attach proof artifacts, and pause for reviews at each demoable slice.
+1. **Optional: Generate codebase context (first time only):** If working with an existing codebase, copy or reference `prompts/generate-context.md` to analyze the repository and generate a comprehensive context document in `/docs`. This step helps the AI understand your codebase architecture and patterns for all subsequent specs.
+2. **Kick off a spec:** Copy or reference `prompts/generate-spec.md` inside your preferred AI chat. Provide the feature idea, answer the clarifying questions, and review the generated spec before saving it under `/tasks`.
+3. **Plan the work:** Point the assistant to the new spec and walk through `prompts/generate-task-list-from-spec.md`. Approve parent tasks first, then request the detailed subtasks and relevant files. Commit the result to `/tasks`.
+4. **Execute with discipline:** Follow `prompts/manage-tasks.md` while implementing. Update statuses as you work, attach proof artifacts, and pause for reviews at each demoable slice.
 
 ### Option 2: Native Slash Commands (Recommended)
 
@@ -226,10 +226,10 @@ Run the prompts as an MCP server for programmatic access. This option is most us
 
 ### Workflow Essentials
 
-0. **(Optional, first time)** Run `/generate-context` or open `prompts/generate-context.md` to analyze your codebase and generate architecture documentation in `docs/`.
-1. Open `prompts/generate-spec.md` inside your AI assistant and follow the instructions to produce a new spec in `tasks/`.
-2. Point the assistant at the generated spec and run `prompts/generate-task-list-from-spec.md` to create the implementation backlog.
-3. Use `prompts/manage-tasks.md` while executing work to keep status, demo criteria, and proof artifacts up to date.
+1. **(Optional, first time)** Run `/generate-context` or open `prompts/generate-context.md` to analyze your codebase and generate architecture documentation in `docs/`.
+2. Open `prompts/generate-spec.md` inside your AI assistant and follow the instructions to produce a new spec in `tasks/`.
+3. Point the assistant at the generated spec and run `prompts/generate-task-list-from-spec.md` to create the implementation backlog.
+4. Use `prompts/manage-tasks.md` while executing work to keep status, demo criteria, and proof artifacts up to date.
 
 ### Installation
 
