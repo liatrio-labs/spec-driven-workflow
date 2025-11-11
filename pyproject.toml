@@ -74,6 +74,8 @@ ignore = [
 minversion = "8.0"
 addopts = "-ra --cov=mcp_server --cov=slash_commands --cov-report=term-missing --cov-report=html"
 testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.coverage.run]
 source = ["mcp_server", "slash_commands"]

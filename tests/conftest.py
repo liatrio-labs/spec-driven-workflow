@@ -10,6 +10,12 @@ from fastmcp import FastMCP
 from mcp_server.prompt_utils import MarkdownPrompt, load_markdown_prompt
 
 
+@pytest.fixture(scope="session")
+def anyio_backend():
+    """Configure anyio to use asyncio backend only."""
+    return "asyncio"
+
+
 @pytest.fixture
 def temp_workspace():
     """Create a temporary workspace directory for testing.
