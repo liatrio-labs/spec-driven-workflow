@@ -23,7 +23,15 @@
     uvx --from git+https://github.com/liatrio-labs/spec-driven-workflow sdd-generate-commands generate --yes
     ```
 
-2. In your AI tool of choice, use `/generate-spec` with your idea:
+2. *(Optional, first time)* Run `/generate-context` to analyze your existing codebase:
+
+    ```text
+    /generate-context
+    ```
+
+    → AI analyzes your codebase → Context document created in `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`, `002-SYSTEM.md`, etc.)
+
+3. In your AI tool of choice, use `/generate-spec` with your idea:
 
     ```text
     /generate-spec I want to add user authentication to my app
@@ -31,12 +39,12 @@
 
     → AI asks clarifying questions → You provide answers → Spec created in `tasks/0001-spec-user-auth.md`
 
-3. Continue the flow:
+4. Continue the flow:
 
     - Run `/generate-task-list-from-spec` → Task list created in `tasks/tasks-0001-spec-user-auth.md`
     - Use `/manage-tasks` → Execute tasks one-by-one with proof artifacts
 
-4. **SHIP IT** 🚢💨
+5. **SHIP IT** 🚢💨
 
 ## Highlights
 
@@ -62,11 +70,24 @@ MCP technology remains available as an optional integration, but the heart of th
 
 All prompts live in `prompts/` and are designed for use inside your preferred AI assistant.
 
+### Optional Pre-Setup
+
+**`generate-context`** (`prompts/generate-context.md`): **Optional first step** for analyzing existing codebases before starting spec development. Use this when:
+
+- Working with an existing codebase the AI hasn't seen before
+- Need to understand repository architecture, patterns, and conventions
+- Want to document technical decisions and design rationale
+- Setting up context for multiple specs in the same project
+
+This prompt performs comprehensive codebase analysis and generates a `docs/00N-SYSTEM.md` file (where N is a sequential number: 001, 002, etc.) documenting architecture, tech stack, patterns, and conventions that inform all subsequent spec development.
+
+### Core SDD Workflow
+
 1. **`generate-spec`** (`prompts/generate-spec.md`): Ask clarifying questions, then author a junior-friendly spec with demoable slices.
 2. **`generate-task-list-from-spec`** (`prompts/generate-task-list-from-spec.md`): Transform the approved spec into actionable parent tasks and sub-tasks with proof artifacts.
 3. **`manage-tasks`** (`prompts/manage-tasks.md`): Coordinate execution, update task status, and record outcomes as you deliver value.
 
-Each prompt writes Markdown outputs into `tasks/`, giving you a lightweight backlog that is easy to review, share, and implement.
+Each prompt writes Markdown outputs into `tasks/` or `docs/`, giving you a lightweight backlog that is easy to review, share, and implement.
 
 ## How does it work?
 
@@ -74,7 +95,14 @@ The workflow is driven by Markdown prompts that function as reusable playbooks f
 
 ## Workflow Overview
 
-Three prompts in `/prompts` define the full lifecycle. Use them sequentially to move from concept to completed work.
+Four prompts in `/prompts` define the full lifecycle. Use them sequentially to move from concept to completed work.
+
+### Optional Pre-Setup — Generate Codebase Context ([prompts/generate-context.md](./prompts/generate-context.md))
+
+- **When to use:** Working with an existing codebase or starting multiple specs in the same project
+- **What it does:** Analyzes existing codebase architecture, extracts patterns and conventions, and documents technical decisions
+- **Output:** Creates `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`) with comprehensive codebase context that informs all subsequent spec generation
+- **Skip when:** Starting a greenfield project or the AI already has sufficient context about your codebase
 
 ### Stage 1 — Generate the Spec ([prompts/generate-spec.md](./prompts/generate-spec.md))
 
@@ -93,6 +121,8 @@ Three prompts in `/prompts` define the full lifecycle. Use them sequentially to 
 - Bakes in commit hygiene, validation steps, and communication rituals so handoffs stay tight.
 
 ### Detailed SDD Workflow Diagram
+
+> **Note:** This diagram shows the core workflow (stages 1-3). The optional context generation phase (stage 0: `/generate-context`) precedes this flow when analyzing an existing codebase.
 
 ```mermaid
 sequenceDiagram
@@ -133,8 +163,9 @@ sequenceDiagram
 
 ## Core Artifacts
 
-- **Specs:** `000X-spec-<feature>.md` — canonical requirements, demo slices, and success metrics.
-- **Task Lists:** `tasks-000X-spec-<feature>.md` — parent/subtask checklist with relevant files and proof artifacts.
+- **Codebase Context (Optional):** `docs/00N-SYSTEM.md` (e.g., `001-SYSTEM.md`, `002-SYSTEM.md`) — comprehensive codebase analysis documenting architecture, patterns, conventions, and technical decisions that inform spec development.
+- **Specs:** `tasks/000X-spec-<feature>.md` — canonical requirements, demo slices, and success metrics.
+- **Task Lists:** `tasks/tasks-000X-spec-<feature>.md` — parent/subtask checklist with relevant files and proof artifacts.
 - **Status Keys:** `[ ]` not started, `[~]` in progress, `[x]` complete, mirroring the manage-tasks guidance.
 - **Proof Artifacts:** URLs, CLI commands, screenshots, or tests captured per task to demonstrate working software.
 
@@ -144,9 +175,10 @@ The SDD workflow can be used in three ways, from simplest to most automated:
 
 ### Option 1: Manual Copy-Paste (No Tooling Required)
 
-1. **Kick off a spec:** Copy or reference `prompts/generate-spec.md` inside your preferred AI chat. Provide the feature idea, answer the clarifying questions, and review the generated spec before saving it under `/tasks`.
-2. **Plan the work:** Point the assistant to the new spec and walk through `prompts/generate-task-list-from-spec.md`. Approve parent tasks first, then request the detailed subtasks and relevant files. Commit the result to `/tasks`.
-3. **Execute with discipline:** Follow `prompts/manage-tasks.md` while implementing. Update statuses as you work, attach proof artifacts, and pause for reviews at each demoable slice.
+1. **Optional: Generate codebase context (first time only):** If working with an existing codebase, copy or reference `prompts/generate-context.md` to analyze the repository and generate a comprehensive context document in `/docs`. This step helps the AI understand your codebase architecture and patterns for all subsequent specs.
+2. **Kick off a spec:** Copy or reference `prompts/generate-spec.md` inside your preferred AI chat. Provide the feature idea, answer the clarifying questions, and review the generated spec before saving it under `/tasks`.
+3. **Plan the work:** Point the assistant to the new spec and walk through `prompts/generate-task-list-from-spec.md`. Approve parent tasks first, then request the detailed subtasks and relevant files. Commit the result to `/tasks`.
+4. **Execute with discipline:** Follow `prompts/manage-tasks.md` while implementing. Update statuses as you work, attach proof artifacts, and pause for reviews at each demoable slice.
 
 ### Option 2: Native Slash Commands (Recommended)
 
@@ -194,9 +226,10 @@ Run the prompts as an MCP server for programmatic access. This option is most us
 
 ### Workflow Essentials
 
-1. Open `prompts/generate-spec.md` inside your AI assistant and follow the instructions to produce a new spec in `tasks/`.
-2. Point the assistant at the generated spec and run `prompts/generate-task-list-from-spec.md` to create the implementation backlog.
-3. Use `prompts/manage-tasks.md` while executing work to keep status, demo criteria, and proof artifacts up to date.
+1. **(Optional, first time)** Run `/generate-context` or open `prompts/generate-context.md` to analyze your codebase and generate architecture documentation in `docs/`.
+2. Open `prompts/generate-spec.md` inside your AI assistant and follow the instructions to produce a new spec in `tasks/`.
+3. Point the assistant at the generated spec and run `prompts/generate-task-list-from-spec.md` to create the implementation backlog.
+4. Use `prompts/manage-tasks.md` while executing work to keep status, demo criteria, and proof artifacts up to date.
 
 ### Installation
 

@@ -145,8 +145,10 @@ If the feature involves existing systems, briefly review the codebase and existi
   - Project documentation (README.md, CONTRIBUTING.md, docs/)
   - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
   - Existing code structure and naming conventions
-  - Testing patterns and quality assurance practices
+  - Testing patterns and quality assurance practices (test frameworks, coverage requirements, testing conventions)
   - Commit message conventions and development workflows
+  - Build and deployment processes
+  - Code quality gates (linting, formatting, pre-commit hooks)
 
 **Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
 
