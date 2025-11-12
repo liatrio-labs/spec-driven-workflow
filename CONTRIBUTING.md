@@ -33,7 +33,8 @@ pre-commit install
 
 To prevent accidental commits of API keys, tokens, or other sensitive data (especially in proof artifacts), consider adding secret scanning to your pre-commit configuration:
 
-**Option 1: gitleaks (recommended)**
+#### Option 1: gitleaks (recommended)
+
 ```yaml
 # Add to .pre-commit-config.yaml
 repos:
@@ -43,7 +44,8 @@ repos:
       - id: gitleaks
 ```
 
-**Option 2: truffleHog**
+#### Option 2: truffleHog
+
 ```yaml
 # Add to .pre-commit-config.yaml
 repos:
@@ -54,7 +56,8 @@ repos:
         args: ['--trace', 'filesystem', '.']
 ```
 
-**Option 3: detect-secrets**
+#### Option 3: detect-secrets
+
 ```yaml
 # Add to .pre-commit-config.yaml
 repos:
