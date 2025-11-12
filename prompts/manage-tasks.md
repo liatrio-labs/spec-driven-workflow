@@ -198,6 +198,15 @@ Each parent task must include artifacts that:
 - **Enable validation** (provide evidence for `/validate-spec-implementation`)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
+### Security Warning
+
+**CRITICAL**: Proof artifacts will be committed to the repository. Never include sensitive data:
+
+- Replace API keys, tokens, and secrets with placeholders like `[YOUR_API_KEY_HERE]` or `[REDACTED]`
+- Sanitize configuration examples to remove credentials
+- Use example or dummy values instead of real production data
+- Review all proof artifact files before committing to ensure no sensitive information is present
+
 ### Proof Artifact Creation Protocol
 
 ```markdown
@@ -216,10 +225,12 @@ For each parent task completion:
    - ## Verification section showing proof artifacts demonstrate required functionality
 [ ] **Format with Markdown**: Use code blocks, headers, and clear organization
 [ ] **Verify File Content**: Ensure the markdown file contains all required evidence
+[ ] **Security Check**: Scan proof file for API keys, tokens, passwords, or other sensitive data and replace with placeholders
 
 **SIMPLE VERIFICATION**: One file per task, all evidence included
 **CONTENT VERIFICATION**: Check the markdown file contains required sections
 **VERIFICATION**: Ensure proof artifact file demonstrates all required functionality
+**SECURITY VERIFICATION**: Confirm no real credentials or sensitive data are present
 
 **The single markdown proof file must be created BEFORE the parent task commit**
 ```

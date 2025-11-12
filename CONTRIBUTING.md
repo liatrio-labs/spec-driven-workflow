@@ -29,6 +29,46 @@ pre-commit install
 - Keep changes small and focused; prefer incremental PRs.
 - All prompts are plain Markdown files in the `prompts/` directory.
 
+### Recommended: Secret Scanning Pre-commit Hooks
+
+To prevent accidental commits of API keys, tokens, or other sensitive data (especially in proof artifacts), consider adding secret scanning to your pre-commit configuration:
+
+**Option 1: gitleaks (recommended)**
+```yaml
+# Add to .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+```
+
+**Option 2: truffleHog**
+```yaml
+# Add to .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/trufflesecurity/trufflehog
+    rev: v3.63.0
+    hooks:
+      - id: trufflehog
+        args: ['--trace', 'filesystem', '.']
+```
+
+**Option 3: detect-secrets**
+```yaml
+# Add to .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+```
+
+After adding a secret scanner, run `pre-commit install` again to activate it. The scanner will automatically check files before each commit and block commits containing potential secrets.
+
+See the [pre-commit hooks documentation](https://pre-commit.com/hooks.html) for more secret scanning options.
+
 ### Common Commands
 
 ```bash
