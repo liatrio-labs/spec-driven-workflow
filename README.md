@@ -255,7 +255,7 @@ Proof artifacts are committed to your repository and may be publicly visible. **
 - **Sanitize command output**: Review CLI output and logs for accidentally captured credentials before committing
 - **Consider pre-commit hooks**: Tools like [gitleaks](https://github.com/gitleaks/gitleaks), [truffleHog](https://github.com/trufflesecurity/truffleHog), or [talisman](https://github.com/thoughtworks/talisman) can automatically scan for secrets before commits
 
-The SDD workflow prompts include built-in reminders about security, but ultimate responsibility lies with the developer to review artifacts before committing.
+The SDD workflow prompts include built-in reminders about security, but ultimate responsibility lies with the developer to review artifacts before committing or pushing to remotes.
 
 ### Installation
 
