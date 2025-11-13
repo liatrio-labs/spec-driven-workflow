@@ -55,20 +55,52 @@ If the user did not include an initial input or reference for the spec, ask the 
 
 Follow this exact sequence:
 
-1. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
-2. **Clarifying Questions** - Gather detailed requirements through structured inquiry
-3. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
-4. **Spec Generation** - Create the detailed specification document
-5. **Review and Refine** - Validate completeness and clarity with the user
+1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
+2. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
+3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
+4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
+5. **Spec Generation** - Create the detailed specification document
+6. **Review and Refine** - Validate completeness and clarity with the user
 
-## Step 1: Initial Scope Assessment
+## Step 1: Create Spec Directory
 
-Before asking questions, evaluate whether this feature request is appropriately sized for this spec-driven workflow.
+Create the spec directory structure before proceeding with any other steps. This ensures all files (questions, spec, tasks, proofs) have a consistent location.
+
+**Directory Structure:**
+
+- **Path**: `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number (e.g., `01`, `02`, `03`)
+- **Naming Convention**: Use lowercase with hyphens for the feature name
+- **Examples**: `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
+
+**Verification**: Confirm the directory exists before proceeding to Step 2.
+
+## Step 2: Context Assessment
+
+If working in a pre-existing project, begin by briefly reviewing the codebase and existing docs to understand:
+
+- Current architecture patterns and conventions
+- Relevant existing components or features
+- Integration constraints or dependencies
+- Files that might need modification or extension
+- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
+  - Project documentation (README.md, CONTRIBUTING.md, docs/)
+  - AI specific documentation (AGENTS.md, CLAUDE.md)
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
+  - Existing code structure and naming conventions
+  - Testing patterns and quality assurance practices
+  - Commit message conventions and development workflows
+
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+
+## Step 3: Initial Scope Assessment
+
+Evaluate whether this feature request is appropriately sized for this spec-driven workflow.
 
 **Chain-of-thought reasoning:**
 
 - Consider the complexity and scope of the requested feature
 - Compare against the following examples
+- Use context from Step 2 to inform the assessment
 - If scope is too large, suggest breaking into smaller specs
 - If scope is too small, suggest direct implementation without formal spec
 
@@ -104,11 +136,11 @@ Before asking questions, evaluate whether this feature request is appropriately 
 
 If the scope appears inappropriate, inform the user and suggest alternatives before proceeding.
 
-## Step 2: Clarifying Questions
+## Step 4: Clarifying Questions
 
-Ask clarifying questions to gather sufficient detail. **Always provide numbered or lettered options** to allow the user to make selections easily by responding with *"1A, 2B, 3C"*, etc. Focus on understanding the "what" and "why" rather than the "how."
+Ask clarifying questions to gather sufficient detail. **Always provide multiple choice answers** with numbered or lettered options to allow the user to make selections easily. Focus on understanding the "what" and "why" rather than the "how."
 
-Adapt your questions based on the user's input. Use the following common areas to guide your questions:
+Use the following common areas to guide your questions:
 
 **Core Understanding:**
 
@@ -133,24 +165,21 @@ Adapt your questions based on the user's input. Use the following common areas t
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
-## Step 3: Context Assessment (Optional)
+**Questions File Workflow:**
 
-If the feature involves existing systems, briefly review the codebase and existing docs to understand:
+1. **Create Questions File**: Save questions to `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
+2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
+3. **Wait for Confirmation**: After the user indicates they have saved their answers, read the file and continue the conversation.
+4. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process.
 
-- Current architecture patterns and conventions
-- Relevant existing components or features
-- Integration constraints or dependencies
-- Files that might need modification or extension
-- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
-  - Project documentation (README.md, CONTRIBUTING.md, docs/)
-  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
-  - Existing code structure and naming conventions
-  - Testing patterns and quality assurance practices
-  - Commit message conventions and development workflows
+**Iterative Process:**
 
-**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
+- If the user requests clarification or rephrasing of a question, provide it in the current questions file and continue the conversation.
+- Build on previous answers - use context from earlier responses to inform subsequent questions.
+- Continue until you have enough detail to populate all spec sections (User Stories, Functional Requirements, Demoable Units, etc.), then proceed to Step 5.
 
-## Step 4: Spec Generation
+## Step 5: Spec Generation
 
 Generate a comprehensive specification using this exact structure:
 
@@ -174,11 +203,13 @@ Generate a comprehensive specification using this exact structure:
 [Focus on tangible progress and WHAT will be demonstrated. Define 2-4 small, end-to-end vertical slices using the format below.]
 
 ### [Unit 1]: [Title]
+
 **Purpose:** [What this slice accomplishes and who it serves]
 **Demo Criteria:** [What will be shown to verify working value]
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
 
 ### [Unit 2]: [Title]
+
 **Purpose:** [What this slice accomplishes and who it serves]
 **Demo Criteria:** [What will be shown to verify working value]
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
@@ -206,12 +237,13 @@ Generate a comprehensive specification using this exact structure:
 ## Repository Standards
 
 [Identify existing patterns and practices that implementation should follow. Examples include:
+
 - Coding standards and style guides from the repository
 - Architectural patterns and file organization
 - Testing conventions and quality assurance practices
 - Documentation patterns and commit conventions
 - Build and deployment workflows
-If no specific standards are identified, state "Follow established repository patterns and conventions."]
+  If no specific standards are identified, state "Follow established repository patterns and conventions."]
 
 ## Technical Considerations
 
@@ -233,7 +265,7 @@ If no specific standards are identified, state "Follow established repository pa
 2. [Question 2]
 ```
 
-## Step 5: Review and Refinement
+## Step 6: Review and Refinement
 
 After generating the spec, present it to the user and ask:
 
@@ -247,9 +279,8 @@ Iterate based on feedback until the user is satisfied.
 ## Output Requirements
 
 **Format:** Markdown (`.md`)
-**Directory:** Create `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number starting from 01 (e.g., `01`, `02`, `03`). For example, `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
 **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
-**Example:** For feature "user authentication", create directory `01-spec-user-authentication/` and save file as `01-spec-user-authentication.md` inside it
+**Example:** For feature "user authentication", the spec directory would be `01-spec-user-authentication/` with a spec file as `01-spec-user-authentication.md` inside it
 
 ## Critical Constraints (Negative Instructions)
 
@@ -280,16 +311,17 @@ Once this spec is complete and approved, instruct the user to run `/generate-tas
 
 Follow this exact sequence:
 
-1. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
-2. **Clarifying Questions**: Ask structured questions with numbered/lettered options for easy selection
-3. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
-4. **Spec Generation**: Create the spec using the exact structure provided
+1. **Create Spec Directory**: Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
+2. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
+3. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
+4. **Clarifying Questions**: Ask structured questions with numbered/lettered options for easy selection
+5. **Spec Generation**: Create the spec using the exact structure provided
    - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
    - **User Stories** focus on motivation and WHY
    - **Demoable Units** focus on tangible progress and WHAT will be shown
    - **Functional Requirements** focus on system behavior and WHAT the system must do
    - **Technical Considerations** focus on implementation constraints and HOW it will be built
-5. **Save**: Create directory `./docs/specs/[NN]-spec-[feature-name]/` and save file as `[NN]-spec-[feature-name].md` inside it
-6. **Review and Refine**: Validate completeness and clarity with the user
-7. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
-8. **Stop**: Stop working once user confirms spec is complete
+6. **Save**: Save file as `[NN]-spec-[feature-name].md` inside the spec directory created in Step 1
+7. **Review and Refine**: Validate completeness and clarity with the user
+8. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
+9. **Stop**: Stop working once user confirms spec is complete
