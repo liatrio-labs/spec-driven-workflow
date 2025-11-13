@@ -224,6 +224,20 @@ For each issue:
 - File comparison results (expected vs actual)
 - Commands executed with results
 
+## Saving The Output
+
+After generation is complete:
+
+- Save the report using the specification below
+- Verify the file was created successfully
+
+### Validation Report File Details
+
+**Format:** Markdown (`.md`)
+**Location:** `./docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
+**Filename:** `[NN]-validation-[feature-name].md` (e.g., if the Spec is `01-spec-user-authentication.md`, save as `01-validation-user-authentication.md`)
+**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
+
 ## What Comes Next
 
 Once validation is complete and all issues are resolved, the implementation is ready for merge. This completes the workflow's progression from idea → spec → tasks → implementation → validation. Instruct the user to do a final code review before merging the changes.
