@@ -136,20 +136,58 @@ Wait for explicit user confirmation before generating sub-tasks. Then:
 
 ## Phase 2 Output Format (Parent Tasks Only)
 
-When generating parent tasks in Phase 2, use this structure WITHOUT sub-tasks:
+When generating parent tasks in Phase 2, use this hierarchical structure with Tasks section marked "TBD":
 
 ```markdown
 ## Tasks
 
-- [ ] 1.0 Parent Task Title
-  - Demo Criteria: "Open /path and complete X end-to-end; acceptance: Y visible/returned"
-  - Proof Artifact(s): "URL: https://..., CLI: command & expected output, Test: MyFeature.test.ts"
-- [ ] 2.0 Parent Task Title
-  - Demo Criteria: "User can perform Z with persisted state"
-  - Proof Artifact(s): "Screenshot of flow; link to test suite section"
-- [ ] 3.0 Parent Task Title
-  - Demo Criteria: "Configuration is verifiable via command/output"
-  - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
+### [ ] 1.0 Parent Task Title
+
+#### 1.0 Demo Criteria
+
+- Open /path and complete X end-to-end
+- Acceptance: Y visible/returned
+
+#### 1.0 Proof Artifact(s)
+
+- URL: https://...
+- CLI: command & expected output
+- Test: MyFeature.test.ts
+
+#### 1.0 Tasks
+
+TBD
+
+### [ ] 2.0 Parent Task Title
+
+#### 2.0 Demo Criteria
+
+- User can perform Z with persisted state
+
+#### 2.0 Proof Artifact(s)
+
+- Screenshot of flow
+- Link to test suite section
+
+#### 2.0 Tasks
+
+TBD
+
+### [ ] 3.0 Parent Task Title
+
+#### 3.0 Demo Criteria
+
+- Configuration is verifiable via command/output
+
+#### 3.0 Proof Artifact(s)
+
+- CLI: config get … -> expected value
+- Log line
+- Diff link
+
+#### 3.0 Tasks
+
+TBD
 ```
 
 ## Phase 3 Output Format (Complete with Sub-Tasks)
@@ -175,21 +213,56 @@ After user confirmation in Phase 3, update the file with this complete structure
 
 ## Tasks
 
-- [ ] 1.0 Parent Task Title
-  - Demo Criteria: "Open /path and complete X end-to-end; acceptance: Y visible/returned"
-  - Proof Artifact(s): "URL: https://..., CLI: command & expected output, Test: MyFeature.test.ts"
-  - [ ] 1.1 [Sub-task description 1.1]
-  - [ ] 1.2 [Sub-task description 1.2]
-- [ ] 2.0 Parent Task Title
-  - Demo Criteria: "User can perform Z with persisted state"
-  - Proof Artifact(s): "Screenshot of flow; link to test suite section"
-  - [ ] 2.1 [Sub-task description 2.1]
-  - [ ] 2.2 [Sub-task description 2.2]
-- [ ] 3.0 Parent Task Title (may not require sub-tasks if purely structural or configuration)
-  - Demo Criteria: "Configuration is verifiable via command/output"
-  - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
-  - [ ] 3.1 [Sub-task description 3.1]
-  - [ ] 3.2 [Sub-task description 3.2]
+### [ ] 1.0 Parent Task Title
+
+#### 1.0 Demo Criteria
+
+- Open /path and complete X end-to-end
+- Acceptance: Y visible/returned
+
+#### 1.0 Proof Artifact(s)
+
+- URL: https://...
+- CLI: command & expected output
+- Test: MyFeature.test.ts
+
+#### 1.0 Tasks
+
+- [ ] 1.1 [Sub-task description 1.1]
+- [ ] 1.2 [Sub-task description 1.2]
+
+### [ ] 2.0 Parent Task Title
+
+#### 2.0 Demo Criteria
+
+- User can perform Z with persisted state
+
+#### 2.0 Proof Artifact(s)
+
+- Screenshot of flow
+- Link to test suite section
+
+#### 2.0 Tasks
+
+- [ ] 2.1 [Sub-task description 2.1]
+- [ ] 2.2 [Sub-task description 2.2]
+
+### [ ] 3.0 Parent Task Title
+
+#### 3.0 Demo Criteria
+
+- Configuration is verifiable via command/output
+
+#### 3.0 Proof Artifact(s)
+
+- CLI: config get … -> expected value
+- Log line
+- Diff link
+
+#### 3.0 Tasks
+
+- [ ] 3.1 [Sub-task description 3.1]
+- [ ] 3.2 [Sub-task description 3.2]
 ```
 
 ## Interaction Model
