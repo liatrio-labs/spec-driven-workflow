@@ -175,7 +175,6 @@ Use the following common areas to guide your questions:
 **Iterative Process:**
 
 - If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
-- If the user requests clarification or rephrasing of a question, provide it in the current questions file and continue the conversation.
 - Build on previous answers - use context from earlier responses to inform subsequent questions.
 - Continue until you have enough detail to populate all spec sections (User Stories, Functional Requirements, Demoable Units, etc.), then proceed to Step 5.
 
