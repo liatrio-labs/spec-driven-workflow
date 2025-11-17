@@ -1047,6 +1047,100 @@ footer a:hover {
     font-family: 'Courier New', Courier, monospace;
 }
 
+/* Reference Materials Page Styles */
+.reference-intro {
+    padding: 3rem 0;
+    background-color: var(--bg-light);
+}
+
+.reference-intro p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.reference-grid-section {
+    padding: 4rem 0;
+    background-color: var(--bg-light);
+}
+
+.reference-grid-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.reference-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.reference-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(166, 239, 57, 0.1);
+    border-color: var(--accent-green);
+}
+
+.reference-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.reference-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.reference-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-green);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.reference-link:hover {
+    color: var(--accent-green-hover);
+}
+
+.reference-link::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    border-left: 6px solid var(--accent-green);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.2s ease, margin-left 0.2s ease;
+}
+
+.reference-link:hover::after {
+    transform: translateX(4px);
+    margin-left: 0.75rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -1139,5 +1233,17 @@ footer a:hover {
     .video-wrapper {
         padding-bottom: 75%;
         /* Taller aspect ratio for mobile */
+    }
+
+    .reference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reference-grid-section .section-title {
+        font-size: 2rem;
+    }
+
+    .reference-card {
+        padding: 1.5rem;
     }
 }
