@@ -443,6 +443,16 @@
                         successfully (0 issues found), dictionary terms visible in config file
                         (all project-specific, dependency, and technical terms included), JSON
                         validation passed, Pre-commit JSON check passed</li>
+                    <li><label><input type="checkbox" checked="" />1.1 Create <code>.cspell.json</code> file at repository root with basic structure including <code>version</code>, <code>language</code>, <code>files</code>, <code>ignorePaths</code>, <code>words</code>, and <code>flagWords</code> fields</label></li>
+                    <li><label><input type="checkbox" checked="" />1.2 Configure <code>language</code> field to use <code>["en"]</code> for English dictionary</label></li>
+                    <li><label><input type="checkbox" checked="" />1.3 Configure <code>files</code> field to include markdown file patterns: <code>["**/*.md"]</code></label></li>
+                    <li><label><input type="checkbox" checked="" />1.4 Configure <code>ignorePaths</code> field to exclude <code>CHANGELOG.md</code> from spell checking</label></li>
+                    <li><label><input type="checkbox" checked="" />1.5 Add project-specific terms to <code>words</code> array: "Liatrio", "slash-man", "SDD", "MCP", "spec-driven", "liatrio-labs"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.6 Add dependency names to <code>words</code> array: "pytest", "ruff", "typer", "fastmcp", "questionary", "uvx", "uv", "pyyaml", "tomli", "hatchling", "semantic-release", "commitlint", "markdownlint"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.7 Add properly capitalized technical terms to <code>words</code> array: "GitHub", "Python", "JSON", "YAML", "CLI", "MCP", "HTTP", "STDIO", "PyPI", "CI", "CD", "API", "REST"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.8 Configure <code>flagWords</code> or use regex patterns to exclude common false positives: code blocks (backtick blocks), URLs (http://, https://), file paths (absolute and relative paths), email addresses</label></li>
+                    <li><label><input type="checkbox" checked="" />1.9 Test configuration by running <code>cspell --config .cspell.json README.md</code> and verify no false positives are reported for existing markdown files</label></li>
+                    <li><label><input type="checkbox" checked="" />1.10 Verify configuration file is valid JSON by running <code>python -m json.tool .cspell.json</code> or using <code>check-json</code> pre-commit hook</label></li>
                 </ul>
             </li>
             <li><label><input type="checkbox" checked="" />2.0 Add cspell Hook to
@@ -460,6 +470,14 @@
                         files checked, Hook execution order verified in config file (after
                         check-toml, before ruff-check), YAML validation passed, Hook
                         installation successful, Hook execution test passed</li>
+                    <li><label><input type="checkbox" checked="" />2.1 Add new repository entry to <code>.pre-commit-config.yaml</code> for cspell using <code>repo: https://github.com/streetsidesoftware/cspell-pre-commit</code> with appropriate <code>rev</code> tag (check latest version)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.2 Add cspell hook entry with <code>id: cspell</code> in the hooks list, placing it after the <code>pre-commit-hooks</code> repository section (after file format checks) but before the <code>ruff-pre-commit</code> repository section (before code linting)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.3 Configure hook to check only markdown files by adding <code>files: \.md$</code> pattern or using appropriate file filtering</label></li>
+                    <li><label><input type="checkbox" checked="" />2.4 Configure hook to exclude <code>CHANGELOG.md</code> using <code>exclude: CHANGELOG\.md</code> pattern (matching markdownlint exclusion pattern)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.5 Verify hook placement in config file: cspell hook should appear after <code>check-toml</code> hook and before <code>ruff-check</code> hook</label></li>
+                    <li><label><input type="checkbox" checked="" />2.6 Test hook installation by running <code>pre-commit install</code> (or verify it's already installed)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.7 Test hook execution by running <code>pre-commit run cspell --all-files</code> and verify it checks markdown files successfully</label></li>
+                    <li><label><input type="checkbox" checked="" />2.8 Verify hook execution order by running <code>pre-commit run --all-files</code> and confirming cspell runs after file format checks and before code linting</label></li>
                 </ul>
             </li>
             <li><label><input type="checkbox" checked="" />3.0 Verify Pre-commit Hook
@@ -480,6 +498,14 @@
                         file with intentional errors (created and removed), Successful commit
                         after fixing errors, Error output clearly indicates file, line numbers,
                         and misspelled words, Suggestions provided for each misspelled word</li>
+                    <li><label><input type="checkbox" checked="" />3.1 Create a temporary test markdown file <code>test-spell-check.md</code> with intentional spelling errors (e.g., "teh" instead of "the", "receive" instead of "receive")</label></li>
+                    <li><label><input type="checkbox" checked="" />3.2 Stage the test file: <code>git add test-spell-check.md</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.3 Attempt to commit the file: <code>git commit -m "test: verify cspell hook failure behavior"</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.4 Verify commit fails with cspell error message showing misspelled words and suggestions</label></li>
+                    <li><label><input type="checkbox" checked="" />3.5 Verify error output clearly indicates which file contains spelling errors and lists misspelled words</label></li>
+                    <li><label><input type="checkbox" checked="" />3.6 Fix spelling errors in test file and verify commit succeeds</label></li>
+                    <li><label><input type="checkbox" checked="" />3.7 Remove test file after verification: <code>git rm test-spell-check.md && git commit -m "test: remove spell check test file"</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.8 Document the failure behavior verification process (can be included in CONTRIBUTING.md update)</label></li>
                 </ul>
             </li>
             <li><label><input type="checkbox" checked="" />4.0 Update Documentation for
@@ -500,6 +526,14 @@
                         false positives), Documentation follows existing CONTRIBUTING.md
                         structure and style, Pre-commit Hooks section summary updated to
                         include spell checking</li>
+                    <li><label><input type="checkbox" checked="" />4.1 Add new "Spell Checking" subsection under "Pre-commit Hooks" section in <code>CONTRIBUTING.md</code> (after existing hook descriptions)</label></li>
+                    <li><label><input type="checkbox" checked="" />4.2 Document that cspell checks markdown files for spelling errors and fails commits on errors</label></li>
+                    <li><label><input type="checkbox" checked="" />4.3 Explain how to add new project-specific terms to <code>.cspell.json</code> dictionary: edit the <code>words</code> array and add the term</label></li>
+                    <li><label><input type="checkbox" checked="" />4.4 Document how to verify spell checking works: run <code>pre-commit run cspell --all-files</code> or let it run automatically on commit</label></li>
+                    <li><label><input type="checkbox" checked="" />4.5 Mention that <code>CHANGELOG.md</code> is excluded from spell checking</label></li>
+                    <li><label><input type="checkbox" checked="" />4.6 Update the "Pre-commit Hooks" section summary to include spell checking in the list of checks</label></li>
+                    <li><label><input type="checkbox" checked="" />4.7 Verify all existing markdown files pass spell checking by running <code>pre-commit run cspell --all-files</code> and addressing any false positives by adding terms to dictionary</label></li>
+                    <li><label><input type="checkbox" checked="" />4.8 Ensure documentation follows existing CONTRIBUTING.md style and formatting conventions</label></li>
                 </ul>
             </li>
         </ul>
