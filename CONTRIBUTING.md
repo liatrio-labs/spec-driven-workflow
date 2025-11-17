@@ -1,4 +1,4 @@
-# Contributing to Spec Driven Development (SDD) Workflow
+# Contributing to Spec-Driven Development (SDD) Workflow
 
 Thanks for your interest in contributing! This guide explains how to set up your environment, follow our style and commit conventions, run linters, and submit pull requests.
 
@@ -58,7 +58,7 @@ pre-commit run --all-files
 This will:
 
 - Check YAML syntax
-- Fix markdown formatting issues
+- Fix Markdown formatting issues
 - Validate commit message format (on commit)
 
 ## Branching and Commit Conventions

@@ -8,12 +8,16 @@ on:
     paths-ignore:
       - "CHANGELOG.md"
   pull_request:
+    paths-ignore:
+      - "CHANGELOG.md"
   workflow_dispatch:
 
 jobs:
   lint:
     name: Run Linting
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -200,7 +200,7 @@ nav {
     margin-top: -1rem;
     margin-bottom: 2rem;
     font-weight: 400;
-    max-width: 900px;
+    width: 100%;
 }
 
 .hero-divider {
@@ -212,7 +212,7 @@ nav {
 }
 
 .hero-content {
-    max-width: 900px;
+    width: 100%;
     margin-bottom: 2rem;
 }
 
