@@ -257,16 +257,20 @@
         }
 
         .task-list li label {
-            display: flex;
-            align-items: flex-start;
+            display: block;
             color: var(--text-secondary);
             cursor: pointer;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 1.75rem;
         }
 
         .task-list li input[type="checkbox"] {
-            margin-right: 0.75rem;
-            margin-top: 0.25rem;
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
             accent-color: var(--accent-primary);
+            margin: 0;
         }
 
         .task-list li ul {
@@ -277,6 +281,41 @@
         .task-list li ul li {
             background-color: var(--bg-tertiary);
             border-left: 3px solid var(--accent-secondary);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-list li ul li label {
+            display: block;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .task-list li ul li input[type="checkbox"] {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            accent-color: var(--accent-primary);
+            margin: 0;
+        }
+
+        .task-list li code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 0.15rem 0.35rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--code-border);
+            white-space: nowrap;
+            display: inline;
+            line-height: 1.4;
+        }
+
+        .task-list li ul li code {
+            word-break: break-all;
+            white-space: normal;
         }
 
         /* Notes section */
