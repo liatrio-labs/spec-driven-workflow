@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-task-04-proofs.md - Liatrio Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Liatrio Brand Colors - Dark Theme */
+            --bg-primary: #111111;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #eeeeee;
+            --text-muted: #9c9c9c;
+            --accent-primary: #24AE1D;
+            --accent-secondary: #89DF00;
+            --accent-lagoon: #00C1DB;
+            --accent-deep-sea: #007DAA;
+            --accent-hot-red: #FF5100;
+            --accent-flame: #FFAA00;
+            --border-color: #444444;
+            --code-bg: #1e1e1e;
+            --code-border: #3a3a3a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Clash Display', 'Anybody', 'DM Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: var(--accent-lagoon);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code */
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--code-border);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        /* Source code blocks styling */
+        .sourceCode {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .sourceCode code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 0.9em;
+        }
+
+        /* Syntax highlighting for dark theme */
+        .sourceCode .fu {
+            color: var(--accent-primary);
+        }
+
+        /* function/constructor */
+        .sourceCode .dt {
+            color: var(--accent-lagoon);
+        }
+
+        /* data type */
+        .sourceCode .st {
+            color: var(--accent-secondary);
+        }
+
+        /* string */
+        .sourceCode .ot {
+            color: var(--text-secondary);
+        }
+
+        /* other */
+        .sourceCode .ch {
+            color: var(--accent-flame);
+        }
+
+        /* character */
+        .sourceCode .kw {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* keyword */
+        .sourceCode .at {
+            color: var(--accent-lagoon);
+        }
+
+        /* attribute */
+        .sourceCode .ex {
+            color: var(--text-primary);
+        }
+
+        /* executable */
+        .sourceCode .bu {
+            color: var(--accent-primary);
+        }
+
+        /* built-in */
+        .sourceCode .op {
+            color: var(--text-secondary);
+        }
+
+        /* operator */
+        .sourceCode .co {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* comment */
+        .sourceCode .in {
+            color: var(--accent-secondary);
+        }
+
+        /* inline code */
+        .sourceCode .ss {
+            color: var(--accent-primary);
+        }
+
+        /* special */
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--accent-primary);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            background-color: var(--bg-secondary);
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-lagoon));
+            margin: 2rem 0;
+        }
+
+        /* Status Indicators */
+        .status-pass {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .status-fail {
+            color: var(--accent-hot-red);
+            font-weight: 600;
+        }
+
+        .status-warning {
+            color: var(--accent-flame);
+            font-weight: 600;
+        }
+
+        /* Proof artifacts and code references */
+        .code-ref {
+            background-color: var(--bg-tertiary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+
+        /* Section styling */
+        .executive-summary {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-primary);
+        }
+
+        /* Metrics styling */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Strong text styling */
+        strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Checkmarks for success indicators */
+        .checkmark {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Documentation section styling */
+        .doc-section {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .doc-section h4 {
+            margin-top: 0;
+            color: var(--accent-primary);
+        }
+
+        /* Result styling */
+        .result-success {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Navigation */
+        .nav-header {
+            background-color: rgba(26, 31, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logo-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo-link">← SDD Playbook</a>
+            <ul class="nav-links">
+                <li><a href="../reference-materials.html">Reference Materials</a></li>
+                <li><a href="../index.html">Main Site</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="task-04-proofs.md">05-task-04-proofs.md</h1>
+        <h2 id="task-4.0-update-documentation-for-spell-checker">Task 4.0:
+            Update Documentation for Spell Checker</h2>
+        <h3 id="documentation-updated">Documentation Updated</h3>
+        <p>The <code>CONTRIBUTING.md</code> file has been updated with a new
+            "Spell Checking" subsection under the "Pre-commit Hooks" section.</p>
+        <h3 id="documentation-changes">Documentation Changes</h3>
+        <p>Added comprehensive spell checking documentation that includes:</p>
+        <ol type="1">
+            <li><strong>Overview</strong>: Explains that cspell checks markdown
+                files and fails commits on errors</li>
+            <li><strong>How it works</strong>: Details about file checking,
+                configuration, and error behavior</li>
+            <li><strong>Adding new terms</strong>: Instructions for adding terms to
+                <code>.cspell.json</code> dictionary
+            </li>
+            <li><strong>Verification</strong>: How to verify spell checking works
+                manually or automatically</li>
+            <li><strong>Exclusions</strong>: Note that <code>CHANGELOG.md</code> is
+                excluded from spell checking</li>
+        </ol>
+        <h3 id="updated-pre-commit-hooks-section">Updated Pre-commit Hooks
+            Section</h3>
+        <p>The summary list in the "Pre-commit Hooks" section now includes:</p>
+        <ul>
+            <li>Spell checking (cspell)</li>
+        </ul>
+        <h3 id="documentation-content">Documentation Content</h3>
+        <div class="sourceCode" id="cb1">
+            <pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Spell Checking</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>The repository uses <span class="co">[</span><span class="ot">cspell</span><span class="co">](https://cspell.org/)</span> to check spelling in markdown files. The spell checker runs automatically as a pre-commit hook and will fail commits if spelling errors are detected.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>**How it works:**</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Checks all markdown files (<span class="in">`.md`</span>) during commits</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Uses the <span class="in">`.cspell.json`</span> configuration file at the repository root</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fails commits when spelling errors are found</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provides suggestions for misspelled words in error messages</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>**Adding new terms to the dictionary:**</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>If you encounter a false positive (a valid word that cspell flags as misspelled), you can add it to the dictionary by editing <span class="in">`.cspell.json`</span> and adding the term to the <span class="in">`words`</span> array:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">```json</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;words&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;existing-terms&quot;</span><span class="ot">,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;your-new-term&quot;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre>
+        </div>
+        <p><strong>Verifying spell checking:</strong></p>
+        <ul>
+            <li>Run manually: <code>pre-commit run cspell --all-files</code></li>
+            <li>Runs automatically: The hook runs automatically on every commit</li>
+            <li>Note: <code>CHANGELOG.md</code> is excluded from spell checking</li>
+        </ul>
+        <pre class="sourceCode bash"><code class="sourceCode bash">
+### Spell Checking Verification
+
+All existing markdown files were verified to pass spell checking:
+
+```bash
+$ pre-commit run cspell --all-files</code></pre>
+        <div class="result-success">
+            <p><strong>Result</strong>: All markdown files pass spell checking with
+                no false positives (after adding necessary terms to dictionary during
+                previous tasks).</p>
+        </div>
+        <h3 id="demo-criteria-verification">Demo Criteria Verification</h3>
+        <ul>
+            <li><span class="checkmark">✅</span> <strong>Spell Checking section added</strong> - New subsection under "Pre-commit Hooks"</li>
+            <li><span class="checkmark">✅</span> <strong>Explains cspell hook</strong> - Documents that it checks markdown files and fails commits on errors</li>
+            <li><span class="checkmark">✅</span> <strong>Dictionary management documented</strong> - Instructions for adding new terms to <code>.cspell.json</code></li>
+            <li><span class="checkmark">✅</span> <strong>Verification documented</strong> - How to verify spell checking works manually or automatically</li>
+            <li><span class="checkmark">✅</span> <strong>CHANGELOG.md exclusion mentioned</strong> - Note that it's excluded from spell checking</li>
+            <li><span class="checkmark">✅</span> <strong>Pre-commit Hooks summary updated</strong> - Includes spell checking in the list</li>
+            <li><span class="checkmark">✅</span> <strong>All markdown files pass</strong> - Verified with <code>pre-commit run cspell --all-files</code></li>
+            <li><span class="checkmark">✅</span> <strong>Follows CONTRIBUTING.md style</strong> - Consistent formatting and structure</li>
+        </ul>
+        <h3 id="proof-artifacts-summary">Proof Artifacts Summary</h3>
+        <ul>
+            <li><span class="checkmark">✅</span> Updated <code>CONTRIBUTING.md</code> with spell checking
+                section</li>
+            <li><span class="checkmark">✅</span> All existing markdown files pass spell checking (no false
+                positives)</li>
+            <li><span class="checkmark">✅</span> Documentation follows existing CONTRIBUTING.md structure and
+                style</li>
+            <li><span class="checkmark">✅</span> Pre-commit Hooks section summary updated to include spell
+                checking</li>
+        </ul>
+    </div>
+</body>
+
+</html>

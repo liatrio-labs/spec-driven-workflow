@@ -1,0 +1,24 @@
+[semantic_release]
+# Use annotated tags like v1.2.3
+tag_format = "v{version}"
+# Allow 0.x.x versions (required for pre-1.0.0 releases)
+allow_zero_version = true
+# Don't update version in any files since this is a markdown-only repo
+# Version is tracked via git tags only
+version_variables = []
+# Generate changelog and commit version bumps
+assets = []
+
+[semantic_release.changelog]
+# Generate CHANGELOG.md in Markdown
+[semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+output_format = "md"
+
+[semantic_release.branches]
+# Release from the main branch
+main = { match = "main" }
+
+[semantic_release.remote]
+# Use GitHub token from environment variable
+token = { env = "GH_TOKEN" }

@@ -1,72 +1,65 @@
-# Contributing to Spec Driven Development (SDD) MCP
+# Contributing to Spec-Driven Development (SDD) Workflow
 
-Thanks for your interest in contributing! This guide explains how to set up your environment, follow our style and commit conventions, run tests and linters, and submit pull requests.
+Thanks for your interest in contributing! This guide explains how to set up your environment, follow our style and commit conventions, run linters, and submit pull requests.
 
 ## Overview
 
-This repository provides an MCP server and prompts that enable a spec‑driven development workflow. Contributions generally fall into one of these areas:
+This repository provides prompts that enable a spec‑driven development workflow. Contributions generally fall into one of these areas:
 
-- Documentation and examples
+- Documentation improvements
 - Prompt and workflow improvements
-- Server code, tests, and tooling
+- Examples and use cases
 
 Please open an issue first for significant changes to discuss the approach.
 
 ## Getting Started
 
 1. Fork and clone the repository.
-2. Ensure you have Python 3.12+ and [`uv`](https://docs.astral.sh/uv/) installed.
+2. Ensure you have Python 3.12+ installed (for pre-commit hooks).
 3. Set up the development environment:
 
 ```bash
-uv sync
+pip install pre-commit
 pre-commit install
 ```
 
 ## Development Setup
 
-- Use `uv` for all Python dependency and execution tasks.
 - Install pre-commit hooks once with `pre-commit install`.
 - Keep changes small and focused; prefer incremental PRs.
+- All prompts are plain Markdown files in the `prompts/` directory.
 
 ### Common Commands
 
 ```bash
-# Run tests with coverage
-uv run pytest
-
 # Run full pre-commit checks across the repo
-uv run pre-commit run --all-files
+pre-commit run --all-files
 
-# Run the server (STDIO)
-uvx fastmcp run server.py
-
-# Run the server (HTTP)
-uvx fastmcp run server.py --transport http --port 8000
+# Run markdown linting only
+pre-commit run markdownlint-fix --all-files
 ```
-
-See `docs/operations.md` for more details on transports and configuration.
 
 ## Style and Quality
 
-- Python style and formatting are enforced via `ruff`. The pre-commit hooks will run `ruff check` and `ruff format`.
 - Markdown is linted using markdownlint (via pre-commit). Keep lines reasonably short and headings well structured.
-- Keep documentation consistent with `docs/operations.md` and `README.md`.
+- YAML files are validated for syntax errors.
+- Commit messages must follow Conventional Commits specification (enforced via commitlint).
+- Keep documentation consistent with `README.md`.
 
 ## Testing
 
-- Tests use `pytest` with coverage reporting via `pytest-cov`.
-- Before submitting a PR, run:
+Before submitting a PR, run:
 
 ```bash
-# Run tests with coverage report
-uv run pytest
-
-# View HTML coverage report (opens in default browser)
-uv run python -m webbrowser htmlcov/index.html
+# Run all pre-commit checks
+pre-commit run --all-files
 ```
 
-The test suite generates both terminal and HTML coverage reports showing which code paths are tested.
+This will:
+
+- Check YAML syntax
+- Fix Markdown formatting issues
+- Validate commit message format (on commit)
 
 ## Branching and Commit Conventions
 
@@ -82,26 +75,27 @@ Use short, descriptive branch names with a category prefix:
 
 Examples:
 
-- `feat/issue-templates`
-- `docs/contributing-guide`
+- `feat/new-prompt`
+- `docs/usage-examples`
+- `fix/prompt-typo`
 
 ### Conventional Commits
 
 We follow the Conventional Commits specification. Examples:
 
-- `feat: add helper tool to list artifacts`
-- `fix: handle missing prompt metadata in loader`
-- `docs: clarify HTTP transport usage`
-- `chore: bump dependencies and run pre-commit`
+- `feat: add new validation prompt`
+- `fix: correct typo in generate-spec prompt`
+- `docs: add usage examples`
+- `chore: update markdownlint config`
 
-If a change is breaking, include `!` (e.g., `feat!: drop Python 3.10 support`).
+If a change is breaking, include `!` (e.g., `feat!: restructure prompt format`).
 
-Semantic versioning and releases are automated in CI (e.g., `python-semantic-release`). Contributors only need to follow Conventional Commits; no manual tagging is required.
+Semantic versioning and releases are automated in CI using `python-semantic-release`. Contributors only need to follow Conventional Commits; no manual tagging is required.
 
 ## Pull Requests
 
 - Keep PRs focused and well scoped.
-- Use a conventional title (e.g., `feat: add new feature`).
+- Use a conventional title (e.g., `feat: add new prompt`).
 - PR description template:
 
 ```markdown
@@ -112,22 +106,21 @@ Semantic versioning and releases are automated in CI (e.g., `python-semantic-rel
 ## Additional Notes
 ```
 
-- Ensure all checks pass (tests and pre-commit) before requesting review.
-- Reference related issues and task IDs where applicable.
+- Ensure all checks pass (pre-commit) before requesting review.
+- Reference related issues where applicable.
 
 ## Issue Templates
 
-Use the GitHub issue templates under `.github/ISSUE_TEMPLATE/` for bug reports, feature requests, and questions. These templates prompt for summary, context/repro, environment (Python/OS), and related prompt/task IDs.
+Use the GitHub issue templates under `.github/ISSUE_TEMPLATE/` for bug reports, feature requests, and questions. These templates prompt for summary, context/repro, and related prompt/workflow information.
 
-## Code of Conduct (Placeholder)
+## Code of Conduct
 
-We strive to maintain a welcoming and respectful community. A formal Code of Conduct will be added or linked here in a future update. In the meantime, please be considerate and professional in all interactions.
+We strive to maintain a welcoming and respectful community. Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our community standards and expectations.
 
-If you have any concerns, please open an issue or contact the maintainers.
+If you have any concerns, please contact the Liatrio Maintainers team (`@liatrio-labs/liatrio-labs-maintainers`) or use GitHub's private reporting form for this repository.
 
 ## References
 
-- `docs/operations.md` — operations, transports, and configuration
 - `README.md` — overview and quick start
 - `.pre-commit-config.yaml` — linting and formatting hooks
 - `.github/ISSUE_TEMPLATE/` — issue forms

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-tasks-pre-commit-cspell.md - Liatrio Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Liatrio Brand Colors - Dark Theme */
+            --bg-primary: #111111;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #eeeeee;
+            --text-muted: #9c9c9c;
+            --accent-primary: #24AE1D;
+            --accent-secondary: #89DF00;
+            --accent-lagoon: #00C1DB;
+            --accent-deep-sea: #007DAA;
+            --accent-hot-red: #FF5100;
+            --accent-flame: #FFAA00;
+            --border-color: #444444;
+            --code-bg: #1e1e1e;
+            --code-border: #3a3a3a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Clash Display', 'Anybody', 'DM Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: var(--accent-lagoon);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code */
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--code-border);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--accent-primary);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            background-color: var(--bg-secondary);
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-lagoon));
+            margin: 2rem 0;
+        }
+
+        /* Status Indicators */
+        .status-pass {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .status-fail {
+            color: var(--accent-hot-red);
+            font-weight: 600;
+        }
+
+        .status-warning {
+            color: var(--accent-flame);
+            font-weight: 600;
+        }
+
+        /* Proof artifacts and code references */
+        .code-ref {
+            background-color: var(--bg-tertiary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+
+        /* Section styling */
+        .executive-summary {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-primary);
+        }
+
+        /* Metrics styling */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Strong text styling */
+        strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Task list styling */
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .task-list li {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: var(--bg-secondary);
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .task-list li label {
+            display: block;
+            color: var(--text-secondary);
+            cursor: pointer;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 1.75rem;
+        }
+
+        .task-list li input[type="checkbox"] {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            accent-color: var(--accent-primary);
+            margin: 0;
+        }
+
+        .task-list li ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .task-list li ul li {
+            background-color: var(--bg-tertiary);
+            border-left: 3px solid var(--accent-secondary);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-list li ul li label {
+            display: block;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .task-list li ul li input[type="checkbox"] {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            accent-color: var(--accent-primary);
+            margin: 0;
+        }
+
+        .task-list li code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 0.15rem 0.35rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--code-border);
+            white-space: nowrap;
+            display: inline;
+            line-height: 1.4;
+        }
+
+        .task-list li ul li code {
+            word-break: break-all;
+            white-space: normal;
+        }
+
+        /* Notes section */
+        .notes {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .notes h3 {
+            margin-top: 0;
+            color: var(--accent-lagoon);
+        }
+
+        /* Navigation */
+        .nav-header {
+            background-color: rgba(26, 31, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logo-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo-link">← SDD Playbook</a>
+            <ul class="nav-links">
+                <li><a href="../reference-materials.html">Reference Materials</a></li>
+                <li><a href="../index.html">Main Site</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="tasks-pre-commit-cspell.md">05-tasks-pre-commit-cspell.md</h1>
+        <h2 id="relevant-files">Relevant Files</h2>
+        <ul>
+            <li><code>.cspell.json</code> - New file at repository root containing
+                cspell configuration with project-specific dictionary, file patterns,
+                and exclusions</li>
+            <li><code>.pre-commit-config.yaml</code> - Existing pre-commit
+                configuration file that needs cspell hook added after file format checks
+                but before code linting hooks</li>
+            <li><code>CONTRIBUTING.md</code> - Existing contributing guide that
+                needs spell checking section added</li>
+        </ul>
+        <div class="notes">
+            <h3 id="notes">Notes</h3>
+            <ul>
+                <li>The <code>.cspell.json</code> file should be created at the
+                    repository root following standard cspell configuration format</li>
+                <li>The cspell hook should be added to
+                    <code>.pre-commit-config.yaml</code> using the official repository:
+                    <code>https://github.com/streetsidesoftware/cspell-pre-commit</code>
+                </li>
+                <li>Hook execution order: cspell should run after file format checks
+                    (check-yaml, check-json, check-toml) but before code linting hooks
+                    (ruff-check, ruff-format)</li>
+                <li>The cspell configuration should exclude <code>CHANGELOG.md</code>
+                    from spell checking (similar to how markdownlint excludes it)</li>
+                <li>Project-specific terms should include: Liatrio, slash-man, SDD, MCP,
+                    and dependency names from pyproject.toml (pytest, ruff, typer, fastmcp,
+                    questionary, uvx, uv, etc.)</li>
+                <li>Technical terms should use proper capitalization: GitHub, Python,
+                    JSON, YAML, CLI, MCP</li>
+                <li>Use standard English (en_US) dictionary provided by cspell</li>
+                <li>Configure exclusions for code blocks, URLs, and file paths to reduce
+                    false positives</li>
+                <li>Follow existing CONTRIBUTING.md structure and style when adding
+                    spell checking documentation</li>
+            </ul>
+        </div>
+        <h2 id="tasks">Tasks</h2>
+        <ul class="task-list">
+            <li><label><input type="checkbox" checked="" />1.0 Create cspell
+                    Configuration File</label>
+                <ul>
+                    <li>Demo Criteria: File <code>.cspell.json</code> exists at repository
+                        root with project-specific dictionary terms (Liatrio, slash-man, SDD,
+                        MCP, etc.), dependency names (pytest, ruff, typer, fastmcp, questionary,
+                        uvx, uv, etc.), proper technical term capitalization (GitHub, Python,
+                        JSON, YAML, CLI, MCP), markdown file patterns configured, CHANGELOG.md
+                        excluded, and code block/URL/file path exclusions configured. Running
+                        <code>cspell --config .cspell.json README.md</code> validates
+                        configuration works without false positives
+                    </li>
+                    <li>Proof Artifact(s): Created <code>.cspell.json</code> file at
+                        repository root, cspell command output showing configuration loaded
+                        successfully (0 issues found), dictionary terms visible in config file
+                        (all project-specific, dependency, and technical terms included), JSON
+                        validation passed, Pre-commit JSON check passed</li>
+                    <li><label><input type="checkbox" checked="" />1.1 Create <code>.cspell.json</code> file at repository root with basic structure including <code>version</code>, <code>language</code>, <code>files</code>, <code>ignorePaths</code>, <code>words</code>, and <code>flagWords</code> fields</label></li>
+                    <li><label><input type="checkbox" checked="" />1.2 Configure <code>language</code> field to use <code>["en"]</code> for English dictionary</label></li>
+                    <li><label><input type="checkbox" checked="" />1.3 Configure <code>files</code> field to include markdown file patterns: <code>["**/*.md"]</code></label></li>
+                    <li><label><input type="checkbox" checked="" />1.4 Configure <code>ignorePaths</code> field to exclude <code>CHANGELOG.md</code> from spell checking</label></li>
+                    <li><label><input type="checkbox" checked="" />1.5 Add project-specific terms to <code>words</code> array: "Liatrio", "slash-man", "SDD", "MCP", "spec-driven", "liatrio-labs"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.6 Add dependency names to <code>words</code> array: "pytest", "ruff", "typer", "fastmcp", "questionary", "uvx", "uv", "pyyaml", "tomli", "hatchling", "semantic-release", "commitlint", "markdownlint"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.7 Add properly capitalized technical terms to <code>words</code> array: "GitHub", "Python", "JSON", "YAML", "CLI", "MCP", "HTTP", "STDIO", "PyPI", "CI", "CD", "API", "REST"</label></li>
+                    <li><label><input type="checkbox" checked="" />1.8 Configure <code>flagWords</code> or use regex patterns to exclude common false positives: code blocks (backtick blocks), URLs (http://, https://), file paths (absolute and relative paths), email addresses</label></li>
+                    <li><label><input type="checkbox" checked="" />1.9 Test configuration by running <code>cspell --config .cspell.json README.md</code> and verify no false positives are reported for existing markdown files</label></li>
+                    <li><label><input type="checkbox" checked="" />1.10 Verify configuration file is valid JSON by running <code>python -m json.tool .cspell.json</code> or using <code>check-json</code> pre-commit hook</label></li>
+                </ul>
+            </li>
+            <li><label><input type="checkbox" checked="" />2.0 Add cspell Hook to
+                    Pre-commit Configuration</label>
+                <ul>
+                    <li>Demo Criteria: Hook added to <code>.pre-commit-config.yaml</code>,
+                        hook placed after file format checks (after check-toml hook), hook placed
+                        before code linting hooks (before ruff-check hook), hook checks markdown
+                        files (configured with <code>files: \.md$</code>), CHANGELOG.md excluded
+                        (configured with <code>exclude: CHANGELOG\.md</code>), hook execution
+                        successful (Pre-commit run cspell passes), hook execution order verified
+                        (runs after file format checks, before code linting)</li>
+                    <li>Proof Artifact(s): Updated <code>.pre-commit-config.yaml</code> with
+                        cspell hook entry, Successful hook execution output showing markdown
+                        files checked, Hook execution order verified in config file (after
+                        check-toml, before ruff-check), YAML validation passed, Hook
+                        installation successful, Hook execution test passed</li>
+                    <li><label><input type="checkbox" checked="" />2.1 Add new repository entry to <code>.pre-commit-config.yaml</code> for cspell using <code>repo: https://github.com/streetsidesoftware/cspell-pre-commit</code> with appropriate <code>rev</code> tag (check latest version)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.2 Add cspell hook entry with <code>id: cspell</code> in the hooks list, placing it after the <code>pre-commit-hooks</code> repository section (after file format checks) but before the <code>ruff-pre-commit</code> repository section (before code linting)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.3 Configure hook to check only markdown files by adding <code>files: \.md$</code> pattern or using appropriate file filtering</label></li>
+                    <li><label><input type="checkbox" checked="" />2.4 Configure hook to exclude <code>CHANGELOG.md</code> using <code>exclude: CHANGELOG\.md</code> pattern (matching markdownlint exclusion pattern)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.5 Verify hook placement in config file: cspell hook should appear after <code>check-toml</code> hook and before <code>ruff-check</code> hook</label></li>
+                    <li><label><input type="checkbox" checked="" />2.6 Test hook installation by running <code>pre-commit install</code> (or verify it's already installed)</label></li>
+                    <li><label><input type="checkbox" checked="" />2.7 Test hook execution by running <code>pre-commit run cspell --all-files</code> and verify it checks markdown files successfully</label></li>
+                    <li><label><input type="checkbox" checked="" />2.8 Verify hook execution order by running <code>pre-commit run --all-files</code> and confirming cspell runs after file format checks and before code linting</label></li>
+                </ul>
+            </li>
+            <li><label><input type="checkbox" checked="" />3.0 Verify Pre-commit Hook
+                    Failure Behavior</label>
+                <ul>
+                    <li>Demo Criteria: Test file created
+                        <code>test-spell-check.md</code> with intentional spelling errors, Commit
+                        fails (Exit code 1 when spelling errors are present), Error message
+                        shows misspelled words ("recieve" and "seperate" identified), Suggestions
+                        provided ("receive" and "separate" suggested as fixes), File clearly
+                        identified (<code>test-spell-check.md</code> shown in error output), Line
+                        numbers provided (Line 9 and line 10 indicated), Commit succeeds after
+                        fix (All hooks pass when errors are corrected), Test file removed
+                        (Cleanup completed successfully)
+                    </li>
+                    <li>Proof Artifact(s): Git commit failure output showing cspell error,
+                        cspell error message with spelling suggestions displayed, Test markdown
+                        file with intentional errors (created and removed), Successful commit
+                        after fixing errors, Error output clearly indicates file, line numbers,
+                        and misspelled words, Suggestions provided for each misspelled word</li>
+                    <li><label><input type="checkbox" checked="" />3.1 Create a temporary test markdown file <code>test-spell-check.md</code> with intentional spelling errors (e.g., "teh" instead of "the", "receive" instead of "receive")</label></li>
+                    <li><label><input type="checkbox" checked="" />3.2 Stage the test file: <code>git add test-spell-check.md</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.3 Attempt to commit the file: <code>git commit -m "test: verify cspell hook failure behavior"</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.4 Verify commit fails with cspell error message showing misspelled words and suggestions</label></li>
+                    <li><label><input type="checkbox" checked="" />3.5 Verify error output clearly indicates which file contains spelling errors and lists misspelled words</label></li>
+                    <li><label><input type="checkbox" checked="" />3.6 Fix spelling errors in test file and verify commit succeeds</label></li>
+                    <li><label><input type="checkbox" checked="" />3.7 Remove test file after verification: <code>git rm test-spell-check.md && git commit -m "test: remove spell check test file"</code></label></li>
+                    <li><label><input type="checkbox" checked="" />3.8 Document the failure behavior verification process (can be included in CONTRIBUTING.md update)</label></li>
+                </ul>
+            </li>
+            <li><label><input type="checkbox" checked="" />4.0 Update Documentation for
+                    Spell Checker</label>
+                <ul>
+                    <li>Demo Criteria: Spell Checking section added (New subsection under
+                        "Pre-commit Hooks"), Explains cspell hook (Documents that it checks
+                        markdown files and fails commits on errors), Dictionary management
+                        documented (Instructions for adding new terms to <code>.cspell.json</code>),
+                        Verification documented (How to verify spell checking works manually or
+                        automatically), CHANGELOG.md exclusion mentioned (Note that it's
+                        excluded from spell checking), Pre-commit Hooks summary updated
+                        (Includes spell checking in the list), All markdown files pass
+                        (Verified with <code>pre-commit run cspell --all-files</code>), Follows
+                        CONTRIBUTING.md style (Consistent formatting and structure)</li>
+                    <li>Proof Artifact(s): Updated <code>CONTRIBUTING.md</code> with spell
+                        checking section, All existing markdown files pass spell checking (no
+                        false positives), Documentation follows existing CONTRIBUTING.md
+                        structure and style, Pre-commit Hooks section summary updated to
+                        include spell checking</li>
+                    <li><label><input type="checkbox" checked="" />4.1 Add new "Spell Checking" subsection under "Pre-commit Hooks" section in <code>CONTRIBUTING.md</code> (after existing hook descriptions)</label></li>
+                    <li><label><input type="checkbox" checked="" />4.2 Document that cspell checks markdown files for spelling errors and fails commits on errors</label></li>
+                    <li><label><input type="checkbox" checked="" />4.3 Explain how to add new project-specific terms to <code>.cspell.json</code> dictionary: edit the <code>words</code> array and add the term</label></li>
+                    <li><label><input type="checkbox" checked="" />4.4 Document how to verify spell checking works: run <code>pre-commit run cspell --all-files</code> or let it run automatically on commit</label></li>
+                    <li><label><input type="checkbox" checked="" />4.5 Mention that <code>CHANGELOG.md</code> is excluded from spell checking</label></li>
+                    <li><label><input type="checkbox" checked="" />4.6 Update the "Pre-commit Hooks" section summary to include spell checking in the list of checks</label></li>
+                    <li><label><input type="checkbox" checked="" />4.7 Verify all existing markdown files pass spell checking by running <code>pre-commit run cspell --all-files</code> and addressing any false positives by adding terms to dictionary</label></li>
+                    <li><label><input type="checkbox" checked="" />4.8 Ensure documentation follows existing CONTRIBUTING.md style and formatting conventions</label></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

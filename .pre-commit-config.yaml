@@ -6,15 +6,12 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
-      -   id: check-yaml
-      -   id: end-of-file-fixer
-      -   id: trailing-whitespace
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.0
-    hooks:
-      - id: ruff-check
-        args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        exclude: ^docs/references/
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.45.0
@@ -33,12 +30,10 @@ repos:
         args:
           - "--extends=@commitlint/config-conventional"
 
-  - repo: local
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.29.0
     hooks:
-      - id: run-tests
-        name: Run pytest before push
-        entry: uv run pytest
-        language: system
-        stages: [pre-push]
-        pass_filenames: false
-        always_run: true
+      - id: gitleaks
+        name: scan for committed secrets with gitleaks
+        args:
+          - "--redact"

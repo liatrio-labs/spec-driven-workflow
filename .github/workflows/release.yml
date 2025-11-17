@@ -1,8 +1,15 @@
 name: Semantic Release
 
+# This workflow runs after CI passes on the main branch.
+# It analyzes commits using Conventional Commits and automatically:
+# - Bumps the version
+# - Generates/updates CHANGELOG.md
+# - Creates a GitHub release
+
 on:
   workflow_run:
-    workflows: ["Run tests and linting"]
+    # Update this to match your CI workflow name (default: "CI - Tests and Linting")
+    workflows: ["CI - Tests and Linting"]
     branches: [main]
     types: [completed]
 
@@ -16,22 +23,24 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
+      contents: read  # Required for actions/checkout
+      id-token: write  # Required for Octo STS
     concurrency:
       group: semantic-release-${{ github.ref }}
       cancel-in-progress: false
     steps:
+      # Chainguard Octo STS authentication (configured at Liatrio org level)
       - uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # v1.0.0
         id: octo-sts
         with:
           scope: ${{ github.repository }}
           identity: main-semantic-release
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           fetch-tags: true
           persist-credentials: false
-
 
       - name: Get GitHub App User ID
         id: get-user-id
@@ -52,7 +61,15 @@ jobs:
           # sanity check
           git ls-remote --heads origin >/dev/null
 
-      - name: Semantic Release
-        uses: python-semantic-release/python-semantic-release@v10
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          github_token: ${{ steps.octo-sts.outputs.token }}
+          python-version: "3.12"
+
+      - name: Install python-semantic-release
+        run: pip install "python-semantic-release>=10.0.0,<11.0.0"
+
+      - name: Semantic Release
+        run: semantic-release -c .releaserc.toml version
+        env:
+          GH_TOKEN: ${{ steps.octo-sts.outputs.token }}

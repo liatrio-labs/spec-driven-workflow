@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-task-03-proofs.md - Liatrio Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Liatrio Brand Colors - Dark Theme */
+            --bg-primary: #111111;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #eeeeee;
+            --text-muted: #9c9c9c;
+            --accent-primary: #24AE1D;
+            --accent-secondary: #89DF00;
+            --accent-lagoon: #00C1DB;
+            --accent-deep-sea: #007DAA;
+            --accent-hot-red: #FF5100;
+            --accent-flame: #FFAA00;
+            --border-color: #444444;
+            --code-bg: #1e1e1e;
+            --code-border: #3a3a3a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Clash Display', 'Anybody', 'DM Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: var(--accent-lagoon);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code */
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--code-border);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        /* Source code blocks styling */
+        .sourceCode {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .sourceCode code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 0.9em;
+        }
+
+        /* Syntax highlighting for dark theme */
+        .sourceCode .fu {
+            color: var(--accent-primary);
+        }
+
+        /* function/constructor */
+        .sourceCode .dt {
+            color: var(--accent-lagoon);
+        }
+
+        /* data type */
+        .sourceCode .st {
+            color: var(--accent-secondary);
+        }
+
+        /* string */
+        .sourceCode .ot {
+            color: var(--text-secondary);
+        }
+
+        /* other */
+        .sourceCode .ch {
+            color: var(--accent-flame);
+        }
+
+        /* character */
+        .sourceCode .kw {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* keyword */
+        .sourceCode .at {
+            color: var(--accent-lagoon);
+        }
+
+        /* attribute */
+        .sourceCode .ex {
+            color: var(--text-primary);
+        }
+
+        /* executable */
+        .sourceCode .bu {
+            color: var(--accent-primary);
+        }
+
+        /* built-in */
+        .sourceCode .op {
+            color: var(--text-secondary);
+        }
+
+        /* operator */
+        .sourceCode .co {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* comment */
+        .sourceCode .in {
+            color: var(--accent-secondary);
+        }
+
+        /* inline code */
+        .sourceCode .ss {
+            color: var(--accent-primary);
+        }
+
+        /* special */
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--accent-primary);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            background-color: var(--bg-secondary);
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-lagoon));
+            margin: 2rem 0;
+        }
+
+        /* Status Indicators */
+        .status-pass {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .status-fail {
+            color: var(--accent-hot-red);
+            font-weight: 600;
+        }
+
+        .status-warning {
+            color: var(--accent-flame);
+            font-weight: 600;
+        }
+
+        /* Proof artifacts and code references */
+        .code-ref {
+            background-color: var(--bg-tertiary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+
+        /* Section styling */
+        .executive-summary {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-primary);
+        }
+
+        /* Metrics styling */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Strong text styling */
+        strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* Checkmarks for success indicators */
+        .checkmark {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Error output styling */
+        .error-output {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--accent-hot-red);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .error-output .error-line {
+            color: var(--accent-hot-red);
+        }
+
+        .error-output .success-line {
+            color: var(--accent-primary);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Navigation */
+        .nav-header {
+            background-color: rgba(26, 31, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logo-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo-link">← SDD Playbook</a>
+            <ul class="nav-links">
+                <li><a href="../reference-materials.html">Reference Materials</a></li>
+                <li><a href="../index.html">Main Site</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="task-03-proofs.md">05-task-03-proofs.md</h1>
+        <h2 id="task-3.0-verify-pre-commit-hook-failure-behavior">Task 3.0:
+            Verify Pre-commit Hook Failure Behavior</h2>
+        <h3 id="test-file-created">Test File Created</h3>
+        <p>Created <code>test-spell-check.md</code> with intentional spelling
+            errors to verify the cspell hook failure behavior.</p>
+        <h3 id="test-file-content">Test File Content</h3>
+        <div class="sourceCode" id="cb1">
+            <pre
+                class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test Spell Check</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>This is a test file to verify that the cspell hook correctly identifies spelling errors.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intentional Errors</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Here are some intentional spelling errors:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&quot;teh&quot; instead of &quot;the&quot;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&quot;receive&quot; instead of &quot;receive&quot; (intentionally misspelled as &quot;recieve&quot;)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&quot;separate&quot; instead of &quot;separate&quot; (intentionally misspelled as &quot;seperate&quot;)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>These errors should be caught by the cspell hook when attempting to commit this file.</span></code></pre>
+        </div>
+        <h3 id="commit-failure-verification">Commit Failure Verification</h3>
+        <p>When attempting to commit the file with spelling errors, the commit
+            fails with clear error messages:</p>
+        <div class="sourceCode" id="cb2">
+            <pre
+                class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add test-spell-check.md</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;test: verify cspell hook failure behavior&quot;</span></span></code></pre>
+        </div>
+        <p><strong>Output:</strong></p>
+        <div class="error-output">cspell...................................................................<span
+                class="error-line">Failed</span>
+            - hook id: cspell
+            - exit code: 1
+
+            1/1 test-spell-check.md 589.79ms X
+            test-spell-check.md:9:4 - Unknown word (recieve) fix: (receive)
+            test-spell-check.md:10:4 - Unknown word (seperate) fix: (separate)
+            CSpell: Files checked: 1, Issues found: 2 in 1 file.</div>
+        <h3 id="error-message-analysis">Error Message Analysis</h3>
+        <p>The error output clearly shows:</p>
+        <ul>
+            <li><span class="checkmark">✅</span> <strong>File identified</strong>:
+                <code>test-spell-check.md</code>
+            </li>
+            <li><span class="checkmark">✅</span> <strong>Line numbers</strong>: Line 9 and line 10</li>
+            <li><span class="checkmark">✅</span> <strong>Misspelled words</strong>: "recieve" and "seperate"
+                (intentionally misspelled for testing)</li>
+            <li><span class="checkmark">✅</span> <strong>Suggestions provided</strong>: "receive" and
+                "separate"</li>
+            <li><span class="checkmark">✅</span> <strong>Exit code</strong>: 1 (indicating failure)</li>
+            <li><span class="checkmark">✅</span> <strong>Summary</strong>: "CSpell: Files checked: 1, Issues
+                found: 2 in 1 file."</li>
+        </ul>
+        <h3 id="commit-success-after-fixing-errors">Commit Success After Fixing
+            Errors</h3>
+        <p>After fixing the spelling errors in the test file:</p>
+        <div class="sourceCode" id="cb4">
+            <pre
+                class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add test-spell-check.md</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;test: verify cspell hook failure behavior&quot;</span></span></code></pre>
+        </div>
+        <p><strong>Output:</strong></p>
+        <div class="error-output">trim trailing whitespace.................................................<span
+                class="success-line">Passed</span>
+            fix end of files.........................................................<span
+                class="success-line">Passed</span>
+            check yaml...........................................(no files to check)Skipped
+            check for added large files..............................................<span
+                class="success-line">Passed</span>
+            check json...........................................(no files to check)Skipped
+            check toml...........................................(no files to check)Skipped
+            check for merge conflicts................................................<span
+                class="success-line">Passed</span>
+            debug statements (python)............................(no files to check)Skipped
+            mixed line ending........................................................<span
+                class="success-line">Passed</span>
+            cspell...................................................................<span
+                class="success-line">Passed</span>
+            ruff check...........................................(no files to check)Skipped
+            ruff format..........................................(no files to check)Skipped
+            markdownlint-fix.........................................................<span
+                class="success-line">Passed</span>
+            [4-feat/dl-prompts-from-github-repo &lt;commit-hash&gt;] test: verify cspell hook failure behavior</div>
+        <p>The commit succeeds when all spelling errors are fixed.</p>
+        <h3 id="test-file-cleanup">Test File Cleanup</h3>
+        <div class="sourceCode" id="cb6">
+            <pre
+                class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm test-spell-check.md</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;test: remove spell check test file&quot;</span></span></code></pre>
+        </div>
+        <p>Test file successfully removed after verification.</p>
+        <h3 id="demo-criteria-verification">Demo Criteria Verification</h3>
+        <ul>
+            <li><span class="checkmark">✅</span> <strong>Test file created</strong> - <code>test-spell-check.md</code> with intentional spelling errors</li>
+            <li><span class="checkmark">✅</span> <strong>Commit fails</strong> - Exit code 1 when spelling errors are present</li>
+            <li><span class="checkmark">✅</span> <strong>Error message shows misspelled words</strong> - "recieve" and "seperate" identified</li>
+            <li><span class="checkmark">✅</span> <strong>Suggestions provided</strong> - "receive" and "separate" suggested as fixes</li>
+            <li><span class="checkmark">✅</span> <strong>File clearly identified</strong> - <code>test-spell-check.md</code> shown in error output</li>
+            <li><span class="checkmark">✅</span> <strong>Line numbers provided</strong> - Line 9 and line 10 indicated</li>
+            <li><span class="checkmark">✅</span> <strong>Commit succeeds after fix</strong> - All hooks pass when errors are corrected</li>
+            <li><span class="checkmark">✅</span> <strong>Test file removed</strong> - Cleanup completed successfully</li>
+        </ul>
+        <h3 id="proof-artifacts-summary">Proof Artifacts Summary</h3>
+        <ul>
+            <li><span class="checkmark">✅</span> Git commit failure output showing cspell error</li>
+            <li><span class="checkmark">✅</span> cspell error message with spelling suggestions displayed</li>
+            <li><span class="checkmark">✅</span> Test markdown file with intentional errors (created and
+                removed)</li>
+            <li><span class="checkmark">✅</span> Successful commit after fixing errors</li>
+            <li><span class="checkmark">✅</span> Error output clearly indicates file, line numbers, and misspelled
+                words</li>
+            <li><span class="checkmark">✅</span> Suggestions provided for each misspelled word</li>
+        </ul>
+    </div>
+</body>
+
+</html>
