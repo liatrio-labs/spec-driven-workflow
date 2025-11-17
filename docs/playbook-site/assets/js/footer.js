@@ -16,8 +16,6 @@
                 <p>&copy; ${currentYear} Liatrio. All rights reserved.</p>
                 <div class="footer-links">
                     <a href="https://liatrio.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                    <span class="footer-separator">|</span>
-                    <a href="https://liatrio.com/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a>
                 </div>
             </div>
         `;

@@ -414,8 +414,9 @@ nav {
     margin-bottom: 0;
 }
 
+/* Style all strong labels in phase cards white to match Prompt label */
 .phase-card-content strong {
-    color: var(--accent-green);
+    color: var(--text-primary);
     font-weight: 600;
 }
 
@@ -555,16 +556,18 @@ nav {
     border-top: 1px solid var(--border-color);
 }
 
-.prompt-link a {
-    color: var(--accent-green);
+.prompt-link a,
+.phase-card-content a {
+    color: var(--primary-green-brand);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
     transition: color 0.2s ease;
 }
 
-.prompt-link a:hover {
-    color: var(--accent-green-hover);
+.prompt-link a:hover,
+.phase-card-content a:hover {
+    color: var(--accent-green);
     text-decoration: underline;
 }
 

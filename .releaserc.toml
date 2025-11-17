@@ -11,7 +11,9 @@ assets = []
 
 [semantic_release.changelog]
 # Generate CHANGELOG.md in Markdown
-default_templates = { changelog_file = "CHANGELOG.md", output_format = "md" }
+[semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+output_format = "md"
 
 [semantic_release.branches]
 # Release from the main branch
