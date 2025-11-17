@@ -113,11 +113,11 @@ Semantic versioning and releases are automated in CI using `python-semantic-rele
 
 Use the GitHub issue templates under `.github/ISSUE_TEMPLATE/` for bug reports, feature requests, and questions. These templates prompt for summary, context/repro, and related prompt/workflow information.
 
-## Code of Conduct (Placeholder)
+## Code of Conduct
 
-We strive to maintain a welcoming and respectful community. A formal Code of Conduct will be added or linked here in a future update. In the meantime, please be considerate and professional in all interactions.
+We strive to maintain a welcoming and respectful community. Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our community standards and expectations.
 
-If you have any concerns, please open an issue or contact the maintainers.
+If you have any concerns, please contact the Liatrio Maintainers team (`@liatrio-labs/liatrio-labs-maintainers`) or use GitHub's private reporting form for this repository.
 
 ## References
 

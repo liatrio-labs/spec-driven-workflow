@@ -7,6 +7,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
@@ -26,3 +28,11 @@ repos:
         stages: [commit-msg]
         args:
           - "--extends=@commitlint/config-conventional"
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+        name: scan for committed secrets with gitleaks
+        args:
+          - "--redact"
