@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Questions - Spec-Driven Development</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo-liatrio.svg" alt="Liatrio" class="logo-img">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">SDD Playbook</a></li>
+                    <li><a href="developer-experience.html">Developer Experience</a></li>
+                    <li><a href="common-questions.html" class="active">Common Questions</a></li>
+                    <li><a href="video-overview.html">Video Overview</a></li>
+                    <li><a href="#reference-materials">Reference Materials</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Addressing Common Objections to Spec-Driven Development</h1>
+                <div class="hero-content">
+                    <p>Adopting new development methodologies raises valid questions about productivity, quality, and adaptability. This evidence-based FAQ addresses common objections to Spec-Driven Development (SDD) using a concrete example: implementing a cspell pre-commit hook for spell-checking. By analyzing specifications, task lists, proof artifacts, and validation reports, we demonstrate how well-executed SDD works in practice.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objection 1: Overhead -->
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>Does Spec-Driven Development Add Unnecessary Overhead?</h2>
+                <p class="section-intro">Structured processes often face criticism for introducing bureaucratic overhead. However, the cspell hook implementation proves that SDD structure is an investment, not a cost. By mandating upfront clarity, it prevents ambiguity and rework—the true sources of delay—ultimately increasing development velocity.</p>
+
+                <div class="objection-content">
+                    <div class="workflow-item">
+                        <h4>Upfront Planning Prevents Waste</h4>
+                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope. This protected the team from scope creep and unexpected requirements, concentrating effort exclusively on agreed-upon value.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Structured Work Creates Velocity</h4>
+                        <p>Git history shows implementation took under 6 minutes—from first commit (09:57:02) to final commit (10:02:41). This remarkable speed was enabled by a clear plan breaking work into four distinct tasks.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Unambiguous Blueprint</h4>
+                        <p>SDD creates a direct, verifiable link between initial goals and final outcomes. The validation report confirms every stated goal was met without deviation, eliminating friction from misaligned expectations.</p>
+                    </div>
+                </div>
+
+                <div class="non-goals-section">
+                    <h3>Non-Goals Defined Clear Boundaries</h3>
+                    <p><strong>Explicitly Out of Scope:</strong></p>
+                    <ul class="non-goals-list">
+                        <li>Spell checking code files</li>
+                        <li>Automatic dictionary updates</li>
+                        <li>CI/CD spell checking</li>
+                        <li>IDE integration</li>
+                    </ul>
+                    <p><strong>Additional Exclusions:</strong></p>
+                    <ul class="non-goals-list">
+                        <li>Multi-language support</li>
+                        <li>Auto-fixing errors</li>
+                        <li>Generated files checking</li>
+                        <li>CHANGELOG.md checking</li>
+                    </ul>
+                    <p>By setting these boundaries, the team ensured effort was concentrated exclusively on delivering agreed-upon value without distraction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objection 2: Verifiability -->
+        <section class="reactive-art">
+            <div class="container">
+                <h2>How Do We Know the Feature Actually Worked?</h2>
+                <p>A primary benefit of SDD is generating objective, verifiable evidence proving features are complete and correct. This moves assessment from subjective opinion to factual verification. The cspell implementation generated multiple layers of proof—from validation reports to individual commit traceability—guaranteeing the final product meets every requirement.</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-number">11/11</div>
+                        <div class="metric-label">Requirements Verified</div>
+                        <p>100% of functional requirements passed validation with documented evidence</p>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">✅</div>
+                        <div class="metric-label">Final Status</div>
+                        <p>Unambiguous PASS conclusion in comprehensive validation report</p>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">2</div>
+                        <div class="metric-label">Spelling Errors Caught</div>
+                        <p>Test proof showed system correctly identified and suggested fixes</p>
+                    </div>
+                </div>
+
+                <div class="coverage-section">
+                    <h3>Coverage Matrix: Evidence for Every Requirement</h3>
+                    <h4>Verifiable Proof from Test Output</h4>
+
+                    <div class="code-example">
+                        <pre><code>test-spell-check.md:9:4 - Unknown word (recieve) fix: (receive)
+test-spell-check.md:10:4 - Unknown word (seperate) fix: (separate)
+CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
+                    </div>
+
+                    <p>This artifact proves the hook correctly identified the file, misspelled words, and provided correct suggestions. This is not a description of what happened—it's a record of what happened, providing undeniable evidence of system behavior.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objection 3: Adaptability -->
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>What Happens If Requirements Change?</h2>
+                <p class="section-intro">Planning-heavy processes face criticism for rigidity and inability to adapt. The cspell hook example proves that SDD provides a structured framework for managing change gracefully. Its emphasis on clarity, iterative planning, and modularity makes it inherently adaptable to inevitable project changes.</p>
+
+                <div class="adaptability-grid">
+                    <div class="shift-item">
+                        <h4>Clarity as Foundation</h4>
+                        <p>Initial specification provides stable baseline. Explicit Non-Goals make it easy to identify scope changes versus clarifications, enabling structured prioritization conversations.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Iterative Planning</h4>
+                        <p>Clarifying Questions phase demonstrates dialogue approach. User feedback refined requirements before finalization, proving planning is collaborative, not dictatorial.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Modular Adaptation</h4>
+                        <p>Task structure allows small-scale changes without disrupting workflow. Git history shows pragmatic in-flight adjustments based on real-world testing discoveries.</p>
+                    </div>
+                </div>
+
+                <div class="example-section">
+                    <h3>Real Example: Incorporating Feedback</h3>
+                    <blockquote class="quote">
+                        "we don't need validation tests in python, that's overkill, remove that."
+                    </blockquote>
+                    <p>This user feedback during task generation was immediately incorporated. The final task list reflects this change, preventing wasted effort on unnecessary work. The plan adapted to stakeholder input before implementation began.</p>
+
+                    <h4>In-Flight Adjustments</h4>
+                    <p>Even with excellent planning, discoveries happen during development. Commit message 26e8c10 shows: "Added missing dictionary terms found during testing." This proves the process allows pragmatic adjustments without rigidity.</p>
+                </div>
+
+                <div class="adaptability-features">
+                    <div class="benefits-grid">
+                        <div class="benefits-column">
+                            <h4>Clear Scope Boundaries</h4>
+                            <p>Non-Goals establish what's out of scope, making change identification straightforward</p>
+                        </div>
+                        <div class="benefits-column">
+                            <h4>Feedback Integration</h4>
+                            <p>Planning phase incorporates stakeholder input before implementation starts</p>
+                        </div>
+                        <div class="benefits-column">
+                            <h4>Modular Tasks</h4>
+                            <p>Small, focused units allow adjustments without disrupting entire workflow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="reactive-art">
+            <div class="container">
+                <h2>Conclusion: Evidence-Based Success</h2>
+                <p>The cspell pre-commit hook implementation provides concrete evidence that Spec-Driven Development effectively mitigates common concerns about overhead, verifiability, and rigidity when executed properly.</p>
+
+                <div class="conclusion-grid">
+                    <div class="shift-item">
+                        <h4>High-Velocity Development</h4>
+                        <p>Upfront planning investment created unambiguous scope, leading to focused development. Complete implementation achieved in under 6 minutes with clear task breakdown.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Guaranteed Verifiability</h4>
+                        <p>Emphasis on proof artifacts produced auditable evidence chain. All 11 functional requirements met and validated with documented proof for stakeholder review.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Graceful Adaptability</h4>
+                        <p>Process demonstrated flexibility by incorporating feedback during planning and implementation phases. Modular structure enabled pragmatic in-flight adjustments without disruption.</p>
+                    </div>
+                </div>
+
+                <div class="sdd-advantage">
+                    <h3>The SDD Advantage</h3>
+                    <p>SDD provides a robust framework that enhances clarity, guarantees verifiability, and gracefully accommodates change. The initial investment in structured planning and documentation delivers more predictable, successful outcomes with reduced rework and increased stakeholder confidence.</p>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-number">100%</div>
+                            <div class="metric-label">Requirements Met</div>
+                            <p>Complete validation coverage</p>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-number">6</div>
+                            <div class="metric-label">Minutes to Implement</div>
+                            <p>From first to final commit</p>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-number">0</div>
+                            <div class="metric-label">Scope Creep Issues</div>
+                            <p>Clear boundaries prevented drift</p>
+                        </div>
+                    </div>
+
+                    <blockquote class="quote">
+                        <strong>Key Takeaway:</strong> The evidence from this real-world implementation demonstrates that SDD's structured approach is not overhead—it's an investment that pays dividends through clarity, velocity, and quality assurance.
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Made with <a href="https://gamma.app/" target="_blank" rel="noopener noreferrer">GAMMA</a></p>
+        </div>
+    </footer>
+</body>
+</html>
