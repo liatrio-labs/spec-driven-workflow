@@ -1,11 +1,11 @@
 # SDD Playbook Site
 
-This directory contains a local recreation of the Spec-Driven Development (SDD) Playbook website originally built with Gamma.app.
+This directory contains code for the Spec-Driven Development (SDD) Playbook website on GitHub Pages.
 
 ## Structure
 
 ```text
-playbook-site/
+docs/
 ├── index.html          # Main playbook page
 ├── assets/
 │   ├── css/
