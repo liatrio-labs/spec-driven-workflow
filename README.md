@@ -16,10 +16,14 @@
 
 ## TLDR / Quickstart
 
-**Want to install these prompts as slash commands?** Use the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
+**Want to install these prompts as slash commands?** Use the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility to install them in all of your local AI tools:
 
 ```bash
-uvx --from git+https://github.com/liatrio-labs/slash-command-manager sdd-install --yes
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
+  slash-man generate \
+  --github-repo liatrio-labs/spec-driven-workflow \
+  --github-branch main \
+  --github-path prompts/
 ```
 
 **Want to use the prompts directly?** Copy-paste them into your AI assistant:
