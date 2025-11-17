@@ -48,6 +48,10 @@
     --border-color: var(--border-dark);
     --box-bg: var(--card-bg-dark);
     --max-width: 1200px;
+
+    /* Typography Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-wide: 0.05em;
 }
 
 body {
@@ -59,6 +63,7 @@ body {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     position: relative;
     min-height: 100vh;
 }
@@ -111,6 +116,8 @@ nav {
     font-weight: 500;
     transition: color 0.2s ease;
     position: relative;
+    white-space: nowrap;
+    text-rendering: optimizeLegibility;
 }
 
 .nav-links a:hover {
@@ -144,7 +151,7 @@ nav {
     line-height: 1.2;
     margin-bottom: 2rem;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 @media (min-width: 768px) {
@@ -223,7 +230,7 @@ nav {
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--text-primary);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .phase-box p {
@@ -244,7 +251,7 @@ nav {
     margin-bottom: 4rem;
     color: var(--text-primary);
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 @media (min-width: 768px) {
@@ -278,7 +285,7 @@ nav {
     font-weight: 600;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 @media (min-width: 768px) {
@@ -325,7 +332,7 @@ nav {
     font-weight: 600;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .benefits-column ul {
@@ -386,7 +393,7 @@ nav {
     margin-bottom: 2rem;
     color: var(--text-primary);
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 @media (min-width: 768px) {
@@ -444,7 +451,7 @@ nav {
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--text-primary);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .progression-box p {
@@ -465,7 +472,7 @@ nav {
     margin-bottom: 2rem;
     color: var(--text-primary);
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 @media (min-width: 768px) {
@@ -502,7 +509,7 @@ nav {
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-primary);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .audit-box p {
@@ -716,7 +723,7 @@ footer a:hover {
     color: var(--text-primary);
     margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .metric-box p {
