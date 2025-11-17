@@ -168,7 +168,7 @@ nav {
 
 /* Hero Section */
 .hero {
-    padding: 4rem 0 6rem;
+    padding: 4rem 0 4rem;
     background-color: var(--bg-light);
 }
 
@@ -203,9 +203,17 @@ nav {
     max-width: 900px;
 }
 
+.hero-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem auto 0;
+    max-width: 900px;
+    opacity: 0.5;
+}
+
 .hero-content {
     max-width: 900px;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .hero-content p {
@@ -1646,20 +1654,6 @@ footer a:hover {
 }
 
 /* Reference Materials Page Styles */
-.reference-intro {
-    padding: 3rem 0;
-    background-color: var(--bg-light);
-}
-
-.reference-intro p {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
 .reference-grid-section {
     padding: 4rem 0;
     background-color: var(--bg-light);
