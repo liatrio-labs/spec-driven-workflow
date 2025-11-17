@@ -30,7 +30,7 @@ repos:
           - "--extends=@commitlint/config-conventional"
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.4
+    rev: v8.29.0
     hooks:
       - id: gitleaks
         name: scan for committed secrets with gitleaks
