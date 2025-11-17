@@ -2,6 +2,111 @@
 
 <!-- version list -->
 
+## v1.9.0 (2025-11-17)
+
+### Bug Fixes
+
+- Update install instructions ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Add missing subtasks to tasks-pre-commit-cspell HTML page
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Improve inline code styling in task list subtasks
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Update validation dates to 2025-11-07 and remove unused index.html
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **playbook-site**: Address code review feedback for security and accessibility
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **security**: Update gitleaks to v8.29.0
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+### Chores
+
+- Remove more obsolete files ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Remove temporary files and update comparison page
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **repo**: Add CODEOWNERS and Code of Conduct, enhance pre-commit hooks
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+### Code Style
+
+- **docs**: Add hero divider to reduce empty space on reference-materials page
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **playbook-site**: Align design with dev.liatrio.com brand standards
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+### Documentation
+
+- Add comprehensive audit report and fix minor issues
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- Update README with comprehensive SDD workflow documentation
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+### Features
+
+- Trim project to prompts-only deliverable
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Add developer experience, common questions, and video overview pages
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Add local playbook site with Liatrio brand styling
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Add navigation header to all reference pages
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Add reference materials page with 9 SDD workflow examples
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **playbook-site**: Enhance design and add comparison page
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+### Refactoring
+
+- Extract navigation and footer into reusable JS components
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- Trim project to prompts-only deliverable
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Extract embedded fonts to dedicated stylesheet
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+- **docs**: Move playbook site to docs root and embed fonts
+  ([#31](https://github.com/liatrio-labs/spec-driven-workflow/pull/31),
+  [`e336618`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e33661897dd32b30e197c77bd13a02d8237bafe5))
+
+
 ## v1.8.0 (2025-11-07)
 
 ### Bug Fixes
