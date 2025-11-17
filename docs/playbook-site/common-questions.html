@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <header>
         <!-- Navigation will be injected by navigation.js -->
@@ -21,7 +25,11 @@
             <div class="container">
                 <h1>Addressing Common Objections to Spec-Driven Development</h1>
                 <div class="hero-content">
-                    <p>Adopting new development methodologies raises valid questions about productivity, quality, and adaptability. This evidence-based FAQ addresses common objections to Spec-Driven Development (SDD) using a concrete example: implementing a cspell pre-commit hook for spell-checking. By analyzing specifications, task lists, proof artifacts, and validation reports, we demonstrate how well-executed SDD works in practice.</p>
+                    <p>Adopting new development methodologies raises valid questions about productivity, quality, and
+                        adaptability. This evidence-based FAQ addresses common objections to Liatrio's Spec-Driven
+                        Development (SDD) using a concrete example: implementing a cspell pre-commit hook for
+                        spell-checking. By analyzing specifications, task lists, proof artifacts, and validation
+                        reports, we demonstrate how well-executed SDD works in practice.</p>
                 </div>
             </div>
         </section>
@@ -30,42 +38,83 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>Does Spec-Driven Development Add Unnecessary Overhead?</h2>
-                <p class="section-intro">Structured processes often face criticism for introducing bureaucratic overhead. However, the cspell hook implementation proves that SDD structure is an investment, not a cost. By mandating upfront clarity, it prevents ambiguity and rework—the true sources of delay—ultimately increasing development velocity.</p>
+                <p class="section-intro">Structured processes often face criticism for introducing bureaucratic
+                    overhead. However, the cspell hook implementation proves that SDD structure is an investment, not a
+                    cost. By mandating upfront clarity, it prevents ambiguity and rework—the true sources of
+                    delay—ultimately increasing development velocity.</p>
 
-                <div class="objection-content">
-                    <div class="workflow-item">
+                <div class="objection-content-grid">
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                         <h4>Upfront Planning Prevents Waste</h4>
-                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope. This protected the team from scope creep and unexpected requirements, concentrating effort exclusively on agreed-upon value.</p>
+                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope. This
+                            protected the team from scope creep and unexpected requirements, concentrating effort
+                            exclusively on agreed-upon value.</p>
                     </div>
 
-                    <div class="workflow-item">
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                         <h4>Structured Work Creates Velocity</h4>
-                        <p>Git history shows implementation took under 6 minutes—from first commit (09:57:02) to final commit (10:02:41). This remarkable speed was enabled by a clear plan breaking work into four distinct tasks.</p>
+                        <p>Git history shows implementation took under 6 minutes—from first commit (09:57:02) to final
+                            commit (10:02:41). This remarkable speed was enabled by a clear plan breaking work into four
+                            distinct tasks.</p>
                     </div>
 
-                    <div class="workflow-item">
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
                         <h4>Unambiguous Blueprint</h4>
-                        <p>SDD creates a direct, verifiable link between initial goals and final outcomes. The validation report confirms every stated goal was met without deviation, eliminating friction from misaligned expectations.</p>
+                        <p>SDD creates a direct, verifiable link between initial goals and final outcomes. The
+                            validation report confirms every stated goal was met without deviation, eliminating friction
+                            from misaligned expectations.</p>
                     </div>
                 </div>
 
-                <div class="non-goals-section">
+                <div class="non-goals-box">
                     <h3>Non-Goals Defined Clear Boundaries</h3>
-                    <p><strong>Explicitly Out of Scope:</strong></p>
-                    <ul class="non-goals-list">
-                        <li>Spell checking code files</li>
-                        <li>Automatic dictionary updates</li>
-                        <li>CI/CD spell checking</li>
-                        <li>IDE integration</li>
-                    </ul>
-                    <p><strong>Additional Exclusions:</strong></p>
-                    <ul class="non-goals-list">
-                        <li>Multi-language support</li>
-                        <li>Auto-fixing errors</li>
-                        <li>Generated files checking</li>
-                        <li>CHANGELOG.md checking</li>
-                    </ul>
-                    <p>By setting these boundaries, the team ensured effort was concentrated exclusively on delivering agreed-upon value without distraction.</p>
+                    <div class="non-goals-content">
+                        <div class="non-goals-column">
+                            <p><strong>Explicitly Out of Scope:</strong></p>
+                            <ul class="non-goals-list">
+                                <li>Spell checking code files</li>
+                                <li>Automatic dictionary updates</li>
+                                <li>CI/CD spell checking</li>
+                                <li>IDE integration</li>
+                            </ul>
+                        </div>
+                        <div class="non-goals-column">
+                            <p><strong>Additional Exclusions:</strong></p>
+                            <ul class="non-goals-list">
+                                <li>Multi-language support</li>
+                                <li>Auto-fixing errors</li>
+                                <li>Generated files checking</li>
+                                <li>CHANGELOG.md checking</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="non-goals-conclusion">By setting these boundaries, the team ensured effort was
+                        concentrated exclusively on delivering agreed-upon value without distraction.</p>
                 </div>
             </div>
         </section>
@@ -74,7 +123,10 @@
         <section class="reactive-art">
             <div class="container">
                 <h2>How Do We Know the Feature Actually Worked?</h2>
-                <p>A primary benefit of SDD is generating objective, verifiable evidence proving features are complete and correct. This moves assessment from subjective opinion to factual verification. The cspell implementation generated multiple layers of proof—from validation reports to individual commit traceability—guaranteeing the final product meets every requirement.</p>
+                <p>A primary benefit of SDD is generating objective, verifiable evidence proving features are complete
+                    and correct. This moves assessment from subjective opinion to factual verification. The cspell
+                    implementation generated multiple layers of proof—from validation reports to individual commit
+                    traceability—guaranteeing the final product meets every requirement.</p>
 
                 <div class="metrics-grid">
                     <div class="metric-box">
@@ -104,7 +156,9 @@ test-spell-check.md:10:4 - Unknown word (seperate) fix: (separate)
 CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     </div>
 
-                    <p>This artifact proves the hook correctly identified the file, misspelled words, and provided correct suggestions. This is not a description of what happened—it's a record of what happened, providing undeniable evidence of system behavior.</p>
+                    <p>This artifact proves the hook correctly identified the file, misspelled words, and provided
+                        correct suggestions. This is not a description of what happened—it's a record of what happened,
+                        providing undeniable evidence of system behavior.</p>
                 </div>
             </div>
         </section>
@@ -113,48 +167,78 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
         <section class="phases-detailed">
             <div class="container">
                 <h2>What Happens If Requirements Change?</h2>
-                <p class="section-intro">Planning-heavy processes face criticism for rigidity and inability to adapt. The cspell hook example proves that SDD provides a structured framework for managing change gracefully. Its emphasis on clarity, iterative planning, and modularity makes it inherently adaptable to inevitable project changes.</p>
+                <p class="section-intro">Planning-heavy processes face criticism for rigidity and inability to adapt.
+                    The cspell hook example proves that SDD provides a structured framework for managing change
+                    gracefully. Its emphasis on clarity, iterative planning, and modularity makes it inherently
+                    adaptable to inevitable project changes.</p>
 
                 <div class="adaptability-grid">
                     <div class="shift-item">
                         <h4>Clarity as Foundation</h4>
-                        <p>Initial specification provides stable baseline. Explicit Non-Goals make it easy to identify scope changes versus clarifications, enabling structured prioritization conversations.</p>
+                        <p>Initial specification provides stable baseline. Explicit Non-Goals make it easy to identify
+                            scope changes versus clarifications, enabling structured prioritization conversations.</p>
                     </div>
                     <div class="shift-item">
                         <h4>Iterative Planning</h4>
-                        <p>Clarifying Questions phase demonstrates dialogue approach. User feedback refined requirements before finalization, proving planning is collaborative, not dictatorial.</p>
+                        <p>Clarifying Questions phase demonstrates dialogue approach. User feedback refined requirements
+                            before finalization, proving planning is collaborative, not dictatorial.</p>
                     </div>
                     <div class="shift-item">
                         <h4>Modular Adaptation</h4>
-                        <p>Task structure allows small-scale changes without disrupting workflow. Git history shows pragmatic in-flight adjustments based on real-world testing discoveries.</p>
+                        <p>Task structure allows small-scale changes without disrupting workflow. Git history shows
+                            pragmatic in-flight adjustments based on real-world testing discoveries.</p>
                     </div>
                 </div>
 
-                <div class="example-section">
+                <div class="example-box">
                     <h3>Real Example: Incorporating Feedback</h3>
                     <blockquote class="quote">
                         "we don't need validation tests in python, that's overkill, remove that."
                     </blockquote>
-                    <p>This user feedback during task generation was immediately incorporated. The final task list reflects this change, preventing wasted effort on unnecessary work. The plan adapted to stakeholder input before implementation began.</p>
+                    <p>This user feedback during task generation was immediately incorporated. The final task list
+                        reflects this change, preventing wasted effort on unnecessary work. The plan adapted to
+                        stakeholder input before implementation began.</p>
 
                     <h4>In-Flight Adjustments</h4>
-                    <p>Even with excellent planning, discoveries happen during development. Commit message 26e8c10 shows: "Added missing dictionary terms found during testing." This proves the process allows pragmatic adjustments without rigidity.</p>
+                    <p>Even with excellent planning, discoveries happen during development. Commit message 26e8c10
+                        shows: "Added missing dictionary terms found during testing." This proves the process allows
+                        pragmatic adjustments without rigidity.</p>
                 </div>
 
-                <div class="adaptability-features">
-                    <div class="benefits-grid">
-                        <div class="benefits-column">
-                            <h4>Clear Scope Boundaries</h4>
-                            <p>Non-Goals establish what's out of scope, making change identification straightforward</p>
+                <div class="adaptability-cards">
+                    <div class="adaptability-card">
+                        <div class="adaptability-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                         </div>
-                        <div class="benefits-column">
-                            <h4>Feedback Integration</h4>
-                            <p>Planning phase incorporates stakeholder input before implementation starts</p>
+                        <h4>Clear Scope Boundaries</h4>
+                        <p>Non-Goals establish what's out of scope, making change identification straightforward</p>
+                    </div>
+                    <div class="adaptability-card">
+                        <div class="adaptability-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
                         </div>
-                        <div class="benefits-column">
-                            <h4>Modular Tasks</h4>
-                            <p>Small, focused units allow adjustments without disrupting entire workflow</p>
+                        <h4>Feedback Integration</h4>
+                        <p>Planning phase incorporates stakeholder input before implementation starts</p>
+                    </div>
+                    <div class="adaptability-card">
+                        <div class="adaptability-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" />
+                            </svg>
                         </div>
+                        <h4>Modular Tasks</h4>
+                        <p>Small, focused units allow adjustments without disrupting entire workflow</p>
                     </div>
                 </div>
             </div>
@@ -164,26 +248,34 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
         <section class="reactive-art">
             <div class="container">
                 <h2>Conclusion: Evidence-Based Success</h2>
-                <p>The cspell pre-commit hook implementation provides concrete evidence that Spec-Driven Development effectively mitigates common concerns about overhead, verifiability, and rigidity when executed properly.</p>
+                <p>The cspell pre-commit hook implementation provides concrete evidence that Spec-Driven Development
+                    effectively mitigates common concerns about overhead, verifiability, and rigidity when executed
+                    properly.</p>
 
                 <div class="conclusion-grid">
                     <div class="shift-item">
                         <h4>High-Velocity Development</h4>
-                        <p>Upfront planning investment created unambiguous scope, leading to focused development. Complete implementation achieved in under 6 minutes with clear task breakdown.</p>
+                        <p>Upfront planning investment created unambiguous scope, leading to focused development.
+                            Complete implementation achieved in under 6 minutes with clear task breakdown.</p>
                     </div>
                     <div class="shift-item">
                         <h4>Guaranteed Verifiability</h4>
-                        <p>Emphasis on proof artifacts produced auditable evidence chain. All 11 functional requirements met and validated with documented proof for stakeholder review.</p>
+                        <p>Emphasis on proof artifacts produced auditable evidence chain. All 11 functional requirements
+                            met and validated with documented proof for stakeholder review.</p>
                     </div>
                     <div class="shift-item">
                         <h4>Graceful Adaptability</h4>
-                        <p>Process demonstrated flexibility by incorporating feedback during planning and implementation phases. Modular structure enabled pragmatic in-flight adjustments without disruption.</p>
+                        <p>Process demonstrated flexibility by incorporating feedback during planning and implementation
+                            phases. Modular structure enabled pragmatic in-flight adjustments without disruption.</p>
                     </div>
                 </div>
 
                 <div class="sdd-advantage">
                     <h3>The SDD Advantage</h3>
-                    <p>SDD provides a robust framework that enhances clarity, guarantees verifiability, and gracefully accommodates change. The initial investment in structured planning and documentation delivers more predictable, successful outcomes with reduced rework and increased stakeholder confidence.</p>
+                    <p>SDD provides a robust framework that enhances clarity, guarantees verifiability, and gracefully
+                        accommodates change. The initial investment in structured planning and documentation delivers
+                        more predictable, successful outcomes with reduced rework and increased stakeholder confidence.
+                    </p>
 
                     <div class="metrics-grid">
                         <div class="metric-box">
@@ -204,7 +296,9 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     </div>
 
                     <blockquote class="quote">
-                        <strong>Key Takeaway:</strong> The evidence from this real-world implementation demonstrates that SDD's structured approach is not overhead—it's an investment that pays dividends through clarity, velocity, and quality assurance.
+                        <strong>Key Takeaway:</strong> The evidence from this real-world implementation demonstrates
+                        that SDD's structured approach is not overhead—it's an investment that pays dividends through
+                        clarity, velocity, and quality assurance.
                     </blockquote>
                 </div>
             </div>
@@ -217,4 +311,5 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
     <script src="assets/js/navigation.js"></script>
     <script src="assets/js/footer.js"></script>
 </body>
+
 </html>

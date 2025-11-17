@@ -2,7 +2,7 @@
  * Navigation Component
  * Dynamically injects navigation into pages
  */
-(function() {
+(function () {
     'use strict';
 
     // Get current page filename, handling both root and subdirectory paths
@@ -15,6 +15,7 @@
 
     const navLinks = [
         { href: basePath + 'index.html', text: 'SDD Playbook' },
+        { href: basePath + 'comparison.html', text: 'Comparison' },
         { href: basePath + 'developer-experience.html', text: 'Developer Experience' },
         { href: basePath + 'common-questions.html', text: 'Common Questions' },
         { href: basePath + 'video-overview.html', text: 'Video Overview' },
@@ -29,15 +30,17 @@
             <nav>
                 <div class="nav-container">
                     <div class="logo">
-                        <img src="${basePath}assets/images/logo-liatrio.svg" alt="Liatrio" class="logo-img">
+                        <a href="https://liatrio.com" target="_blank" rel="noopener noreferrer">
+                            <img src="${basePath}assets/images/logo-liatrio.svg" alt="Liatrio" class="logo-img">
+                        </a>
                     </div>
                     <ul class="nav-links">
                         ${navLinks.map(link => {
-                            // Extract filename from href for comparison
-                            const linkPage = link.href.split('/').pop();
-                            const isActive = linkPage === currentPage ? ' class="active"' : '';
-                            return `<li><a href="${link.href}"${isActive}>${link.text}</a></li>`;
-                        }).join('')}
+            // Extract filename from href for comparison
+            const linkPage = link.href.split('/').pop();
+            const isActive = linkPage === currentPage ? ' class="active"' : '';
+            return `<li><a href="${link.href}"${isActive}>${link.text}</a></li>`;
+        }).join('')}
                     </ul>
                 </div>
             </nav>

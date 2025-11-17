@@ -21,22 +21,49 @@
             <div class="container">
                 <h1>The Spec-Driven Development (SDD) Playbook</h1>
                 <div class="hero-content">
-                    <p>This website outlines the Spec-Driven Development (SDD) workflow as envisioned by <a href="https://liatrio.com/" target="_blank" rel="noopener noreferrer">Liatrio</a>. SDD is a systematic process designed to guide a feature from initial concept to a fully validated, production-ready state. The strategic importance of this workflow lies in its rigorous, phase-based structure that transforms an abstract idea into a tangible, merge-ready feature.</p>
-                    <p>By prioritizing clear requirements, verifiable progress, and evidence-based quality assurance, the SDD process ensures that all stakeholders are aligned, development is predictable, and the final product meets its intended goals with exceptional quality. This playbook details the four distinct phases: Specification, Task Breakdown, Implementation, and Validation.</p>
-                    <p>You can experience the workflow yourself at <a href="https://github.com/liatrio-labs/spec-driven-workflow" target="_blank" rel="noopener noreferrer">https://github.com/liatrio-labs/spec-driven-workflow</a>.</p>
+                    <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is <strong>just 4 markdown prompts</strong> that help developers guide an AI assistant through implementing their day-to-day work with structure, clarity, and evidence.</p>
+                    <p>These prompts are <strong>transparent</strong> (you can read and modify every one), <strong>tool-agnostic</strong> (works with any AI assistant), and <strong>lightweight</strong> (no installation, no dependencies). They create a simple file structure in <code>docs/specs/</code> that doesn't pollute your repo.</p>
+                    <p>View the prompts on GitHub: <a href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts" target="_blank" rel="noopener noreferrer">github.com/liatrio-labs/spec-driven-workflow/prompts</a></p>
                 </div>
 
-                <!-- Phase Overview Boxes -->
+                <!-- Flow Input Section -->
+                <div class="flow-input-section">
+                    <h3>What You Bring: Flow Input</h3>
+                    <p>Start with anything: an idea, a Jira story, a GitHub issue, or a feature request. The prompts adapt to your input and guide you through the workflow. No special format required—just describe what you want to build.</p>
+                </div>
+
+                <!-- Scope Validation Section -->
+                <div class="scope-validation-section">
+                    <h3>Built-in Scope Validation</h3>
+                    <p>The prompts automatically check if your work is appropriately sized. If it's <strong>too large</strong>, they'll suggest splitting it into smaller specs. If it's <strong>too small</strong>, they'll suggest direct implementation. Perfect for well-scoped features that are ready to implement.</p>
+                    <div class="scope-examples">
+                        <div class="scope-example">
+                            <strong>Too Large:</strong> Rewriting entire architecture, migrating complete database systems
+                        </div>
+                        <div class="scope-example">
+                            <strong>Too Small:</strong> Single console.log, changing button color, fixing off-by-one errors
+                        </div>
+                        <div class="scope-example highlight">
+                            <strong>Just Right:</strong> Adding CLI flag, implementing single API endpoint, creating database migration, implementing one user story
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step Overview Boxes -->
                 <div class="phase-overview">
                     <div class="phase-box">
                         <div class="phase-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <h3>Specification</h3>
-                        <p>Define the "what" and "why" with clear boundaries and functional requirements</p>
+                        <h3>Step 1: Specification</h3>
+                        <p>Transform your flow input into a structured spec with clear boundaries</p>
+                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
@@ -44,8 +71,9 @@
                                 <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <h3>Task Breakdown</h3>
-                        <p>Translate specs into concrete, actionable implementation plans</p>
+                        <h3>Step 2: Task Breakdown</h3>
+                        <p>Break the spec into actionable tasks with demo criteria</p>
+                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
@@ -53,8 +81,9 @@
                                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>Implementation</h3>
-                        <p>Execute tasks systematically while generating comprehensive proof artifacts</p>
+                        <h3>Step 3: Implementation</h3>
+                        <p>Execute tasks with verification and proof artifacts</p>
+                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
@@ -63,68 +92,70 @@
                                 <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>Validation</h3>
-                        <p>Evidence-based quality assurance ensuring all requirements are met</p>
+                        <h3>Step 4: Validation</h3>
+                        <p>Verify implementation meets all requirements with evidence</p>
+                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Four Phases Section -->
+        <!-- Four Steps Section -->
         <section class="phases-detailed">
             <div class="container">
-                <h2>The Four Phases of SDD</h2>
+                <h2>The Four Steps</h2>
+                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. The example described on this site took less than 15 minutes from start to finish.</p>
 
                 <div class="phases-grid">
                     <div class="phase-card">
                         <div class="phase-card-header">
                             <span class="phase-number-badge">01</span>
-                            <h3>Phase 1: Specification</h3>
+                            <h3>Specification</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Objective:</strong> Define the "what" and "why" of the feature, establishing clear boundaries and functional requirements.</p>
-                            <p><strong>Responsible Role:</strong> Feature Lead</p>
-                            <p><strong>Primary Artifact:</strong> A specification document detailing Goals, User Stories, Demoable Units, Functional Requirements, and Technical Considerations.</p>
-                            <p><strong>Acceptance Gate:</strong> Sign-off from Feature Lead and key stakeholders, locking the scope as the single source of truth.</p>
+                            <p><strong>Focus:</strong> Transform your flow input into a structured specification with clear boundaries and functional requirements.</p>
+                            <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just right), asks clarifying questions, and generates a specification document.</p>
+                            <p><strong>Output:</strong> A markdown spec file in <code>docs/specs/[NN]-spec-[feature-name]/</code></p>
+                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md" target="_blank" rel="noopener noreferrer">generate-spec.md</a></p>
                         </div>
                     </div>
 
                     <div class="phase-card">
                         <div class="phase-card-header">
                             <span class="phase-number-badge">02</span>
-                            <h3>Phase 2: Task Breakdown</h3>
+                            <h3>Task Breakdown</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Objective:</strong> Deconstruct the specification into a sequential list of demoable parent tasks and granular sub-tasks.</p>
-                            <p><strong>Responsible Role:</strong> Technical Lead or Implementer</p>
-                            <p><strong>Primary Artifact:</strong> A task list document identifying all relevant files and providing a comprehensive checklist of parent and sub-tasks.</p>
-                            <p><strong>Acceptance Gate:</strong> Technical Lead and implementing team approve the complete task list, confirming it is technically sound and comprehensive.</p>
+                            <p><strong>Focus:</strong> Break the specification into actionable tasks with demo criteria and proof artifacts.</p>
+                            <p><strong>What It Does:</strong> Analyzes the spec, identifies relevant files, and creates a task list with parent tasks (first) and sub-tasks (after confirmation).</p>
+                            <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact requirements</p>
+                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md" target="_blank" rel="noopener noreferrer">generate-task-list-from-spec.md</a></p>
                         </div>
                     </div>
 
                     <div class="phase-card">
                         <div class="phase-card-header">
                             <span class="phase-number-badge">03</span>
-                            <h3>Phase 3: Implementation</h3>
+                            <h3>Implementation</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Objective:</strong> Execute the task list to produce working code while creating comprehensive proof artifacts.</p>
-                            <p><strong>Responsible Role:</strong> Implementer</p>
-                            <p><strong>Primary Artifacts:</strong> Task-aligned Git commits with conventional messages and proof documents containing outputs, screenshots, and verification steps.</p>
-                            <p><strong>Acceptance Gate:</strong> Every task marked complete with corresponding proof artifact and task-aligned git commit generated and linked.</p>
+                            <p><strong>Focus:</strong> Execute tasks systematically while creating proof artifacts and following git workflow.</p>
+                            <p><strong>What It Does:</strong> Guides implementation with checkpoint modes (continuous/task/batch), creates proof artifacts, and manages git commits.</p>
+                            <p><strong>Output:</strong> Working code, proof artifact files, and task-aligned git commits</p>
+                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md" target="_blank" rel="noopener noreferrer">manage-tasks.md</a></p>
                         </div>
                     </div>
 
                     <div class="phase-card">
                         <div class="phase-card-header">
                             <span class="phase-number-badge">04</span>
-                            <h3>Phase 4: Validation</h3>
+                            <h3>Validation</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Objective:</strong> Provide an evidence-based verdict on whether implementation meets all functional requirements and repository standards.</p>
-                            <p><strong>Responsible Role:</strong> Reviewer or QA Lead</p>
-                            <p><strong>Primary Artifact:</strong> A validation report with executive summary, detailed coverage matrix, and list of any issues found.</p>
-                            <p><strong>Acceptance Gate:</strong> Validation Report returns overall PASS status, confirming all requirements met and formal approval to merge.</p>
+                            <p><strong>Focus:</strong> Verify implementation meets all spec requirements using proof artifacts and evidence.</p>
+                            <p><strong>What It Does:</strong> Creates a coverage matrix, verifies proof artifacts, checks file integrity, and produces a validation report.</p>
+                            <p><strong>Output:</strong> A validation report with PASS/FAIL gates and evidence-based coverage matrix</p>
+                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md" target="_blank" rel="noopener noreferrer">validate-spec-implementation.md</a></p>
                         </div>
                     </div>
                 </div>
@@ -135,23 +166,27 @@
 
                 <div class="benefits-grid">
                     <div class="benefits-column">
-                        <h4>Key Benefits</h4>
+                        <h4>Why This Works</h4>
                         <ul>
-                            <li>Prevents costly rework and late-stage pivots</li>
-                            <li>Creates measurable checkpoints for predictable progress</li>
-                            <li>Eliminates "works on my machine" scenarios</li>
-                            <li>Removes subjectivity from quality assurance</li>
+                            <li>Built-in scope validation prevents oversized work</li>
+                            <li>Transparent prompts you can read and modify</li>
+                            <li>Tool-agnostic—works with any AI assistant</li>
+                            <li>Simple file structure that doesn't pollute your repo</li>
                         </ul>
                     </div>
                     <div class="benefits-column">
-                        <h4>Critical Success Factors</h4>
+                        <h4>Perfect For</h4>
                         <ul>
-                            <li>Formal sign-off at each phase gate</li>
-                            <li>Immutable evidence for every requirement</li>
-                            <li>Direct traceability from code to requirement</li>
-                            <li>Systematic verification against specifications</li>
+                            <li>Jira stories post-grooming (ready to pick up)</li>
+                            <li>Small-to-medium features (one user story)</li>
+                            <li>One-person workflows with AI assistance</li>
+                            <li>Teams wanting lightweight, flexible processes</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="comparison-cta">
+                    <p><strong>How does this compare to other structured development tools?</strong> See our <a href="comparison.html">comparison against Kiro, SpecKit, and Taskmaster</a> to understand why Liatrio's prompts fit better into the typical workflow of software developers doing day-to-day work.</p>
                 </div>
             </div>
         </section>
@@ -160,7 +195,7 @@
         <section class="reactive-art">
             <div class="container">
                 <h2>From Reactive Art to Predictable Engineering</h2>
-                <p>By consistently executing these four phases, teams transform software development from a reactive art into a predictable engineering discipline. The Spec-Driven Development workflow creates a self-documenting, auditable, and evidence-based process that systematically drives up quality, reduces ambiguity, and ensures every feature delivered is a feature validated.</p>
+                <p>By consistently using these four prompts, developers transform small feature work from reactive coding into predictable, evidence-based implementation. Liatrio's Spec-Driven Development workflow creates a self-documenting, auditable process that systematically drives up quality, reduces ambiguity, and ensures every feature delivered is a feature validated—all in minutes, not days.</p>
 
                 <div class="progression-boxes">
                     <div class="progression-box">
@@ -215,7 +250,7 @@
                 <div class="audit-boxes">
                     <div class="audit-box">
                         <h4>Self-Documenting Process</h4>
-                        <p>Every phase generates artifacts that serve as living documentation, creating a complete project history without additional overhead.</p>
+                        <p>Every step generates artifacts that serve as living documentation, creating a complete project history without additional overhead.</p>
                     </div>
                     <div class="audit-box">
                         <h4>Auditable Progress</h4>
