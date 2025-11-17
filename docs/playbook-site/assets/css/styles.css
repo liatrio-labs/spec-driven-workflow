@@ -1,0 +1,614 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Brand Colors - Primary Palette */
+    --grey-800: #111111;
+    --white: #ffffff;
+    --primary-green: #24AE1D;
+    --bright-green: #89df00;
+
+    /* Dark Theme Colors - Matching dev.liatrio.com */
+    --bg-dark: #1a1f23;
+    /* rgb(26, 31, 35) - Main background */
+    --bg-section-dark: #2d3338;
+    /* rgb(45, 51, 56) - Section background */
+    --bg-section-alt: rgba(49, 56, 63, 0.3);
+    /* Alternative section background */
+    --card-bg-dark: #23292f;
+    /* rgb(35, 41, 47) - Card/box background */
+    --nav-bg-dark: rgba(26, 31, 35, 0.8);
+    /* Navigation background */
+    --border-dark: #343d46;
+    /* rgb(52, 61, 70) - Border color */
+
+    /* Text Colors - Dark Theme */
+    --text-primary-dark: #fafafa;
+    /* rgb(250, 250, 250) - Primary text */
+    --text-secondary-dark: #acb3b9;
+    /* rgb(172, 179, 185) - Secondary text */
+
+    /* Accent Colors - Dark Theme */
+    --accent-green-dark: #a6ef39;
+    /* rgb(166, 239, 57) - Bright green accent */
+    --accent-green-dark-hover: #b8ff4d;
+
+    /* Semantic Color Variables - Dark Theme */
+    --bg-light: var(--bg-dark);
+    --bg-section: var(--bg-section-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent-green: var(--accent-green-dark);
+    --accent-green-hover: var(--accent-green-dark-hover);
+    --primary-green-brand: var(--primary-green);
+    --border-color: var(--border-dark);
+    --box-bg: var(--card-bg-dark);
+    --max-width: 1200px;
+}
+
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 18px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--nav-bg-dark);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+nav {
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-img {
+    height: 32px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+.nav-links a.active {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-green);
+}
+
+/* Hero Section */
+.hero {
+    padding: 4rem 0 6rem;
+    background-color: var(--bg-light);
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .hero h1 {
+        font-size: 4.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero h1 {
+        font-size: 5rem;
+    }
+}
+
+.hero-content {
+    max-width: 900px;
+    margin-bottom: 4rem;
+}
+
+.hero-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.hero-content a {
+    color: var(--accent-green);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+.hero-content a:hover {
+    color: var(--accent-green-hover);
+    text-decoration: underline;
+}
+
+/* Phase Overview Boxes */
+.phase-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.phase-box {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.phase-box:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-green);
+    box-shadow: 0 4px 12px rgba(166, 239, 57, 0.2);
+}
+
+.phase-icon {
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.phase-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.phase-box h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+.phase-box p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Phases Detailed Section */
+.phases-detailed {
+    padding: 6rem 0;
+    background-color: var(--bg-section);
+}
+
+.phases-detailed h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .phases-detailed h2 {
+        font-size: 3rem;
+    }
+}
+
+.phase-detail {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: flex-start;
+}
+
+.phase-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.phase-content {
+    flex: 1;
+}
+
+.phase-content h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+@media (min-width: 768px) {
+    .phase-content h3 {
+        font-size: 2rem;
+    }
+}
+
+.phase-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.phase-content strong {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+/* Quote */
+.quote {
+    border-left: 4px solid var(--accent-green);
+    padding-left: 2rem;
+    margin: 4rem 0;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.benefits-column h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+.benefits-column ul {
+    list-style: none;
+}
+
+.benefits-column li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.benefits-column li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+/* Reactive Art Section */
+.reactive-art {
+    padding: 6rem 0;
+    background-color: var(--bg-light);
+    position: relative;
+    background-image: url('../images/background/texture05-dark.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.reactive-art::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-light);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.reactive-art>* {
+    position: relative;
+    z-index: 1;
+}
+
+.reactive-art h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .reactive-art h2 {
+        font-size: 3rem;
+    }
+}
+
+.reactive-art>.container>p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    text-align: center;
+}
+
+.progression-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.progression-box {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.progression-box:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-green);
+    box-shadow: 0 4px 12px rgba(166, 239, 57, 0.2);
+}
+
+.progression-icon {
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progression-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.progression-box h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+.progression-box p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Audit Trail Section */
+.audit-trail {
+    padding: 6rem 0;
+    background-color: var(--bg-section);
+}
+
+.audit-trail h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .audit-trail h2 {
+        font-size: 3rem;
+    }
+}
+
+.audit-trail>.container>p:first-of-type {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    text-align: center;
+}
+
+.audit-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.audit-box {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.audit-box h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+.audit-box p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.conclusion {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 900px;
+    margin: 4rem auto 0;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    padding: 3rem 0;
+    background-color: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+footer p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: var(--accent-green);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+footer a:hover {
+    color: var(--accent-green-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .nav-container {
+        padding: 0 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content {
+        font-size: 1rem;
+    }
+
+    .phases-detailed h2,
+    .reactive-art h2,
+    .audit-trail h2 {
+        font-size: 2rem;
+    }
+
+    .phase-detail {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .phase-number {
+        font-size: 3rem;
+        min-width: auto;
+    }
+
+    .phase-overview,
+    .progression-boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .benefits-grid,
+    .audit-boxes {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .phase-box,
+    .progression-box,
+    .audit-box {
+        padding: 1.5rem;
+    }
+}

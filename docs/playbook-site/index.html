@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spec-Driven Development (SDD) Playbook</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo-liatrio.svg" alt="Liatrio" class="logo-img">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">SDD Playbook</a></li>
+                    <li><a href="#developer-experience">Developer Experience</a></li>
+                    <li><a href="#common-questions">Common Questions</a></li>
+                    <li><a href="#video-overview">Video Overview</a></li>
+                    <li><a href="#reference-materials">Reference Materials</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>THE SPEC-DRIVEN DEVELOPMENT (SDD) PLAYBOOK</h1>
+                <div class="hero-content">
+                    <p>This website outlines the Spec-Driven Development (SDD) workflow as envisioned by <a href="https://liatrio.com/" target="_blank" rel="noopener noreferrer">Liatrio</a>. SDD is a systematic process designed to guide a feature from initial concept to a fully validated, production-ready state. The strategic importance of this workflow lies in its rigorous, phase-based structure that transforms an abstract idea into a tangible, merge-ready feature.</p>
+                    <p>By prioritizing clear requirements, verifiable progress, and evidence-based quality assurance, the SDD process ensures that all stakeholders are aligned, development is predictable, and the final product meets its intended goals with exceptional quality. This playbook details the four distinct phases: Specification, Task Breakdown, Implementation, and Validation.</p>
+                    <p>You can experience the workflow yourself at <a href="https://github.com/liatrio-labs/spec-driven-workflow" target="_blank" rel="noopener noreferrer">https://github.com/liatrio-labs/spec-driven-workflow</a>.</p>
+                </div>
+
+                <!-- Phase Overview Boxes -->
+                <div class="phase-overview">
+                    <div class="phase-box">
+                        <div class="phase-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>SPECIFICATION</h3>
+                        <p>Define the "what" and "why" with clear boundaries and functional requirements</p>
+                    </div>
+                    <div class="phase-box">
+                        <div class="phase-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>TASK BREAKDOWN</h3>
+                        <p>Translate specs into concrete, actionable implementation plans</p>
+                    </div>
+                    <div class="phase-box">
+                        <div class="phase-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>IMPLEMENTATION</h3>
+                        <p>Execute tasks systematically while generating comprehensive proof artifacts</p>
+                    </div>
+                    <div class="phase-box">
+                        <div class="phase-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>VALIDATION</h3>
+                        <p>Evidence-based quality assurance ensuring all requirements are met</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Four Phases Section -->
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>THE FOUR PHASES OF SDD</h2>
+
+                <div class="phase-detail">
+                    <div class="phase-number">01</div>
+                    <div class="phase-content">
+                        <h3>PHASE 1: SPECIFICATION</h3>
+                        <p><strong>Objective:</strong> Define the "what" and "why" of the feature, establishing clear boundaries and functional requirements.</p>
+                        <p><strong>Responsible Role:</strong> Feature Lead</p>
+                        <p><strong>Primary Artifact:</strong> A specification document detailing Goals, User Stories, Demoable Units, Functional Requirements, and Technical Considerations.</p>
+                        <p><strong>Acceptance Gate:</strong> Sign-off from Feature Lead and key stakeholders, locking the scope as the single source of truth.</p>
+                    </div>
+                </div>
+
+                <div class="phase-detail">
+                    <div class="phase-number">02</div>
+                    <div class="phase-content">
+                        <h3>PHASE 2: TASK BREAKDOWN</h3>
+                        <p><strong>Objective:</strong> Deconstruct the specification into a sequential list of demoable parent tasks and granular sub-tasks.</p>
+                        <p><strong>Responsible Role:</strong> Technical Lead or Implementer</p>
+                        <p><strong>Primary Artifact:</strong> A task list document identifying all relevant files and providing a comprehensive checklist of parent and sub-tasks.</p>
+                        <p><strong>Acceptance Gate:</strong> Technical Lead and implementing team approve the complete task list, confirming it is technically sound and comprehensive.</p>
+                    </div>
+                </div>
+
+                <div class="phase-detail">
+                    <div class="phase-number">03</div>
+                    <div class="phase-content">
+                        <h3>PHASE 3: IMPLEMENTATION</h3>
+                        <p><strong>Objective:</strong> Execute the task list to produce working code while creating comprehensive proof artifacts.</p>
+                        <p><strong>Responsible Role:</strong> Implementer</p>
+                        <p><strong>Primary Artifacts:</strong> Task-aligned Git commits with conventional messages and proof documents containing outputs, screenshots, and verification steps.</p>
+                        <p><strong>Acceptance Gate:</strong> Every task marked complete with corresponding proof artifact and task-aligned git commit generated and linked.</p>
+                    </div>
+                </div>
+
+                <div class="phase-detail">
+                    <div class="phase-number">04</div>
+                    <div class="phase-content">
+                        <h3>PHASE 4: VALIDATION</h3>
+                        <p><strong>Objective:</strong> Provide an evidence-based verdict on whether implementation meets all functional requirements and repository standards.</p>
+                        <p><strong>Responsible Role:</strong> Reviewer or QA Lead</p>
+                        <p><strong>Primary Artifact:</strong> A validation report with executive summary, detailed coverage matrix, and list of any issues found.</p>
+                        <p><strong>Acceptance Gate:</strong> Validation Report returns overall PASS status, confirming all requirements met and formal approval to merge.</p>
+                    </div>
+                </div>
+
+                <blockquote class="quote">
+                    The upfront investment in clarity de-risks the entire development lifecycle by preventing the two most common causes of project failure: ambiguous requirements and unchecked scope creep.
+                </blockquote>
+
+                <div class="benefits-grid">
+                    <div class="benefits-column">
+                        <h4>KEY BENEFITS</h4>
+                        <ul>
+                            <li>Prevents costly rework and late-stage pivots</li>
+                            <li>Creates measurable checkpoints for predictable progress</li>
+                            <li>Eliminates "works on my machine" scenarios</li>
+                            <li>Removes subjectivity from quality assurance</li>
+                        </ul>
+                    </div>
+                    <div class="benefits-column">
+                        <h4>CRITICAL SUCCESS FACTORS</h4>
+                        <ul>
+                            <li>Formal sign-off at each phase gate</li>
+                            <li>Immutable evidence for every requirement</li>
+                            <li>Direct traceability from code to requirement</li>
+                            <li>Systematic verification against specifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- From Reactive Art Section -->
+        <section class="reactive-art">
+            <div class="container">
+                <h2>FROM REACTIVE ART TO PREDICTABLE ENGINEERING</h2>
+                <p>By consistently executing these four phases, teams transform software development from a reactive art into a predictable engineering discipline. The Spec-Driven Development workflow creates a self-documenting, auditable, and evidence-based process that systematically drives up quality, reduces ambiguity, and ensures every feature delivered is a feature validated.</p>
+
+                <div class="progression-boxes">
+                    <div class="progression-box">
+                        <div class="progression-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h4>ABSTRACT IDEA</h4>
+                        <p>Initial concept with unclear requirements</p>
+                    </div>
+                    <div class="progression-box">
+                        <div class="progression-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h4>CLEAR SPECIFICATION</h4>
+                        <p>Locked scope with stakeholder alignment</p>
+                    </div>
+                    <div class="progression-box">
+                        <div class="progression-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h4>SYSTEMATIC EXECUTION</h4>
+                        <p>Evidence-backed implementation</p>
+                    </div>
+                    <div class="progression-box">
+                        <div class="progression-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h4>VALIDATED FEATURE</h4>
+                        <p>Production-ready, merge-approved code</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audit Trail Section -->
+        <section class="audit-trail">
+            <div class="container">
+                <h2>THE AUDIT TRAIL ADVANTAGE</h2>
+                <p>The linkage from Git commit, to task list, to proof artifact forms an unbreakable audit trail from a specific line of code back to the requirement it satisfies. This traceability is non-negotiable and transforms development into a transparent, verifiable process.</p>
+
+                <div class="audit-boxes">
+                    <div class="audit-box">
+                        <h4>SELF-DOCUMENTING PROCESS</h4>
+                        <p>Every phase generates artifacts that serve as living documentation, creating a complete project history without additional overhead.</p>
+                    </div>
+                    <div class="audit-box">
+                        <h4>AUDITABLE PROGRESS</h4>
+                        <p>Machine-readable commit messages and proof documents enable automated verification and compliance tracking at any point in time.</p>
+                    </div>
+                    <div class="audit-box">
+                        <h4>EVIDENCE-BASED QUALITY</h4>
+                        <p>Replaces subjective opinions with verifiable proof, ensuring what was built is exactly what was requested.</p>
+                    </div>
+                </div>
+
+                <p class="conclusion">This disciplined approach prevents common development pitfalls and ensures that completion is a matter of proof, not opinion. The result is higher quality software, reduced risk, and a development process that scales with organizational growth.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Made with <a href="https://gamma.app/" target="_blank" rel="noopener noreferrer">GAMMA</a></p>
+        </div>
+    </footer>
+</body>
+</html>
