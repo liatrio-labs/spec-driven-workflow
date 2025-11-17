@@ -293,6 +293,59 @@
             color: var(--accent-lagoon);
         }
 
+        /* Navigation */
+        .nav-header {
+            background-color: rgba(26, 31, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logo-link:hover {
+            color: var(--accent-secondary);
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .container {
@@ -306,11 +359,32 @@
             h2 {
                 font-size: 1.5rem;
             }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo-link">← SDD Playbook</a>
+            <ul class="nav-links">
+                <li><a href="../reference-materials.html">Reference Materials</a></li>
+                <li><a href="../index.html">Main Site</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <h1 id="tasks-pre-commit-cspell.md">05-tasks-pre-commit-cspell.md</h1>
         <h2 id="relevant-files">Relevant Files</h2>
