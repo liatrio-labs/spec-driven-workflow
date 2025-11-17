@@ -1,6 +1,8 @@
 # MCP Prompt Support
 
-This guide tracks how well popular IDEs, CLIs, and agent shells load the Spec Driven Development (SDD) prompts exposed by the MCP server. Use it to choose the smoothest environment, understand current limitations, and contribute new findings.
+> **Note:** The MCP server implementation has been moved to a separate repository. This document tracks how well popular IDEs, CLIs, and agent shells load the Spec Driven Development (SDD) prompts. For MCP server implementation details, see the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) repository.
+
+This guide tracks how well popular IDEs, CLIs, and agent shells load the Spec Driven Development (SDD) prompts. Use it to choose the smoothest environment, understand current limitations, and contribute new findings.
 
 ## Support Matrix
 
@@ -37,7 +39,7 @@ This guide tracks how well popular IDEs, CLIs, and agent shells load the Spec Dr
 
 ## How to Contribute Updates
 
-1. Launch the MCP server with the environment you are testing.
+1. Launch the MCP server with the environment you are testing (see [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) for setup).
 2. Note whether prompts load automatically and how the assistant responds to each stage of the SDD workflow.
 3. Capture any error messages or required workarounds.
 4. Update the support matrix and notes above with your findings.
