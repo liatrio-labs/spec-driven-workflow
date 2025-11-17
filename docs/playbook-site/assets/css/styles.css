@@ -33,9 +33,9 @@
     /* rgb(172, 179, 185) - Secondary text */
 
     /* Accent Colors - Dark Theme */
-    --accent-green-dark: #a6ef39;
-    /* rgb(166, 239, 57) - Bright green accent */
-    --accent-green-dark-hover: #b8ff4d;
+    --accent-green-dark: #89df00;
+    /* rgb(137, 223, 0) - Bright green accent (brand standard) */
+    --accent-green-dark-hover: #9ef033;
 
     /* Semantic Color Variables - Dark Theme */
     --bg-light: var(--bg-dark);
@@ -146,7 +146,7 @@ nav {
 }
 
 .hero h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 2rem;
@@ -156,14 +156,24 @@ nav {
 
 @media (min-width: 768px) {
     .hero h1 {
-        font-size: 4.5rem;
+        font-size: 4rem;
     }
 }
 
 @media (min-width: 1024px) {
     .hero h1 {
-        font-size: 5rem;
+        font-size: 4.5rem;
     }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    max-width: 900px;
 }
 
 .hero-content {
@@ -210,7 +220,7 @@ nav {
 .phase-box:hover {
     transform: translateY(-2px);
     border-color: var(--accent-green);
-    box-shadow: 0 4px 12px rgba(166, 239, 57, 0.2);
+    box-shadow: 0 4px 12px rgba(137, 223, 0, 0.2);
 }
 
 .phase-icon {
@@ -260,6 +270,100 @@ nav {
     }
 }
 
+/* Phases Grid - Card Layout */
+.phases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+    .phases-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+.phase-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.phase-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
+}
+
+.phase-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.phase-number-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    background-color: rgba(137, 223, 0, 0.1);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.phase-card-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-wide);
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .phase-card-header h3 {
+        font-size: 1.75rem;
+    }
+}
+
+.phase-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.phase-card-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.phase-card-content p:last-child {
+    margin-bottom: 0;
+}
+
+.phase-card-content strong {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+/* Legacy phase-detail styles for backward compatibility */
 .phase-detail {
     display: flex;
     gap: 3rem;
@@ -430,7 +534,7 @@ nav {
 .progression-box:hover {
     transform: translateY(-2px);
     border-color: var(--accent-green);
-    box-shadow: 0 4px 12px rgba(166, 239, 57, 0.2);
+    box-shadow: 0 4px 12px rgba(137, 223, 0, 0.2);
 }
 
 .progression-icon {
@@ -704,7 +808,7 @@ footer a:hover {
 
 .commit-item code {
     color: var(--accent-green);
-    background-color: rgba(166, 239, 57, 0.1);
+    background-color: rgba(137, 223, 0, 0.1);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
 }
@@ -728,7 +832,7 @@ footer a:hover {
 .metric-box:hover {
     transform: translateY(-4px);
     border-color: var(--accent-green);
-    box-shadow: 0 4px 12px rgba(166, 239, 57, 0.2);
+    box-shadow: 0 4px 12px rgba(137, 223, 0, 0.2);
 }
 
 .metric-number {
@@ -744,7 +848,6 @@ footer a:hover {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1rem;
-    text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
 }
 
@@ -1069,7 +1172,7 @@ footer a:hover {
 }
 
 .video-instructions code {
-    background-color: rgba(166, 239, 57, 0.1);
+    background-color: rgba(137, 223, 0, 0.1);
     color: var(--accent-green);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
@@ -1121,7 +1224,7 @@ footer a:hover {
 
 .reference-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(166, 239, 57, 0.1);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
     border-color: var(--accent-green);
 }
 
@@ -1189,7 +1292,7 @@ footer a:hover {
     }
 
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
 
     .hero-content {
@@ -1200,6 +1303,31 @@ footer a:hover {
     .reactive-art h2,
     .audit-trail h2 {
         font-size: 2rem;
+    }
+
+    .phases-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .phase-card {
+        padding: 1.5rem;
+    }
+
+    .phase-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .phase-number-badge {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
+
+    .phase-card-header h3 {
+        font-size: 1.25rem;
     }
 
     .phase-detail {
@@ -1230,6 +1358,19 @@ footer a:hover {
 
     .hero-content p {
         font-size: 1rem;
+    }
+
+    .phase-card {
+        padding: 1.25rem;
+    }
+
+    .phase-card-header {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .phase-card-content p {
+        font-size: 0.95rem;
     }
 
     .phase-box,
