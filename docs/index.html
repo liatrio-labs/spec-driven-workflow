@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
 
 
 </head>
+
 <body>
     <header>
         <!-- Navigation will be injected by navigation.js -->
@@ -22,30 +24,46 @@
             <div class="container">
                 <h1>The Spec-Driven Development (SDD) Playbook</h1>
                 <div class="hero-content">
-                    <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is <strong>just 4 markdown prompts</strong> that help developers guide an AI assistant through implementing their day-to-day work with structure, clarity, and evidence.</p>
-                    <p>These prompts are <strong>transparent</strong> (you can read and modify every one), <strong>tool-agnostic</strong> (works with any AI assistant), and <strong>lightweight</strong> (no installation, no dependencies). They create a simple file structure in <code>docs/specs/</code> that doesn't pollute your repo.</p>
-                    <p>View the prompts on GitHub: <a href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts" target="_blank" rel="noopener noreferrer">github.com/liatrio-labs/spec-driven-workflow/prompts</a></p>
+                    <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is
+                        <strong>just 4 markdown prompts</strong> that help developers guide an AI assistant through
+                        implementing their day-to-day work with structure, clarity, and evidence.</p>
+                    <p>These prompts are <strong>transparent</strong> (you can read and modify every one),
+                        <strong>tool-agnostic</strong> (works with any AI assistant), and <strong>lightweight</strong>
+                        (no installation, no dependencies). They create a simple file structure in
+                        <code>docs/specs/</code> that doesn't pollute your repo.</p>
+                    <p>View the prompts on GitHub: <a
+                            href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
+                            target="_blank"
+                            rel="noopener noreferrer">github.com/liatrio-labs/spec-driven-workflow/prompts</a></p>
                 </div>
 
                 <!-- Flow Input Section -->
                 <div class="flow-input-section">
                     <h3>What You Bring: Flow Input</h3>
-                    <p>Start with anything: an idea, a Jira story, a GitHub issue, or a feature request. The prompts adapt to your input and guide you through the workflow. No special format required—just describe what you want to build.</p>
+                    <p>Start with anything: an idea, a Jira story, a GitHub issue, or a feature request. The prompts
+                        adapt to your input and guide you through the workflow. No special format required—just describe
+                        what you want to build.</p>
                 </div>
 
                 <!-- Scope Validation Section -->
                 <div class="scope-validation-section">
                     <h3>Built-in Scope Validation</h3>
-                    <p>The prompts automatically check if your work is appropriately sized. If it's <strong>too large</strong>, they'll suggest splitting it into smaller specs. If it's <strong>too small</strong>, they'll suggest direct implementation. Perfect for well-scoped features that are ready to implement.</p>
+                    <p>The prompts automatically check if your work is appropriately sized. If it's <strong>too
+                            large</strong>, they'll suggest splitting it into smaller specs. If it's <strong>too
+                            small</strong>, they'll suggest direct implementation. Perfect for well-scoped features that
+                        are ready to implement.</p>
                     <div class="scope-examples">
                         <div class="scope-example">
-                            <strong>Too Large:</strong> Rewriting entire architecture, migrating complete database systems
+                            <strong>Too Large:</strong> Rewriting entire architecture, migrating complete database
+                            systems
                         </div>
                         <div class="scope-example">
-                            <strong>Too Small:</strong> Single console.log, changing button color, fixing off-by-one errors
+                            <strong>Too Small:</strong> Single console.log, changing button color, fixing off-by-one
+                            errors
                         </div>
                         <div class="scope-example highlight">
-                            <strong>Just Right:</strong> Adding CLI flag, implementing single API endpoint, creating database migration, implementing one user story
+                            <strong>Just Right:</strong> Adding CLI flag, implementing single API endpoint, creating
+                            database migration, implementing one user story
                         </div>
                     </div>
                 </div>
@@ -54,48 +72,69 @@
                 <div class="phase-overview">
                     <div class="phase-box">
                         <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </div>
                         <h3>Step 1: Specification</h3>
                         <p>Transform your flow input into a structured spec with clear boundaries</p>
-                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
+                        <p class="prompt-link"><a
+                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md"
+                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </div>
                         <h3>Step 2: Task Breakdown</h3>
                         <p>Break the spec into actionable tasks with demo criteria</p>
-                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
+                        <p class="prompt-link"><a
+                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md"
+                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h3>Step 3: Implementation</h3>
                         <p>Execute tasks with verification and proof artifacts</p>
-                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
+                        <p class="prompt-link"><a
+                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md"
+                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                     <div class="phase-box">
                         <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h3>Step 4: Validation</h3>
                         <p>Verify implementation meets all requirements with evidence</p>
-                        <p class="prompt-link"><a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md" target="_blank" rel="noopener noreferrer">View prompt →</a></p>
+                        <p class="prompt-link"><a
+                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md"
+                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
                     </div>
                 </div>
             </div>
@@ -105,7 +144,8 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>The Four Steps</h2>
-                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. The example described on this site took less than 15 minutes from start to finish.</p>
+                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. The
+                    example described on this site took less than 15 minutes from start to finish.</p>
 
                 <div class="phases-grid">
                     <div class="phase-card">
@@ -114,10 +154,15 @@
                             <h3>Specification</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Transform your flow input into a structured specification with clear boundaries and functional requirements.</p>
-                            <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just right), asks clarifying questions, and generates a specification document.</p>
-                            <p><strong>Output:</strong> A markdown spec file in <code>docs/specs/[NN]-spec-[feature-name]/</code></p>
-                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md" target="_blank" rel="noopener noreferrer">generate-spec.md</a></p>
+                            <p><strong>Focus:</strong> Transform your flow input into a structured specification with
+                                clear boundaries and functional requirements.</p>
+                            <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just
+                                right), asks clarifying questions, and generates a specification document.</p>
+                            <p><strong>Output:</strong> A markdown spec file in
+                                <code>docs/specs/[NN]-spec-[feature-name]/</code></p>
+                            <p><strong>Prompt:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-spec.md"
+                                    target="_blank" rel="noopener noreferrer">generate-spec.md</a></p>
                         </div>
                     </div>
 
@@ -127,10 +172,15 @@
                             <h3>Task Breakdown</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Break the specification into actionable tasks with demo criteria and proof artifacts.</p>
-                            <p><strong>What It Does:</strong> Analyzes the spec, identifies relevant files, and creates a task list with parent tasks (first) and sub-tasks (after confirmation).</p>
-                            <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact requirements</p>
-                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md" target="_blank" rel="noopener noreferrer">generate-task-list-from-spec.md</a></p>
+                            <p><strong>Focus:</strong> Break the specification into actionable tasks with demo criteria
+                                and proof artifacts.</p>
+                            <p><strong>What It Does:</strong> Analyzes the spec, identifies relevant files, and creates
+                                a task list with parent tasks (first) and sub-tasks (after confirmation).</p>
+                            <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact
+                                requirements</p>
+                            <p><strong>Prompt:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/generate-task-list-from-spec.md"
+                                    target="_blank" rel="noopener noreferrer">generate-task-list-from-spec.md</a></p>
                         </div>
                     </div>
 
@@ -140,10 +190,15 @@
                             <h3>Implementation</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Execute tasks systematically while creating proof artifacts and following git workflow.</p>
-                            <p><strong>What It Does:</strong> Guides implementation with checkpoint modes (continuous/task/batch), creates proof artifacts, and manages git commits.</p>
-                            <p><strong>Output:</strong> Working code, proof artifact files, and task-aligned git commits</p>
-                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md" target="_blank" rel="noopener noreferrer">manage-tasks.md</a></p>
+                            <p><strong>Focus:</strong> Execute tasks systematically while creating proof artifacts and
+                                following git workflow.</p>
+                            <p><strong>What It Does:</strong> Guides implementation with checkpoint modes
+                                (continuous/task/batch), creates proof artifacts, and manages git commits.</p>
+                            <p><strong>Output:</strong> Working code, proof artifact files, and task-aligned git commits
+                            </p>
+                            <p><strong>Prompt:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/manage-tasks.md"
+                                    target="_blank" rel="noopener noreferrer">manage-tasks.md</a></p>
                         </div>
                     </div>
 
@@ -153,16 +208,22 @@
                             <h3>Validation</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Verify implementation meets all spec requirements using proof artifacts and evidence.</p>
-                            <p><strong>What It Does:</strong> Creates a coverage matrix, verifies proof artifacts, checks file integrity, and produces a validation report.</p>
-                            <p><strong>Output:</strong> A validation report with PASS/FAIL gates and evidence-based coverage matrix</p>
-                            <p><strong>Prompt:</strong> <a href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md" target="_blank" rel="noopener noreferrer">validate-spec-implementation.md</a></p>
+                            <p><strong>Focus:</strong> Verify implementation meets all spec requirements using proof
+                                artifacts and evidence.</p>
+                            <p><strong>What It Does:</strong> Creates a coverage matrix, verifies proof artifacts,
+                                checks file integrity, and produces a validation report.</p>
+                            <p><strong>Output:</strong> A validation report with PASS/FAIL gates and evidence-based
+                                coverage matrix</p>
+                            <p><strong>Prompt:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/validate-spec-implementation.md"
+                                    target="_blank" rel="noopener noreferrer">validate-spec-implementation.md</a></p>
                         </div>
                     </div>
                 </div>
 
                 <blockquote class="quote">
-                    The upfront investment in clarity de-risks the entire development lifecycle by preventing the two most common causes of project failure: ambiguous requirements and unchecked scope creep.
+                    The upfront investment in clarity de-risks the entire development lifecycle by preventing the two
+                    most common causes of project failure: ambiguous requirements and unchecked scope creep.
                 </blockquote>
 
                 <div class="benefits-grid">
@@ -173,6 +234,7 @@
                             <li>Transparent prompts you can read and modify</li>
                             <li>Tool-agnostic—works with any AI assistant</li>
                             <li>Simple file structure that doesn't pollute your repo</li>
+                            <li>Context verification markers detect instruction loss early</li>
                         </ul>
                     </div>
                     <div class="benefits-column">
@@ -186,8 +248,23 @@
                     </div>
                 </div>
 
+                <!-- Context Verification Section -->
+                <div class="scope-validation-section" style="margin-top: 2rem;">
+                    <h3>Built-in Context Verification</h3>
+                    <p>Each prompt includes a verification marker (SDD1️⃣, SDD2️⃣, SDD3️⃣, SDD4️⃣) that appears at the
+                        start of AI responses. These markers help detect <strong>context rot</strong>—a silent failure
+                        mode where AI performance degrades as input context length increases, even when tasks remain
+                        simple.</p>
+                    <p>For more information, see <a
+                            href="common-questions.html#why-do-ai-responses-start-with-emoji-markers">Why Do AI
+                            Responses Start with Emoji Markers?</a></p>
+                </div>
+
                 <div class="comparison-cta">
-                    <p><strong>How does this compare to other structured development tools?</strong> See our <a href="comparison.html">comparison against Kiro, SpecKit, and Taskmaster</a> to understand why Liatrio's prompts fit better into the typical workflow of software developers doing day-to-day work.</p>
+                    <p><strong>How does this compare to other structured development tools?</strong> See our <a
+                            href="comparison.html">comparison against Kiro, SpecKit, and Taskmaster</a> to understand
+                        why Liatrio's prompts fit better into the typical workflow of software developers doing
+                        day-to-day work.</p>
                 </div>
             </div>
         </section>
@@ -196,14 +273,19 @@
         <section class="reactive-art">
             <div class="container">
                 <h2>From Reactive Art to Predictable Engineering</h2>
-                <p>By consistently using these four prompts, developers transform small feature work from reactive coding into predictable, evidence-based implementation. Liatrio's Spec-Driven Development workflow creates a self-documenting, auditable process that systematically drives up quality, reduces ambiguity, and ensures every feature delivered is a feature validated—all in minutes, not days.</p>
+                <p>By consistently using these four prompts, developers transform small feature work from reactive
+                    coding into predictable, evidence-based implementation. Liatrio's Spec-Driven Development workflow
+                    creates a self-documenting, auditable process that systematically drives up quality, reduces
+                    ambiguity, and ensures every feature delivered is a feature validated—all in minutes, not days.</p>
 
                 <div class="progression-boxes">
                     <div class="progression-box">
                         <div class="progression-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <circle cx="12" cy="12" r="2" fill="currentColor" />
                             </svg>
                         </div>
                         <h4>Abstract Idea</h4>
@@ -211,9 +293,12 @@
                     </div>
                     <div class="progression-box">
                         <div class="progression-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
                             </svg>
                         </div>
                         <h4>Clear Specification</h4>
@@ -221,8 +306,12 @@
                     </div>
                     <div class="progression-box">
                         <div class="progression-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h4>Systematic Execution</h4>
@@ -230,9 +319,12 @@
                     </div>
                     <div class="progression-box">
                         <div class="progression-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2"/>
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h4>Validated Feature</h4>
@@ -246,24 +338,31 @@
         <section class="audit-trail">
             <div class="container">
                 <h2>The Audit Trail Advantage</h2>
-                <p>The linkage from Git commit, to task list, to proof artifact forms an unbreakable audit trail from a specific line of code back to the requirement it satisfies. This traceability is non-negotiable and transforms development into a transparent, verifiable process.</p>
+                <p>The linkage from Git commit, to task list, to proof artifact forms an unbreakable audit trail from a
+                    specific line of code back to the requirement it satisfies. This traceability is non-negotiable and
+                    transforms development into a transparent, verifiable process.</p>
 
                 <div class="audit-boxes">
                     <div class="audit-box">
                         <h4>Self-Documenting Process</h4>
-                        <p>Every step generates artifacts that serve as living documentation, creating a complete project history without additional overhead.</p>
+                        <p>Every step generates artifacts that serve as living documentation, creating a complete
+                            project history without additional overhead.</p>
                     </div>
                     <div class="audit-box">
                         <h4>Auditable Progress</h4>
-                        <p>Machine-readable commit messages and proof documents enable automated verification and compliance tracking at any point in time.</p>
+                        <p>Machine-readable commit messages and proof documents enable automated verification and
+                            compliance tracking at any point in time.</p>
                     </div>
                     <div class="audit-box">
                         <h4>Evidence-Based Quality</h4>
-                        <p>Replaces subjective opinions with verifiable proof, ensuring what was built is exactly what was requested.</p>
+                        <p>Replaces subjective opinions with verifiable proof, ensuring what was built is exactly what
+                            was requested.</p>
                     </div>
                 </div>
 
-                <p class="conclusion">This disciplined approach prevents common development pitfalls and ensures that completion is a matter of proof, not opinion. The result is higher quality software, reduced risk, and a development process that scales with organizational growth.</p>
+                <p class="conclusion">This disciplined approach prevents common development pitfalls and ensures that
+                    completion is a matter of proof, not opinion. The result is higher quality software, reduced risk,
+                    and a development process that scales with organizational growth.</p>
             </div>
         </section>
     </main>
@@ -274,4 +373,5 @@
     <script src="assets/js/navigation.js"></script>
     <script src="assets/js/footer.js"></script>
 </body>
+
 </html>
