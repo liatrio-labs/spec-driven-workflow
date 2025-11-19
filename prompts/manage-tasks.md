@@ -12,6 +12,10 @@ meta:
 
 # Manage Tasks
 
+## Context Verification Marker
+
+**ALWAYS** begin replies with this starting character sequence: `SDD3️⃣`
+
 ## You are here in the workflow
 
 You have completed the **task generation** phase and are now entering the **implementation** phase. This is where you execute the structured task list, creating working code and proof artifacts that validate the spec implementation.

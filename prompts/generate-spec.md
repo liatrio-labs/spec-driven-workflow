@@ -12,6 +12,10 @@ meta:
 
 # Generate Specification
 
+## Context Verification Marker
+
+**ALWAYS** begin replies with this starting character sequence: `SDD1️⃣`
+
 ## You are here in the workflow
 
 We are at the **beginning** of the Spec-Driven Development Workflow. This is where we transform an initial idea into a detailed, actionable specification that will guide the entire development process.

@@ -13,6 +13,10 @@ meta:
 
 # Validate Spec Implementation
 
+## Context Verification Marker
+
+**ALWAYS** begin replies with this starting character sequence: `SDD4️⃣`
+
 ## You are here in the workflow
 
 You have completed the **implementation** phase and are now entering the **validation** phase. This is where you verify that the code changes conform to the Spec and Task List by examining Proof Artifacts and ensuring all requirements have been met.

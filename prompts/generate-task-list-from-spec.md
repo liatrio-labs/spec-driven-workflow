@@ -12,6 +12,10 @@ meta:
 
 # Generate Task List From Spec
 
+## Context Verification Marker
+
+**ALWAYS** begin replies with this starting character sequence: `SDD2️⃣`
+
 ## You are here in the workflow
 
 You have completed the **spec creation** phase and now need to break down the spec into actionable implementation tasks. This is the critical planning step that bridges requirements to code.
