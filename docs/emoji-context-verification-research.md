@@ -120,7 +120,6 @@ For multi-step workflows (like SDD):
 
 3. **Context Rot Research and Discussions**:
    - ["Context Rot Is Already Here. Can We Slow It Down?"](https://aimaker.substack.com/p/context-rot-ai-long-inputs) - The AI Maker
-   - ["Context Rot: The Hidden Vulnerability in AI's Long Memory"](https://lego17440.medium.com/context-rot-the-hidden-vulnerability-in-ais-long-memory-afde1522b0c8) - Medium
    - ["Context rot: the emerging challenge that could hold back LLM..."](https://www.understandingai.org/p/context-rot-the-emerging-challenge) - Understanding AI
 
 4. **Context Engineering Resources**:
