@@ -165,18 +165,7 @@ Use the following common areas to guide your questions:
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
-**Questions File Workflow:**
-
-1. **Create Questions File**: Save questions to `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
-2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
-3. **Wait for Confirmation**: After the user indicates they have saved their answers, read the file and continue the conversation.
-4. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process.
-
-**Iterative Process:**
-
-- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
-- Build on previous answers - use context from earlier responses to inform subsequent questions.
-- Continue until you have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.), then proceed to Step 5.
+### Questions File Format
 
 **Example Questions Format:**
 
@@ -213,6 +202,23 @@ Please answer each question below (select one or more options, or add your own n
 
 - [ ] (e) Other (describe)
 ```
+
+### Questions File Workflow
+
+1. **Create Questions File**: Save questions to `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
+2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
+3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
+4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
+5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+
+**Iterative Process:**
+
+- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
+- Build on previous answers - use context from earlier responses to inform subsequent questions.
+- **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
+- Only proceed to Step 5 after:
+  - You have received and reviewed all user answers to clarifying questions
+  - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
 
 ## Step 5: Spec Generation
 
@@ -356,7 +362,7 @@ Follow this exact sequence:
 1. **Create Spec Directory**: Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
 2. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
 3. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
-4. **Clarifying Questions**: Ask structured questions with numbered/lettered options for easy selection
+4. **Clarifying Questions**: Ask structured questions, then STOP and wait for user answers before proceeding
 5. **Spec Generation**: Create the spec using the exact structure provided
    - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
    - **User Stories** focus on motivation and WHY
