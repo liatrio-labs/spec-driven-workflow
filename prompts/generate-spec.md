@@ -29,14 +29,14 @@ This spec serves as the **planning blueprint** for the entire SDD workflow:
 
 **Critical Dependencies:**
 
-- **User Stories** become the basis for task demo criteria
+- **User Stories** become the basis for proof artifacts in task generation
 - **Functional Requirements** drive implementation task breakdown
 - **Technical Considerations** inform architecture and dependency decisions
 - **Demoable Units** become parent task boundaries in task generation
 
 **What Breaks the Chain:**
 
-- Vague user stories → unclear demo criteria and task boundaries
+- Vague user stories → unclear proof artifacts and task boundaries
 - Missing functional requirements → gaps in implementation coverage
 - Inadequate technical considerations → architectural conflicts during implementation
 - Oversized specs → unmanageable task breakdown and loss of incremental progress
@@ -158,10 +158,10 @@ Use the following common areas to guide your questions:
 - Any existing design mockups or UI guidelines to follow?
 - Are there any technical constraints or integration requirements?
 
-**Demo & Proof:**
+**Proof Artifacts:**
 
-- How will we demonstrate this feature works?
-- What proof artifacts will we need (URLs, CLI output, screenshots)?
+- What proof artifacts will demonstrate this feature works (URLs, CLI output, screenshots)?
+- What will each artifact demonstrate about the feature?
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
@@ -246,9 +246,10 @@ Generate a comprehensive specification using this exact structure:
 - The system shall [requirement 2: clear, testable, unambiguous]
 - The user shall [requirement 3: clear, testable, unambiguous]
 
-**Demo Criteria:** [What will be shown to verify working value]
-
-**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
+**Proof Artifacts:**
+- [Artifact type]: [description] demonstrates [what it proves]
+- Example: `Screenshot: `--help` output demonstrates new command exists`
+- Example: `CLI: `command --flag` returns expected output demonstrates feature works`
 
 ### [Unit 2]: [Title]
 
@@ -258,9 +259,10 @@ Generate a comprehensive specification using this exact structure:
 - The system shall [requirement 1: clear, testable, unambiguous]
 - The system shall [requirement 2: clear, testable, unambiguous]
 
-**Demo Criteria:** [What will be shown to verify working value]
-
-**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
+**Proof Artifacts:**
+- [Artifact type]: [description] demonstrates [what it proves]
+- Example: `Test: MyFeature.test.ts passes demonstrates requirement implementation`
+- Example: `Order PDF: PDF downloaded fromhttps://example.com/order-submitted shows completed flow demonstrates end-to-end functionality`
 
 ## Non-Goals (Out of Scope)
 
@@ -340,7 +342,7 @@ Iterate based on feedback until the user is satisfied.
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
-- Include proof artifacts and demo criteria for each work unit
+- Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
 
 ## What Comes Next
@@ -358,7 +360,7 @@ Follow this exact sequence:
 5. **Spec Generation**: Create the spec using the exact structure provided
    - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
    - **User Stories** focus on motivation and WHY
-   - **Demoable Units** focus on tangible progress and WHAT will be shown, with functional requirements included within each unit
+   - **Demoable Units** focus on tangible progress with functional requirements and proof artifacts included within each unit
    - **Functional Requirements** within each unit focus on system behavior and WHAT the system must do (use "The system shall..." or "The user shall...")
    - **Technical Considerations** focus on implementation constraints and HOW it will be built
 6. **Save**: Save file as `[NN]-spec-[feature-name].md` inside the spec directory created in Step 1

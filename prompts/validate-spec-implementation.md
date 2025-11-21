@@ -30,15 +30,14 @@ This validation phase serves as the **quality gate** for the entire SDD workflow
 **Critical Dependencies:**
 
 - **Functional Requirements** become the validation criteria for code coverage
-- **Demo Criteria** guide the verification of user-facing functionality
-- **Proof Artifacts** provide the evidence source for validation checks
+- **Proof Artifacts** guide the verification of user-facing functionality and provide the evidence source for validation checks
 - **Relevant Files** define the scope of changes to be validated
 
 **What Breaks the Chain:**
 
 - Missing proof artifacts → validation cannot be completed
 - Incomplete task coverage → gaps in spec implementation
-- Unclear demo criteria → cannot verify user acceptance
+- Unclear or missing proof artifacts → cannot verify user acceptance
 - Inconsistent file references → validation scope becomes ambiguous
 
 ## Your Role
@@ -52,7 +51,7 @@ Validate that the **code changes** conform to the Spec and Task List by verifyin
 ## Context
 
 - **Specification file** (source of truth for requirements).
-- **Task List file** (contains Demo Criteria, Proof Artifacts, and Relevant Files).
+- **Task List file** (contains Proof Artifacts and Relevant Files).
 - Assume the **Repository root** is the current working directory.
 - Assume the **Implementation work** is on the current git branch.
 
@@ -141,7 +140,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 
 3) **Requirement Implementation**
    - Functional requirements are present in changed code
-   - Demo Criteria are satisfied by the implementation
+   - Proof Artifacts demonstrate functionality is satisfied by the implementation
    - Code structure follows spec specifications
 
 4) **Repository Compliance**: Implementation follows identified repository patterns and conventions
@@ -195,10 +194,10 @@ Provide three tables (edit as needed):
 
 #### Proof Artifacts
 
-| Demo Unit | Proof Artifact | Status | Evidence & Output |
+| Unit/Task | Proof Artifact | Status | Verification Result |
 | --- | --- | --- | --- |
-| Demo-1 | URL: https://... | Verified | Returns "200 OK" with expected content |
-| Demo-2 | CLI: command | Failed | Exit code 1: "Error: missing parameter" |
+| Unit-1 | Screenshot: `/path` page demonstrates end-to-end functionality | Verified | HTTP 200 OK, expected content present |
+| Unit-2 | CLI: `command --flag` demonstrates feature works | Failed | Exit code 1: "Error: missing parameter" |
 
 ### 3) Issues (use rubric → severity)
 
@@ -213,7 +212,7 @@ For each issue:
 
 > **Few‑shot exemplars**
 >
-> - *HIGH* — Proof Artifact URL returns 404. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found". **Impact:** Demo criteria cannot be verified. **Fix:** Update URL or deploy missing endpoint.
+> - *HIGH* — Proof Artifact URL returns 404. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found". **Impact:** Functionality cannot be verified. **Fix:** Update URL or deploy missing endpoint.
 > - *CRITICAL* — Changed file `src/auth.ts` not in "Relevant Files". Evidence: `git diff` shows new file but task list only references `src/user.ts`. **Impact:** Implementation scope creep. **Fix:** Update task list or revert changes.
 > - *Reject (too vague)* — "Some files are missing."
 

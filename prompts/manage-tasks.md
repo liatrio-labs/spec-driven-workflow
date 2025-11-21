@@ -29,13 +29,12 @@ This implementation phase serves as the **execution engine** for the entire SDD 
 **Critical Dependencies:**
 
 - **Parent tasks** become implementation checkpoints and commit boundaries
-- **Demo criteria** guide implementation verification and user acceptance
-- **Proof artifacts** become the evidence source for `/validate-spec-implementation`
+- **Proof artifacts** guide implementation verification and become the evidence source for `/validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
 
 **What Breaks the Chain:**
 
-- Skipping demo criteria → implementation cannot be verified
+- Missing or unclear proof artifacts → implementation cannot be verified
 - Missing proof artifacts → validation cannot be completed
 - Inconsistent commits → loss of progress tracking and rollback capability
 - Ignoring task boundaries → loss of incremental progress and demo capability
@@ -83,7 +82,7 @@ For each parent task, follow this structured workflow with built-in verification
 [ ] Locate task file: `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
-[ ] Confirm demo criteria for current parent task
+[ ] Review proof artifacts required for current parent task
 [ ] Review repository standards and patterns identified in spec
 [ ] Verify required tools and dependencies are available
 ```
@@ -120,7 +119,7 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
    - **Format**: Use markdown code blocks with clear section headers
    - **Execute commands immediately**: Capture command output directly in the markdown file
    - **Verify creation**: Confirm the markdown file exists and contains all required evidence
-[ ] **Verify Demo Criteria**: Confirm all demo requirements are met
+[ ] **Verify Proof Artifacts**: Confirm all proof artifacts demonstrate required functionality
 [ ] **Stage Changes**: `git add .`
 [ ] **Create Commit**: Use repository's commit format and conventions
 
@@ -157,7 +156,7 @@ After each parent task completion, verify:
 [ ] Proof artifacts exist in correct directory with proper naming
 [ ] Git commit created with proper format (verify with `git log --oneline -1`)
 [ ] All tests are passing using repository's test approach
-[ ] Demo criteria are satisfied
+[ ] Proof artifacts demonstrate all required functionality
 [ ] Commit message includes task reference and spec number
 [ ] Repository quality gates pass (linting, formatting, etc.)
 [ ] Implementation follows identified repository patterns and conventions
@@ -207,20 +206,20 @@ Each parent task must include artifacts that:
 For each parent task completion:
 
 [ ] **Directory Ready**: `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` exists
-[ ] **Review Task Requirements**: Check what demo evidence the task specifically requires
+[ ] **Review Task Requirements**: Check what proof artifacts the task specifically requires
 [ ] **Create Single Proof File**: Create `[spec-number]-task-[task-number]-proofs.md`
 [ ] **Include All Evidence in One File**:
    - ## CLI Output section with command results
    - ## Test Results section with test output
    - ## Screenshots section with image references
    - ## Configuration section with config examples
-   - ## Demo Validation section showing criteria met
+   - ## Verification section showing proof artifacts demonstrate required functionality
 [ ] **Format with Markdown**: Use code blocks, headers, and clear organization
 [ ] **Verify File Content**: Ensure the markdown file contains all required evidence
 
 **SIMPLE VERIFICATION**: One file per task, all evidence included
 **CONTENT VERIFICATION**: Check the markdown file contains required sections
-**DEMO VERIFICATION**: Ensure file demonstrates all demo criteria are met
+**VERIFICATION**: Ensure proof artifact file demonstrates all required functionality
 
 **The single markdown proof file must be created BEFORE the parent task commit**
 ```
@@ -270,7 +269,7 @@ Before marking parent task as complete:
 After completing all tasks in the task list:
 
 1. **Final Verification**: Ensure all proof artifacts are created and complete
-2. **Demo Validation**: Verify all demo criteria from original spec are met
+2. **Proof Artifact Validation**: Verify all proof artifacts demonstrate functionality from original spec
 3. **Test Suite**: Run final comprehensive test suite
 4. **Documentation**: Update any relevant documentation
 5. **Handoff**: Instruct user to proceed to `/validate-spec-implementation`
@@ -319,7 +318,7 @@ Implementation is successful when:
 - Proof artifacts exist for each parent task
 - Git commits follow repository format with proper frequency
 - All tests pass using repository's testing approach
-- Demo criteria are met
+- Proof artifacts demonstrate all required functionality
 - Repository quality gates pass consistently
 - Task file accurately reflects final status
 - Implementation follows established repository patterns and conventions
