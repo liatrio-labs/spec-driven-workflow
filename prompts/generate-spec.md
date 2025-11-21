@@ -138,7 +138,7 @@ If the scope appears inappropriate, inform the user and suggest alternatives bef
 
 ## Step 4: Clarifying Questions
 
-Ask clarifying questions to gather sufficient detail. **Always provide multiple choice answers** with numbered or lettered options to allow the user to make selections easily. Focus on understanding the "what" and "why" rather than the "how."
+Ask clarifying questions to gather sufficient detail. Focus on understanding the "what" and "why" rather than the "how."
 
 Use the following common areas to guide your questions:
 
@@ -177,6 +177,42 @@ Use the following common areas to guide your questions:
 - If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
 - Build on previous answers - use context from earlier responses to inform subsequent questions.
 - Continue until you have enough detail to populate all spec sections (User Stories, Functional Requirements, Demoable Units, etc.), then proceed to Step 5.
+
+**Example Questions Format:**
+
+```markdown
+# [NN] Questions Round 1 - [Feature Name]
+
+Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
+
+## 1. [Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (a) [Option description explaining what this choice means]
+
+- [ ] (b) [Option description explaining what this choice means]
+
+- [ ] (c) [Option description explaining what this choice means]
+
+- [ ] (d) [Option description explaining what this choice means]
+
+- [ ] (e) Other (describe)
+
+## 2. [Another Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (a) [Option description explaining what this choice means]
+
+- [ ] (b) [Option description explaining what this choice means]
+
+- [ ] (c) [Option description explaining what this choice means]
+
+- [ ] (d) [Option description explaining what this choice means]
+
+- [ ] (e) Other (describe)
+```
 
 ## Step 5: Spec Generation
 
