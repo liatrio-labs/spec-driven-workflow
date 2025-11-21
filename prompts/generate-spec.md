@@ -176,7 +176,7 @@ Use the following common areas to guide your questions:
 
 - If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
 - Build on previous answers - use context from earlier responses to inform subsequent questions.
-- Continue until you have enough detail to populate all spec sections (User Stories, Functional Requirements, Demoable Units, etc.), then proceed to Step 5.
+- Continue until you have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.), then proceed to Step 5.
 
 **Example Questions Format:**
 
@@ -240,22 +240,27 @@ Generate a comprehensive specification using this exact structure:
 ### [Unit 1]: [Title]
 
 **Purpose:** [What this slice accomplishes and who it serves]
+
+**Functional Requirements:**
+- The system shall [requirement 1: clear, testable, unambiguous]
+- The system shall [requirement 2: clear, testable, unambiguous]
+- The user shall [requirement 3: clear, testable, unambiguous]
+
 **Demo Criteria:** [What will be shown to verify working value]
+
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
 
 ### [Unit 2]: [Title]
 
 **Purpose:** [What this slice accomplishes and who it serves]
+
+**Functional Requirements:**
+- The system shall [requirement 1: clear, testable, unambiguous]
+- The system shall [requirement 2: clear, testable, unambiguous]
+
 **Demo Criteria:** [What will be shown to verify working value]
+
 **Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
-
-## Functional Requirements
-
-[Focus on system behavior and WHAT the system must do. Each should start with "The system shall..." or "The user shall..."]
-
-1. [**Requirement 1**: clear, testable, unambiguous]
-2. [**Requirement 2**: clear, testable, unambiguous]
-3. [**Requirement 3**: clear, testable, unambiguous]
 
 ## Non-Goals (Out of Scope)
 
@@ -353,8 +358,8 @@ Follow this exact sequence:
 5. **Spec Generation**: Create the spec using the exact structure provided
    - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
    - **User Stories** focus on motivation and WHY
-   - **Demoable Units** focus on tangible progress and WHAT will be shown
-   - **Functional Requirements** focus on system behavior and WHAT the system must do
+   - **Demoable Units** focus on tangible progress and WHAT will be shown, with functional requirements included within each unit
+   - **Functional Requirements** within each unit focus on system behavior and WHAT the system must do (use "The system shall..." or "The user shall...")
    - **Technical Considerations** focus on implementation constraints and HOW it will be built
 6. **Save**: Save file as `[NN]-spec-[feature-name].md` inside the spec directory created in Step 1
 7. **Review and Refine**: Validate completeness and clarity with the user
