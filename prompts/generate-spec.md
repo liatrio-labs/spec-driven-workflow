@@ -51,12 +51,10 @@ To create a comprehensive Specification (Spec) based on an initial user input. T
 
 If the user did not include an initial input or reference for the spec, ask the user to provide this input before proceeding.
 
-## Process Overview
-
-Follow this exact sequence:
+## Spec Generation Overview
 
 1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
-2. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
+2. **Context Assessment** - Review existing codebase for relevant patterns and constraints
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
 4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
 5. **Spec Generation** - Create the detailed specification document
@@ -134,7 +132,10 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - Creating a single database migration with rollback capability
 - Implementing one user story with complete end-to-end flow
 
-If the scope appears inappropriate, inform the user and suggest alternatives before proceeding.
+### Report Scope Assessment To User
+
+- **ALWAYS** inform the user of the result of the scope assessment.
+- If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
 ## Step 4: Clarifying Questions
 
@@ -167,7 +168,7 @@ Use the following common areas to guide your questions:
 
 ### Questions File Format
 
-**Example Questions Format:**
+Follow this format exactly when you create the questions file.
 
 ```markdown
 # [NN] Questions Round 1 - [Feature Name]
@@ -178,34 +179,26 @@ Please answer each question below (select one or more options, or add your own n
 
 [What specific aspect of the feature needs clarification?]
 
-- [ ] (a) [Option description explaining what this choice means]
-
-- [ ] (b) [Option description explaining what this choice means]
-
-- [ ] (c) [Option description explaining what this choice means]
-
-- [ ] (d) [Option description explaining what this choice means]
-
-- [ ] (e) Other (describe)
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
 
 ## 2. [Another Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
 
-- [ ] (a) [Option description explaining what this choice means]
-
-- [ ] (b) [Option description explaining what this choice means]
-
-- [ ] (c) [Option description explaining what this choice means]
-
-- [ ] (d) [Option description explaining what this choice means]
-
-- [ ] (e) Other (describe)
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
 ```
 
-### Questions File Workflow
+### Questions File Process
 
-1. **Create Questions File**: Save questions to `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
+1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
 2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
 3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
 4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
@@ -330,7 +323,7 @@ Iterate based on feedback until the user is satisfied.
 **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
 **Example:** For feature "user authentication", the spec directory would be `01-spec-user-authentication/` with a spec file as `01-spec-user-authentication.md` inside it
 
-## Critical Constraints (Negative Instructions)
+## Critical Constraints
 
 **NEVER:**
 
@@ -344,7 +337,6 @@ Iterate based on feedback until the user is satisfied.
 **ALWAYS:**
 
 - Ask clarifying questions before generating the spec
-- Provide numbered/lettered options for easy selection
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
@@ -354,22 +346,3 @@ Iterate based on feedback until the user is satisfied.
 ## What Comes Next
 
 Once this spec is complete and approved, instruct the user to run `/generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
-
-## Final Instructions
-
-Follow this exact sequence:
-
-1. **Create Spec Directory**: Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
-2. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
-3. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
-4. **Clarifying Questions**: Ask structured questions, then STOP and wait for user answers before proceeding
-5. **Spec Generation**: Create the spec using the exact structure provided
-   - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
-   - **User Stories** focus on motivation and WHY
-   - **Demoable Units** focus on tangible progress with functional requirements and proof artifacts included within each unit
-   - **Functional Requirements** within each unit focus on system behavior and WHAT the system must do (use "The system shall..." or "The user shall...")
-   - **Technical Considerations** focus on implementation constraints and HOW it will be built
-6. **Save**: Save file as `[NN]-spec-[feature-name].md` inside the spec directory created in Step 1
-7. **Review and Refine**: Validate completeness and clarity with the user
-8. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
-9. **Stop**: Stop working once user confirms spec is complete
