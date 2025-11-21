@@ -261,7 +261,7 @@ Generate a comprehensive specification using this exact structure:
 **Proof Artifacts:**
 - [Artifact type]: [description] demonstrates [what it proves]
 - Example: `Test: MyFeature.test.ts passes demonstrates requirement implementation`
-- Example: `Order PDF: PDF downloaded fromhttps://example.com/order-submitted shows completed flow demonstrates end-to-end functionality`
+- Example: `Order PDF: PDF downloaded from https://example.com/order-submitted shows completed flow demonstrates end-to-end functionality`
 
 ## Non-Goals (Out of Scope)
 
