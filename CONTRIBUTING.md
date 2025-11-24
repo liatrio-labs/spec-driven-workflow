@@ -39,7 +39,7 @@ To prevent accidental commits of API keys, tokens, or other sensitive data (espe
 # Add to .pre-commit-config.yaml
 repos:
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.0
+    rev: v8.18.0 # Update to the latest version (run `pre-commit autoupdate`)
     hooks:
       - id: gitleaks
 ```
@@ -50,7 +50,7 @@ repos:
 # Add to .pre-commit-config.yaml
 repos:
   - repo: https://github.com/trufflesecurity/trufflehog
-    rev: v3.63.0
+    rev: v3.63.0 # Update to the latest version (run `pre-commit autoupdate`)
     hooks:
       - id: trufflehog
         args: ['--trace', 'filesystem', '.']
@@ -62,7 +62,7 @@ repos:
 # Add to .pre-commit-config.yaml
 repos:
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.4.0 # Update to the latest version (run `pre-commit autoupdate`)
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
@@ -71,6 +71,8 @@ repos:
 After adding a secret scanner, run `pre-commit install` again to activate it. The scanner will automatically check files before each commit and block commits containing potential secrets.
 
 See the [pre-commit hooks documentation](https://pre-commit.com/hooks.html) for more secret scanning options.
+
+> ⚠️ **Note:** To keep your hooks current with the latest versions, periodically run `pre-commit autoupdate`.
 
 ### Common Commands
 
