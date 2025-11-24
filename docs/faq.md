@@ -1,4 +1,5 @@
 > **Note:** This FAQ is a hypothetical example created for demonstration purposes. It illustrates how to document and answer common questions about the Spec-Driven Workflow and is included in this repository as sample documentation.
+>
 # Frequently Asked Questions
 
 ## What problem does the Spec‑Driven Workflow solve?
