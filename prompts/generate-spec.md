@@ -290,6 +290,15 @@ Generate a comprehensive specification using this exact structure:
 
 [Focus on implementation constraints and HOW it will be built. Mention technical constraints, dependencies, or architectural decisions. If no technical constraints, state "No specific technical constraints identified."]
 
+## Security Considerations
+
+[Identify security requirements and sensitive data handling needs. Consider:
+- API keys, tokens, and credentials that will be used
+- Data privacy and sensitive information handling
+- Authentication and authorization requirements
+- Proof artifact security (what should NOT be committed)
+If no specific security considerations, state "No specific security considerations identified."]
+
 ## Success Metrics
 
 [How will success be measured? Include specific metrics where possible.]

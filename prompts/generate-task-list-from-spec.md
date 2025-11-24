@@ -82,6 +82,8 @@ Proof artifacts provide evidence of task completion and are essential for the up
 - **Enable validation** (provide evidence for `/validate-spec-implementation`)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
+**Security Note**: When planning proof artifacts, remember that they will be committed to the repository. Artifacts should use placeholder values for API keys, tokens, and other sensitive data rather than real credentials.
+
 ## Chain-of-Thought Analysis Process
 
 Before generating any tasks, you must follow this reasoning process:

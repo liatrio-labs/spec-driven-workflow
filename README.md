@@ -232,7 +232,32 @@ Once installed, you can use:
 - `/manage-tasks` - Manage task execution
 - `/validate-spec-implementation` - Validate implementation against spec
 
-## Installation
+### Option 3: MCP Server (Advanced)
+
+Run the prompts as an MCP server for programmatic access. This option is most useful for custom integrations and tools that support MCP.
+
+> Note: MCP prompt support is not uniformly supported across AI tools. See [docs/mcp-prompt-support.md](./docs/mcp-prompt-support.md) for details.
+
+### Workflow Essentials
+
+1. Open `prompts/generate-spec.md` inside your AI assistant and follow the instructions to produce a new spec in `tasks/`.
+2. Point the assistant at the generated spec and run `prompts/generate-task-list-from-spec.md` to create the implementation backlog.
+3. Use `prompts/manage-tasks.md` while executing work to keep status, demo criteria, and proof artifacts up to date.
+
+## Security Best Practices
+
+### Protecting Sensitive Data in Proof Artifacts
+
+Proof artifacts are committed to your repository and may be publicly visible. **Never commit real credentials or sensitive data.** Follow these guidelines:
+
+- **Replace credentials with placeholders**: Use `[YOUR_API_KEY_HERE]`, `[REDACTED]`, or `example-key-123` instead of real API keys, tokens, or passwords
+- **Use example values**: When demonstrating configuration, use dummy or example data instead of production values
+- **Sanitize command output**: Review CLI output and logs for accidentally captured credentials before committing
+- **Consider pre-commit hooks**: Tools like [gitleaks](https://github.com/gitleaks/gitleaks), [truffleHog](https://github.com/trufflesecurity/truffleHog), or [talisman](https://github.com/thoughtworks/talisman) can automatically scan for secrets before commits
+
+The SDD workflow prompts include built-in reminders about security, but ultimate responsibility lies with the developer to review artifacts before committing or pushing to remotes.
+
+### Installation
 
 ```bash
 # Clone the repository

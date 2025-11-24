@@ -74,6 +74,7 @@ If no spec is provided, follow this exact sequence:
 - **GATE C:** All Proof Artifacts are accessible and functional → **REQUIRED**.
 - **GATE D:** All changed files are either in "Relevant Files" list OR explicitly justified in git commit messages → **REQUIRED**.
 - **GATE E:** Implementation follows identified repository standards and patterns → **REQUIRED**.
+- **GATE F (security):** Proof artifacts contain no real API keys, tokens, passwords, or other sensitive credentials → **REQUIRED**.
 
 ## Evaluation Rubric (score each 0–3 to guide severity)
 
@@ -137,6 +138,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
    - CLI commands execute successfully with expected output
    - Test references exist and can be executed
    - Screenshots/demos show required functionality
+   - **Security Check**: Proof artifacts contain no real API keys, tokens, passwords, or sensitive data
 
 3) **Requirement Coverage**
    - Proof Artifacts exist for each Functional Requirement
@@ -163,6 +165,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 - Any `Unknown` entries in the Coverage Matrix
 - Repository pattern violations (coding standards, quality gates, workflows)
 - Implementation that ignores identified repository conventions
+- **Real API keys, tokens, passwords, or credentials in proof artifacts** (auto CRITICAL)
 
 ## Output (single human-readable Markdown report)
 
