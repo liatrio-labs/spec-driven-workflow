@@ -2,6 +2,56 @@
 
 <!-- version list -->
 
+## v1.10.0 (2025-11-24)
+
+### Bug Fixes
+
+- Clarify developer responsibility
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+- Convert bold text to proper markdown headings in CONTRIBUTING.md
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+### Build System
+
+- **release**: Configure semantic release commit message
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+### Chores
+
+- More linter fixes ([#18](https://github.com/liatrio-labs/spec-driven-workflow/pull/18),
+  [`25a6cad`](https://github.com/liatrio-labs/spec-driven-workflow/commit/25a6cad87497ba4b21347811dcd12f19849da89f))
+
+### Continuous Integration
+
+- Add PR title validation workflow
+  ([#18](https://github.com/liatrio-labs/spec-driven-workflow/pull/18),
+  [`25a6cad`](https://github.com/liatrio-labs/spec-driven-workflow/commit/25a6cad87497ba4b21347811dcd12f19849da89f))
+
+### Documentation
+
+- Add autoupdate reminder for pre-commit hook versions
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+- Fix markdown linting error in CONTRIBUTING.md
+  ([#18](https://github.com/liatrio-labs/spec-driven-workflow/pull/18),
+  [`25a6cad`](https://github.com/liatrio-labs/spec-driven-workflow/commit/25a6cad87497ba4b21347811dcd12f19849da89f))
+
+### Features
+
+- Add security guardrails to prevent credential exposure
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+- Add security guardrails to prevent credential exposure in proof artifacts
+  ([#29](https://github.com/liatrio-labs/spec-driven-workflow/pull/29),
+  [`dda693a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/dda693a7d5618aa07c1a6ce8dba5d7ac1f329df8))
+
+
 ## v1.9.1 (2025-11-24)
 
 ### Bug Fixes
