@@ -13,9 +13,13 @@ meta:
 
 # Validate Spec Implementation
 
-## Context Verification Marker
+## Context Marker
 
-**ALWAYS** begin replies with this starting character sequence: `SDD4️⃣`
+Always begin your response with all active emoji markers, in the order they were introduced.
+
+Format:  "<marker1><marker2><marker3>\n<response>"
+
+The marker for this instruction is:  SDD4️⃣
 
 ## You are here in the workflow
 
