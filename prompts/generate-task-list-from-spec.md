@@ -29,13 +29,12 @@ This task list serves as the **execution blueprint** for the entire SDD workflow
 **Critical Dependencies:**
 
 - **Parent tasks** become implementation checkpoints in `/manage-tasks`
-- **Demo Criteria** guide implementation verification and user acceptance
-- **Proof Artifacts** become the evidence source for `/validate-spec-implementation`
+- **Proof Artifacts** guide implementation verification and become the evidence source for `/validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
 
 **What Breaks the Chain:**
 
-- Poorly defined demo criteria → implementation verification fails
+- Poorly defined proof artifacts → implementation verification fails
 - Missing proof artifacts → validation cannot be completed
 - Overly large tasks → loss of incremental progress and demo capability
 - Unclear task dependencies → implementation sequence becomes confusing
@@ -72,7 +71,7 @@ Ensure complete spec coverage by:
 2. **Verify functional requirements** are addressed in specific tasks
 3. **Map technical considerations** to implementation details
 4. **Identify gaps** where spec requirements aren't covered
-5. **Validate acceptance criteria** are testable through demo criteria
+5. **Validate acceptance criteria** are testable through proof artifacts
 
 ## Proof Artifacts
 
@@ -136,20 +135,46 @@ Wait for explicit user confirmation before generating sub-tasks. Then:
 
 ## Phase 2 Output Format (Parent Tasks Only)
 
-When generating parent tasks in Phase 2, use this structure WITHOUT sub-tasks:
+When generating parent tasks in Phase 2, use this hierarchical structure with Tasks section marked "TBD":
 
 ```markdown
 ## Tasks
 
-- [ ] 1.0 Parent Task Title
-  - Demo Criteria: "Open /path and complete X end-to-end; acceptance: Y visible/returned"
-  - Proof Artifact(s): "URL: https://..., CLI: command & expected output, Test: MyFeature.test.ts"
-- [ ] 2.0 Parent Task Title
-  - Demo Criteria: "User can perform Z with persisted state"
-  - Proof Artifact(s): "Screenshot of flow; link to test suite section"
-- [ ] 3.0 Parent Task Title
-  - Demo Criteria: "Configuration is verifiable via command/output"
-  - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
+### [ ] 1.0 Parent Task Title
+
+#### 1.0 Proof Artifact(s)
+
+- Screenshot: `/path` page showing completed X flow demonstrates end-to-end functionality
+- URL: https://... demonstrates feature is accessible
+- CLI: `command --flag` returns expected output demonstrates feature works
+- Test: `MyFeature.test.ts` passes demonstrates requirement implementation
+
+#### 1.0 Tasks
+
+TBD
+
+### [ ] 2.0 Parent Task Title
+
+#### 2.0 Proof Artifact(s)
+
+- Screenshot: User flow showing Z with persisted state demonstrates feature persistence
+- Test: `UserFlow.test.ts` passes demonstrates state management works
+
+#### 2.0 Tasks
+
+TBD
+
+### [ ] 3.0 Parent Task Title
+
+#### 3.0 Proof Artifact(s)
+
+- CLI: `config get ...` returns expected value demonstrates configuration is verifiable
+- Log: Configuration loaded message demonstrates system initialization
+- Diff: Configuration file changes demonstrates setup completion
+
+#### 3.0 Tasks
+
+TBD
 ```
 
 ## Phase 3 Output Format (Complete with Sub-Tasks)
@@ -175,21 +200,44 @@ After user confirmation in Phase 3, update the file with this complete structure
 
 ## Tasks
 
-- [ ] 1.0 Parent Task Title
-  - Demo Criteria: "Open /path and complete X end-to-end; acceptance: Y visible/returned"
-  - Proof Artifact(s): "URL: https://..., CLI: command & expected output, Test: MyFeature.test.ts"
-  - [ ] 1.1 [Sub-task description 1.1]
-  - [ ] 1.2 [Sub-task description 1.2]
-- [ ] 2.0 Parent Task Title
-  - Demo Criteria: "User can perform Z with persisted state"
-  - Proof Artifact(s): "Screenshot of flow; link to test suite section"
-  - [ ] 2.1 [Sub-task description 2.1]
-  - [ ] 2.2 [Sub-task description 2.2]
-- [ ] 3.0 Parent Task Title (may not require sub-tasks if purely structural or configuration)
-  - Demo Criteria: "Configuration is verifiable via command/output"
-  - Proof Artifact(s): "CLI: config get … -> expected value; log line; diff link"
-  - [ ] 3.1 [Sub-task description 3.1]
-  - [ ] 3.2 [Sub-task description 3.2]
+### [ ] 1.0 Parent Task Title
+
+#### 1.0 Proof Artifact(s)
+
+- Screenshot: `/path` page showing completed X flow demonstrates end-to-end functionality
+- URL: https://... demonstrates feature is accessible
+- CLI: `command --flag` returns expected output demonstrates feature works
+- Test: `MyFeature.test.ts` passes demonstrates requirement implementation
+
+#### 1.0 Tasks
+
+- [ ] 1.1 [Sub-task description 1.1]
+- [ ] 1.2 [Sub-task description 1.2]
+
+### [ ] 2.0 Parent Task Title
+
+#### 2.0 Proof Artifact(s)
+
+- Screenshot: User flow showing Z with persisted state demonstrates feature persistence
+- Test: `UserFlow.test.ts` passes demonstrates state management works
+
+#### 2.0 Tasks
+
+- [ ] 2.1 [Sub-task description 2.1]
+- [ ] 2.2 [Sub-task description 2.2]
+
+### [ ] 3.0 Parent Task Title
+
+#### 3.0 Proof Artifact(s)
+
+- CLI: `config get ...` returns expected value demonstrates configuration is verifiable
+- Log: Configuration loaded message demonstrates system initialization
+- Diff: Configuration file changes demonstrates setup completion
+
+#### 3.0 Tasks
+
+- [ ] 3.1 [Sub-task description 3.1]
+- [ ] 3.2 [Sub-task description 3.2]
 ```
 
 ## Interaction Model
@@ -201,7 +249,7 @@ After user confirmation in Phase 3, update the file with this complete structure
 3. **No Auto-progression:** Never automatically proceed to sub-tasks or implementation
 
 **Example interaction:**
-> "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes demo criteria and proof artifacts. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Respond with 'Generate sub tasks' to continue."
+> "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes proof artifacts that demonstrate what will be shown. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Respond with 'Generate sub tasks' to continue."
 
 ## Target Audience
 
@@ -211,7 +259,7 @@ Write tasks and sub-tasks for a **junior developer** who:
 - Is familiar with the existing codebase structure
 - Needs clear, actionable steps without ambiguity
 - Will be implementing tasks independently
-- Relies on demo criteria to verify completion
+- Relies on proof artifacts to verify completion
 - Must follow established repository patterns and conventions
 
 ## Quality Checklist
@@ -219,7 +267,7 @@ Write tasks and sub-tasks for a **junior developer** who:
 Before finalizing your task list, verify:
 
 - [ ] Each parent task is demoable and has clear completion criteria
-- [ ] Demo Criteria are specific and measurable
+- [ ] Proof Artifacts are specific and demonstrate clear functionality
 - [ ] Proof Artifacts are appropriate for each task
 - [ ] Tasks are appropriately scoped (not too large/small)
 - [ ] Dependencies are logical and sequential
@@ -239,7 +287,7 @@ Once this task list is complete and approved, instruct the user to run `/manage-
 2. Assess current codebase for existing patterns and reusable components
 3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
-5. Ensure every parent task has specific Demo Criteria and Proof Artifacts
+5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
 6. Identify all relevant files for creation/modification
 7. Review with user and refine until satisfied
 8. Guide user to the next workflow step (`/manage-tasks`)

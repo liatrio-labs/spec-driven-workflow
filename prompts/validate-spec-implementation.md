@@ -30,15 +30,14 @@ This validation phase serves as the **quality gate** for the entire SDD workflow
 **Critical Dependencies:**
 
 - **Functional Requirements** become the validation criteria for code coverage
-- **Demo Criteria** guide the verification of user-facing functionality
-- **Proof Artifacts** provide the evidence source for validation checks
+- **Proof Artifacts** guide the verification of user-facing functionality and provide the evidence source for validation checks
 - **Relevant Files** define the scope of changes to be validated
 
 **What Breaks the Chain:**
 
 - Missing proof artifacts → validation cannot be completed
 - Incomplete task coverage → gaps in spec implementation
-- Unclear demo criteria → cannot verify user acceptance
+- Unclear or missing proof artifacts → cannot verify user acceptance
 - Inconsistent file references → validation scope becomes ambiguous
 
 ## Your Role
@@ -52,7 +51,7 @@ Validate that the **code changes** conform to the Spec and Task List by verifyin
 ## Context
 
 - **Specification file** (source of truth for requirements).
-- **Task List file** (contains Demo Criteria, Proof Artifacts, and Relevant Files).
+- **Task List file** (contains Proof Artifacts and Relevant Files).
 - Assume the **Repository root** is the current working directory.
 - Assume the **Implementation work** is on the current git branch.
 
@@ -80,11 +79,11 @@ If no spec is provided, follow this exact sequence:
 
 Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 
-- **R1 Spec Coverage:** Every Functional Requirement is traceable to code changes.
+- **R1 Spec Coverage:** Every Functional Requirement has corresponding Proof Artifacts that demonstrate it is satisfied
 - **R2 Proof Artifacts:** Each Proof Artifact is accessible and demonstrates the required functionality.
 - **R3 File Integrity:** All changed files are listed in "Relevant Files" and vice versa.
 - **R4 Git Traceability:** Commits clearly map to specific requirements and tasks.
-- **R5 Evidence Quality:** Evidence includes specific file paths, line numbers, and artifact outputs.
+- **R5 Evidence Quality:** Evidence includes proof artifact test results and file existence checks.
 - **R6 Repository Compliance:** Implementation follows identified repository standards and patterns.
 
 ## Validation Process (step-by-step chain-of-thought)
@@ -117,13 +116,13 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 
 For each Functional Requirement, Demoable Unit, and Repository Standard:
 
-1) Pose a verification question (e.g., "Is FR-3 implemented in the changed files?").
+1) Pose a verification question (e.g., "Do Proof Artifacts demonstrate FR-3?").
 2) Verify with independent checks:
-   - Search changed files for requirement implementation (glob/grep)
-   - Test each Proof Artifact (URLs, CLI commands, test references)
-   - Verify file content matches requirement specifications
-   - Check repository pattern compliance
-3) Record **evidence** (file paths + line ranges, artifact outputs, commit references).
+   - Verify proof artifact files exist (from task list)
+   - Test that each Proof Artifact (URLs, CLI commands, test references) demonstrates what it claims
+   - Verify file existence for "Relevant Files" listed in task list
+   - Check repository pattern compliance (via proof artifacts, file checks, and commit log analysis)
+3) Record **evidence** (proof artifact test results, file existence checks, commit references).
 4) Mark each item **Verified**, **Failed**, or **Unknown**.
 
 ## Detailed Checks
@@ -139,10 +138,10 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
    - Test references exist and can be executed
    - Screenshots/demos show required functionality
 
-3) **Requirement Implementation**
-   - Functional requirements are present in changed code
-   - Demo Criteria are satisfied by the implementation
-   - Code structure follows spec specifications
+3) **Requirement Coverage**
+   - Proof Artifacts exist for each Functional Requirement
+   - Proof Artifacts demonstrate functionality as specified in the spec
+   - All required proof artifact files exist and are accessible
 
 4) **Repository Compliance**: Implementation follows identified repository patterns and conventions
    - Verify coding standards compliance
@@ -159,7 +158,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 
 - Missing or non-functional Proof Artifacts
 - Changed files not listed in "Relevant Files" without justification in commit messages
-- Functional Requirements with no implementation evidence
+- Functional Requirements with no proof artifacts
 - Git commits unrelated to spec implementation
 - Any `Unknown` entries in the Coverage Matrix
 - Repository pattern violations (coding standards, quality gates, workflows)
@@ -181,8 +180,8 @@ Provide three tables (edit as needed):
 
 | Requirement ID/Name | Status (Verified/Failed/Unknown) | Evidence (file:lines, commit, or artifact) |
 | --- | --- | --- |
-| FR-1 | Verified | `src/feature/x.ts#L10-L58`; commit `abc123` |
-| FR-2 | Failed | No implementation found in changed files |
+| FR-1 | Verified | Proof artifact: `test-x.ts` passes; commit `abc123` |
+| FR-2 | Failed | No proof artifact found for this requirement |
 
 #### Repository Standards
 
@@ -195,27 +194,33 @@ Provide three tables (edit as needed):
 
 #### Proof Artifacts
 
-| Demo Unit | Proof Artifact | Status | Evidence & Output |
+| Unit/Task | Proof Artifact | Status | Verification Result |
 | --- | --- | --- | --- |
-| Demo-1 | URL: https://... | Verified | Returns "200 OK" with expected content |
-| Demo-2 | CLI: command | Failed | Exit code 1: "Error: missing parameter" |
+| Unit-1 | Screenshot: `/path` page demonstrates end-to-end functionality | Verified | HTTP 200 OK, expected content present |
+| Unit-2 | CLI: `command --flag` demonstrates feature works | Failed | Exit code 1: "Error: missing parameter" |
 
-### 3) Issues (use rubric → severity)
+### 3) Validation Issues
 
-For each issue:
+Report any issues found during validation that prevent verification or indicate problems. Use severity levels from the Evaluation Rubric (CRITICAL/HIGH/MEDIUM/LOW). Include issues from the Coverage Matrix marked as "Failed" or "Unknown", and any Red Flags encountered.
 
-- **Severity:** CRITICAL/HIGH/MEDIUM/LOW
-- **What & Where:** concise description + concrete paths/lines
-- **Evidence:** minimal diff or command output
-- **Root Cause:** spec | task | implementation
-- **Impact:** functionality | demo | traceability
-- **Recommendation:** precise, actionable steps
+**Issue Format:**
 
-> **Few‑shot exemplars**
->
-> - *HIGH* — Proof Artifact URL returns 404. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found". **Impact:** Demo criteria cannot be verified. **Fix:** Update URL or deploy missing endpoint.
-> - *CRITICAL* — Changed file `src/auth.ts` not in "Relevant Files". Evidence: `git diff` shows new file but task list only references `src/user.ts`. **Impact:** Implementation scope creep. **Fix:** Update task list or revert changes.
-> - *Reject (too vague)* — "Some files are missing."
+For each issue, provide:
+
+- **Severity:** CRITICAL/HIGH/MEDIUM/LOW (based on rubric scoring)
+- **Issue:** Concise description with location (file paths from task list or proof artifact references) and evidence (proof artifact test results, file existence checks, coverage gaps)
+- **Impact:** What breaks or cannot be verified (functionality | verification | traceability)
+- **Recommendation:** Precise, actionable steps to resolve
+
+**Examples:**
+
+| Severity | Issue | Impact | Recommendation |
+| --- | --- | --- | --- |
+| HIGH | Proof Artifact URL returns 404. `task-list.md#L45` references `https://example.com/demo`. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found" | Functionality cannot be verified | Update URL in task list or deploy missing endpoint |
+| CRITICAL | Changed file not in "Relevant Files". `src/auth.ts` created but not listed in task list. Evidence: `git log --name-only` shows file created; task list only references `src/user.ts` | Implementation scope creep | Update task list to include `src/auth.ts` or revert unauthorized changes |
+| MEDIUM | Missing proof artifact for FR-2. Task list specifies test file `src/feature/x.test.ts` but file does not exist. Evidence: File check shows `src/feature/x.test.ts` missing | Requirement verification incomplete | Add test file `src/feature/x.test.ts` as specified in task list |
+
+**Note:** Do not report issues that are already clearly marked in the Coverage Matrix unless additional context is needed. Focus on actionable problems that need resolution.
 
 ### 4) Evidence Appendix
 
@@ -223,6 +228,20 @@ For each issue:
 - Proof Artifact test results (outputs, screenshots)
 - File comparison results (expected vs actual)
 - Commands executed with results
+
+## Saving The Output
+
+After generation is complete:
+
+- Save the report using the specification below
+- Verify the file was created successfully
+
+### Validation Report File Details
+
+**Format:** Markdown (`.md`)
+**Location:** `./docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
+**Filename:** `[NN]-validation-[feature-name].md` (e.g., if the Spec is `01-spec-user-authentication.md`, save as `01-validation-user-authentication.md`)
+**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
 
 ## What Comes Next
 

@@ -29,14 +29,14 @@ This spec serves as the **planning blueprint** for the entire SDD workflow:
 
 **Critical Dependencies:**
 
-- **User Stories** become the basis for task demo criteria
+- **User Stories** become the basis for proof artifacts in task generation
 - **Functional Requirements** drive implementation task breakdown
 - **Technical Considerations** inform architecture and dependency decisions
 - **Demoable Units** become parent task boundaries in task generation
 
 **What Breaks the Chain:**
 
-- Vague user stories → unclear demo criteria and task boundaries
+- Vague user stories → unclear proof artifacts and task boundaries
 - Missing functional requirements → gaps in implementation coverage
 - Inadequate technical considerations → architectural conflicts during implementation
 - Oversized specs → unmanageable task breakdown and loss of incremental progress
@@ -51,24 +51,54 @@ To create a comprehensive Specification (Spec) based on an initial user input. T
 
 If the user did not include an initial input or reference for the spec, ask the user to provide this input before proceeding.
 
-## Process Overview
+## Spec Generation Overview
 
-Follow this exact sequence:
+1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
+2. **Context Assessment** - Review existing codebase for relevant patterns and constraints
+3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
+4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
+5. **Spec Generation** - Create the detailed specification document
+6. **Review and Refine** - Validate completeness and clarity with the user
 
-1. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
-2. **Clarifying Questions** - Gather detailed requirements through structured inquiry
-3. **Context Assessment** - Review existing codebase for relevant patterns and constraints (optional)
-4. **Spec Generation** - Create the detailed specification document
-5. **Review and Refine** - Validate completeness and clarity with the user
+## Step 1: Create Spec Directory
 
-## Step 1: Initial Scope Assessment
+Create the spec directory structure before proceeding with any other steps. This ensures all files (questions, spec, tasks, proofs) have a consistent location.
 
-Before asking questions, evaluate whether this feature request is appropriately sized for this spec-driven workflow.
+**Directory Structure:**
+
+- **Path**: `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number (e.g., `01`, `02`, `03`)
+- **Naming Convention**: Use lowercase with hyphens for the feature name
+- **Examples**: `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
+
+**Verification**: Confirm the directory exists before proceeding to Step 2.
+
+## Step 2: Context Assessment
+
+If working in a pre-existing project, begin by briefly reviewing the codebase and existing docs to understand:
+
+- Current architecture patterns and conventions
+- Relevant existing components or features
+- Integration constraints or dependencies
+- Files that might need modification or extension
+- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
+  - Project documentation (README.md, CONTRIBUTING.md, docs/)
+  - AI specific documentation (AGENTS.md, CLAUDE.md)
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
+  - Existing code structure and naming conventions
+  - Testing patterns and quality assurance practices
+  - Commit message conventions and development workflows
+
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+
+## Step 3: Initial Scope Assessment
+
+Evaluate whether this feature request is appropriately sized for this spec-driven workflow.
 
 **Chain-of-thought reasoning:**
 
 - Consider the complexity and scope of the requested feature
 - Compare against the following examples
+- Use context from Step 2 to inform the assessment
 - If scope is too large, suggest breaking into smaller specs
 - If scope is too small, suggest direct implementation without formal spec
 
@@ -102,13 +132,16 @@ Before asking questions, evaluate whether this feature request is appropriately 
 - Creating a single database migration with rollback capability
 - Implementing one user story with complete end-to-end flow
 
-If the scope appears inappropriate, inform the user and suggest alternatives before proceeding.
+### Report Scope Assessment To User
 
-## Step 2: Clarifying Questions
+- **ALWAYS** inform the user of the result of the scope assessment.
+- If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-Ask clarifying questions to gather sufficient detail. **Always provide numbered or lettered options** to allow the user to make selections easily by responding with *"1A, 2B, 3C"*, etc. Focus on understanding the "what" and "why" rather than the "how."
+## Step 4: Clarifying Questions
 
-Adapt your questions based on the user's input. Use the following common areas to guide your questions:
+Ask clarifying questions to gather sufficient detail. Focus on understanding the "what" and "why" rather than the "how."
+
+Use the following common areas to guide your questions:
 
 **Core Understanding:**
 
@@ -126,31 +159,61 @@ Adapt your questions based on the user's input. Use the following common areas t
 - Any existing design mockups or UI guidelines to follow?
 - Are there any technical constraints or integration requirements?
 
-**Demo & Proof:**
+**Proof Artifacts:**
 
-- How will we demonstrate this feature works?
-- What proof artifacts will we need (URLs, CLI output, screenshots)?
+- What proof artifacts will demonstrate this feature works (URLs, CLI output, screenshots)?
+- What will each artifact demonstrate about the feature?
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
-## Step 3: Context Assessment (Optional)
+### Questions File Format
 
-If the feature involves existing systems, briefly review the codebase and existing docs to understand:
+Follow this format exactly when you create the questions file.
 
-- Current architecture patterns and conventions
-- Relevant existing components or features
-- Integration constraints or dependencies
-- Files that might need modification or extension
-- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
-  - Project documentation (README.md, CONTRIBUTING.md, docs/)
-  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
-  - Existing code structure and naming conventions
-  - Testing patterns and quality assurance practices
-  - Commit message conventions and development workflows
+```markdown
+# [NN] Questions Round 1 - [Feature Name]
 
-**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
 
-## Step 4: Spec Generation
+## 1. [Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
+
+## 2. [Another Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
+```
+
+### Questions File Process
+
+1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
+2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
+3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
+4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
+5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+
+**Iterative Process:**
+
+- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
+- Build on previous answers - use context from earlier responses to inform subsequent questions.
+- **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
+- Only proceed to Step 5 after:
+  - You have received and reviewed all user answers to clarifying questions
+  - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
+
+## Step 5: Spec Generation
 
 Generate a comprehensive specification using this exact structure:
 
@@ -174,22 +237,31 @@ Generate a comprehensive specification using this exact structure:
 [Focus on tangible progress and WHAT will be demonstrated. Define 2-4 small, end-to-end vertical slices using the format below.]
 
 ### [Unit 1]: [Title]
+
 **Purpose:** [What this slice accomplishes and who it serves]
-**Demo Criteria:** [What will be shown to verify working value]
-**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
+
+**Functional Requirements:**
+- The system shall [requirement 1: clear, testable, unambiguous]
+- The system shall [requirement 2: clear, testable, unambiguous]
+- The user shall [requirement 3: clear, testable, unambiguous]
+
+**Proof Artifacts:**
+- [Artifact type]: [description] demonstrates [what it proves]
+- Example: `Screenshot: `--help` output demonstrates new command exists`
+- Example: `CLI: `command --flag` returns expected output demonstrates feature works`
 
 ### [Unit 2]: [Title]
+
 **Purpose:** [What this slice accomplishes and who it serves]
-**Demo Criteria:** [What will be shown to verify working value]
-**Proof Artifacts:** [Tangible evidence - URLs, CLI commands, test names, screenshots]
 
-## Functional Requirements
+**Functional Requirements:**
+- The system shall [requirement 1: clear, testable, unambiguous]
+- The system shall [requirement 2: clear, testable, unambiguous]
 
-[Focus on system behavior and WHAT the system must do. Each should start with "The system shall..." or "The user shall..."]
-
-1. [**Requirement 1**: clear, testable, unambiguous]
-2. [**Requirement 2**: clear, testable, unambiguous]
-3. [**Requirement 3**: clear, testable, unambiguous]
+**Proof Artifacts:**
+- [Artifact type]: [description] demonstrates [what it proves]
+- Example: `Test: MyFeature.test.ts passes demonstrates requirement implementation`
+- Example: `Order PDF: PDF downloaded from https://example.com/order-submitted shows completed flow demonstrates end-to-end functionality`
 
 ## Non-Goals (Out of Scope)
 
@@ -206,12 +278,13 @@ Generate a comprehensive specification using this exact structure:
 ## Repository Standards
 
 [Identify existing patterns and practices that implementation should follow. Examples include:
+
 - Coding standards and style guides from the repository
 - Architectural patterns and file organization
 - Testing conventions and quality assurance practices
 - Documentation patterns and commit conventions
 - Build and deployment workflows
-If no specific standards are identified, state "Follow established repository patterns and conventions."]
+  If no specific standards are identified, state "Follow established repository patterns and conventions."]
 
 ## Technical Considerations
 
@@ -233,7 +306,7 @@ If no specific standards are identified, state "Follow established repository pa
 2. [Question 2]
 ```
 
-## Step 5: Review and Refinement
+## Step 6: Review and Refinement
 
 After generating the spec, present it to the user and ask:
 
@@ -247,11 +320,10 @@ Iterate based on feedback until the user is satisfied.
 ## Output Requirements
 
 **Format:** Markdown (`.md`)
-**Directory:** Create `./docs/specs/[NN]-spec-[feature-name]/` where `[NN]` is a zero-padded 2-digit sequence number starting from 01 (e.g., `01`, `02`, `03`). For example, `01-spec-user-authentication/`, `02-spec-payment-integration/`, etc.
 **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
-**Example:** For feature "user authentication", create directory `01-spec-user-authentication/` and save file as `01-spec-user-authentication.md` inside it
+**Example:** For feature "user authentication", the spec directory would be `01-spec-user-authentication/` with a spec file as `01-spec-user-authentication.md` inside it
 
-## Critical Constraints (Negative Instructions)
+## Critical Constraints
 
 **NEVER:**
 
@@ -265,31 +337,12 @@ Iterate based on feedback until the user is satisfied.
 **ALWAYS:**
 
 - Ask clarifying questions before generating the spec
-- Provide numbered/lettered options for easy selection
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
-- Include proof artifacts and demo criteria for each work unit
+- Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
 
 ## What Comes Next
 
 Once this spec is complete and approved, instruct the user to run `/generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
-
-## Final Instructions
-
-Follow this exact sequence:
-
-1. **Initial Scope Assessment**: Use the provided examples to evaluate if the feature is appropriately sized
-2. **Clarifying Questions**: Ask structured questions with numbered/lettered options for easy selection
-3. **Context Assessment**: Review existing codebase for relevant patterns and constraints (optional)
-4. **Spec Generation**: Create the spec using the exact structure provided
-   - **Ensure each section has a distinct purpose** - avoid restating content from previous sections
-   - **User Stories** focus on motivation and WHY
-   - **Demoable Units** focus on tangible progress and WHAT will be shown
-   - **Functional Requirements** focus on system behavior and WHAT the system must do
-   - **Technical Considerations** focus on implementation constraints and HOW it will be built
-5. **Save**: Create directory `./docs/specs/[NN]-spec-[feature-name]/` and save file as `[NN]-spec-[feature-name].md` inside it
-6. **Review and Refine**: Validate completeness and clarity with the user
-7. **Guide User**: Direct user to the next workflow step (`/generate-task-list-from-spec`)
-8. **Stop**: Stop working once user confirms spec is complete
