@@ -2,6 +2,62 @@
 
 <!-- version list -->
 
+## v1.9.1 (2025-11-24)
+
+### Bug Fixes
+
+- Add missing space ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Enforce wait for user answers in spec generation
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+### Documentation
+
+- **prompts**: Add example format for clarifying questions
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Add validation report output location
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Improve task list format with hierarchical structure
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Remove redundant instruction from iterative process
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+### Refactoring
+
+- **prompts**: Align validation to focus on proof artifacts
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Consolidate functional requirements into demoable units
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Improve clarity and enforceability in spec generation
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Improve spec generation workflow and task list formatting
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Remove demo criteria, consolidate into proof artifacts
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+- **prompts**: Reorganize generate-spec workflow steps
+  ([#30](https://github.com/liatrio-labs/spec-driven-workflow/pull/30),
+  [`948bb83`](https://github.com/liatrio-labs/spec-driven-workflow/commit/948bb836192bdbe8669dba4657f01dbbc066668d))
+
+
 ## v1.9.0 (2025-11-17)
 
 ### Bug Fixes
