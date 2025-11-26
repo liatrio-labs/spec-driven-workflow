@@ -26,6 +26,10 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
   --github-path prompts/
 ```
 
+This should apply slash commands in your IDE (eg in Windsurf, in the chat screen. Note you may want to be in Agent or Code mode):
+
+<img width="523" height="362" alt="Screenshot 2025-11-26 at 10 29 42 AM" src="https://github.com/user-attachments/assets/ad0fc006-86c9-47f0-80c2-9d1f774ace54" />
+
 **Want to use the prompts directly?** Copy-paste them into your AI assistant:
 
 1. **Generate a spec:** Copy `prompts/generate-spec.md` into your AI chat → AI assesses scope, asks structured questions (numbered/lettered options), optionally reviews codebase, generates spec, iterates with you → Spec saved to `docs/specs/01-spec-<feature-name>/01-spec-<feature-name>.md`
