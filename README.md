@@ -16,7 +16,15 @@
 
 ## TLDR / Quickstart
 
-**Want to install these prompts as slash commands?** Use the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility to install them in all of your local AI tools:
+### What is this?
+
+This repository provides **structured prompts** (Markdown files) that guide AI assistants through a complete software development workflow: from initial feature idea → detailed specification → task breakdown → implementation → validation. Think of them as reusable playbooks that keep AI agents focused and consistent.
+
+### Installation Options
+
+#### Option A: Install as Slash Commands (Recommended)
+
+Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
 
 ```bash
 uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
@@ -26,15 +34,42 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
   --github-path prompts/
 ```
 
-**Want to use the prompts directly?** Copy-paste them into your AI assistant:
+**What this command does:**
+- `uvx` runs Python tools without installation (like `npx` for Python)
+- Fetches the `slash-command-manager` tool from GitHub
+- `slash-man generate` auto-detects your installed AI assistants
+- Downloads the prompt files from `prompts/` directory
+- Installs them as slash commands like `/generate-spec`, `/manage-tasks`, etc.
 
-1. **Generate a spec:** Copy `prompts/generate-spec.md` into your AI chat → AI assesses scope, asks structured questions (numbered/lettered options), optionally reviews codebase, generates spec, iterates with you → Spec saved to `docs/specs/01-spec-<feature-name>/01-spec-<feature-name>.md`
+**Result:** You can now type `/generate-spec` in your AI assistant to start the workflow.
 
-2. **Generate task list:** Point AI to spec (or let it auto-discover) and use `prompts/generate-task-list-from-spec.md` → AI analyzes spec, generates parent tasks for review, then after confirmation expands into sub-tasks with "Relevant Files" section → Saved to `docs/specs/01-spec-<feature-name>/01-tasks-<feature-name>.md`
+#### Option B: Manual Copy-Paste (No Installation)
 
-3. **Manage tasks:** Use `prompts/manage-tasks.md` while implementing → Choose checkpoint mode (Continuous/Task/Batch), execute with verification checklists, create proof artifacts **before** commits → Proofs saved to `docs/specs/01-spec-<feature-name>/01-proofs/[NN]-task-[TT]-proofs.md`
+Copy the prompt files directly from `prompts/` and paste them into your AI chat. The AI will follow the structured instructions in each prompt.
 
-4. **Validate:** Use `prompts/validate-spec-implementation.md` (or let it auto-discover) → AI verifies proof artifacts, applies validation gates, produces coverage matrix and validation report
+### The 4-Step Workflow
+
+Each step uses a different prompt file and produces specific artifacts:
+
+1. **Generate a Spec** (`prompts/generate-spec.md`)
+   - **What it does:** Guides AI to ask clarifying questions, assess scope, and create a detailed specification document
+   - **Output:** `docs/specs/01-spec-<feature-name>/01-spec-<feature-name>.md` — A comprehensive spec with goals, requirements, demo criteria, and success metrics
+   - **Why:** Ensures everyone (human and AI) agrees on what to build before writing code
+
+2. **Generate Task List** (`prompts/generate-task-list-from-spec.md`)
+   - **What it does:** Breaks the spec into parent tasks (demoable units) and detailed sub-tasks with relevant files
+   - **Output:** `docs/specs/01-spec-<feature-name>/01-tasks-<feature-name>.md` — A checklist of all work items with `[ ]` not started, `[~]` in progress, `[x]` complete
+   - **Why:** Creates an actionable implementation plan with clear checkpoints
+
+3. **Manage Tasks** (`prompts/manage-tasks.md`)
+   - **What it does:** Guides execution with verification checklists, creates proof artifacts (screenshots, test results, CLI output) before each commit
+   - **Output:** `docs/specs/01-spec-<feature-name>/01-proofs/[NN]-task-[TT]-proofs.md` — Evidence that each task works as intended
+   - **Why:** Maintains quality and creates a verifiable audit trail of what was built
+
+4. **Validate Implementation** (`prompts/validate-spec-implementation.md`)
+   - **What it does:** Verifies the implementation matches the spec using proof artifacts, applies validation gates, generates coverage matrix
+   - **Output:** Validation report showing what's verified, what's missing, and any issues
+   - **Why:** Confirms the feature is complete and meets all requirements before shipping
 
 5. **SHIP IT** 🚢💨
 
