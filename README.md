@@ -18,7 +18,7 @@
 
 ### What is this?
 
-This repository provides **structured prompts** (Markdown files) that guide AI assistants through a complete software development workflow: from initial feature idea → detailed specification → task breakdown → implementation → validation. Think of them as reusable playbooks that keep AI agents focused and consistent.
+This repository provides **structured prompts** (Markdown files) that guide AI assistants through a complete software development workflow. Starting with a feature or story from your backlog, these prompts help you create: detailed specification → task breakdown → implementation → validation. Think of them as reusable playbooks that keep AI agents focused and consistent.
 
 ### Installation Options
 
@@ -35,6 +35,7 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 ```
 
 **What this command does:**
+
 - `uvx` runs Python tools without installation (like `npx` for Python)
 - Fetches the `slash-command-manager` tool from GitHub
 - `slash-man generate` auto-detects your installed AI assistants
