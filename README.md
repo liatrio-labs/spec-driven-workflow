@@ -43,6 +43,7 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 - **Prompt-first workflow:** Use curated prompts to go from idea → spec → task list → implementation-ready backlog.
 - **Predictable delivery:** Every step emphasizes demoable slices, proof artifacts, and collaboration with junior developers in mind.
 - **No dependencies required:** The prompts are plain Markdown files that work with any AI assistant.
+- **Context verification:** Built-in emoji markers (SDD1️⃣-SDD4️⃣) detect when AI responses follow critical instructions, helping identify context rot issues early.
 
 ## Why Spec-Driven Development?
 
@@ -66,6 +67,14 @@ All prompts live in `prompts/` and are designed for use inside your preferred AI
 4. **`validate-spec-implementation`** (`prompts/validate-spec-implementation.md`): Auto-discovers spec if needed, validates implementation against spec using proof artifacts, applies validation gates, produces coverage matrix, and generates comprehensive validation report.
 
 Each prompt writes Markdown outputs into `docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.), giving you a lightweight backlog that is easy to review, share, and implement.
+
+### Context Verification Markers
+
+Each prompt includes a context verification marker (SDD1️⃣ for spec generation, SDD2️⃣ for task breakdown, SDD3️⃣ for task management, SDD4️⃣ for validation) that appears at the start of AI responses. These markers help detect **context rot**—a phenomenon where AI performance degrades as input context length increases, even when tasks remain simple.
+
+**Why this matters:** Context rot doesn't announce itself with errors. It creeps in silently, causing models to lose track of critical instructions. When you see the marker at the start of each response, it's an <strong>indicator</strong> that the AI is probably following the prompt's instructions. If the marker disappears, it's an immediate signal that context instructions may have been lost.
+
+**What to expect:** You'll see responses like `SDD1️⃣ I'll help you generate a specification...` or `SDD3️⃣ Let me start implementing task 1.0...`. This is normal and indicates the verification system is working. For more details, see the [research documentation](docs/emoji-context-verification-research.md).
 
 ## How does it work?
 

@@ -302,6 +302,90 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                 </div>
             </div>
         </section>
+
+        <!-- Context Verification Question -->
+        <section class="phases-detailed" id="why-do-ai-responses-start-with-emoji-markers">
+            <div class="container">
+                <h2>Why Do AI Responses Start with Emoji Markers (SDD1️⃣, SDD2️⃣, etc.)?</h2>
+                <p class="section-intro">You may notice that AI responses begin with emoji markers like
+                    <code>SDD1️⃣</code>, <code>SDD2️⃣</code>, <code>SDD3️⃣</code>, or <code>SDD4️⃣</code>. This is an
+                    intentional feature designed to detect a silent failure mode called <strong>context rot</strong>.
+                </p>
+
+                <div class="objection-content-grid">
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
+                                    fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h4>What Is Context Rot?</h4>
+                        <p>Research from Chroma and Anthropic demonstrates that AI performance degrades as input context
+                            length increases, even when tasks remain simple. This degradation happens silently—the AI
+                            doesn't announce errors, but gradually loses track of critical instructions.</p>
+                    </div>
+
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <h4>How Verification Markers Work</h4>
+                        <p>Each prompt instructs the AI to always begin responses with its specific marker (SDD1️⃣ for
+                            spec generation, SDD2️⃣ for task breakdown, etc.). When you see the marker, it's an
+                            <strong>indicator</strong> that critical instructions are probably being followed. If the
+                            marker disappears, it's an immediate signal that context instructions may have been lost.
+                        </p>
+                    </div>
+
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h4>What You Should Expect</h4>
+                        <p>Normal responses will start with the marker:
+                            <code>SDD1️⃣ I'll help you generate a specification...</code> or
+                            <code>SDD3️⃣ Let me start implementing task 1.0...</code>. This is expected behavior and
+                            indicates the verification system is working correctly. The markers add minimal overhead
+                            (1-2 tokens) while providing immediate visual feedback.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="non-goals-box">
+                    <h3>Technical Background</h3>
+                    <div class="non-goals-content">
+                        <p>This verification technique was shared by Lada Kesseler at AI Native Dev Con Fall 2025 as a
+                            practical solution for detecting context rot in production AI workflows. The technique
+                            provides:</p>
+                        <ul class="non-goals-list">
+                            <li><strong>Immediate feedback:</strong> Visual confirmation that instructions are being
+                                followed</li>
+                            <li><strong>Low overhead:</strong> Minimal token cost (1-2 tokens per response)</li>
+                            <li><strong>Simple implementation:</strong> Easy to spot in terminal/text output</li>
+                            <li><strong>Failure detection:</strong> Absence of marker immediately signals instruction
+                                loss</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">For detailed research and technical information, see the <a
+                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/docs/emoji-context-verification-research.md"
+                                target="_blank" rel="noopener noreferrer">context verification research
+                                documentation</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

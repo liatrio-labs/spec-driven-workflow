@@ -13,6 +13,14 @@ meta:
 
 # Validate Spec Implementation
 
+## Context Marker
+
+Always begin your response with all active emoji markers, in the order they were introduced.
+
+Format:  "<marker1><marker2><marker3>\n<response>"
+
+The marker for this instruction is:  SDD4️⃣
+
 ## You are here in the workflow
 
 You have completed the **implementation** phase and are now entering the **validation** phase. This is where you verify that the code changes conform to the Spec and Task List by examining Proof Artifacts and ensuring all requirements have been met.
