@@ -2,6 +2,40 @@
 
 <!-- version list -->
 
+## v1.11.0 (2025-12-04)
+
+### Bug Fixes
+
+- **docs**: Remove broken Medium link from context rot research
+  ([#32](https://github.com/liatrio-labs/spec-driven-workflow/pull/32),
+  [`a4d680f`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a4d680fc60e0095bd1949693716cf61b324ad9e8))
+
+### Chores
+
+- Linting fixes ([#25](https://github.com/liatrio-labs/spec-driven-workflow/pull/25),
+  [`9ead128`](https://github.com/liatrio-labs/spec-driven-workflow/commit/9ead128c3ff7e0c52f3787824bd24ef271bb69ef))
+
+### Documentation
+
+- Add context verification markers documentation
+  ([#32](https://github.com/liatrio-labs/spec-driven-workflow/pull/32),
+  [`a4d680f`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a4d680fc60e0095bd1949693716cf61b324ad9e8))
+
+- Add press release and FAQ markdown docs
+  ([#25](https://github.com/liatrio-labs/spec-driven-workflow/pull/25),
+  [`9ead128`](https://github.com/liatrio-labs/spec-driven-workflow/commit/9ead128c3ff7e0c52f3787824bd24ef271bb69ef))
+
+- **prompts**: Update context marker documentation format
+  ([#32](https://github.com/liatrio-labs/spec-driven-workflow/pull/32),
+  [`a4d680f`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a4d680fc60e0095bd1949693716cf61b324ad9e8))
+
+### Features
+
+- **prompts**: Add context verification markers to SDD workflow prompts
+  ([#32](https://github.com/liatrio-labs/spec-driven-workflow/pull/32),
+  [`a4d680f`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a4d680fc60e0095bd1949693716cf61b324ad9e8))
+
+
 ## v1.10.0 (2025-11-24)
 
 ### Bug Fixes
