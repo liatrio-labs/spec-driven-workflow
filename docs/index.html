@@ -365,6 +365,81 @@
                     and a development process that scales with organizational growth.</p>
             </div>
         </section>
+
+        <!-- Directory Structure Section -->
+        <section class="directory-structure">
+            <div class="container">
+                <h2>Directory Structure</h2>
+                <p>The SDD workflow creates a structured directory layout in <code>docs/specs/</code> that provides a complete audit trail from requirements to implementation:</p>
+
+                <div class="tree-structure">
+                    <pre><code>docs/specs
+├── 01-spec-feature-name
+│   ├── 01-proofs
+│   │   ├── 01-task-01-proofs.md
+│   │   ├── 01-task-02-proofs.md
+│   │   ├── 01-task-03-proofs.md
+│   │   └── 01-task-04-proofs.md
+│   ├── 01-questions-1-feature-name.md
+│   ├── 01-spec-feature-name.md
+│   ├── 01-tasks-feature-name.md
+│   └── 01-validation-feature-name.md
+├── 02-spec-another-feature
+│   ├── 02-proofs
+│   │   ├── 02-task-01-proofs.md
+│   │   ├── 02-task-02-proofs.md
+│   │   └── 02-task-03-proofs.md
+│   ├── 02-questions-1-another-feature.md
+│   ├── 02-spec-another-feature.md
+│   ├── 02-tasks-another-feature.md
+│   └── 02-validation-another-feature.md
+└── 03-spec-third-feature
+    ├── 03-proofs
+    │   ├── 03-task-01-proofs.md
+    │   ├── 03-task-02-proofs.md
+    │   ├── 03-task-03-proofs.md
+    │   ├── 03-task-04-proofs.md
+    │   └── 03-task-05-proofs.md
+    ├── 03-questions-1-third-feature.md
+    ├── 03-spec-third-feature.md
+    ├── 03-tasks-third-feature.md
+    └── 03-validation-third-feature.md</code></pre>
+                </div>
+
+                <div class="structure-explanation">
+                    <div class="structure-column">
+                        <h4>File Naming Convention</h4>
+                        <ul>
+                            <li><strong><code>[NN]-spec-[feature-name]/</code></strong>: Main directory for each feature specification
+                                <ul>
+                                    <li><code>[NN]</code>: Zero-padded 2-digit number (01, 02, 03, etc.)</li>
+                                    <li><code>spec-[feature-name]</code>: Descriptive feature name</li>
+                                </ul>
+                            </li>
+                            <li><strong><code>[NN]-spec-[feature-name].md</code></strong>: The main specification document</li>
+                            <li><strong><code>[NN]-tasks-[feature-name].md</code></strong>: Task breakdown with parent/sub-tasks</li>
+                            <li><strong><code>[NN]-questions-1-[feature-name].md</code></strong>: Clarifying questions and answers</li>
+                            <li><strong><code>[NN]-validation-[feature-name].md</code></strong>: Validation report and coverage matrix</li>
+                            <li><strong><code>[NN]-proofs/</code></strong>: Subdirectory containing proof artifacts
+                                <ul>
+                                    <li><strong><code>[NN]-task-[TT]-proofs.md</code></strong>: Proof artifacts for each parent task</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="structure-column">
+                        <h4>Workflow Progression</h4>
+                        <ol>
+                            <li><strong>Specification Phase</strong>: Creates <code>[NN]-spec-[feature-name].md</code> and <code>[NN]-questions-1-[feature-name].md</code></li>
+                            <li><strong>Task Planning Phase</strong>: Creates <code>[NN]-tasks-[feature-name].md</code></li>
+                            <li><strong>Implementation Phase</strong>: Creates <code>[NN]-proofs/[NN]-task-[TT]-proofs.md</code> files as tasks are completed</li>
+                            <li><strong>Validation Phase</strong>: Creates <code>[NN]-validation-[feature-name].md</code> with final validation report</li>
+                        </ol>
+                        <p>This structure provides a complete audit trail from requirements to implementation, with each artifact serving as evidence in the validation process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

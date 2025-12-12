@@ -1942,3 +1942,122 @@ footer a:hover {
         display: none;
     }
 }
+
+/* Directory Structure Section */
+.directory-structure {
+    padding: 4rem 0;
+    background: var(--bg-section);
+}
+
+.tree-structure {
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tree-structure pre {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.tree-structure code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.structure-explanation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.structure-column h4 {
+    color: var(--accent-green);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.structure-column ul {
+    list-style: none;
+}
+
+.structure-column ul li {
+    margin-bottom: 0.75rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.structure-column ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+}
+
+.structure-column ul ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.structure-column ul ul li {
+    margin-bottom: 0.5rem;
+}
+
+.structure-column ul ul li::before {
+    content: "•";
+    color: var(--text-secondary);
+}
+
+.structure-column ol {
+    list-style: none;
+    counter-reset: item;
+}
+
+.structure-column ol li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    counter-increment: item;
+}
+
+.structure-column ol li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    background: var(--accent-green);
+    color: var(--bg-dark);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.structure-column p {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .structure-explanation {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .tree-structure pre {
+        padding: 1rem;
+        font-size: 0.75rem;
+    }
+}
