@@ -88,17 +88,17 @@ Each step uses a different prompt file and produces specific artifacts in `docs/
 
 1. **Generate a spec** ([`prompts/SDD-1-generate-spec.md`](./prompts/SDD-1-generate-spec.md))
    - **What it does**: asks structured clarifying questions, checks scope, and writes a junior-friendly spec with demo criteria
-   - **Output**: `docs/specs/01-spec-<feature-name>/01-spec-<feature-name>.md`
+   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
    - **Why**: aligns humans + AI on what to build before any code changes
 
 2. **Generate a task list** ([`prompts/SDD-2-generate-task-list-from-spec.md`](./prompts/SDD-2-generate-task-list-from-spec.md))
    - **What it does**: converts the spec into parent tasks (demoable units) + detailed subtasks with a "Relevant Files" section
-   - **Output**: `docs/specs/01-spec-<feature-name>/01-tasks-<feature-name>.md`
+   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
    - **Why**: creates an actionable plan with clear checkpoints and reviewable scope
 
 3. **Manage tasks (implementation loop)** ([`prompts/SDD-3-manage-tasks.md`](./prompts/SDD-3-manage-tasks.md))
    - **What it does**: guides execution with checkpoints, verification checklists, and proof artifacts created **before** each commit
-   - **Output**: `docs/specs/01-spec-<feature-name>/01-proofs/[NN]-task-[TT]-proofs.md`
+   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/[NN]-task-[TT]-proofs.md`
    - **Why**: keeps work single-threaded, demoable, and evidence-driven
 
 4. **Validate implementation** ([`prompts/SDD-4-validate-spec-implementation.md`](./prompts/SDD-4-validate-spec-implementation.md))
