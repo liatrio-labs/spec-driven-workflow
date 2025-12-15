@@ -1,5 +1,5 @@
 ---
-name: validate-spec-implementation
+name: SDD-4-validate-spec-implementation
 description: "Focused validation of code changes against Spec and Proof Artifacts with evidence-based coverage matrix"
 tags:
   - validation

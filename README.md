@@ -63,43 +63,45 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 - Downloads the prompt files for each supported tool from the `prompts/` directory
 - Installs them as slash commands for each supported tool
 
-**Result:** you can now type `/generate-spec` in your AI assistant to start the workflow.
+**Result:** you can now type `/SDD-1-generate-spec` in your AI assistant to start the workflow.
 
-**Where to use the slash commands:** in IDE chat UIs (e.g., Windsurf, Cursor) type `/` in the chat input. Some IDEs require being in “Agent” or “Code” mode for slash commands to appear.
+**Where to use the slash commands:** in AI chat UIs (e.g., Windsurf, Claude Code) type `/` in the chat input. Some AI assistants require being in "Agent" or "Code" mode for slash commands to appear.
 
-<img width="523" height="362" alt="Example of slash commands installed in an IDE chat UI" src="https://github.com/user-attachments/assets/ad0fc006-86c9-47f0-80c2-9d1f774ace54" />
+<img max-width="500" alt="Example of slash commands installed in Claude Code" src="docs/assets/images/slash-command-example-claude.png" />
+
+<img max-width="500" alt="Example of slash commands installed in Windsurf" src="docs/assets/images/slash-command-example-windsurf.png" />
 
 #### Option B: Manual Copy-Paste (No Installation)
 
 Copy the contents of a prompt file directly from `prompts/` and paste it into your AI chat. The AI will follow the structured instructions in the prompt.
 
-### Quick “try it” flow
+### Quick "try it" flow
 
-1. Run `/generate-spec` and describe the feature you want.
-2. Run `/generate-task-list-from-spec` and point it at the generated spec.
-3. Run `/manage-tasks` and implement tasks one at a time (creating proof artifacts before commits).
-4. Run `/validate-spec-implementation` to verify the implementation against the spec.
+1. Run `/SDD-1-generate-spec` and describe the feature you want.
+2. Run `/SDD-2-generate-task-list-from-spec` and point it at the generated spec.
+3. Run `/SDD-3-manage-tasks` and implement tasks one at a time (creating proof artifacts before commits).
+4. Run `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
 
 ## Details for the 4-step workflow
 
 Each step uses a different prompt file and produces specific artifacts in `docs/specs/`.
 
-1. **Generate a spec** ([`prompts/generate-spec.md`](./prompts/generate-spec.md))
+1. **Generate a spec** ([`prompts/SDD-1-generate-spec.md`](./prompts/SDD-1-generate-spec.md))
    - **What it does**: asks structured clarifying questions, checks scope, and writes a junior-friendly spec with demo criteria
    - **Output**: `docs/specs/01-spec-<feature-name>/01-spec-<feature-name>.md`
    - **Why**: aligns humans + AI on what to build before any code changes
 
-2. **Generate a task list** ([`prompts/generate-task-list-from-spec.md`](./prompts/generate-task-list-from-spec.md))
-   - **What it does**: converts the spec into parent tasks (demoable units) + detailed subtasks with a “Relevant Files” section
+2. **Generate a task list** ([`prompts/SDD-2-generate-task-list-from-spec.md`](./prompts/SDD-2-generate-task-list-from-spec.md))
+   - **What it does**: converts the spec into parent tasks (demoable units) + detailed subtasks with a "Relevant Files" section
    - **Output**: `docs/specs/01-spec-<feature-name>/01-tasks-<feature-name>.md`
    - **Why**: creates an actionable plan with clear checkpoints and reviewable scope
 
-3. **Manage tasks (implementation loop)** ([`prompts/manage-tasks.md`](./prompts/manage-tasks.md))
+3. **Manage tasks (implementation loop)** ([`prompts/SDD-3-manage-tasks.md`](./prompts/SDD-3-manage-tasks.md))
    - **What it does**: guides execution with checkpoints, verification checklists, and proof artifacts created **before** each commit
    - **Output**: `docs/specs/01-spec-<feature-name>/01-proofs/[NN]-task-[TT]-proofs.md`
    - **Why**: keeps work single-threaded, demoable, and evidence-driven
 
-4. **Validate implementation** ([`prompts/validate-spec-implementation.md`](./prompts/validate-spec-implementation.md))
+4. **Validate implementation** ([`prompts/SDD-4-validate-spec-implementation.md`](./prompts/SDD-4-validate-spec-implementation.md))
    - **What it does**: validates implementation vs spec using proof artifacts, applies validation gates, produces a coverage matrix
    - **Output**: validation report (markdown) showing verified/missing items
    - **Why**: confirms completeness before shipping
