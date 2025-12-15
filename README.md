@@ -78,9 +78,9 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 ### Quick "try it" flow
 
 1. Run `/SDD-1-generate-spec` and describe the feature you want.
-2. Run `/SDD-2-generate-task-list-from-spec` and point it at the generated spec.
-3. Run `/SDD-3-manage-tasks` and implement tasks one at a time (creating proof artifacts before commits).
-4. Run `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
+2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec.
+3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits).
+4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
 
 ## Details for the 4-step workflow
 
@@ -191,7 +191,7 @@ The SDD workflow prompts include built-in reminders about security, but ultimate
 
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). Please also review [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Please review [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
 
 ## References
 
