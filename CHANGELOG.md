@@ -2,6 +2,37 @@
 
 <!-- version list -->
 
+## v1.12.0 (2025-12-16)
+
+### Documentation
+
+- Add directory structure section
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+- **readme**: Address CodeRabbit review feedback
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+- **readme**: Align proof-artifact path templates across sections
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+- **readme**: Restructure and improve organization
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+### Features
+
+- **docs**: Add numbered prefixes to prompts and restructure README
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+- **prompts**: Add numbered prefixes to prompt files for command menu organization
+  ([#36](https://github.com/liatrio-labs/spec-driven-workflow/pull/36),
+  [`e3bf832`](https://github.com/liatrio-labs/spec-driven-workflow/commit/e3bf832c73d55b1d53cffa5169e9f536c01eedde))
+
+
 ## v1.11.0 (2025-12-04)
 
 ### Bug Fixes
