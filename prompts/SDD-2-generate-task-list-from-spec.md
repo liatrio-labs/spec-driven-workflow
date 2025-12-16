@@ -1,5 +1,5 @@
 ---
-name: generate-task-list-from-spec
+name: SDD-2-generate-task-list-from-spec
 description: "Generate a task list from a Spec"
 tags:
   - planning

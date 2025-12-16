@@ -1,5 +1,5 @@
 ---
-name: manage-tasks
+name: SDD-3-manage-tasks
 description: "Execute structured task implementation with built-in verification and progress tracking"
 tags:
   - execution
