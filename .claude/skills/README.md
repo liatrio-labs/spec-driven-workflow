@@ -34,6 +34,7 @@ These skills are designed for use with Claude Code. To install:
 
 ```bash
 # Copy to user skills directory (available in all projects)
+mkdir -p ~/.claude/skills
 cp -r .claude/skills/* ~/.claude/skills/
 
 # Or copy to project-specific location (available only in this project)

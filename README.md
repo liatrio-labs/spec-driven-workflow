@@ -85,9 +85,11 @@ git clone https://github.com/liatrio-labs/spec-driven-workflow.git
 cd spec-driven-workflow
 
 # Copy skills to Claude Code's user skills directory
+mkdir -p ~/.claude/skills
 cp -r .claude/skills/* ~/.claude/skills/
 
 # Or for project-specific skills, copy to your project
+mkdir -p /path/to/your/project/.claude/skills
 cp -r .claude/skills/* /path/to/your/project/.claude/skills/
 ```
 
@@ -115,6 +117,7 @@ The skills are already included in this repository in the `.github/skills/` dire
 git clone https://github.com/liatrio-labs/spec-driven-workflow.git
 
 # Copy skills to your project
+mkdir -p /path/to/your/project/.github
 cp -r spec-driven-workflow/.github/skills /path/to/your/project/.github/
 
 # Or add this repository to your organization's .github repo

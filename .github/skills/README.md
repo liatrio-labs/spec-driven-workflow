@@ -35,7 +35,8 @@ These skills are automatically available when you use this repository with GitHu
 **To use in your own projects:**
 
 ```bash
-# Copy skills to your project
+# From the spec-driven-workflow repository root, copy skills to your project
+mkdir -p /path/to/your/project/.github
 cp -r .github/skills /path/to/your/project/.github/
 
 # Or add to organization-wide skills
