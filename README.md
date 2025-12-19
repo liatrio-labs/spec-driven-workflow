@@ -71,7 +71,70 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 
 <img max-width="500" alt="Example of slash commands installed in Windsurf" src="docs/assets/images/slash-command-example-windsurf.png" />
 
-#### Option B: Manual Copy-Paste (No Installation)
+#### Option B: Install as Agent Skills (Claude Code & GitHub Copilot)
+
+Install these prompts as **Agent Skills** that AI assistants can autonomously invoke when relevant to your workflow.
+
+##### For Claude Code
+
+Clone this repository and copy the skills to your Claude Code skills directory:
+
+```bash
+# Clone the repository (or use an existing clone)
+git clone https://github.com/liatrio-labs/spec-driven-workflow.git
+cd spec-driven-workflow
+
+# Copy skills to Claude Code's user skills directory
+cp -r .claude/skills/* ~/.claude/skills/
+
+# Or for project-specific skills, copy to your project
+cp -r .claude/skills/* /path/to/your/project/.claude/skills/
+```
+
+**What this does:**
+- Installs four SDD workflow skills that Claude Code can discover and invoke automatically
+- Skills are available in Agent mode when Claude determines they're relevant
+- Each skill includes the full workflow instructions and context verification markers
+
+**Skills installed:**
+- `sdd-1-generate-spec` - Generate specifications with workflow guidance
+- `sdd-2-generate-task-list` - Convert specs into actionable task lists
+- `sdd-3-manage-tasks` - Execute structured task implementation
+- `sdd-4-validate-implementation` - Validate implementation against specs
+
+##### For GitHub Copilot
+
+The skills are already included in this repository in the `.github/skills/` directory, so they are **automatically available** when you clone or fork the repository.
+
+**To use in your own projects:**
+
+```bash
+# Clone or download this repository
+git clone https://github.com/liatrio-labs/spec-driven-workflow.git
+
+# Copy skills to your project
+cp -r spec-driven-workflow/.github/skills /path/to/your/project/.github/
+
+# Or add this repository to your organization's .github repo
+# Place in {org}/.github/skills/ or {org}/.github-private/skills/
+```
+
+**What this does:**
+- Makes SDD workflow skills available to GitHub Copilot agents in VS Code
+- Skills appear in the Agent HQ and can be invoked by Copilot when relevant
+- Works with Copilot's coding agent, CLI, and multi-agent orchestration
+
+**Skills installed:**
+- `sdd-1-generate-spec` - Generate specifications with workflow guidance
+- `sdd-2-generate-task-list` - Convert specs into actionable task lists
+- `sdd-3-manage-tasks` - Execute structured task implementation
+- `sdd-4-validate-implementation` - Validate implementation against specs
+
+**Learn more:**
+- [Claude Code Agent Skills Documentation](https://code.claude.com/docs/en/skills)
+- [GitHub Copilot Agent Skills Documentation](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+
+#### Option C: Manual Copy-Paste (No Installation)
 
 Copy the contents of a prompt file directly from `prompts/` and paste it into your AI chat. The AI will follow the structured instructions in the prompt.
 
