@@ -92,11 +92,13 @@ cp -r .claude/skills/* /path/to/your/project/.claude/skills/
 ```
 
 **What this does:**
+
 - Installs four SDD workflow skills that Claude Code can discover and invoke automatically
 - Skills are available in Agent mode when Claude determines they're relevant
 - Each skill includes the full workflow instructions and context verification markers
 
 **Skills installed:**
+
 - `sdd-1-generate-spec` - Generate specifications with workflow guidance
 - `sdd-2-generate-task-list` - Convert specs into actionable task lists
 - `sdd-3-manage-tasks` - Execute structured task implementation
@@ -120,17 +122,20 @@ cp -r spec-driven-workflow/.github/skills /path/to/your/project/.github/
 ```
 
 **What this does:**
+
 - Makes SDD workflow skills available to GitHub Copilot agents in VS Code
 - Skills appear in the Agent HQ and can be invoked by Copilot when relevant
 - Works with Copilot's coding agent, CLI, and multi-agent orchestration
 
 **Skills installed:**
+
 - `sdd-1-generate-spec` - Generate specifications with workflow guidance
 - `sdd-2-generate-task-list` - Convert specs into actionable task lists
 - `sdd-3-manage-tasks` - Execute structured task implementation
 - `sdd-4-validate-implementation` - Validate implementation against specs
 
 **Learn more:**
+
 - [Claude Code Agent Skills Documentation](https://code.claude.com/docs/en/skills)
 - [GitHub Copilot Agent Skills Documentation](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
 
