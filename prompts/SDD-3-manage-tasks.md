@@ -37,7 +37,7 @@ This implementation phase serves as the **execution engine** for the entire SDD 
 **Critical Dependencies:**
 
 - **Parent tasks** become implementation checkpoints and commit boundaries
-- **Proof artifacts** guide implementation verification and become the evidence source for `/validate-spec-implementation`
+- **Proof artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
 
 **What Breaks the Chain:**
@@ -203,7 +203,7 @@ Each parent task must include artifacts that:
 
 - **Demonstrate functionality** (screenshots, URLs, CLI output)
 - **Verify quality** (test results, lint output, performance metrics)
-- **Enable validation** (provide evidence for `/validate-spec-implementation`)
+- **Enable validation** (provide evidence for `/SDD-4-validate-spec-implementation`)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
 ### Security Warning
@@ -291,7 +291,7 @@ After completing all tasks in the task list:
 2. **Proof Artifact Validation**: Verify all proof artifacts demonstrate functionality from original spec
 3. **Test Suite**: Run final comprehensive test suite
 4. **Documentation**: Update any relevant documentation
-5. **Handoff**: Instruct user to proceed to `/validate-spec-implementation`
+5. **Handoff**: Instruct user to proceed to `/SDD-4-validate-spec-implementation`
 
 The validation phase will use your proof artifacts as evidence to verify that the spec has been fully and correctly implemented.
 
@@ -344,4 +344,4 @@ Implementation is successful when:
 
 ## What Comes Next
 
-Once this task implementation is complete and all proof artifacts are created, instruct the user to run `/validate-spec-implementation` to verify the implementation meets all spec requirements. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
+Once this task implementation is complete and all proof artifacts are created, instruct the user to run `/SDD-4-validate-spec-implementation` to verify the implementation meets all spec requirements. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.

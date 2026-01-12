@@ -362,4 +362,4 @@ Iterate based on feedback until the user is satisfied.
 
 ## What Comes Next
 
-Once this spec is complete and approved, instruct the user to run `/generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
+Once this spec is complete and approved, instruct the user to run `/SDD-2-generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
