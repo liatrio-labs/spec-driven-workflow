@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v1.12.1 (2026-01-12)
+
+### Bug Fixes
+
+- Update task name references to be consistent with new SDD- prefixes for slash commands
+  ([#41](https://github.com/liatrio-labs/spec-driven-workflow/pull/41),
+  [`ea91731`](https://github.com/liatrio-labs/spec-driven-workflow/commit/ea9173157273a2d49194eb61e945c25bf9d4eade))
+
+
 ## v1.12.0 (2025-12-16)
 
 ### Documentation
