@@ -36,8 +36,8 @@ This task list serves as the **execution blueprint** for the entire SDD workflow
 
 **Critical Dependencies:**
 
-- **Parent tasks** become implementation checkpoints in `/manage-tasks`
-- **Proof Artifacts** guide implementation verification and become the evidence source for `/validate-spec-implementation`
+- **Parent tasks** become implementation checkpoints in `/SDD-3-manage-tasks`
+- **Proof Artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
 
 **What Breaks the Chain:**
@@ -87,7 +87,7 @@ Proof artifacts provide evidence of task completion and are essential for the up
 
 - **Demonstrate functionality** (screenshots, URLs, CLI output)
 - **Verify quality** (test results, lint output, performance metrics)
-- **Enable validation** (provide evidence for `/validate-spec-implementation`)
+- **Enable validation** (provide evidence for `/SDD-4-validate-spec-implementation`)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
 **Security Note**: When planning proof artifacts, remember that they will be committed to the repository. Artifacts should use placeholder values for API keys, tokens, and other sensitive data rather than real credentials.
@@ -289,7 +289,7 @@ Before finalizing your task list, verify:
 
 ## What Comes Next
 
-Once this task list is complete and approved, instruct the user to run `/manage-tasks` to begin implementation. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
+Once this task list is complete and approved, instruct the user to run `/SDD-3-manage-tasks` to begin implementation. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
 
 ## Final Instructions
 
@@ -300,5 +300,5 @@ Once this task list is complete and approved, instruct the user to run `/manage-
 5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
 6. Identify all relevant files for creation/modification
 7. Review with user and refine until satisfied
-8. Guide user to the next workflow step (`/manage-tasks`)
+8. Guide user to the next workflow step (`/SDD-3-manage-tasks`)
 9. Stop working once user confirms task list is complete
