@@ -46,10 +46,12 @@ Think of these prompts as reusable playbooks that keep AI agents focused and con
 Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
 
 **Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/). Install uv first if you don’t already have it:
-  - (Mac): `brew install uv`
-  - (Windows): `winget install astral-sh.uv`
+
+- (Mac): `brew install uv`
+- (Windows): `winget install astral-sh.uv`
 
 ##### Install SDD w/ Bash (Mac)
+
 ```bash
 uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
   slash-man generate \
@@ -59,6 +61,7 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 ```
 
 ##### Install SDD w/ PowerShell (Windows)
+
 ```ps
 uvx --from git+https://github.com/liatrio-labs/slash-command-manager `
   slash-man generate `
