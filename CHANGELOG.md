@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v1.12.2 (2026-02-11)
+
+### Bug Fixes
+
+- **ci**: Show modified files when pre-commit hooks fail
+  ([#45](https://github.com/liatrio-labs/spec-driven-workflow/pull/45),
+  [`4783668`](https://github.com/liatrio-labs/spec-driven-workflow/commit/4783668fe822c27714b6eef71bd26df8e5002762))
+
+
 ## v1.12.1 (2026-01-12)
 
 ### Bug Fixes
