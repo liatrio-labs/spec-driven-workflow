@@ -32,3 +32,14 @@ jobs:
 
       - name: Run pre-commit hooks
         run: pre-commit run --all-files
+
+      - name: Show files modified by pre-commit hooks
+        if: failure()
+        run: |
+          echo "::group::Files modified by pre-commit hooks"
+          git diff --name-only
+          echo "::endgroup::"
+          echo ""
+          echo "::group::Full diff of modifications"
+          git diff
+          echo "::endgroup::"
