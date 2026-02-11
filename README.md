@@ -45,13 +45,22 @@ Think of these prompts as reusable playbooks that keep AI agents focused and con
 
 Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
 
-**Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/). Install uv first if you don’t already have it.
+**Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/). Install uv first if you don’t already have it via `winget install astral-sh.uv` (Windows) or `brew install uv` (Mac).
 
+**Bash (Mac)**
 ```bash
 uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
   slash-man generate \
   --github-repo liatrio-labs/spec-driven-workflow \
   --github-branch main \
+  --github-path prompts/
+```
+**Powershell (Windows)**
+```ps
+uvx --from git+https://github.com/liatrio-labs/slash-command-manager `
+  slash-man generate `
+  --github-repo liatrio-labs/spec-driven-workflow `
+  --github-branch main `
   --github-path prompts/
 ```
 
