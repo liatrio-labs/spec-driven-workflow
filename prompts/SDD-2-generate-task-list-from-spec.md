@@ -208,7 +208,42 @@ Audit must evaluate and report these checks:
 7. **Context-aware alignment confidence (FLAG):**
    - Compare against related specs and higher-level plans (for example PRDs/roadmaps) and include confidence (`low`, `med`, `high`) for each alignment finding.
 
-### Phase 6: Human Review Checkpoint (Required)
+**Default audit verbosity mode (required):**
+
+- Use a compact "Gateboard" first, not long narrative text.
+- Show at most 5 REQUIRED failures and 3 FLAG findings in the main report.
+- Use exception-only reporting:
+  - include only missing requirement mappings
+  - include only standards conflicts
+  - include only low-confidence alignment findings
+- For re-audits, show delta output: gates that changed status plus any still-failing REQUIRED gates.
+- Do not include full appendices unless the user explicitly asks for full details.
+
+### Phase 6: Reset Recommendation Gate (Escape Hatch)
+
+Immediately after the first full audit pass, evaluate whether remediation is efficient or a restart is safer:
+
+1. **Proceed with remediation** when:
+   - REQUIRED failures <= 3, and
+   - total findings <= 7
+2. **Caution zone (user decides)** when:
+   - REQUIRED failures are 4-5, or
+   - total findings are 8-12
+3. **Recommend restart** when any of these are true:
+   - REQUIRED failures >= 6
+   - total findings >= 13
+   - 30% or more of functional requirements have no task/test mapping
+   - remediation would rewrite 40% or more of parent tasks
+
+If restart is recommended, pause normal remediation and present only:
+
+- Why restart is recommended (max 3 bullets)
+- Preserve vs discard guidance for current artifacts
+- Explicit user choice:
+  - `Start over from spec/task creation`
+  - `Continue with remediation anyway` (explicit override)
+
+### Phase 7: Human Review Checkpoint (Required)
 
 After generating the audit report:
 
@@ -222,14 +257,14 @@ After generating the audit report:
 - Exact file section to edit
 - Exact acceptance condition
 
-### Phase 7: Remediation Execution and Re-Audit
+### Phase 8: Remediation Execution and Re-Audit
 
 After explicit user approval:
 
 1. Apply approved remediation edits to planning artifacts.
 2. Commit remediation changes.
 3. Re-run the full audit and update the audit report.
-4. If REQUIRED gates still fail, return to Phase 6.
+4. If REQUIRED gates still fail, return to Phase 7 (or follow Phase 6 restart path if thresholds are now exceeded).
 5. Only proceed when all REQUIRED gates pass.
 
 ## Phase 2 Output Format (Parent Tasks Only)
@@ -286,7 +321,7 @@ After user confirmation in Phase 3, update the task file with complete parent ta
 
 ## Audit Report Format (Phase 5 and Later)
 
-Use this structure in `[NN]-audit-[feature-name].md`:
+Use this structure in `[NN]-audit-[feature-name].md` (compact-by-default):
 
 ```markdown
 # [NN]-audit-[feature-name].md
@@ -296,30 +331,37 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 - Overall Status: PASS/FAIL
 - Required Gate Failures: [count]
 - Flagged Risks: [count]
+- Top 3 Blocking Items: [short list]
 
-## Gate Results
+## Gateboard
 
-| Gate | Type | Status | Evidence |
+| Gate | Status | Why it failed (<=12 words) | Exact fix target |
 | --- | --- | --- | --- |
-| Requirement-to-test traceability | REQUIRED | FAIL | `...` |
+| Requirement-to-test traceability | FAIL | FR-2 has no planned test artifact | `Tasks > 2.0` |
 
-## Traceability Matrix
+## Reset Recommendation Gate
 
-| Functional Requirement | Task IDs | Planned Test Artifact | Proof Artifact |
-| --- | --- | --- | --- |
-| FR-1 | 1.0, 1.2 | `tests/...` | `CLI: ...` |
+- Recommendation: Remediate | Caution | Restart
+- Trigger(s): [which threshold(s) matched]
+- User Decision: [Pending | Restart | Continue remediation override]
 
-## Standards Analysis
+## Traceability Exceptions (Only Missing Coverage)
 
-- Sources reviewed
-- Conflicts found
-- Documented precedence/decision status
+| Functional Requirement | Missing Mapping | File Section to Edit |
+| --- | --- | --- |
+| FR-2 | No task/test mapping | `## Tasks > 2.0` |
 
-## Context-Aware Alignment
+## Standards Exceptions (Only Conflicts)
+
+- Conflict: [summary]
+- Sources: [paths]
+- Required precedence/decision update: [exact section]
+
+## Low-Confidence Alignment Findings (Only `low`)
 
 - Artifact compared: [path]
 - Finding: [summary]
-- Confidence: low|med|high
+- Confidence: low
 
 ## Findings
 
@@ -344,6 +386,12 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 
 - Run 1: [summary]
 - Run 2: [summary]
+
+## Re-Audit Delta (For Runs 2+)
+
+- Changed gate statuses since previous run:
+- Still-failing REQUIRED gates:
+- Newly introduced findings:
 ```
 
 ## Interaction Model
@@ -351,8 +399,9 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 This is now a **multi-checkpoint planning flow** with explicit user approvals:
 
 1. Parent task review checkpoint (before subtasks)
-2. Human remediation approval checkpoint (after audit findings)
-3. Re-audit loop checkpoint (if REQUIRED gates fail)
+2. Reset recommendation checkpoint (restart vs remediation)
+3. Human remediation approval checkpoint (after audit findings)
+4. Re-audit loop checkpoint (if REQUIRED gates fail)
 
 No remediation edits may be made before explicit user approval.
 
@@ -394,7 +443,8 @@ Only after all REQUIRED audit gates pass, instruct the user to run `/SDD-3-manag
 3. Generate full task list with relevant files and proof artifacts.
 4. Create baseline planning commit before audit.
 5. Generate audit report with REQUIRED and FLAG findings.
-6. Present findings and remediation plan; get explicit approval before edits.
-7. Apply approved remediation and commit changes.
-8. Re-run full audit until REQUIRED gates pass.
-9. Hand off to `/SDD-3-manage-tasks` only when audit is passing.
+6. Evaluate reset recommendation gate; if restart thresholds are met, require explicit user restart/override decision.
+7. Present findings and remediation plan; get explicit approval before edits.
+8. Apply approved remediation and commit changes.
+9. Re-run full audit until REQUIRED gates pass.
+10. Hand off to `/SDD-3-manage-tasks` only when audit is passing.
