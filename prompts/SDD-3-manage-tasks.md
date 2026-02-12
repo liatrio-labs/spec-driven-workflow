@@ -39,6 +39,7 @@ This implementation phase serves as the **execution engine** for the entire SDD 
 - **Parent tasks** become implementation checkpoints and commit boundaries
 - **Proof artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
+- **Planning audit report** from `/SDD-2-generate-task-list-from-spec` confirms planning quality gates passed before implementation starts
 
 **What Breaks the Chain:**
 
@@ -88,6 +89,10 @@ For each parent task, follow this structured workflow with built-in verification
 ## PRE-WORK CHECKLIST (Complete before starting any sub-task)
 
 [ ] Locate task file: `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
+[ ] Locate audit file: `./docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`
+[ ] Verify audit report exists and is current for this spec
+[ ] Verify all REQUIRED planning audit gates are PASS
+[ ] If REQUIRED gates are not PASS, stop and return to `/SDD-2-generate-task-list-from-spec`
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
 [ ] Review proof artifacts required for current parent task
@@ -298,11 +303,12 @@ The validation phase will use your proof artifacts as evidence to verify that th
 ## Instructions
 
 1. **Locate Task File**: Find the task list in `./docs/specs/` directory
-2. **Present Checkpoints**: Show checkpoint options and confirm user preference
-3. **Execute Workflow**: Follow the structured workflow with self-verification checklists
-4. **Validate Progress**: Use verification checkpoints before proceeding
-5. **Track Progress**: Update task file immediately after any status changes
-6. **Complete or Continue**:
+2. **Verify Planning Audit Status**: Confirm audit report exists and all REQUIRED gates passed before any implementation work
+3. **Present Checkpoints**: Show checkpoint options and confirm user preference
+4. **Execute Workflow**: Follow the structured workflow with self-verification checklists
+5. **Validate Progress**: Use verification checkpoints before proceeding
+6. **Track Progress**: Update task file immediately after any status changes
+7. **Complete or Continue**:
    - If tasks remain, proceed to next parent task
    - If all complete, instruct user to proceed to validation
 

@@ -362,4 +362,12 @@ Iterate based on feedback until the user is satisfied.
 
 ## What Comes Next
 
-Once this spec is complete and approved, instruct the user to run `/SDD-2-generate-task-list-from-spec`. This will start the next step in the workflow, which is to break down the specification into actionable tasks.
+Once this spec is complete and approved, instruct the user to run `/SDD-2-generate-task-list-from-spec`. In that step, the AI will:
+
+1. Generate parent tasks and sub-tasks
+2. Create a baseline planning commit (spec + tasks + questions files when present)
+3. Run a planning audit and create `[NN]-audit-[feature-name].md`
+4. Present findings and a remediation plan for explicit user approval before any remediation edits
+5. Re-run the audit until all required gates pass
+
+Only after those audit gates pass should the workflow proceed to `/SDD-3-manage-tasks`.
