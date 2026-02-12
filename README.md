@@ -19,7 +19,7 @@
 This repository provides **structured prompts** (Markdown files) that guide AI assistants through a complete software development workflow:
 
 - **Define intent**: generate a reviewed spec with clear demo criteria
-- **Plan**: break work into demoable tasks and subtasks
+- **Plan**: break work into demoable tasks and subtasks, then run a planning audit gate
 - **Execute**: implement with checkpoints and proof artifacts
 - **Validate**: verify implementation against the spec with evidence
 
@@ -93,8 +93,8 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 ### Quick "try it" flow
 
 1. Run `/SDD-1-generate-spec` and describe the feature you want.
-2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec.
-3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits).
+2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec; complete task generation, baseline planning commit, planning audit, and user-approved remediation if needed.
+3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits) after the SDD-2 audit required gates pass.
 4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
 
 ## Details for the 4-step workflow
@@ -107,9 +107,9 @@ Each step uses a different prompt file and produces specific artifacts in `docs/
    - **Why**: aligns humans + AI on what to build before any code changes
 
 2. **Generate a task list** ([`prompts/SDD-2-generate-task-list-from-spec.md`](./prompts/SDD-2-generate-task-list-from-spec.md))
-   - **What it does**: converts the spec into parent tasks (demoable units) + detailed subtasks with a "Relevant Files" section
-   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
-   - **Why**: creates an actionable plan with clear checkpoints and reviewable scope
+   - **What it does**: converts the spec into parent tasks (demoable units) + detailed subtasks, creates a baseline planning commit, runs a planning audit gate, and requires user-approved remediation before implementation handoff
+   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` and `docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`
+   - **Why**: catches planning defects early and improves downstream validation readiness
 
 3. **Manage tasks (implementation loop)** ([`prompts/SDD-3-manage-tasks.md`](./prompts/SDD-3-manage-tasks.md))
    - **What it does**: guides execution with checkpoints, verification checklists, and proof artifacts created **before** each commit
@@ -126,6 +126,7 @@ Each step uses a different prompt file and produces specific artifacts in `docs/
 ## Highlights
 
 - **Prompt-first workflow:** Use curated prompts to go from idea → spec → task list → implementation-ready backlog.
+- **Planning quality gate:** SDD-2 includes a mandatory audit with human-approved remediation before implementation starts.
 - **Predictable delivery:** Every step emphasizes demoable slices, proof artifacts, and collaboration with junior developers in mind.
 - **No dependencies required:** The prompts are plain Markdown files that work with any AI assistant.
 - **Context verification:** Built-in emoji markers (SDD1️⃣-SDD4️⃣) detect when AI responses follow critical instructions, helping identify context rot issues early.
@@ -148,6 +149,7 @@ Each prompt writes Markdown outputs into `docs/specs/[NN]-spec-[feature-name]/` 
 
 - **Specs:** `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
 - **Task lists:** `docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
+- **Audit reports:** `docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`
 - **Proof artifacts:** `docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/[NN]-task-[TT]-proofs.md`
 - **Validation reports:** `docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
 
@@ -162,6 +164,7 @@ docs/specs
     │   ├── 01-task-03-proofs.md
     │   └── 01-task-04-proofs.md
     ├── 01-questions-1-feature-name.md
+    ├── 01-audit-feature-name.md
     ├── 01-spec-feature-name.md
     ├── 01-tasks-feature-name.md
     └── 01-validation-feature-name.md

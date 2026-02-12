@@ -38,6 +38,14 @@ Commands and scaffolds steer teams toward skateboard‑to‑scooter increments: 
 
 Yes. You can keep everything in a single repository using Markdown files with no external dependencies. Tool integrations and multi‑repo features are optional.
 
+## How does the workflow prevent low-quality planning from reaching implementation?
+
+The planning step includes a mandatory audit gate after task generation. The AI produces an audit report that checks requirement coverage, proof artifact quality, repository standards consistency, open-question handling, and context alignment against related docs (such as specs, PRDs, or roadmaps). Required failures block implementation handoff until remediated.
+
+## Is remediation fully automated?
+
+No. Remediation is human-in-the-loop. The AI presents findings and a concrete remediation plan, then waits for explicit user approval before editing planning artifacts. After approved edits, the AI reruns the audit. This loop repeats until required audit gates pass.
+
 ## Can solo developers use it?
 
 Yes. The same context and work‑breakdown helpers make it easy to pause and resume personal projects while keeping AI assistance on track.
