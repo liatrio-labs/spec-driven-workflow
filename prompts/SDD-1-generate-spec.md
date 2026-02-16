@@ -64,8 +64,8 @@ If the user did not include an initial input or reference for the spec, ask the 
 1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
 2. **Context Assessment** - Review existing codebase for relevant patterns and constraints
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
-4. **Clarifying Questions (CONDITIONAL)** - Ask only when context cannot resolve genuine ambiguity
-5. **Spec Generation** - Create the detailed specification document following reference patterns
+4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
+5. **Spec Generation** - Create the detailed specification document
 6. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Create Spec Directory
@@ -82,11 +82,8 @@ Create the spec directory structure before proceeding with any other steps. This
 
 ## Step 2: Context Assessment
 
-If working in a pre-existing project, begin by reviewing the codebase and existing docs to understand both general repository patterns and spec-specific precedents.
+If working in a pre-existing project, begin by briefly reviewing the codebase and existing docs to understand:
 
-### What to Review
-
-**Repository-Level Context:**
 - Current architecture patterns and conventions
 - Relevant existing components or features
 - Integration constraints or dependencies
@@ -99,57 +96,7 @@ If working in a pre-existing project, begin by reviewing the codebase and existi
   - Testing patterns and quality assurance practices
   - Commit message conventions and development workflows
 
-**Existing Spec Patterns (if applicable):**
-- **Look for completed spec directories** in `./docs/specs/`
-  - Specs with validation reports and proof artifacts are completed
-  - Examine file naming patterns across multiple specs
-  - Review spec document structure (sections, formatting, level of detail)
-  - Study proof artifact organization (directory structure, file naming)
-  - Note task breakdown patterns (granularity, naming conventions)
-  - Identify validation report format (structure, evidence requirements)
-
-**Similar Features Analysis:**
-- Search codebase for similar functionality to the feature you're specifying
-- Example: For "add export feature" → look for existing export/download features
-- Example: For "add validation" → look for existing validation patterns
-- Example: For "add search field" → look for existing search implementations
-
 **Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
-
-### Context Assessment Output
-
-**Summarize key findings for the user.** Focus on what's relevant to this feature. Include only the categories that have meaningful information:
-
-**Established Patterns Identified** (if relevant):
-- Framework/stack, architecture pattern, testing approach, UI framework, i18n/l10n
-
-**Decisions Already Made by Repository** (if relevant):
-- Code style, testing requirements, error handling, validation approach
-
-**Spec File Patterns** (if existing specs found):
-- File naming, section order, demoable units structure, level of detail
-
-**Similar Features & Implementation Patterns** (if found):
-- Similar feature location, architectural approach, UI patterns, testing patterns, components to modify, patterns to follow
-
-**Keep it concise.** Only mention findings that will inform the spec or question decisions.
-
-### Decision: Skip or Ask Questions?
-
-Based on your analysis, determine which approach to take in Step 4 (Clarifying Questions):
-
-**SKIP questions and proceed directly to spec generation if you can answer these:**
-- ✅ **Pattern clarity**: Can you identify consistent patterns across existing specs (file structure, section organization, level of detail)?
-- ✅ **Similar features**: Does a similar feature exist that demonstrates the architectural approach?
-- ✅ **Documentation coverage**: Do repository docs (README, CONTRIBUTING, AGENTS.md, etc.) answer technical questions?
-- ✅ **Standard practices**: Are remaining decisions covered by industry standards or framework conventions?
-
-**ASK questions (Step 4: Clarifying Questions) only if you encounter genuinely ambiguous decisions:**
-- ❓ **Business logic ambiguity**: Core behavior is undefined (e.g., "What makes two records duplicates?")
-- ❓ **Multiple valid approaches**: Several architectures are equally valid and no pattern exists to choose
-- ❓ **User preference needed**: UX decisions where no clear pattern exists (e.g., modal vs inline confirmation)
-- ❓ **Novel functionality**: Feature type has no precedent in codebase or documentation
-- ❓ **Conflicting patterns**: Existing code shows inconsistent approaches and you need direction
 
 ## Step 3: Initial Scope Assessment
 
@@ -202,96 +149,21 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 
 **⚠️ IMPORTANT: This step may be skipped based on Step 2 analysis.**
 
-### Before Creating Questions
-
-Review your Step 2 decision. If you decided to skip questions, proceed directly to Step 5 (Spec Generation) using the reference patterns you identified.
-
-### If Questions Are Needed
-
 **Question Philosophy: Prefer zero questions when context is sufficient**
 
-Ask clarifying questions ONLY for decisions that cannot be inferred from existing patterns or documentation. Each question should address genuine ambiguity that blocks spec creation. Focus on understanding the "what" and "why" rather than the "how."
+Ask clarifying questions ONLY for decisions that cannot be inferred from existing patterns or documentation. Each question should address genuine ambiguity that blocks spec creation.
 
-### What TO Ask (High Priority)
+### Questions File - ALWAYS Create
 
-**Business Logic Decisions:**
-- "What defines [ambiguous concept]?" (e.g., "What makes two records duplicates?")
-- "Should we [approach A] or [approach B]?" when both are equally valid
+**File:** `[NN]-questions-1-[feature-name].md`
 
-**User Preference Questions:**
-- UI placement when no clear pattern exists
-- Confirmation style (modal vs inline) when both are used
-- Behavior choices that affect UX significantly
+**Two sections:**
+1. **Questions for User** - Questions needing user input (if any), OR "None - all questions resolved from existing context"
+2. **Questions Answered by Context** - Questions you resolved from codebase/docs (brief answer + source)
 
-**Data/Behavior Ambiguity:**
-- Cascade delete vs block delete vs soft delete decisions
-- Empty state behavior when not established
-- Error handling for genuinely novel scenarios
-
-### What NOT to Ask (Infer from Context)
-
-**DO NOT ask if the codebase already shows the answer:**
-- ❌ "Should we use [Framework X]?" → Already using Framework X
-- ❌ "Should we support internationalization?" → Already have i18n files
-- ❌ "What testing approach?" → TESTING.md or existing tests show approach
-- ❌ "Where should files go?" → Existing structure shows conventions
-- ❌ "What error handling?" → Existing error handlers show pattern
-- ❌ "What validation approach?" → Existing validators show pattern
-- ❌ "What UI framework?" → Already using specific framework
-
-**DO NOT ask about implementation details:**
-- ❌ "Which HTTP status code?" → Use REST conventions
-- ❌ "How to structure the class?" → Follow existing architecture
-- ❌ "What variable names?" → Follow existing naming conventions
-
-### Questions File Format
-
-**ALWAYS create a questions file:** `[NN]-questions-1-[feature-name].md`
-
-The file has two sections:
-1. **Questions for User** - Questions that need user input (if any)
-2. **Questions Answered by Context** - Questions you resolved from codebase, documentation, previous specs, or other sources
-
+**Format:**
 ```markdown
 # [NN] Questions - [Feature Name]
-
-## Questions for User
-
-[If none: "None - all questions resolved from existing context"]
-
-[If there are questions for the user, use checkbox format:]
-
-### 1. [Question Category/Topic]
-
-[What specific aspect of the feature needs clarification?]
-
-- [ ] (A) [Option description explaining what this choice means]
-- [ ] (B) [Option description explaining what this choice means]
-- [ ] (C) [Option description explaining what this choice means]
-- [ ] (D) [Option description explaining what this choice means]
-- [ ] (E) Other (describe)
-
-## Questions Answered by Context
-
-[Always include this section, even if empty]
-
-1. **[Question 1]?**
-   - Answer: [Brief answer]
-   - Source: [Where you found the answer - file, docs, issue]
-
-2. **[Question 2]?**
-   - Answer: [Brief answer]
-   - Source: [Where you found the answer]
-
-3. **[Question 3]?**
-   - Answer: [Brief answer]
-   - Source: [Where you found the answer]
-```
-
-**Example - No User Questions:**
-
-```markdown
-# 07 Questions - Prevent Duplicates
 
 ## Questions for User
 
@@ -299,67 +171,26 @@ None - all questions resolved from existing context
 
 ## Questions Answered by Context
 
-1. **What defines duplicate?**
-   - Answer: firstName+lastName+telephone
-   - Source: GitHub issue #4
-
-2. **Case sensitive?**
-   - Answer: No, case-insensitive
-   - Source: IgnoreCase pattern in OwnerRepository.java
-
-3. **Apply to updates?**
-   - Answer: No, creation only
-   - Source: Issue scope mentions "creation"
+1. **What defines duplicate?** - Answer: firstName+lastName+telephone (Source: GitHub issue #4)
+2. **Case sensitive?** - Answer: No, case-insensitive (Source: OwnerRepository.java)
+3. **Apply to updates?** - Answer: Creation only (Source: Issue scope)
 ```
 
-**Example - Mixed (some for user, some resolved):**
-
+If user questions ARE needed, use checkbox format:
 ```markdown
-# 07 Questions - Prevent Duplicates
-
 ## Questions for User
 
-### 1. Duplicate Handling Strategy
-
-What should happen when a duplicate is detected?
-
-- [ ] (A) Block creation completely (hard stop)
-- [ ] (B) Show warning but allow override
-- [ ] (C) Show suggestion to merge with existing
-
-## Questions Answered by Context
-
-1. **What defines duplicate?**
-   - Answer: firstName+lastName+telephone
-   - Source: GitHub issue #4
-
-2. **Case sensitive?**
-   - Answer: No, case-insensitive
-   - Source: IgnoreCase pattern in OwnerRepository.java
+### 1. [Question Topic]
+- [ ] (A) [Option]
+- [ ] (B) [Option]
+- [ ] (C) Other
 ```
 
-### Questions File Process (If Questions Are Needed)
+### Questions File Process
 
-**Remember: If you're asking many questions, you're likely asking about things you should infer from context.**
-
-1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
-2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
-3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
-4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
-5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
-   - **Note**: Follow-up rounds should be rare. If you need a second round, you likely asked the wrong questions in round 1.
-
-**Iterative Process:**
-
-- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
-- Build on previous answers - use context from earlier responses to inform subsequent questions.
-- **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
-- Only proceed to Step 5 after:
-  - You have received and reviewed all user answers to clarifying questions (if any were needed)
-  - You have documented any questions resolved from context in the questions file
-  - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
-
-**Note:** If all questions were resolved from context (no user questions needed), proceed directly to Step 5 after creating the questions file with "Questions for User: None" and filling out the "Questions Answered by Context" section.
+1. **Create Questions File** with both sections
+2. **If "Questions for User" has items**: Point user to file, STOP AND WAIT for answers
+3. **If "Questions for User" is "None"**: Proceed directly to Step 5
 
 ## Step 5: Spec Generation
 
@@ -482,13 +313,11 @@ Iterate based on feedback until the user is satisfied.
    - **Format:** Markdown (`.md`)
    - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
    - **Example:** `01-spec-user-authentication/01-spec-user-authentication.md`
-   - **Purpose:** Comprehensive feature specification (300-800 lines)
 
 2. **Questions File** (always created)
    - **File:** `[NN]-questions-1-[feature-name].md`
    - **Format:** Two sections: "Questions for User" and "Questions Answered by Context"
-   - **Purpose:** Document all question-resolution (both user questions and context-resolved questions)
-   - **Note:** If no user questions needed, first section says "None - all questions resolved from existing context"
+   - **Purpose:** Document question-resolution process
 
 ## Critical Constraints
 
@@ -498,21 +327,17 @@ Iterate based on feedback until the user is satisfied.
 - Ask questions about things you can infer from the codebase or existing specs
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
-- Ask questions that can be answered by examining existing code, specs, or documentation
 - Ignore existing repository patterns and conventions
-- Ask about frameworks/tools already in use (check first!)
 
 **ALWAYS:**
 
-- Review existing completed specs before asking questions (Step 2)
-- Make clarifying questions conditional - skip if patterns are clear
+- Create a questions file with two sections: "Questions for User" and "Questions Answered by Context"
 - Validate scope appropriateness before proceeding
-- Follow reference spec structure if available (adapt the template to match)
+- Use the exact spec structure provided above
+- Document key decisions in "Questions Answered by Context" section (brief answers with sources)
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
-- **Create a questions file** with two sections: "Questions for User" and "Questions Answered by Context"
-- Document key decisions in "Questions Answered by Context" section (brief answers with sources)
 
 ## What Comes Next
 
