@@ -66,8 +66,7 @@ If the user did not include an initial input or reference for the spec, ask the 
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
 4. **Clarifying Questions (CONDITIONAL)** - Ask only when context cannot resolve genuine ambiguity
 5. **Spec Generation** - Create the detailed specification document following reference patterns
-6. **Document Decision Process** - Create `[NN]-sdd-notes.md` documenting the decision-making process
-7. **Review and Refine** - Validate completeness and clarity with the user
+6. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Create Spec Directory
 
@@ -247,24 +246,22 @@ Ask clarifying questions ONLY for decisions that cannot be inferred from existin
 
 ### Questions File Format
 
-Follow this format exactly when you create the questions file.
+**ALWAYS create a questions file:** `[NN]-questions-1-[feature-name].md`
+
+The file has two sections:
+1. **Questions for User** - Questions that need user input (if any)
+2. **Questions Answered by Context** - Questions you resolved from codebase, documentation, previous specs, or other sources
 
 ```markdown
-# [NN] Questions Round 1 - [Feature Name]
+# [NN] Questions - [Feature Name]
 
-Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
+## Questions for User
 
-## 1. [Question Category/Topic]
+[If none: "None - all questions resolved from existing context"]
 
-[What specific aspect of the feature needs clarification?]
+[If there are questions for the user, use checkbox format:]
 
-- [ ] (A) [Option description explaining what this choice means]
-- [ ] (B) [Option description explaining what this choice means]
-- [ ] (C) [Option description explaining what this choice means]
-- [ ] (D) [Option description explaining what this choice means]
-- [ ] (E) Other (describe)
-
-## 2. [Another Question Category/Topic]
+### 1. [Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
 
@@ -273,6 +270,72 @@ Please answer each question below (select one or more options, or add your own n
 - [ ] (C) [Option description explaining what this choice means]
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
+
+## Questions Answered by Context
+
+[Always include this section, even if empty]
+
+1. **[Question 1]?**
+   - Answer: [Brief answer]
+   - Source: [Where you found the answer - file, docs, issue]
+
+2. **[Question 2]?**
+   - Answer: [Brief answer]
+   - Source: [Where you found the answer]
+
+3. **[Question 3]?**
+   - Answer: [Brief answer]
+   - Source: [Where you found the answer]
+```
+
+**Example - No User Questions:**
+
+```markdown
+# 07 Questions - Prevent Duplicates
+
+## Questions for User
+
+None - all questions resolved from existing context
+
+## Questions Answered by Context
+
+1. **What defines duplicate?**
+   - Answer: firstName+lastName+telephone
+   - Source: GitHub issue #4
+
+2. **Case sensitive?**
+   - Answer: No, case-insensitive
+   - Source: IgnoreCase pattern in OwnerRepository.java
+
+3. **Apply to updates?**
+   - Answer: No, creation only
+   - Source: Issue scope mentions "creation"
+```
+
+**Example - Mixed (some for user, some resolved):**
+
+```markdown
+# 07 Questions - Prevent Duplicates
+
+## Questions for User
+
+### 1. Duplicate Handling Strategy
+
+What should happen when a duplicate is detected?
+
+- [ ] (A) Block creation completely (hard stop)
+- [ ] (B) Show warning but allow override
+- [ ] (C) Show suggestion to merge with existing
+
+## Questions Answered by Context
+
+1. **What defines duplicate?**
+   - Answer: firstName+lastName+telephone
+   - Source: GitHub issue #4
+
+2. **Case sensitive?**
+   - Answer: No, case-insensitive
+   - Source: IgnoreCase pattern in OwnerRepository.java
 ```
 
 ### Questions File Process (If Questions Are Needed)
@@ -292,8 +355,11 @@ Please answer each question below (select one or more options, or add your own n
 - Build on previous answers - use context from earlier responses to inform subsequent questions.
 - **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
 - Only proceed to Step 5 after:
-  - You have received and reviewed all user answers to clarifying questions
+  - You have received and reviewed all user answers to clarifying questions (if any were needed)
+  - You have documented any questions resolved from context in the questions file
   - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
+
+**Note:** If all questions were resolved from context (no user questions needed), proceed directly to Step 5 after creating the questions file with "Questions for User: None" and filling out the "Questions Answered by Context" section.
 
 ## Step 5: Spec Generation
 
@@ -397,97 +463,14 @@ If no specific security considerations, state "No specific security consideratio
 2. [Question 2]
 ```
 
-## Step 6: Document Decision Process
+## Step 6: Review and Refinement
 
-After generating the specification, create an SDD notes document that captures your decision-making process. This provides transparency and creates an audit trail for the entire feature lifecycle.
-
-**File Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-sdd-notes.md`
-
-**Format:**
-
-```markdown
-# SDD Process Notes: [Feature Name]
-
-## SDD-1: Spec Generation
-
-### Context specific to this feature
-
-[Focus on what's SPECIFIC to this feature, not generic repository patterns]
-
-**Relevant Existing Features:**
-- [Only list features that actually influenced design decisions]
-- [Example: Owner search in OwnerController provides multi-field query pattern]
-
-**Key Documentation Used:**
-- [Only cite docs with SPECIFIC sections that answered questions]
-- [Example: DEVELOPMENT.md "Search Implementation Patterns" (lines 164-202): Multi-field query methods]
-
-**Scope Decision:** [Appropriate ✅ / Too Large ⚠️ / Too Small ⚠️]
-- [1-2 sentence justification focusing on what makes it appropriately sized]
-- Estimated: [N] demoable units
-
----
-
-### Decision-Making Process
-
-**Clarifying Questions:** [SKIP ✅ / ASK ❓]
-
-[If SKIP: 2-3 bullet points explaining why context was sufficient]
-
----
-
-### Questions We Considered (But Didn't Need to Ask)
-
-[Document questions that were considered but resolved through existing context]
-
-- **"[Question]"** → [How it was resolved from codebase/docs]
-- **"[Question]"** → [How it was resolved from codebase/docs]
-
-[This section demonstrates the thinking process and shows due diligence]
-
----
-
-_Note: This document will be updated during subsequent SDD phases to track the complete feature lifecycle._
-```
-
-**Important Guidelines:**
-
-**Focus on what's unique:**
-- ❌ Don't list generic tech stack (Spring Boot, TDD, etc.) - everyone knows the repository patterns
-- ✅ Do mention specific features/patterns that influenced THIS spec's design decisions
-
-**Be specific with documentation references:**
-- ❌ Don't say "DEVELOPMENT.md covers validation" (too generic)
-- ✅ Do say "DEVELOPMENT.md 'Data Validation' section (lines 200-250): Lenient search validation pattern"
-
-**Keep scope assessment concise:**
-- ❌ Don't repeat boilerplate about "builds on existing infrastructure, not too large, not too small"
-- ✅ Do focus on the key reason this scope is appropriate (e.g., "Extends single controller without architectural changes")
-
-**"Key Design Decisions" is the most valuable section:**
-- This is where the real thinking transparency lives
-- Each decision should clearly state: what, why, and based on what evidence
-- This helps future developers understand the rationale
-
-**"Questions We Considered" shows diligence:**
-- Demonstrates that you thought about ambiguities
-- Shows how existing context resolved potential questions
-- Proves questions weren't needed, rather than being overlooked
-
-**File will grow over time:**
-- This template is for SDD-1 only
-- Subsequent phases (SDD-2, SDD-3, SDD-4) will append their own sections
-- Keep SDD-1 section concise so the file remains readable as it grows
-
-## Step 7: Review and Refinement
-
-After generating the spec and sdd-notes, present both to the user and ask:
+After generating the spec, present it to the user and ask:
 
 1. "Does this specification accurately capture your requirements?"
 2. "Are there any missing details or unclear sections?"
 3. "Are the scope boundaries appropriate?"
 4. "Do the demoable units represent meaningful progress?"
-5. "Do the documented decisions and assumptions make sense?"
 
 Iterate based on feedback until the user is satisfied.
 
@@ -499,12 +482,13 @@ Iterate based on feedback until the user is satisfied.
    - **Format:** Markdown (`.md`)
    - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
    - **Example:** `01-spec-user-authentication/01-spec-user-authentication.md`
+   - **Purpose:** Comprehensive feature specification (300-800 lines)
 
-2. **SDD Notes Document**
-   - **Format:** Markdown (`.md`)
-   - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-sdd-notes.md`
-   - **Example:** `01-spec-user-authentication/01-sdd-notes.md`
-   - **Purpose:** Documents decision-making process for transparency and audit trail
+2. **Questions File** (always created)
+   - **File:** `[NN]-questions-1-[feature-name].md`
+   - **Format:** Two sections: "Questions for User" and "Questions Answered by Context"
+   - **Purpose:** Document all question-resolution (both user questions and context-resolved questions)
+   - **Note:** If no user questions needed, first section says "None - all questions resolved from existing context"
 
 ## Critical Constraints
 
@@ -527,8 +511,8 @@ Iterate based on feedback until the user is satisfied.
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
-- Justify why you're asking each question (what can't be inferred)
-- **Create the sdd-notes.md file documenting your decision-making process (Step 6)**
+- **Create a questions file** with two sections: "Questions for User" and "Questions Answered by Context"
+- Document key decisions in "Questions Answered by Context" section (brief answers with sources)
 
 ## What Comes Next
 
