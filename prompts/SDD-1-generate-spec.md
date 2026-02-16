@@ -410,74 +410,74 @@ After generating the specification, create an SDD notes document that captures y
 
 ## SDD-1: Spec Generation
 
-### Context Assessment (Step 2)
+### Context specific to this feature
 
-**Existing Patterns Found:**
-- [List frameworks, architecture patterns, testing approaches identified that are relevant to the current spec]
-- [Example: Spring Boot + JPA, Bootstrap 5 UI, Thymeleaf templates]
-- [Example: TDD methodology with >90% coverage requirement]
+[Focus on what's SPECIFIC to this feature, not generic repository patterns]
 
-**Similar Features:**
-- [List similar features that provide implementation patterns]
-- [Example: Existing owner search provides query method pattern]
-- [Example: Language selector spec provides i18n pattern]
+**Relevant Existing Features:**
+- [Only list features that actually influenced design decisions]
+- [Example: Owner search in OwnerController provides multi-field query pattern]
 
-**Documentation Coverage:**
-- [List relevant documentation reviewed]
-- [Example: DEVELOPMENT.md: Search Implementation Patterns]
-- [Example: TESTING.md: TDD methodology and proof artifacts]
+**Key Documentation Used:**
+- [Only cite docs with SPECIFIC sections that answered questions]
+- [Example: DEVELOPMENT.md "Search Implementation Patterns" (lines 164-202): Multi-field query methods]
 
-### Scope Assessment (Step 3)
-
-**Decision:** [Appropriate ✅ / Too Large ⚠️ / Too Small ⚠️]
-
-**Reasoning:**
-[Explain why this scope is appropriate for the SDD workflow]
-- [Example: Single feature with clear boundaries]
-- [Example: Builds on existing infrastructure]
-- [Example: Estimated 6-8 demoable units (appropriate size)]
-
-### Clarifying Questions (Step 4)
-
-**Decision:** [SKIP ✅ / ASK ❓]
-
-**Reasoning:**
-[Explain why questions were or weren't needed]
-- [If SKIP: Explain what patterns/documentation provided the answers]
-- [If ASK: Explain what genuine ambiguities required user input]
-
-**Key Assumptions Made:**
-[List important decisions inferred from context]
-1. [Assumption 1 with reasoning]
-2. [Assumption 2 with reasoning]
-3. [Assumption 3 with reasoning]
-
-**Questions Considered But Not Asked:**
-[Document questions you considered but resolved through context]
-- [Question] → [Resolution based on existing patterns]
-- [Question] → [Resolution based on documentation]
+**Scope Decision:** [Appropriate ✅ / Too Large ⚠️ / Too Small ⚠️]
+- [1-2 sentence justification focusing on what makes it appropriately sized]
+- Estimated: [N] demoable units
 
 ---
 
-## SDD-2: Task Generation
-[To be added during task breakdown phase]
+### Decision-Making Process
+
+**Clarifying Questions:** [SKIP ✅ / ASK ❓]
+
+[If SKIP: 2-3 bullet points explaining why context was sufficient]
 
 ---
 
-## SDD-3: Implementation
-[To be added during implementation phase]
+### Questions We Considered (But Didn't Need to Ask)
+
+[Document questions that were considered but resolved through existing context]
+
+- **"[Question]"** → [How it was resolved from codebase/docs]
+- **"[Question]"** → [How it was resolved from codebase/docs]
+
+[This section demonstrates the thinking process and shows due diligence]
 
 ---
 
-## SDD-4: Validation
-[To be added during validation phase]
+_Note: This document will be updated during subsequent SDD phases to track the complete feature lifecycle._
 ```
 
-**Important Notes:**
-- Create this file immediately after completing the specification
-- This file will be appended to by subsequent SDD phases (SDD-2, SDD-3, SDD-4)
-- Focus on documenting the "why" behind decisions, not the "what"
-- This provides transparency whether the skill is run directly or via sub-agents
+**Important Guidelines:**
+
+**Focus on what's unique:**
+- ❌ Don't list generic tech stack (Spring Boot, TDD, etc.) - everyone knows the repository patterns
+- ✅ Do mention specific features/patterns that influenced THIS spec's design decisions
+
+**Be specific with documentation references:**
+- ❌ Don't say "DEVELOPMENT.md covers validation" (too generic)
+- ✅ Do say "DEVELOPMENT.md 'Data Validation' section (lines 200-250): Lenient search validation pattern"
+
+**Keep scope assessment concise:**
+- ❌ Don't repeat boilerplate about "builds on existing infrastructure, not too large, not too small"
+- ✅ Do focus on the key reason this scope is appropriate (e.g., "Extends single controller without architectural changes")
+
+**"Key Design Decisions" is the most valuable section:**
+- This is where the real thinking transparency lives
+- Each decision should clearly state: what, why, and based on what evidence
+- This helps future developers understand the rationale
+
+**"Questions We Considered" shows diligence:**
+- Demonstrates that you thought about ambiguities
+- Shows how existing context resolved potential questions
+- Proves questions weren't needed, rather than being overlooked
+
+**File will grow over time:**
+- This template is for SDD-1 only
+- Subsequent phases (SDD-2, SDD-3, SDD-4) will append their own sections
+- Keep SDD-1 section concise so the file remains readable as it grows
 
 ## Step 7: Review and Refinement
 
