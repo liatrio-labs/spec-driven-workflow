@@ -246,6 +246,7 @@ After generation is complete:
 
 - Save the report using the specification below
 - Verify the file was created successfully
+- Update the SDD Notes file (see format below)
 
 ### Validation Report File Details
 
@@ -253,6 +254,32 @@ After generation is complete:
 **Location:** `./docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
 **Filename:** `[NN]-validation-[feature-name].md` (e.g., if the Spec is `01-spec-user-authentication.md`, save as `01-validation-user-authentication.md`)
 **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
+
+## SDD Notes Format
+
+After saving the validation report, append the following section to the existing `[NN]-sdd-notes.md` file:
+
+```markdown
+## SDD-4: Validation
+
+**Validation Report:** `[NN]-validation-[feature-name].md`
+**Overall Result:** [PASS/FAIL]
+
+[Free-form notes: Capture process insights about what made validation easy or difficult, and lessons learned for improving future specs, task lists, and proof artifacts. Keep concise - aim for 1-2 paragraphs with the most valuable insights for improving the SDD workflow.]
+
+### Suggested topics (pick the most relevant, don't answer all):
+- What aspects of the spec/tasks/proof artifacts made validation easy?
+- What made validation difficult or time-consuming?
+- Were proof artifacts sufficient? What was missing or could be improved?
+- Any issues with traceability between requirements and implementation?
+- Observations about repository standards compliance?
+- What would you change about the spec to make validation easier?
+- What would you change about the task list structure?
+- What would you change about the proof artifact strategy?
+- Overall lessons learned for improving the SDD workflow?
+
+---
+```
 
 ## What Comes Next
 

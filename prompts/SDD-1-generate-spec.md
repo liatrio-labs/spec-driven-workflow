@@ -66,7 +66,8 @@ If the user did not include an initial input or reference for the spec, ask the 
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
 4. **Clarifying Questions (CONDITIONAL)** - Ask only when context cannot resolve genuine ambiguity
 5. **Spec Generation** - Create the detailed specification document following reference patterns
-6. **Review and Refine** - Validate completeness and clarity with the user
+6. **Document Decision Process** - Create `[NN]-sdd-notes.md` documenting the decision-making process
+7. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Create Spec Directory
 
@@ -396,22 +397,114 @@ If no specific security considerations, state "No specific security consideratio
 2. [Question 2]
 ```
 
-## Step 6: Review and Refinement
+## Step 6: Document Decision Process
 
-After generating the spec, present it to the user and ask:
+After generating the specification, create an SDD notes document that captures your decision-making process. This provides transparency and creates an audit trail for the entire feature lifecycle.
+
+**File Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-sdd-notes.md`
+
+**Format:**
+
+```markdown
+# SDD Process Notes: [Feature Name]
+
+## SDD-1: Spec Generation
+
+### Context Assessment (Step 2)
+
+**Existing Patterns Found:**
+- [List frameworks, architecture patterns, testing approaches identified that are relevant to the current spec]
+- [Example: Spring Boot + JPA, Bootstrap 5 UI, Thymeleaf templates]
+- [Example: TDD methodology with >90% coverage requirement]
+
+**Similar Features:**
+- [List similar features that provide implementation patterns]
+- [Example: Existing owner search provides query method pattern]
+- [Example: Language selector spec provides i18n pattern]
+
+**Documentation Coverage:**
+- [List relevant documentation reviewed]
+- [Example: DEVELOPMENT.md: Search Implementation Patterns]
+- [Example: TESTING.md: TDD methodology and proof artifacts]
+
+### Scope Assessment (Step 3)
+
+**Decision:** [Appropriate ✅ / Too Large ⚠️ / Too Small ⚠️]
+
+**Reasoning:**
+[Explain why this scope is appropriate for the SDD workflow]
+- [Example: Single feature with clear boundaries]
+- [Example: Builds on existing infrastructure]
+- [Example: Estimated 6-8 demoable units (appropriate size)]
+
+### Clarifying Questions (Step 4)
+
+**Decision:** [SKIP ✅ / ASK ❓]
+
+**Reasoning:**
+[Explain why questions were or weren't needed]
+- [If SKIP: Explain what patterns/documentation provided the answers]
+- [If ASK: Explain what genuine ambiguities required user input]
+
+**Key Assumptions Made:**
+[List important decisions inferred from context]
+1. [Assumption 1 with reasoning]
+2. [Assumption 2 with reasoning]
+3. [Assumption 3 with reasoning]
+
+**Questions Considered But Not Asked:**
+[Document questions you considered but resolved through context]
+- [Question] → [Resolution based on existing patterns]
+- [Question] → [Resolution based on documentation]
+
+---
+
+## SDD-2: Task Generation
+[To be added during task breakdown phase]
+
+---
+
+## SDD-3: Implementation
+[To be added during implementation phase]
+
+---
+
+## SDD-4: Validation
+[To be added during validation phase]
+```
+
+**Important Notes:**
+- Create this file immediately after completing the specification
+- This file will be appended to by subsequent SDD phases (SDD-2, SDD-3, SDD-4)
+- Focus on documenting the "why" behind decisions, not the "what"
+- This provides transparency whether the skill is run directly or via sub-agents
+
+## Step 7: Review and Refinement
+
+After generating the spec and sdd-notes, present both to the user and ask:
 
 1. "Does this specification accurately capture your requirements?"
 2. "Are there any missing details or unclear sections?"
 3. "Are the scope boundaries appropriate?"
 4. "Do the demoable units represent meaningful progress?"
+5. "Do the documented decisions and assumptions make sense?"
 
 Iterate based on feedback until the user is satisfied.
 
 ## Output Requirements
 
-**Format:** Markdown (`.md`)
-**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
-**Example:** For feature "user authentication", the spec directory would be `01-spec-user-authentication/` with a spec file as `01-spec-user-authentication.md` inside it
+**Two files must be created:**
+
+1. **Specification Document**
+   - **Format:** Markdown (`.md`)
+   - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
+   - **Example:** `01-spec-user-authentication/01-spec-user-authentication.md`
+
+2. **SDD Notes Document**
+   - **Format:** Markdown (`.md`)
+   - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-sdd-notes.md`
+   - **Example:** `01-spec-user-authentication/01-sdd-notes.md`
+   - **Purpose:** Documents decision-making process for transparency and audit trail
 
 ## Critical Constraints
 
@@ -435,6 +528,7 @@ Iterate based on feedback until the user is satisfied.
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
 - Justify why you're asking each question (what can't be inferred)
+- **Create the sdd-notes.md file documenting your decision-making process (Step 6)**
 
 ## What Comes Next
 

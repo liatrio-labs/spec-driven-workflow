@@ -142,6 +142,7 @@ Wait for explicit user confirmation before generating sub-tasks. Then:
 1. **Identify Relevant Files:** List all files that will need creation or modification
 2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
 3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+4. **Update SDD Notes:** Append the SDD-2 section to the existing `[NN]-sdd-notes.md` file (see format below)
 
 ## Phase 2 Output Format (Parent Tasks Only)
 
@@ -250,6 +251,28 @@ After user confirmation in Phase 3, update the file with this complete structure
 - [ ] 3.2 [Sub-task description 3.2]
 ```
 
+## SDD Notes Format (Phase 3 Step 4)
+
+After completing sub-task generation, append the following section to the existing `[NN]-sdd-notes.md` file:
+
+```markdown
+## SDD-2: Task Generation
+
+[Free-form notes: Capture your reasoning for task breakdown, architectural decisions, and any challenges anticipated. Focus on WHY you structured tasks this way. Keep concise - aim for 1-2 paragraphs covering the most important 2-3 decisions/insights.]
+
+### Suggested topics (pick the most relevant, don't answer all):
+- Why did you choose this specific task breakdown?
+- How did you decide on the demoable units?
+- What architectural or technical decisions influenced the task structure?
+- What alternatives did you consider and why weren't they chosen?
+- What was included vs deferred and why?
+- What dependencies or sequencing decisions were made?
+- What technical risks or challenges do you anticipate?
+- Any open questions that will be resolved during implementation?
+
+---
+```
+
 ## Interaction Model
 
 **Critical:** This is a two-phase process that requires explicit user confirmation:
@@ -299,6 +322,7 @@ Once this task list is complete and approved, instruct the user to run `/SDD-3-m
 4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
 5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
 6. Identify all relevant files for creation/modification
-7. Review with user and refine until satisfied
-8. Guide user to the next workflow step (`/SDD-3-manage-tasks`)
-9. Stop working once user confirms task list is complete
+7. **Append SDD-2 section to the `[NN]-sdd-notes.md` file** documenting your analysis and decisions
+8. Review with user and refine until satisfied
+9. Guide user to the next workflow step (`/SDD-3-manage-tasks`)
+10. Stop working once user confirms task list is complete

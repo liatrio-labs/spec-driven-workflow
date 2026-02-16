@@ -291,9 +291,32 @@ After completing all tasks in the task list:
 2. **Proof Artifact Validation**: Verify all proof artifacts demonstrate functionality from original spec
 3. **Test Suite**: Run final comprehensive test suite
 4. **Documentation**: Update any relevant documentation
-5. **Handoff**: Instruct user to proceed to `/SDD-4-validate-spec-implementation`
+5. **Update SDD Notes**: Append the SDD-3 implementation section to `[NN]-sdd-notes.md` (see format below)
+6. **Handoff**: Instruct user to proceed to `/SDD-4-validate-spec-implementation`
 
 The validation phase will use your proof artifacts as evidence to verify that the spec has been fully and correctly implemented.
+
+## SDD Notes Format (Step 5)
+
+After completing all tasks and before handoff to validation, append the following section to the existing `[NN]-sdd-notes.md` file:
+
+```markdown
+## SDD-3: Implementation
+
+[Free-form notes: Capture important decisions made during implementation, unexpected challenges, deviations from the plan, and key learnings. Keep concise - aim for 1-2 paragraphs covering the most significant 2-3 items that would be valuable for future reference.]
+
+### Suggested topics (pick the most relevant, don't answer all):
+- What important technical decisions were made during implementation?
+- What unexpected challenges arose and how were they resolved?
+- Where did you deviate from the original plan and why?
+- What library or dependency decisions were made?
+- What worked well that should be repeated in future implementations?
+- What would you do differently next time?
+- What knowledge gaps impacted the implementation?
+- Any important context for the validator to understand?
+
+---
+```
 
 ## Instructions
 
