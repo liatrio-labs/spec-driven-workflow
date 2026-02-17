@@ -176,25 +176,32 @@ Use the following common areas to guide your questions:
 
 ### Questions File Format
 
-ALWAYS create a questions file with two sections:
+Follow this format exactly when you create the questions file.
 
 ```markdown
-# [NN] Questions - [Feature Name]
+# [NN] Questions Round 1 - [Feature Name]
 
-## Questions for User
+Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
 
-[If none: "None - all questions resolved from existing context"]
+## 1. [Question Category/Topic]
 
-[If questions exist, use checkbox format:]
-### 1. [Question Category/Topic]
-- [ ] (A) [Option description]
-- [ ] (B) [Option description]
-- [ ] (C) Other
+[What specific aspect of the feature needs clarification?]
 
-## Questions Answered by Context
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
 
-1. **[Question]?** - Answer: [brief answer] (Source: [file/doc/issue])
-2. **[Question]?** - Answer: [brief answer] (Source: [file/doc/issue])
+## 2. [Another Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
 ```
 
 ### Questions File Process
