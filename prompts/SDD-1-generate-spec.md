@@ -82,21 +82,27 @@ Create the spec directory structure before proceeding with any other steps. This
 
 ## Step 2: Context Assessment
 
-If working in a pre-existing project, begin by briefly reviewing the codebase and existing docs to understand:
+If working in a pre-existing project, conduct research to understand the codebase. This is the PRIMARY research phase - gather the context needed to generate a comprehensive, accurate spec that follows repository patterns.
 
-- Current architecture patterns and conventions
-- Relevant existing components or features
-- Integration constraints or dependencies
-- Files that might need modification or extension
-- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
-  - Project documentation (README.md, CONTRIBUTING.md, docs/)
-  - AI specific documentation (AGENTS.md, CLAUDE.md)
-  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
-  - Existing code structure and naming conventions
-  - Testing patterns and quality assurance practices
+**What to Understand:**
+
+- **Project Spec Standards**: Understand the structure, detail level, and conventions used in specs for this project from:
+  - Completed specs in `docs/specs/`
+- **Architecture Patterns and Conventions**: Understand the system structure and design patterns from:
+  - Project documentation (README.md, CONTRIBUTING.md, ARCHITECTURE.md, docs/)
+  - AI-specific documentation (AGENTS.md, CLAUDE.md)
+  - Existing code structure and module organization
+- **Testing Standards and Practices**: Understand testing requirements and patterns from:
+  - TESTING.md or testing documentation
+  - Existing test files and test structure
+  - Quality assurance practices
+- **Repository Standards**: Understand coding standards and development practices from:
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, pom.xml, etc.)
+  - Code naming conventions and file organization
   - Commit message conventions and development workflows
+- **Related Implementations**: Search for existing code that implements similar operations, data models, or workflows
 
-**Use this context to inform all aspects of the spec - scope, requirements, and technical approach. Follow the repository's established patterns and technical decisions rather than asking questions about them.** Focus on understanding what exists to make the spec realistic, achievable, and consistent with existing implementation patterns.
+**Use this context to inform all aspects of the spec - scope, requirements, and technical approach. Follow the repository's established patterns and technical decisions rather than asking questions about them.**
 
 ## Step 3: Initial Scope Assessment
 
@@ -145,39 +151,40 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - **ALWAYS** inform the user of the result of the scope assessment.
 - If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-## Step 4: Clarifying Questions
+## Step 4: Requirements Gathering
 
-To create a comprehensive specification, you need to gather detailed requirements beyond the initial user input. This involves identifying what information is needed (design decisions, technical constraints, success criteria, etc.), then using a two-phase approach: first attempting to answer these requirements from existing codebase context, then asking the user only what cannot be inferred.
+To create a comprehensive specification, determine which requirements are already clear from Step 2 research, and identify what still needs user input. Use a two-phase approach: first determine what can be answered from the context you've already gathered, then ask the user only what cannot be determined from that context.
 
-### Phase A: Context-Based Resolution (Internal)
+### Phase A: Determine Requirements from Context (REQUIRED)
 
-Before creating a questions file, generate and attempt to answer common clarifying questions using context gathered in Step 2:
+Using ONLY the context gathered in Step 2 (do not do new research), determine which requirements are already clear:
 
-1. **Generate potential questions** covering common areas:
-   - Core Understanding (problem, functionality)
-   - Success & Boundaries (validation, scope, edge cases)
-   - Design & Technical (UI guidelines, constraints)
-   - Proof Artifacts (what will demonstrate the feature works)
+1. **Review what you learned in Step 2** about:
+   - Testing approach (from existing tests and TESTING.md)
+   - UI/UX patterns (from similar features)
+   - Technical stack and frameworks (from configuration files)
+   - File structure and naming conventions (from codebase)
+   - Validation patterns (from existing implementations)
+   - i18n support (from message files and docs)
+   - Architectural patterns (from ARCHITECTURE.md and existing code)
 
-2. **Attempt to answer from context** by checking:
-   - Existing completed specs (patterns, structure, detail level)
-   - Repository documentation (TESTING.md, CLAUDE.md, ARCHITECTURE.md, etc.)
-   - Similar existing features in the codebase
-   - Configuration files and established conventions
+2. **Identify what's still unknown**:
+   - Requirements that cannot be determined from Step 2 context
+   - Information that requires user decision or clarification
 
-3. **Classify each question**:
-   - ✅ **Answered from Context**: High confidence answer from codebase analysis
-   - ❓ **Needs User Input**: Requires genuine user decision or clarification
+3. **Default to "known" unless truly unknown**:
+   - If Step 2 provided ANY relevant information → consider it answered
+   - Only mark as "needs user input" if Step 2 context provides ZERO guidance
 
-### Phase B: Create Questions File
+### Phase B: Create Questions File (If Needed)
 
-After completing Phase A (Context-Based Resolution), create a questions file only if there are questions that genuinely require user input.
+After completing Phase A, create a questions file only if there is information that cannot be determined from Step 2 context.
 
-**Only ask questions about:**
-- Business logic ambiguity ("What defines a duplicate?")
-- User preferences between valid options ("Cascade delete or block delete?")
+**Only create questions for information that cannot be determined from context:**
+- Business logic ambiguity (e.g., "What defines a duplicate?")
+- Choices between valid technical approaches (e.g., "Cascade delete or block delete?")
 - Novel functionality without precedent in the codebase
-- Edge case handling that isn't established by existing patterns
+- Edge cases without established patterns
 
 **Do NOT ask questions about:**
 - Technical decisions already made by the repository (frameworks, tools, patterns)
@@ -189,9 +196,9 @@ After completing Phase A (Context-Based Resolution), create a questions file onl
 **Progressive Disclosure:** Focus on essential questions only. The number of questions will vary based on available context:
 - **Mature codebases** (3+ completed specs, clear patterns): Aim for 0-5 questions, or skip questions entirely if all requirements are clear
 - **New codebases** (limited context): May require 8-12 questions to establish requirements
-- **Always prioritize**: Questions about business logic, user preferences, and novel functionality over technical implementation details
+- **Always prioritize**: Questions about business logic, product decisions, and novel functionality over technical implementation details
 
-**If no questions are needed:** Skip directly to Step 5 (Spec Generation). Use the context gathered in Phase A to inform the spec.
+**If no questions are needed:** Skip directly to Step 5 (Spec Generation). Use the context gathered in Step 2 and Phase A to inform the spec.
 
 ### Questions File Format
 
@@ -372,7 +379,8 @@ Iterate based on feedback until the user is satisfied.
 
 **ALWAYS:**
 
-- Attempt to answer questions from context before asking the user (Phase A)
+- Conduct thorough research in Step 2 to gather context before Step 4
+- Use Step 2 context to determine requirements in Phase A (do not do new research in Step 4)
 - Only create questions file if genuine user input is needed; skip to spec generation if all requirements are clear
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
