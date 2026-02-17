@@ -147,32 +147,48 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 
 ## Step 4: Clarifying Questions
 
-Ask clarifying questions to gather sufficient detail. Focus on understanding the "what" and "why" rather than the "how."
+To create a comprehensive specification, you need to gather detailed requirements beyond the initial user input. This involves identifying what information is needed (design decisions, technical constraints, success criteria, etc.), then using a two-phase approach: first attempting to answer these requirements from existing codebase context, then asking the user only what cannot be inferred.
 
-Use the following common areas to guide your questions:
+### Phase A: Context-Based Resolution (Internal)
 
-**Core Understanding:**
+Before creating a questions file, generate and attempt to answer common clarifying questions using context gathered in Step 2:
 
-- What problem does this solve and for whom?
-- What specific functionality does this feature provide?
+1. **Generate potential questions** covering common areas:
+   - Core Understanding (problem, functionality)
+   - Success & Boundaries (validation, scope, edge cases)
+   - Design & Technical (UI guidelines, constraints)
+   - Proof Artifacts (what will demonstrate the feature works)
 
-**Success & Boundaries:**
+2. **Attempt to answer from context** by checking:
+   - Existing completed specs (patterns, structure, detail level)
+   - Repository documentation (TESTING.md, CLAUDE.md, ARCHITECTURE.md, etc.)
+   - Similar existing features in the codebase
+   - Configuration files and established conventions
 
-- How will we know it's working correctly?
-- What should this NOT do?
-- Are there edge cases we should explicitly include or exclude?
+3. **Classify each question**:
+   - ✅ **Answered from Context**: High confidence answer from codebase analysis
+   - ❓ **Needs User Input**: Requires genuine user decision or clarification
 
-**Design & Technical:**
+### Phase B: Two-Part Questions File
 
-- Any existing design mockups or UI guidelines to follow?
-- Are there any technical constraints or integration requirements?
+Create a questions file with two distinct sections:
 
-**Proof Artifacts:**
+**Part 1: Questions for User** - Only questions requiring genuine user decisions:
+- Business logic ambiguity ("What defines a duplicate?")
+- User preferences between valid options ("Cascade delete or block delete?")
+- Novel functionality without precedent in the codebase
+- Edge case handling that isn't established by existing patterns
 
-- What proof artifacts will demonstrate this feature works (URLs, CLI output, screenshots)?
-- What will each artifact demonstrate about the feature?
+**Part 2: Questions Answered from Context** - For transparency and validation:
+- Show what was inferred from codebase analysis
+- Cite specific sources (files, patterns, existing features)
+- Allow user to flag incorrect assumptions
+- Provide confidence level for each inference
 
-**Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
+**Progressive Disclosure:** Focus on essential questions only. The number of questions in Part 1 will vary based on available context:
+- **Mature codebases** (3+ completed specs, clear patterns): Aim for 0-5 questions
+- **New codebases** (limited context): May require 8-12 questions to establish requirements
+- **Always prioritize**: Questions about business logic, user preferences, and novel functionality over technical implementation details
 
 ### Questions File Format
 
@@ -181,9 +197,21 @@ Follow this format exactly when you create the questions file.
 ```markdown
 # [NN] Questions Round 1 - [Feature Name]
 
-Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
+## Part 1: Questions for User
 
-## 1. [Question Category/Topic]
+Please answer each question below (select one or more options, or use other to describe your own answer). Feel free to add additional context under any question.
+
+### 1. [Question Category/Topic]
+
+[What specific aspect of the feature needs clarification?]
+
+- [ ] (A) [Option description explaining what this choice means]
+- [ ] (B) [Option description explaining what this choice means]
+- [ ] (C) [Option description explaining what this choice means]
+- [ ] (D) [Option description explaining what this choice means]
+- [ ] (E) Other (describe)
+
+### 2. [Another Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
 
@@ -193,15 +221,32 @@ Please answer each question below (select one or more options, or add your own n
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
 
-## 2. [Another Question Category/Topic]
+---
 
-[What specific aspect of the feature needs clarification?]
+## Part 2: Questions Answered from Context
 
-- [ ] (A) [Option description explaining what this choice means]
-- [ ] (B) [Option description explaining what this choice means]
-- [ ] (C) [Option description explaining what this choice means]
-- [ ] (D) [Option description explaining what this choice means]
-- [ ] (E) Other (describe)
+The following questions were answered by analyzing the existing codebase. **If any answer is incorrect, add a comment below it explaining what's wrong or what should be different.**
+
+### 1. [Question Category/Topic]
+
+**Question:** [What would have been asked]
+
+**Answer from Context:** [What was inferred from the codebase]
+
+**Source:** [Where this was found - e.g., "existing specs in docs/specs/", "TESTING.md line 45", "similar feature: user-search component"]
+
+**Confidence:** High/Medium
+
+### 2. [Another Question Category/Topic]
+
+**Question:** [What would have been asked]
+
+**Answer from Context:** [What was inferred from the codebase]
+
+**Source:** [Where this was found]
+
+**Confidence:** High/Medium
+
 ```
 
 ### Questions File Process
@@ -210,7 +255,8 @@ Please answer each question below (select one or more options, or add your own n
 2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
 3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
 4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
-5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+5. Look for comments under "Questions Answered from Context" and address them.
+6. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
 
 **Iterative Process:**
 
@@ -345,20 +391,23 @@ Iterate based on feedback until the user is satisfied.
 **NEVER:**
 
 - Start implementing the spec; only create the specification document
-- Assume technical details without asking the user
+- Assume technical details without documenting your inference in Part 2 of questions file
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
-- Skip the clarifying questions phase, even if the prompt seems clear
+- Skip context-based question resolution (Phase A) before creating questions file
+- Ask questions about things clearly answered by existing codebase patterns
 - Ignore existing repository patterns and conventions
 
 **ALWAYS:**
 
-- Ask clarifying questions before generating the spec
+- Attempt to answer questions from context before asking the user (Phase A)
+- Use two-part questions file format showing both user questions and context-based answers
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
+- Cite specific sources when answering questions from context
 
 ## What Comes Next
 
