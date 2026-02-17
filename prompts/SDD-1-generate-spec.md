@@ -96,7 +96,7 @@ If working in a pre-existing project, begin by briefly reviewing the codebase an
   - Testing patterns and quality assurance practices
   - Commit message conventions and development workflows
 
-**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+**Use this context to inform all aspects of the spec - scope, requirements, and technical approach. Follow the repository's established patterns and technical decisions rather than asking questions about them.** Focus on understanding what exists to make the spec realistic, achievable, and consistent with existing implementation patterns.
 
 ## Step 3: Initial Scope Assessment
 
@@ -169,26 +169,29 @@ Before creating a questions file, generate and attempt to answer common clarifyi
    - ✅ **Answered from Context**: High confidence answer from codebase analysis
    - ❓ **Needs User Input**: Requires genuine user decision or clarification
 
-### Phase B: Two-Part Questions File
+### Phase B: Create Questions File
 
-Create a questions file with two distinct sections:
+After completing Phase A (Context-Based Resolution), create a questions file only if there are questions that genuinely require user input.
 
-**Part 1: Questions for User** - Only questions requiring genuine user decisions:
+**Only ask questions about:**
 - Business logic ambiguity ("What defines a duplicate?")
 - User preferences between valid options ("Cascade delete or block delete?")
 - Novel functionality without precedent in the codebase
 - Edge case handling that isn't established by existing patterns
 
-**Part 2: Questions Answered from Context** - For transparency and validation:
-- Show what was inferred from codebase analysis
-- Cite specific sources (files, patterns, existing features)
-- Allow user to flag incorrect assumptions
-- Provide confidence level for each inference
+**Do NOT ask questions about:**
+- Technical decisions already made by the repository (frameworks, tools, patterns)
+- Testing approaches documented in TESTING.md or visible in existing tests
+- UI/UX patterns that match existing implementations
+- File structure and naming conventions that follow established patterns
+- i18n support that already exists in the codebase
 
-**Progressive Disclosure:** Focus on essential questions only. The number of questions in Part 1 will vary based on available context:
-- **Mature codebases** (3+ completed specs, clear patterns): Aim for 0-5 questions
+**Progressive Disclosure:** Focus on essential questions only. The number of questions will vary based on available context:
+- **Mature codebases** (3+ completed specs, clear patterns): Aim for 0-5 questions, or skip questions entirely if all requirements are clear
 - **New codebases** (limited context): May require 8-12 questions to establish requirements
 - **Always prioritize**: Questions about business logic, user preferences, and novel functionality over technical implementation details
+
+**If no questions are needed:** Skip directly to Step 5 (Spec Generation). Use the context gathered in Phase A to inform the spec.
 
 ### Questions File Format
 
@@ -197,11 +200,9 @@ Follow this format exactly when you create the questions file.
 ```markdown
 # [NN] Questions Round 1 - [Feature Name]
 
-## Part 1: Questions for User
+Please answer each question below (select one or more options, or add your own notes). Feel free to add additional context under any question.
 
-Please answer each question below (select one or more options, or use other to describe your own answer). Feel free to add additional context under any question.
-
-### 1. [Question Category/Topic]
+## 1. [Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
 
@@ -211,7 +212,7 @@ Please answer each question below (select one or more options, or use other to d
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
 
-### 2. [Another Question Category/Topic]
+## 2. [Another Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
 
@@ -220,33 +221,6 @@ Please answer each question below (select one or more options, or use other to d
 - [ ] (C) [Option description explaining what this choice means]
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
-
----
-
-## Part 2: Questions Answered from Context
-
-The following questions were answered by analyzing the existing codebase. **If any answer is incorrect, add a comment below it explaining what's wrong or what should be different.**
-
-### 1. [Question Category/Topic]
-
-**Question:** [What would have been asked]
-
-**Answer from Context:** [What was inferred from the codebase]
-
-**Source:** [Where this was found - e.g., "existing specs in docs/specs/", "TESTING.md line 45", "similar feature: user-search component"]
-
-**Confidence:** High/Medium
-
-### 2. [Another Question Category/Topic]
-
-**Question:** [What would have been asked]
-
-**Answer from Context:** [What was inferred from the codebase]
-
-**Source:** [Where this was found]
-
-**Confidence:** High/Medium
-
 ```
 
 ### Questions File Process
@@ -255,8 +229,6 @@ The following questions were answered by analyzing the existing codebase. **If a
 2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
 3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
 4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
-5. Look for comments under "Questions Answered from Context" and address them.
-6. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
 
 **Iterative Process:**
 
@@ -391,23 +363,22 @@ Iterate based on feedback until the user is satisfied.
 **NEVER:**
 
 - Start implementing the spec; only create the specification document
-- Assume technical details without documenting your inference in Part 2 of questions file
+- Ask questions about technical decisions already made by the repository (frameworks, tools, patterns)
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
-- Skip context-based question resolution (Phase A) before creating questions file
+- Skip context-based question resolution (Phase A) before asking questions
 - Ask questions about things clearly answered by existing codebase patterns
 - Ignore existing repository patterns and conventions
 
 **ALWAYS:**
 
 - Attempt to answer questions from context before asking the user (Phase A)
-- Use two-part questions file format showing both user questions and context-based answers
+- Only create questions file if genuine user input is needed; skip to spec generation if all requirements are clear
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
-- Cite specific sources when answering questions from context
 
 ## What Comes Next
 
