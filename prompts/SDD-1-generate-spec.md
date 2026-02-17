@@ -145,52 +145,74 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - **ALWAYS** inform the user of the result of the scope assessment.
 - If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-## Step 4: Clarifying Questions (CONDITIONAL)
+## Step 4: Clarifying Questions
 
-**⚠️ IMPORTANT: This step may be skipped based on Step 2 analysis.**
+Ask clarifying questions to gather sufficient detail. Focus on understanding the "what" and "why" rather than the "how."
 
-**Question Philosophy: Prefer zero questions when context is sufficient**
+Use the following common areas to guide your questions:
 
-Ask clarifying questions ONLY for decisions that cannot be inferred from existing patterns or documentation. Each question should address genuine ambiguity that blocks spec creation.
+**Core Understanding:**
 
-### Questions File - ALWAYS Create
+- What problem does this solve and for whom?
+- What specific functionality does this feature provide?
 
-**File:** `[NN]-questions-1-[feature-name].md`
+**Success & Boundaries:**
 
-**Two sections:**
-1. **Questions for User** - Questions needing user input (if any), OR "None - all questions resolved from existing context"
-2. **Questions Answered by Context** - Questions you resolved from codebase/docs (brief answer + source)
+- How will we know it's working correctly?
+- What should this NOT do?
+- Are there edge cases we should explicitly include or exclude?
 
-**Format:**
+**Design & Technical:**
+
+- Any existing design mockups or UI guidelines to follow?
+- Are there any technical constraints or integration requirements?
+
+**Proof Artifacts:**
+
+- What proof artifacts will demonstrate this feature works (URLs, CLI output, screenshots)?
+- What will each artifact demonstrate about the feature?
+
+**Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
+
+### Questions File Format
+
+ALWAYS create a questions file with two sections:
+
 ```markdown
 # [NN] Questions - [Feature Name]
 
 ## Questions for User
 
-None - all questions resolved from existing context
+[If none: "None - all questions resolved from existing context"]
+
+[If questions exist, use checkbox format:]
+### 1. [Question Category/Topic]
+- [ ] (A) [Option description]
+- [ ] (B) [Option description]
+- [ ] (C) Other
 
 ## Questions Answered by Context
 
-1. **What defines duplicate?** - Answer: firstName+lastName+telephone (Source: GitHub issue #4)
-2. **Case sensitive?** - Answer: No, case-insensitive (Source: OwnerRepository.java)
-3. **Apply to updates?** - Answer: Creation only (Source: Issue scope)
-```
-
-If user questions ARE needed, use checkbox format:
-```markdown
-## Questions for User
-
-### 1. [Question Topic]
-- [ ] (A) [Option]
-- [ ] (B) [Option]
-- [ ] (C) Other
+1. **[Question]?** - Answer: [brief answer] (Source: [file/doc/issue])
+2. **[Question]?** - Answer: [brief answer] (Source: [file/doc/issue])
 ```
 
 ### Questions File Process
 
-1. **Create Questions File** with both sections
-2. **If "Questions for User" has items**: Point user to file, STOP AND WAIT for answers
-3. **If "Questions for User" is "None"**: Proceed directly to Step 5
+1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
+2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
+3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
+4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
+5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+
+**Iterative Process:**
+
+- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
+- Build on previous answers - use context from earlier responses to inform subsequent questions.
+- **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
+- Only proceed to Step 5 after:
+  - You have received and reviewed all user answers to clarifying questions
+  - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
 
 ## Step 5: Spec Generation
 
@@ -307,34 +329,26 @@ Iterate based on feedback until the user is satisfied.
 
 ## Output Requirements
 
-**Two files must be created:**
-
-1. **Specification Document**
-   - **Format:** Markdown (`.md`)
-   - **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
-   - **Example:** `01-spec-user-authentication/01-spec-user-authentication.md`
-
-2. **Questions File** (always created)
-   - **File:** `[NN]-questions-1-[feature-name].md`
-   - **Format:** Two sections: "Questions for User" and "Questions Answered by Context"
-   - **Purpose:** Document question-resolution process
+**Format:** Markdown (`.md`)
+**Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
+**Example:** For feature "user authentication", the spec directory would be `01-spec-user-authentication/` with a spec file as `01-spec-user-authentication.md` inside it
 
 ## Critical Constraints
 
 **NEVER:**
 
 - Start implementing the spec; only create the specification document
-- Ask questions about things you can infer from the codebase or existing specs
+- Assume technical details without asking the user
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
+- Skip the clarifying questions phase, even if the prompt seems clear
 - Ignore existing repository patterns and conventions
 
 **ALWAYS:**
 
-- Create a questions file with two sections: "Questions for User" and "Questions Answered by Context"
+- Ask clarifying questions before generating the spec
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
-- Document key decisions in "Questions Answered by Context" section (brief answers with sources)
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
