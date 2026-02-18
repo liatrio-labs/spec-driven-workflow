@@ -151,30 +151,31 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - **ALWAYS** inform the user of the result of the scope assessment.
 - If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-## Step 4: Requirements Gathering
+## Step 4: Identify Information Gaps
 
-To create a comprehensive specification, determine which requirements are already clear from Step 2 research, and identify what still needs user input. Use a two-phase approach: first determine what can be answered from the context you've already gathered, then ask the user only what cannot be determined from that context.
+Determine what additional information is needed to generate the spec beyond what was learned in Step 2. Use a two-phase approach: first identify what information is needed and check if Step 2 research already provided it, then ask the user only about genuine gaps.
 
-### Phase A: Determine Requirements from Context (REQUIRED)
+### Phase A: Identify Information Gaps (REQUIRED)
 
-Using ONLY the context gathered in Step 2 (do not do new research), determine which requirements are already clear:
+Using ONLY the context gathered in Step 2 (do not do new research), determine what additional information is needed to generate the spec.
 
-1. **Review what you learned in Step 2** about:
-   - Testing approach (from existing tests and TESTING.md)
-   - UI/UX patterns (from similar features)
-   - Technical stack and frameworks (from configuration files)
-   - File structure and naming conventions (from codebase)
-   - Validation patterns (from existing implementations)
-   - i18n support (from message files and docs)
-   - Architectural patterns (from ARCHITECTURE.md and existing code)
+1. **Identify what information is needed** to write this spec:
+   - How should this be tested?
+   - What UI/UX patterns should be followed?
+   - What technical approach should be used?
+   - How should data be validated?
+   - What error handling is needed?
+   - What edge cases need to be handled?
+   - What proof artifacts will demonstrate it works?
 
-2. **Identify what's still unknown**:
-   - Requirements that cannot be determined from Step 2 context
-   - Information that requires user decision or clarification
-
-3. **Default to "known" unless truly unknown**:
+2. **Check if Step 2 research already answered these**:
    - If Step 2 provided ANY relevant information → consider it answered
    - Only mark as "needs user input" if Step 2 context provides ZERO guidance
+
+3. **Identify genuine gaps**:
+   - Business logic that cannot be inferred from existing patterns
+   - Product decisions that require user choice
+   - Novel functionality without precedent in the codebase
 
 ### Phase B: Create Questions File (If Needed)
 
