@@ -80,12 +80,26 @@ If no spec is provided, follow this exact sequence:
 - **GATE A (blocker):** Any **CRITICAL** or **HIGH** issue → **FAIL**.
 - **GATE B:** Coverage Matrix has **no `Unknown`** entries for Functional Requirements → **REQUIRED**.
 - **GATE C:** All Proof Artifacts are accessible and functional → **REQUIRED**.
-- **GATE D (tiered file integrity):** classify changed files and evaluate by risk:
+- **GATE D (tiered file integrity):** classify changed files and evaluate by risk (see **Core vs Supporting File Linkage Clarification** below):
   - **D1 (blocker):** Any **unmapped out-of-scope source code change** (`src/`, `app/`, `lib/`, runtime config, infra code) with no requirement/task linkage → **FAIL**.
   - **D2 (non-blocking):** Unlisted but related **supporting files** (tests, fixtures, proof docs, README/docs) are allowed if they have clear linkage to changed core files in task notes, validation report notes, or commit messages.
   - **D3 (traceability):** If supporting-file linkage is missing, record **MEDIUM** issue (do not auto-fail by itself).
 - **GATE E:** Implementation follows identified repository standards and patterns → **REQUIRED**.
 - **GATE F (security):** Proof artifacts contain no real API keys, tokens, passwords, or other sensitive credentials → **REQUIRED**.
+
+## Core vs Supporting File Linkage Clarification
+
+To keep validation portable across repositories:
+
+- Treat source/runtime-impacting changes as **core** and require explicit
+  requirement/task linkage.
+- Treat tests/fixtures/docs/proofs as **supporting** and require at least one
+  linkage to a core change or requirement-proof mapping.
+- Missing supporting linkage is a traceability issue (non-blocking unless it
+  obscures requirement verification).
+- Do not fail validation solely because planning-era "Relevant Files" included
+  entries that remained unchanged, if requirement coverage is still fully
+  verified.
 
 ## Evaluation Rubric (score each 0–3 to guide severity)
 

@@ -106,6 +106,20 @@ Proof artifacts provide evidence of task completion and are essential for the up
 
 **Security Note**: When planning proof artifacts, remember that they will be committed to the repository. Artifacts should use placeholder values for API keys, tokens, and other sensitive data rather than real credentials.
 
+## Evidence Quality Bar (Required)
+
+For each parent task, proof artifacts must satisfy all four checks:
+
+1. **Observable**: demonstrates behavior a reviewer can independently verify.
+2. **Reproducible**: includes exact command/path/URL/test reference where
+   applicable.
+3. **Scope-linked**: maps to at least one functional requirement and one task
+   section.
+4. **Sanitized**: contains no secrets, credentials, or private identifiers.
+
+Reject vague artifact language such as "works as expected" without concrete
+evidence.
+
 ## Chain-of-Thought Analysis Process
 
 Before generating any tasks, you must follow this reasoning process:

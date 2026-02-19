@@ -325,6 +325,23 @@ If no specific security considerations, state "No specific security consideratio
 
 ## Step 6: Review and Refinement
 
+### Cross-Domain Applicability Guard (Required)
+
+Before presenting the spec to the user, run this check to keep the workflow
+broadly applicable across software tasks (API, UI, CLI, data, infra,
+platform):
+
+- [ ] The spec language is domain-neutral (no project-specific assumptions
+      unless user-provided).
+- [ ] Demoable Units can be validated in at least one of these contexts: API,
+      UI, CLI, data pipeline, or infrastructure automation.
+- [ ] Proof Artifacts are defined as observable outcomes, not tool-specific
+      rituals.
+- [ ] Requirements are written so another repository could reuse the structure
+      with only context substitutions.
+
+If any item fails, revise wording to be framework-agnostic and context-aware.
+
 After generating the spec, present it to the user and ask:
 
 1. "Does this specification accurately capture your requirements?"

@@ -133,6 +133,12 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
    - **Execute commands immediately**: Capture command output directly in the markdown file
    - **Verify creation**: Confirm the markdown file exists and contains all required evidence
 [ ] **Verify Proof Artifacts**: Confirm all proof artifacts demonstrate required functionality
+[ ] **Artifact Sufficiency Gate**: Verify proof quality before commit
+   - Proof file exists at required path
+   - Evidence covers all listed artifacts for the parent task
+   - Evidence demonstrates functionality and quality checks (tests/lint/typecheck or repository-equivalent gates)
+   - Environment-specific values are sanitized
+   - Evidence is concise and reviewer-usable
 [ ] **Stage Changes**: `git add .`
 [ ] **Create Commit**: Use repository's commit format and conventions
 
