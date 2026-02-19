@@ -237,6 +237,7 @@ Please answer each question below (select one or more options, or add your own n
 2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
 3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
 4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
+5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
 
 **Iterative Process:**
 
