@@ -23,8 +23,8 @@ repos:
     rev: v9.7.0
     hooks:
       - id: cspell
-        name: spell check public docs with cspell
-        files: ^(README\.md|CONTRIBUTING\.md|CODE_OF_CONDUCT\.md|docs/.*\.(md|html))$
+        name: spell check docs and prompts with cspell
+        files: ^(README\.md|CONTRIBUTING\.md|CODE_OF_CONDUCT\.md|\.github/pull_request_template\.md|prompts/.*\.md|docs/.*\.(md|html))$
         exclude: ^docs/(references|assets)/
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook

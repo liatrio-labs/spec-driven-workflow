@@ -1,6 +1,12 @@
 version: "0.2"
 language: en
 
+words:
+  - Liatrio
+  - SDD
+  - demoable
+  - pyproject
+
 ignorePaths:
   - .git/**
   - .venv/**
@@ -13,10 +19,55 @@ ignoreRegExpList:
   - /```[\s\S]*?```/g
   - /<pre><code>[\s\S]*?<\/code><\/pre>/g
 
-dictionaryDefinitions:
-  - name: project-words
-    path: ./config/cspell/project-words.txt
-    addWords: true
+overrides:
+  - filename: README.md
+    words:
+      - uvx
+      - Windsurf
+      - winget
+      - snarktank
+      - modelcontextprotocol
 
-dictionaries:
-  - project-words
+  - filename: docs/comparison.html
+    words:
+      - Kiro
+      - SpecKit
+      - speckit
+
+  - filename: docs/index.html
+    words:
+      - Kiro
+      - SpecKit
+
+  - filename: docs/common-questions.html
+    words:
+      - Lada
+      - Kesseler
+
+  - filename: docs/emoji-context-verification-research.md
+    words:
+      - Lada
+      - Kesseler
+      - Philipp
+      - Schmid
+      - Automators
+
+  - filename: docs/developer-experience.html
+    words:
+      - pytest
+      - typer
+      - fastmcp
+      - reimagines
+
+  - filename: prompts/SDD-3-manage-tasks.md
+    words:
+      - oneline
+      - pytest
+
+  - filename: prompts/SDD-2-generate-task-list-from-spec.md
+    words:
+      - pytest
+
+  - filename: .github/pull_request_template.md
+    words:
+      - pytest
