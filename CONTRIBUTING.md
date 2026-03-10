@@ -82,11 +82,15 @@ pre-commit run --all-files
 
 # Run markdown linting only
 pre-commit run markdownlint-fix --all-files
+
+# Run documentation spell checking only
+pre-commit run cspell --all-files
 ```
 
 ## Style and Quality
 
 - Markdown is linted using markdownlint (via pre-commit). Keep lines reasonably short and headings well structured.
+- Public-facing docs are spell-checked with cspell. Add confirmed project-specific terms to `config/cspell/project-words.txt`.
 - YAML files are validated for syntax errors.
 - Commit messages must follow Conventional Commits specification (enforced via commitlint).
 - Keep documentation consistent with `README.md`.
@@ -104,6 +108,7 @@ This will:
 
 - Check YAML syntax
 - Fix Markdown formatting issues
+- Spell-check public-facing documentation
 - Validate commit message format (on commit)
 
 ## Branching and Commit Conventions

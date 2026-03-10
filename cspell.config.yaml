@@ -1,0 +1,22 @@
+version: "0.2"
+language: en
+
+ignorePaths:
+  - .git/**
+  - .venv/**
+  - docs/assets/**
+  - docs/references/**
+  - site/**
+  - temp/**
+
+ignoreRegExpList:
+  - /```[\s\S]*?```/g
+  - /<pre><code>[\s\S]*?<\/code><\/pre>/g
+
+dictionaryDefinitions:
+  - name: project-words
+    path: ./config/cspell/project-words.txt
+    addWords: true
+
+dictionaries:
+  - project-words

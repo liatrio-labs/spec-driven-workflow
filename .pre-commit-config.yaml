@@ -19,6 +19,14 @@ repos:
       - id: markdownlint-fix
         exclude: "CHANGELOG.md|LICENSE"
 
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v9.7.0
+    hooks:
+      - id: cspell
+        name: spell check public docs with cspell
+        files: ^(README\.md|CONTRIBUTING\.md|CODE_OF_CONDUCT\.md|docs/.*\.(md|html))$
+        exclude: ^docs/(references|assets)/
+
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.23.0
     hooks:
