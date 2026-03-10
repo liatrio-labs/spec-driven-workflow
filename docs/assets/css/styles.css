@@ -706,6 +706,16 @@ nav {
     min-width: 200px;
 }
 
+.comparison-table a {
+    color: var(--accent-green);
+    text-decoration: none;
+}
+
+.comparison-table a:hover {
+    color: var(--accent-green-hover);
+    text-decoration: underline;
+}
+
 /* Quote */
 .quote {
     border-left: 4px solid var(--accent-green);
