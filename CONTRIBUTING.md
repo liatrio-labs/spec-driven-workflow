@@ -77,16 +77,23 @@ See the [pre-commit hooks documentation](https://pre-commit.com/hooks.html) for 
 ### Common Commands
 
 ```bash
+# Preview the docs site locally with hot reload
+uvx livereload --port 8012 docs/
+
 # Run full pre-commit checks across the repo
 pre-commit run --all-files
 
 # Run markdown linting only
 pre-commit run markdownlint-fix --all-files
+
+# Run docs and prompt spell checking only
+pre-commit run cspell --all-files
 ```
 
 ## Style and Quality
 
 - Markdown is linted using markdownlint (via pre-commit). Keep lines reasonably short and headings well structured.
+- Public-facing docs and workflow prompts are spell-checked with cspell. Add broadly reusable project terms to `cspell.config.yaml` and prefer file-specific config for one-off names.
 - YAML files are validated for syntax errors.
 - Commit messages must follow Conventional Commits specification (enforced via commitlint).
 - Keep documentation consistent with `README.md`.
@@ -104,6 +111,7 @@ This will:
 
 - Check YAML syntax
 - Fix Markdown formatting issues
+- Spell-check public-facing documentation and workflow prompts
 - Validate commit message format (on commit)
 
 ## Branching and Commit Conventions
