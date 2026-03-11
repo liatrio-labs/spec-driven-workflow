@@ -77,6 +77,9 @@ See the [pre-commit hooks documentation](https://pre-commit.com/hooks.html) for 
 ### Common Commands
 
 ```bash
+# Preview the docs site locally with hot reload
+uvx livereload --port 8012 docs/
+
 # Run full pre-commit checks across the repo
 pre-commit run --all-files
 
