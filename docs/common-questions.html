@@ -29,6 +29,10 @@
                         Development (SDD) using a concrete example: implementing a cspell pre-commit hook for
                         spell-checking. By analyzing specifications, task lists, proof artifacts, and validation
                         reports, we demonstrate how well-executed SDD works in practice.</p>
+                    <p>It also highlights something easy to miss: <em>SDD keeps its method visible</em>. The workflow is not
+                        hidden behind a product layer, allowing teams to inspect the prompts and understand the
+                        patterns that drive the workflow. This accessibility enables teams to improve their skills
+                        with AI as they learn SDD.</p>
                 </div>
             </div>
         </section>
@@ -274,6 +278,9 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     <p>SDD provides a robust framework that enhances clarity, guarantees verifiability, and gracefully
                         accommodates change. The initial investment in structured planning and documentation delivers
                         more predictable, successful outcomes with reduced rework and increased stakeholder confidence.
+                        Because the workflow is exposed in readable prompts and artifacts, it also helps engineers learn
+                        the patterns of effective AI-assisted development instead of treating them as hidden product
+                        behavior.
                     </p>
 
                     <div class="metrics-grid">
@@ -297,7 +304,7 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     <blockquote class="quote">
                         <strong>Key Takeaway:</strong> The evidence from this real-world implementation demonstrates
                         that SDD's structured approach is not overhead—it's an investment that pays dividends through
-                        clarity, velocity, and quality assurance.
+                        clarity, velocity, quality assurance, and a more teachable way of working with AI.
                     </blockquote>
                 </div>
             </div>
@@ -359,7 +366,9 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                             <code>SDD1️⃣ I'll help you generate a specification...</code> or
                             <code>SDD3️⃣ Let me start implementing task 1.0...</code>. This is expected behavior and
                             indicates the verification system is working correctly. The markers add minimal overhead
-                            (1-2 tokens) while providing immediate visual feedback.
+                            (1-2 tokens) while providing immediate visual feedback. They also model a broader SDD
+                            principle: effective AI workflows should make important operating logic explicit and easy to
+                            inspect.
                         </p>
                     </div>
                 </div>
