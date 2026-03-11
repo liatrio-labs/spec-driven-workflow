@@ -22,12 +22,11 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1>Why Not Other Structured Development Tools?</h1>
+                <h1>Comparing SDD to Other Structured Development Tools</h1>
                 <div class="hero-content">
-                    <p>Other structured development tools like Kiro, SpecKit, and Taskmaster offer structured approaches
-                        to AI-assisted development, but they require installation, configuration, and learning new
-                        workflows. Here's why Liatrio's 4 transparent prompts are a better fit for day-to-day
-                        development work.</p>
+                    <p>Kiro, SpecKit, and Taskmaster each add structure to AI-assisted development, but they do so
+                        through very different operating models. This page compares Liatrio's four repo-local SDD
+                        prompts with those tools, with a focus on setup, workflow fit, and day-to-day adoption cost.</p>
                 </div>
             </div>
         </section>
@@ -36,8 +35,9 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>Comparison: Liatrio's Prompts vs. Other Structured Development Tools</h2>
-                <p class="section-intro">How do Liatrio's prompts compare to other structured development tools? Here's
-                    a side-by-side look at the key differences between Liatrio's prompts and three competitors.</p>
+                <p class="section-intro">The table below compares Liatrio's prompts with three other structured
+                    development approaches. The emphasis is less on feature lists and more on the practical cost of
+                    adopting each system inside an existing engineering workflow.</p>
 
                 <div class="comparison-table-wrapper">
                     <table class="comparison-table">
@@ -53,75 +53,100 @@
                         <tbody>
                             <tr>
                                 <td><strong>Setup & Installation</strong></td>
-                                <td><a href="https://github.com/liatrio-labs/spec-driven-workflow">Four markdown files added as basic prompts</a></td>
-                                <td><a href="https://kiro.dev/downloads/">Requires downloading IDE or cli</a></td>
-                                <td><a href="https://github.com/github/spec-kit">Install SpecKit cli tooling</a></td>
-                                <td><a href="https://docs.task-master.dev/getting-started/quick-start/installation#option-1-mcp-recommended">MCP installation</a></td>
+                                <td><a href="https://github.com/liatrio-labs/spec-driven-workflow">Four markdown files
+                                        added as prompts within your existing workflow</a></td>
+                                <td><a href="https://kiro.dev/downloads/">Requires installing Kiro, signing in, and
+                                        learning its product-specific workflow model</a>
+                                </td>
+                                <td><a href="https://github.com/github/spec-kit">Requires the Specify CLI, generated
+                                        agent command files, and adoption of a large multi-step workflow</a></td>
+                                <td><a
+                                        href="https://docs.task-master.dev/getting-started/quick-start/installation#option-1-mcp-recommended">MCP
+                                        or CLI setup, plus model/API configuration, project initialization, and a
+                                        PRD-to-task pipeline</a></td>
                             </tr>
                             <tr>
                                 <td><strong>Editor/IDE Dependency</strong></td>
-                                <td>✅ Works with any editor (VS Code, Cursor, etc.)</td>
-                                <td>❌ Requires switching to Kiro IDE (can import VS Code settings)</td>
-                                <td>✅ Works within existing editor (VS Code, Cursor, etc.)</td>
-                                <td>⚠️ Works within existing editors but requires MCP setup</td>
+                                <td>✅ Works in editors that support prompts or slash commands</td>
+                                <td>❌ Structured workflow assumes the Kiro IDE as the primary environment</td>
+                                <td>✅ Runs in existing editors through generated agent commands</td>
+                                <td>✅ Works in existing editors through CLI or MCP integration</td>
                             </tr>
                             <tr>
                                 <td><strong>AI Assistant Compatibility</strong></td>
-                                <td>✅ Works with any AI assistant (Claude, GPT, Gemini, etc.)</td>
-                                <td>⚠️ Built-in agent but works with many models</td>
-                                <td>✅ Works with any AI assistant (Claude, GPT, Gemini, etc.)</td>
-                                <td>✅ Works with any AI assistant (Claude, GPT, Gemini, etc.)</td>
+                                <td>✅ Works with assistants that support custom prompts or slash commands</td>
+                                <td>⚠️ Uses Kiro's built-in agent experience, model options, and product-specific modes
+                                </td>
+                                <td>⚠️ Works through supported agent integrations and slash commands</td>
+                                <td>⚠️ Works through CLI or MCP integrations plus model-provider and agent setup</td>
                             </tr>
                             <tr>
                                 <td><strong>Learning Curve</strong></td>
-                                <td>⚠️ Simple tooling but change to development process</td>
-                                <td>⚠️ Learn new IDE but low learning curve because based on VS Code </td>
-                                <td>⚠️ Learn command system (`/speckit.specify`,
-                                    `/speckit.plan`, etc.)</td>
-                                <td>❌ Learn task management system</td>
+                                <td>✅ Uses a guided four-prompt workflow layered onto your existing workflow</td>
+                                <td>❌ Requires learning Kiro's broader vocabulary and workflow model (`specs`,
+                                    `steering`, `hooks`, `powers`, `autopilot`, `vibe` vs `spec`, etc.)</td>
+                                <td>❌ Requires learning a large `constitution` → `specify` → `clarify` →
+                                    `plan` → `tasks` → `implement` methodology</td>
+                                <td>❌ Requires learning Taskmaster's broader orchestration model: PRDs, task graphs,
+                                    subtasks, dependencies, statuses, and optional autopilot/TDD workflows</td>
                             </tr>
                             <tr>
                                 <td><strong>Transparency</strong></td>
-                                <td>✅ Every prompt is readable markdown—no black boxes</td>
-                                <td>❌ Tool logic is hidden in codebases. Can't easily see or modify how they work</td>
-                                <td>✅ Available on GitHub, markdown is readable and editable</td>
-                                <td>⚠️ Open source but logic hidden in JS packages</td>
+                                <td>✅ Prompts are plain markdown and can be edited directly</td>
+                                <td>⚠️ Some files are editable, but core behavior, modes, and workflow concepts live in
+                                    the product</td>
+                                <td>✅ Workflow files and templates are published on GitHub and editable</td>
+                                <td>⚠️ Open source, but much of the behavior lives in JS packages, configs, and task
+                                    state data</td>
                             </tr>
                             <tr>
                                 <td><strong>Flexibility</strong></td>
-                                <td>✅ Edit prompts to fit your project/style/company guidelines</td>
-                                <td>❌ Limited customization. Must work within tool's structure and constraints</td>
-                                <td>✅ Can freely edit markdown files based on project/style/company guidelines</td>
-                                <td>⚠️ Task templates and AI prompts can be configured</td>
+                                <td>✅ Prompt text can be edited to match team or project conventions</td>
+                                <td>⚠️ Steering files, hooks, and modes are configurable within Kiro's product model
+                                </td>
+                                <td>⚠️ Templates can be adapted, but the workflow, artifacts, and process vocabulary
+                                    stay highly prescriptive</td>
+                                <td>⚠️ Models, prompts, tasks, tags, and execution modes can be configured within its
+                                    orchestration system</td>
                             </tr>
                             <tr>
                                 <td><strong>File Structure</strong></td>
-                                <td>Repository specific <code>docs/specs/</code> folder structure</td>
-                                <td>IDE-specific files stored at <code>.kiro</code></td>
-                                <td>Creates <code>.specify/</code> directory
-                                    structure.</td>
-                                <td>Task management files stored in <code>.taskmaster/</code></td>
+                                <td>Uses a repository-level <code>docs/specs/</code> structure but can be easily adapted
+                                    to any directory structure</td>
+                                <td>Stores project-specific files in <code>.kiro</code> alongside multiple product
+                                    concepts and configs</td>
+                                <td>Creates a <code>.specify/</code> directory, agent-specific command files, and
+                                    multiple generated planning artifacts</td>
+                                <td>Stores PRDs, config, state, task graphs, and generated artifacts in
+                                    <code>.taskmaster/</code></td>
                             </tr>
                             <tr>
                                 <td><strong>Workflow Integration</strong></td>
-                                <td>✅ Fits into your existing workflow—no context switching</td>
-                                <td>❌ Requires switching IDEs</td>
-                                <td>✅ Fits into your existing workflow—no context switching</td>
-                                <td>❌ Requires managing tasks through tool</td>
+                                <td>✅ Adds structure without replacing repo-local development workflows</td>
+                                <td>❌ Best fit when teams are willing to adopt Kiro as the primary workspace and
+                                    operating model</td>
+                                <td>❌ Can run in an existing repo, but expects teams to adopt its full process and
+                                    artifact model</td>
+                                <td>❌ Adds a separate planning, execution, and tracking layer on top of normal
+                                    engineering work</td>
                             </tr>
                             <tr>
                                 <td><strong>Speed</strong></td>
-                                <td>✅ Complete feature in minutes (example: &lt;15 min)</td>
-                                <td>⚠️ Varies</td>
-                                <td>⚠️ Varies</td>
-                                <td>⚠️ Varies</td>
+                                <td>✅ Minimal setup overhead once prompts are installed</td>
+                                <td>❌ Front-loaded overhead is high because teams must learn the product model before
+                                    moving quickly</td>
+                                <td>❌ Front-loaded overhead is high because the workflow generates and coordinates many
+                                    artifacts</td>
+                                <td>❌ Front-loaded overhead is high because useful adoption requires creating and
+                                    maintaining the task system</td>
                             </tr>
                             <tr>
                                 <td><strong>Cost</strong></td>
-                                <td>✅ Free markdown files</td>
-                                <td>❌ Requires license</td>
+                                <td>✅ Markdown files are free to use</td>
+                                <td>⚠️ Free tier available, but usage is managed through sign-in, credits, and paid
+                                    usage tiers</td>
                                 <td>✅ Open source</td>
-                                <td>⚠️  Open source but commercial use has limitations</td>
+                                <td>⚠️ Open source, with limits on some commercial use cases</td>
                             </tr>
                         </tbody>
                     </table>
@@ -133,21 +158,16 @@
         <section class="reactive-art">
             <div class="container">
                 <div class="installation-highlight">
-                    <h2>Getting Started Is Simple</h2>
-                    <p>While other tools require complex installation and configuration, the SDD workflow prompts can be
-                        installed
+                    <h2>Repo-Native Setup</h2>
+                    <p>The SDD workflow prompts can be installed
                         in any AI assistant in seconds using the <a
                             href="https://github.com/liatrio-labs/slash-command-manager" target="_blank"
                             rel="noopener noreferrer">slash-command-manager</a>. This open-source tool from Liatrio
-                        makes it
-                        straightforward
+                        makes it straightforward
                         to add the prompts as slash commands in VS Code, Cursor, Claude Code, and many other AI tools
-                        that
-                        support
-                        custom commands.</p>
-                    <p>No complex setup, no configuration files, no learning curve—just install the prompts and start
-                        using
-                        them immediately in your existing workflow. See the <a
+                        that support custom commands.</p>
+                    <p>Because the workflow is plain markdown, teams can adopt it without taking on a new IDE, a
+                        generated artifact model, or a separate task-orchestration system. See the <a
                             href="https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart" target="_blank"
                             rel="noopener noreferrer">installation instructions in the README</a> to get started.</p>
                 </div>
@@ -158,11 +178,10 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>The Bottom Line</h2>
-                <p>For day-to-day development work in enterprise companies, Liatrio's 4 prompts provide the structure
-                    and rigor you need without requiring new tools, installation, or learning curves. They're
-                    transparent, flexible, and designed to fit into your existing workflow—not replace it. Perfect for
-                    developers who want structured AI-assisted development without the overhead of switching tools or
-                    learning new systems.</p>
+                <p>For teams working in existing enterprise codebases, the main tradeoff is not whether a tool offers
+                    structure, but how much new product or process it asks engineers to adopt. Liatrio's prompts aim to
+                    provide structure in a repo-native form: readable markdown, editable conventions, and a workflow
+                    that can sit on top of existing tools rather than replace them.</p>
 
                 <div class="comparison-cta">
                     <p><a href="index.html">← Back to the Playbook</a></p>
