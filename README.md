@@ -178,6 +178,14 @@ For comprehensive documentation, examples, and detailed guides, visit the **SDD 
 - **[Video Overview](https://liatrio-labs.github.io/spec-driven-workflow/video-overview.html)** — Visual walkthrough of the workflow
 - **[Reference Materials](https://liatrio-labs.github.io/spec-driven-workflow/reference-materials.html)** — Additional resources and examples
 
+To preview the playbook locally with hot reload, run:
+
+```bash
+uvx livereload --port 8012 docs/
+```
+
+Then open `http://localhost:8012`.
+
 ### Getting help
 
 - **Start here**: [Common Questions](https://liatrio-labs.github.io/spec-driven-workflow/common-questions.html)
