@@ -905,6 +905,20 @@ nav {
     pointer-events: none;
 }
 
+.progression-section {
+    background-color: var(--bg-section);
+    background-image: radial-gradient(circle at top left, rgba(137, 223, 0, 0.1), transparent 32%), linear-gradient(180deg, rgba(45, 51, 56, 0.96) 0%, rgba(26, 31, 35, 0.96) 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.progression-section::before {
+    background: linear-gradient(180deg, rgba(26, 31, 35, 0.24) 0%, rgba(26, 31, 35, 0.5) 100%);
+    opacity: 1;
+}
+
 .reactive-art>* {
     position: relative;
     z-index: 1;
