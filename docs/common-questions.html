@@ -28,7 +28,8 @@
                         adaptability. This evidence-based FAQ addresses common objections to Liatrio's Spec-Driven
                         Development (SDD) using a concrete example: implementing a cspell pre-commit hook for
                         spell-checking. By analyzing specifications, task lists, proof artifacts, and validation
-                        reports, we demonstrate how well-executed SDD works in practice.</p>
+                        reports, we demonstrate how well-executed SDD works in practice. You can inspect the full
+                        example in <a href="reference-materials.html">Reference Materials</a>.</p>
                     <p>It also highlights something easy to miss: <em>SDD keeps its method visible</em>. The workflow is not
                         hidden behind a product layer, allowing teams to inspect the prompts and understand the
                         patterns that drive the workflow. This accessibility enables teams to improve their skills
@@ -43,8 +44,8 @@
                 <h2>Does Spec-Driven Development Add Unnecessary Overhead?</h2>
                 <p class="section-intro">Structured processes often face criticism for introducing bureaucratic
                     overhead. However, the cspell hook implementation proves that SDD structure is an investment, not a
-                    cost. By mandating upfront clarity, it prevents ambiguity and rework—the true sources of
-                    delay—ultimately increasing development velocity.</p>
+                    cost. By forcing the hardest thinking into the first two steps when correction is cheapest, it
+                    prevents ambiguity and rework. These are the true sources of delay. Mandating upfront clarity ultimately increases development velocity.</p>
 
                 <div class="objection-content-grid">
                     <div class="objection-card">
@@ -57,10 +58,10 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                        <h4>Upfront Planning Prevents Waste</h4>
-                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope. This
-                            protected the team from scope creep and unexpected requirements, concentrating effort
-                            exclusively on agreed-upon value.</p>
+                        <h4>Upfront Planning Prevents Costly Rework</h4>
+                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope.
+                            That early clarity protected the team from scope creep and unexpected requirements, when it
+                            was still cheap to make adjustments.</p>
                     </div>
 
                     <div class="objection-card">
@@ -73,8 +74,8 @@
                         </div>
                         <h4>Structured Work Creates Velocity</h4>
                         <p>Git history shows implementation took under 6 minutes—from first commit (09:57:02) to final
-                            commit (10:02:41). This remarkable speed was enabled by a clear plan breaking work into four
-                            distinct tasks.</p>
+                            commit (10:02:41). That speed was enabled by Step 2 turning the approved spec into four
+                            distinct tasks before implementation began.</p>
                     </div>
 
                     <div class="objection-card">

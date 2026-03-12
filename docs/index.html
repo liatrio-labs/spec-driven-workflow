@@ -79,10 +79,13 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>The Four Steps</h2>
-                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. The
-                    example described on this site took less than 15 minutes from start to finish. Because the prompts
-                    are readable, the workflow also doubles as a guide for learning how to scope work, guide AI, and
-                    verify results more effectively.</p>
+                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. In
+                    the <a href="reference-materials.html">cspell pre-commit hook example</a> featured across this
+                    site, the end-to-end workflow took less than 15 minutes from start to finish. The highest-leverage
+                    work happens in Step 1 and Step 2: when the spec is clear and the task plan is concrete,
+                    implementation and validation are far more likely to run smoothly without human rescue. Because the
+                    prompts are readable, the workflow also doubles as a guide for learning how to scope work, guide
+                    AI, and verify results more effectively.</p>
 
                 <div class="phases-grid">
                     <div class="phase-card">
@@ -91,10 +94,11 @@
                             <h3>Specification</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Transform your flow input into a structured specification with
-                                clear boundaries and functional requirements.</p>
+                            <p><strong>Focus:</strong> Lock down scope, intent, and success criteria before any code is
+                                written.</p>
                             <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just
-                                right), asks clarifying questions, and generates a specification document.</p>
+                                right), resolves ambiguous context, and generates a specification document with clear
+                                boundaries.</p>
                             <p><strong>Output:</strong> A markdown spec file in
                                 <code>docs/specs/[NN]-spec-[feature-name]/</code>
                             </p>
@@ -110,10 +114,11 @@
                             <h3>Task Breakdown</h3>
                         </div>
                         <div class="phase-card-content">
-                            <p><strong>Focus:</strong> Break the specification into actionable tasks with demo criteria
-                                and proof artifacts.</p>
+                            <p><strong>Focus:</strong> Turn the approved spec into an executable plan with demo
+                                criteria and proof artifacts.</p>
                             <p><strong>What It Does:</strong> Analyzes the spec, identifies relevant files, and creates
-                                a task list with parent tasks (first) and sub-tasks (after confirmation).</p>
+                                a task list with parent tasks (first) and sub-tasks (after confirmation) so drift is
+                                caught before implementation starts.</p>
                             <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact
                                 requirements</p>
                             <p><strong>Prompt:</strong> <a
@@ -162,8 +167,9 @@
                 </div>
 
                 <blockquote class="quote">
-                    The upfront investment in clarity de-risks the entire development lifecycle by preventing the two
-                    most common causes of project failure: ambiguous requirements and unchecked scope creep.
+                    The highest-leverage work happens in the first two steps: if you nail the spec and task breakdown,
+                    the later steps have a much better chance of succeeding without rework, course correction, or human
+                    intervention.
                 </blockquote>
 
                 <div class="benefits-grid">
@@ -171,6 +177,7 @@
                         <h4>Why This Works</h4>
                         <ul>
                             <li>Built-in scope validation prevents oversized work</li>
+                            <li>Early clarification makes later course correction cheaper and less likely</li>
                             <li>Readable prompts expose patterns teams can study and adapt</li>
                             <li>Tool-agnostic—works with any AI assistant</li>
                             <li>Simple file structure that doesn't pollute your repo</li>
