@@ -663,32 +663,63 @@ nav {
     text-decoration: underline;
 }
 
-/* Comparison CTA */
-.comparison-cta {
+/* Next Step CTA */
+.next-step-cta {
     margin-top: 3rem;
-    padding: 1.5rem;
+    padding: 2rem;
     background-color: var(--box-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
+    text-align: center;
 }
 
-.comparison-cta p {
+.next-step-cta h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.next-step-cta p {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin: 0;
+    margin: 0 auto;
+    max-width: 720px;
 }
 
-.comparison-cta a {
+.next-step-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.next-step-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-section);
     color: var(--accent-green);
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-.comparison-cta a:hover {
+.next-step-link:hover {
     color: var(--accent-green-hover);
-    text-decoration: underline;
+    border-color: var(--accent-green);
+    transform: translateY(-1px);
+}
+
+.next-step-link-primary {
+    background-color: rgba(137, 223, 0, 0.1);
+    border-color: rgba(137, 223, 0, 0.25);
 }
 
 /* Comparison Table */
@@ -711,7 +742,7 @@ nav {
 }
 
 .comparison-table th {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
     text-align: left;
     font-size: 1rem;
     font-weight: 600;
@@ -720,12 +751,20 @@ nav {
 }
 
 .comparison-table td {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
     vertical-align: top;
+}
+
+.comparison-table tbody tr:nth-child(odd) {
+    background-color: rgba(137, 223, 0, 0.03);
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background-color: var(--box-bg);
 }
 
 .comparison-table tbody tr:last-child td {
@@ -984,6 +1023,13 @@ nav {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.audit-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
 }
 
 .audit-box h4 {
@@ -1152,9 +1198,16 @@ footer a:hover {
 }
 
 .workflow-item {
-    margin-bottom: 2rem;
-    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--bg-section);
+    border: 1px solid var(--border-color);
     border-left: 3px solid var(--accent-green);
+    border-radius: 0 8px 8px 0;
+}
+
+.workflow-item:last-of-type {
+    margin-bottom: 0;
 }
 
 .workflow-item h4 {
@@ -1232,6 +1285,14 @@ footer a:hover {
     color: var(--text-primary);
     margin-bottom: 0.75rem;
     padding-left: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.commit-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .commit-item code {
@@ -1317,6 +1378,13 @@ footer a:hover {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shift-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
 }
 
 .shift-item h4 {
@@ -1795,6 +1863,11 @@ footer a:hover {
     margin-top: 2rem;
 }
 
+.reference-grid-balanced {
+    grid-template-columns: repeat(2, minmax(280px, 420px));
+    justify-content: center;
+}
+
 .reference-card {
     background-color: var(--box-bg);
     border: 1px solid var(--border-color);
@@ -1879,6 +1952,27 @@ footer a:hover {
     transition: transform 0.2s ease, margin-left 0.2s ease;
 }
 
+.ai-workflow-section,
+.demo-section,
+.documentation-section,
+.compound-effect {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.ai-workflow-section .code-example,
+.demo-section .code-example,
+.documentation-section .commit-list {
+    background-color: var(--bg-section);
+}
+
+.demo-section .benefits-grid {
+    margin-top: 2rem;
+}
+
 .reference-link:hover::after {
     transform: translateX(4px);
     margin-left: 0.75rem;
@@ -1959,6 +2053,18 @@ footer a:hover {
     .benefits-grid,
     .audit-boxes {
         grid-template-columns: 1fr;
+    }
+
+    .reference-grid-balanced {
+        grid-template-columns: 1fr;
+    }
+
+    .next-step-actions {
+        flex-direction: column;
+    }
+
+    .next-step-link {
+        width: 100%;
     }
 }
 
