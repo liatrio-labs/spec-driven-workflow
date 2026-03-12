@@ -26,13 +26,15 @@
                 <div class="hero-content">
                     <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is
                         <strong>just 4 markdown prompts</strong> that help developers guide an AI assistant through
-                        implementing their day-to-day work with structure, clarity, and evidence.</p>
+                        implementing their day-to-day work with structure, clarity, and evidence.
+                    </p>
                     <p>These prompts are <strong>transparent</strong> and <strong>learnable</strong>: you can read
                         every prompt, understand the workflow logic it applies, and adapt the patterns to your own team
                         and projects. Instead of hiding the method inside a product, SDD exposes it in markdown.</p>
                     <p>They are also <strong>tool-agnostic</strong> (works with any AI assistant) and
                         <strong>lightweight</strong> (no installation, no dependencies). They create a simple file
-                        structure in <code>docs/specs/</code> that doesn't pollute your repo.</p>
+                        structure in <code>docs/specs/</code> that doesn't pollute your repo.
+                    </p>
                     <p>View the prompts on GitHub: <a
                             href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
                             target="_blank"
@@ -70,75 +72,6 @@
                     </div>
                 </div>
 
-                <!-- Step Overview Boxes -->
-                <div class="phase-overview">
-                    <div class="phase-box">
-                        <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <h3>Step 1: Specification</h3>
-                        <p>Transform your flow input into a structured spec with clear boundaries</p>
-                        <p class="prompt-link"><a
-                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-1-generate-spec.md"
-                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
-                    </div>
-                    <div class="phase-box">
-                        <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <h3>Step 2: Task Breakdown</h3>
-                        <p>Break the spec into actionable tasks with demo criteria</p>
-                        <p class="prompt-link"><a
-                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-2-generate-task-list-from-spec.md"
-                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
-                    </div>
-                    <div class="phase-box">
-                        <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <h3>Step 3: Implementation</h3>
-                        <p>Execute tasks with verification and proof artifacts</p>
-                        <p class="prompt-link"><a
-                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-3-manage-tasks.md"
-                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
-                    </div>
-                    <div class="phase-box">
-                        <div class="phase-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
-                                    stroke="currentColor" stroke-width="2" />
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <h3>Step 4: Validation</h3>
-                        <p>Verify implementation meets all requirements with evidence</p>
-                        <p class="prompt-link"><a
-                                href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-4-validate-spec-implementation.md"
-                                target="_blank" rel="noopener noreferrer">View prompt →</a></p>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -163,7 +96,8 @@
                             <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just
                                 right), asks clarifying questions, and generates a specification document.</p>
                             <p><strong>Output:</strong> A markdown spec file in
-                                <code>docs/specs/[NN]-spec-[feature-name]/</code></p>
+                                <code>docs/specs/[NN]-spec-[feature-name]/</code>
+                            </p>
                             <p><strong>Prompt:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-1-generate-spec.md"
                                     target="_blank" rel="noopener noreferrer">SDD-1-generate-spec.md</a></p>
@@ -184,7 +118,8 @@
                                 requirements</p>
                             <p><strong>Prompt:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-2-generate-task-list-from-spec.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-2-generate-task-list-from-spec.md</a></p>
+                                    target="_blank" rel="noopener noreferrer">SDD-2-generate-task-list-from-spec.md</a>
+                            </p>
                         </div>
                     </div>
 
@@ -220,7 +155,8 @@
                                 coverage matrix</p>
                             <p><strong>Prompt:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-4-validate-spec-implementation.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-4-validate-spec-implementation.md</a></p>
+                                    target="_blank" rel="noopener noreferrer">SDD-4-validate-spec-implementation.md</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -268,7 +204,8 @@
                     <p><strong>How does this compare to other structured development tools?</strong> See our <a
                             href="comparison.html">comparison against Kiro, SpecKit, and Taskmaster</a> to understand
                         why Liatrio's prompts fit better into the typical workflow of software developers doing
-                        day-to-day work, and why exposing the workflow logic matters just as much as lightweight adoption.</p>
+                        day-to-day work, and why exposing the workflow logic matters just as much as lightweight
+                        adoption.</p>
                 </div>
             </div>
         </section>
@@ -379,11 +316,23 @@
         <!-- Directory Structure Section -->
         <section class="directory-structure">
             <div class="container">
-                <h2>Directory Structure</h2>
-                <p>The SDD workflow creates a structured directory layout in <code>docs/specs/</code> that provides a complete audit trail from requirements to implementation:</p>
+                <div class="directory-structure-header">
+                    <h2>Directory Structure</h2>
+                    <p class="section-intro">The SDD workflow creates a structured directory layout in
+                        <code>docs/specs/</code> so every requirement, task, proof, and validation artifact stays
+                        connected in one place.
+                    </p>
+                </div>
 
-                <div class="tree-structure">
-                    <pre><code>docs/specs
+                <div class="directory-structure-layout">
+                    <div class="tree-structure">
+                        <div class="tree-structure-card">
+                            <div class="tree-structure-meta">
+                                <h4>Example Spec Workspace</h4>
+                                <p>A single feature folder contains the full implementation trail from planning through
+                                    proof and validation.</p>
+                            </div>
+                            <pre><code>docs/specs
 ├── 01-spec-feature-name
 │   ├── 01-proofs
 │   │   ├── 01-task-01-proofs.md
@@ -414,38 +363,56 @@
     ├── 03-spec-third-feature.md
     ├── 03-tasks-third-feature.md
     └── 03-validation-third-feature.md</code></pre>
-                </div>
-
-                <div class="structure-explanation">
-                    <div class="structure-column">
-                        <h4>File Naming Convention</h4>
-                        <ul>
-                            <li><strong><code>[NN]-spec-[feature-name]/</code></strong>: Main directory for each feature specification
-                                <ul>
-                                    <li><code>[NN]</code>: Zero-padded 2-digit number (01, 02, 03, etc.)</li>
-                                    <li><code>spec-[feature-name]</code>: Descriptive feature name</li>
-                                </ul>
-                            </li>
-                            <li><strong><code>[NN]-spec-[feature-name].md</code></strong>: The main specification document</li>
-                            <li><strong><code>[NN]-tasks-[feature-name].md</code></strong>: Task breakdown with parent/sub-tasks</li>
-                            <li><strong><code>[NN]-questions-1-[feature-name].md</code></strong>: Clarifying questions and answers</li>
-                            <li><strong><code>[NN]-validation-[feature-name].md</code></strong>: Validation report and coverage matrix</li>
-                            <li><strong><code>[NN]-proofs/</code></strong>: Subdirectory containing proof artifacts
-                                <ul>
-                                    <li><strong><code>[NN]-task-[TT]-proofs.md</code></strong>: Proof artifacts for each parent task</li>
-                                </ul>
-                            </li>
-                        </ul>
+                        </div>
                     </div>
-                    <div class="structure-column">
-                        <h4>Workflow Progression</h4>
-                        <ol>
-                            <li><strong>Specification Phase</strong>: Creates <code>[NN]-spec-[feature-name].md</code> and <code>[NN]-questions-1-[feature-name].md</code></li>
-                            <li><strong>Task Planning Phase</strong>: Creates <code>[NN]-tasks-[feature-name].md</code></li>
-                            <li><strong>Implementation Phase</strong>: Creates <code>[NN]-proofs/[NN]-task-[TT]-proofs.md</code> files as tasks are completed</li>
-                            <li><strong>Validation Phase</strong>: Creates <code>[NN]-validation-[feature-name].md</code> with final validation report</li>
-                        </ol>
-                        <p>This structure provides a complete audit trail from requirements to implementation, with each artifact serving as evidence in the validation process.</p>
+
+                    <div class="structure-explanation">
+                        <div class="structure-column">
+                            <h4>File Naming Convention</h4>
+                            <ul>
+                                <li><strong><code>[NN]-spec-[feature-name]/</code></strong>: Main directory for each
+                                    feature specification
+                                    <ul>
+                                        <li><code>[NN]</code>: Zero-padded 2-digit number (01, 02, 03, etc.)</li>
+                                        <li><code>spec-[feature-name]</code>: Descriptive feature name</li>
+                                    </ul>
+                                </li>
+                                <li><strong><code>[NN]-spec-[feature-name].md</code></strong>: The main specification
+                                    document</li>
+                                <li><strong><code>[NN]-tasks-[feature-name].md</code></strong>: Task breakdown with
+                                    parent/sub-tasks</li>
+                                <li><strong><code>[NN]-questions-1-[feature-name].md</code></strong>: Clarifying
+                                    questions and answers</li>
+                                <li><strong><code>[NN]-validation-[feature-name].md</code></strong>: Validation report
+                                    and coverage matrix</li>
+                                <li><strong><code>[NN]-proofs/</code></strong>: Subdirectory containing proof artifacts
+                                    <ul>
+                                        <li><strong><code>[NN]-task-[TT]-proofs.md</code></strong>: Proof artifacts for
+                                            each parent task</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="structure-column">
+                            <h4>Workflow Progression</h4>
+                            <ol>
+                                <li><strong>Specification Phase</strong><br> Creates
+                                    <code>[NN]-spec-[feature-name].md</code> and
+                                    <code>[NN]-questions-1-[feature-name].md</code>
+                                </li>
+                                <li><strong>Task Planning Phase</strong><br> Creates
+                                    <code>[NN]-tasks-[feature-name].md</code>
+                                </li>
+                                <li><strong>Implementation Phase</strong><br> Creates
+                                    <code>[NN]-proofs/[NN]-task-[TT]-proofs.md</code> files as tasks are completed
+                                </li>
+                                <li><strong>Validation Phase</strong><br> Creates
+                                    <code>[NN]-validation-[feature-name].md</code> with final validation report
+                                </li>
+                            </ol>
+                            <p>This structure provides a complete audit trail from requirements to implementation, with
+                                each artifact serving as evidence in the validation process.</p>
+                        </div>
                     </div>
                 </div>
             </div>

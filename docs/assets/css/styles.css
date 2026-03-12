@@ -68,6 +68,11 @@ body {
     min-height: 100vh;
 }
 
+a {
+    color: var(--accent-green);
+    text-decoration: none;
+}
+
 /* Code styling - applies to all code elements, but not pre elements */
 code:not(pre code) {
     background-color: rgba(137, 223, 0, 0.15);
@@ -476,6 +481,47 @@ nav {
     font-weight: 600;
 }
 
+.before-scenario .phase-detail {
+    margin-bottom: 1.5rem;
+    padding: 2rem;
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.before-scenario .phase-detail:nth-of-type(even) {
+    background-color: rgba(137, 223, 0, 0.06);
+    border-color: rgba(137, 223, 0, 0.18);
+}
+
+.before-scenario .phase-detail:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.08);
+}
+
+.before-scenario .phase-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    min-width: 4rem;
+    height: 4rem;
+    font-size: 1.75rem;
+    color: var(--accent-green);
+    background-color: rgba(137, 223, 0, 0.1);
+    border-radius: 8px;
+}
+
+.before-scenario .phase-content h3 {
+    margin-bottom: 1rem;
+}
+
+.before-scenario .phase-content p {
+    margin-bottom: 0;
+}
+
 /* Flow Input Section */
 .flow-input-section {
     margin: 3rem 0;
@@ -624,7 +670,6 @@ nav {
     background-color: var(--box-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    text-align: center;
 }
 
 .comparison-cta p {
@@ -662,7 +707,7 @@ nav {
 }
 
 .comparison-table thead {
-    background-color: var(--bg-section);
+    background-color: var(--bg-dark);
 }
 
 .comparison-table th {
@@ -719,6 +764,7 @@ nav {
 /* Quote */
 .quote {
     border-left: 4px solid var(--accent-green);
+    background-color: var(--box-bg);
     padding-left: 2rem;
     margin: 4rem 0;
     font-size: 1.25rem;
@@ -764,6 +810,35 @@ nav {
     color: var(--accent-green);
     font-weight: bold;
     font-size: 1.25rem;
+}
+
+.redefining-grid {
+    gap: 2rem;
+}
+
+.redefining-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.redefining-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
+}
+
+.redefining-card h4 {
+    margin-bottom: 1rem;
+}
+
+.redefining-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
 /* Reactive Art Section */
@@ -817,7 +892,6 @@ nav {
     color: var(--text-secondary);
     max-width: 900px;
     margin: 0 auto 4rem;
-    text-align: center;
 }
 
 .progression-boxes {
@@ -890,20 +964,19 @@ nav {
     }
 }
 
-.audit-trail>.container>p:first-of-type {
+.audit-trail>.container>p {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--text-secondary);
     max-width: 900px;
-    margin: 0 auto 4rem;
-    text-align: center;
+    margin: 0 auto 1rem;
 }
 
 .audit-boxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .audit-box {
@@ -927,14 +1000,6 @@ nav {
     color: var(--text-secondary);
 }
 
-.conclusion {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    max-width: 900px;
-    margin: 4rem auto 0;
-    text-align: center;
-}
 
 /* Footer */
 footer {
@@ -991,7 +1056,6 @@ footer a:hover {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
 
 
@@ -1348,11 +1412,25 @@ footer a:hover {
     margin-bottom: 2rem;
 }
 
+.non-goals-split {
+    grid-template-columns: repeat(2, minmax(280px, 420px));
+    justify-content: center;
+}
+
+.non-goals-column {
+    background-color: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
 .non-goals-column p {
     font-size: 1.125rem;
-    line-height: 1.8;
+    line-height: 1.6;
     color: var(--text-secondary);
     margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .non-goals-column p strong {
@@ -1372,7 +1450,7 @@ footer a:hover {
 
 .non-goals-list {
     list-style: none;
-    margin: 1rem 0 2rem 0;
+    margin: 0;
     padding-left: 0;
 }
 
@@ -1392,6 +1470,40 @@ footer a:hover {
     color: var(--accent-green);
     font-weight: bold;
     font-size: 1.25rem;
+}
+
+.technical-background-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.technical-background-intro,
+.technical-background-link {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.technical-background-list {
+    background-color: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.technical-background-link {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .non-goals-split {
+        grid-template-columns: 1fr;
+    }
 }
 
 .coverage-section {
@@ -1533,7 +1645,6 @@ footer a:hover {
     line-height: 1.8;
     color: var(--text-secondary);
     margin-bottom: 2rem;
-    text-align: center;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -1955,18 +2066,78 @@ footer a:hover {
 
 /* Directory Structure Section */
 .directory-structure {
-    padding: 4rem 0;
-    background: var(--bg-section);
+    padding: 5rem 0;
+    background: var(--bg-light);
+}
+
+.directory-structure-header {
+    margin-bottom: 2.5rem;
+}
+
+.directory-structure-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+@media (min-width: 768px) {
+    .directory-structure-header h2 {
+        font-size: 3rem;
+    }
+}
+
+.directory-structure-header .section-intro {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.directory-structure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 2rem;
+    align-items: start;
 }
 
 .tree-structure {
-    margin: 2rem 0;
+    margin: 0;
     border-radius: 8px;
-    overflow: hidden;
+}
+
+.tree-structure-card {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.tree-structure-meta {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tree-structure-meta h4 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.tree-structure-meta p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
 .tree-structure pre {
-    background: var(--box-bg);
+    background: var(--bg-section);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 2rem;
@@ -1983,9 +2154,14 @@ footer a:hover {
 
 .structure-explanation {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 2rem;
+    gap: 1.25rem;
+}
+
+.structure-column {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
 }
 
 .structure-column h4 {
@@ -2060,10 +2236,24 @@ footer a:hover {
     font-style: italic;
 }
 
-@media (max-width: 768px) {
-    .structure-explanation {
+@media (max-width: 1024px) {
+    .directory-structure-layout {
         grid-template-columns: 1fr;
-        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .directory-structure {
+        padding: 4rem 0;
+    }
+
+    .tree-structure-card,
+    .structure-column {
+        padding: 1rem;
+    }
+
+    .tree-structure-meta {
+        padding: 0 0 1rem;
     }
 
     .tree-structure pre {
