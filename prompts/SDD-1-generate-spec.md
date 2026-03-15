@@ -64,13 +64,13 @@ If the user did not include an initial input or reference for the spec, ask the 
 1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
 2. **Context Assessment** - Review existing codebase for relevant patterns and constraints
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
-4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
+4. **Clarification Decision** - Decide whether the current context is sufficient or whether a questions file is required
 5. **Spec Generation** - Create the detailed specification document
 6. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Create Spec Directory
 
-Create the spec directory structure before proceeding with any other steps. This ensures all files (questions, spec, tasks, proofs) have a consistent location.
+Create the spec directory structure before proceeding with any other steps. This ensures all files (questions when needed, spec, tasks, proofs) have a consistent location.
 
 **Directory Structure:**
 
@@ -145,11 +145,13 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - **ALWAYS** inform the user of the result of the scope assessment.
 - If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-## Step 4: Clarifying Questions
+## Step 4: Clarification Sufficiency Check
 
-Ask clarifying questions to gather sufficient detail. Focus on understanding the "what" and "why" rather than the "how."
+Assess whether you already have enough aligned context to write a high-quality spec without inventing requirements. Always err on the side of caution, but do not force a questions file when the available information is already sufficient.
 
-Use the following common areas to guide your questions:
+Focus on understanding the "what" and "why" rather than the "how."
+
+Use the following common areas to assess whether clarification is needed:
 
 **Core Understanding:**
 
@@ -174,9 +176,46 @@ Use the following common areas to guide your questions:
 
 **Progressive Disclosure:** Start with Core Understanding, then expand based on feature complexity and user responses.
 
+### Clarification Sufficiency Criteria
+
+Proceed without a questions file only if all of the following are true:
+
+- The user goal and intended outcome are clear.
+- Scope boundaries are clear enough to define meaningful non-goals.
+- Demoable Units and Proof Artifacts can be specified without guessing.
+- Known repository context and user-provided constraints are sufficient to avoid inventing requirements.
+- Any remaining uncertainty is minor and can safely be recorded in the spec's `Open Questions` section without reducing spec quality.
+
+Create a questions file if any of the following are true:
+
+- There are multiple materially different interpretations of the requested feature.
+- Acceptance criteria, Proof Artifacts, or Demoable Units would otherwise be guessed.
+- Scope boundaries or non-goals are unclear.
+- Design, technical, integration, security, or operational constraints are missing and would materially change the spec.
+- The user intent or direction could reasonably lead to different implementation paths.
+
+### Clarification Status Declaration (Required)
+
+Before proceeding, you MUST state exactly one of the following:
+
+- `Clarification status: sufficient - no questions file required`
+- `Clarification status: insufficient - questions file required`
+
+### Self-Verification Before Proceeding
+
+Before choosing `sufficient`, explicitly verify:
+
+- [ ] I am not guessing at missing requirements.
+- [ ] I can populate all major spec sections with grounded, user-aligned content.
+- [ ] Any remaining uncertainty is non-blocking and belongs in `Open Questions` rather than a blocking questions round.
+
+If any check fails, create a questions file.
+
 ### Questions File Format
 
-Follow this format exactly when you create the questions file.
+Follow this format exactly when you create a questions file.
+
+Each question MUST include recommended answer guidance for the user. Recommendations should reduce ambiguity, explain tradeoffs, and bias toward the option that best supports a clear, reviewable, junior-friendly spec.
 
 ```markdown
 # [NN] Questions Round 1 - [Feature Name]
@@ -193,6 +232,13 @@ Please answer each question below (select one or more options, or add your own n
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
 
+**Recommended answer(s):** [(A), (C)]
+
+**Why these are recommended:**
+
+- [Recommendation note 1 explaining why the suggested option best preserves user intent, reduces ambiguity, or improves spec quality]
+- [Recommendation note 2 explaining tradeoffs versus the other options]
+
 ## 2. [Another Question Category/Topic]
 
 [What specific aspect of the feature needs clarification?]
@@ -202,23 +248,71 @@ Please answer each question below (select one or more options, or add your own n
 - [ ] (C) [Option description explaining what this choice means]
 - [ ] (D) [Option description explaining what this choice means]
 - [ ] (E) Other (describe)
+
+**Recommended answer(s):** [(B)]
+
+**Why these are recommended:**
+
+- [Recommendation note 1 explaining why the suggested option best preserves user intent, reduces ambiguity, or improves spec quality]
+- [Recommendation note 2 explaining tradeoffs versus the other options]
+```
+
+### Recommendation Rules For Questions Files
+
+When adding recommended answer guidance:
+
+- Recommend the option or combination of options that best supports alignment with the user's likely intent.
+- Explain why the recommendation is better than the alternatives presented, not just why it is reasonable in isolation.
+- Prefer recommendations that reduce avoidable ambiguity and make the eventual spec easier to validate.
+- Do not present recommendations as mandatory; the user remains the decision-maker.
+- If no option is clearly safer or more aligned, say so explicitly and explain the tradeoff instead of forcing a weak recommendation.
+- If recommending `Other`, provide a short suggested custom answer the user can edit.
+
+### Example Question With Recommendation Guidance
+
+Use this as a style reference for how to recommend answers without taking the decision away from the user.
+
+```markdown
+## 1. Authentication Entry Point
+
+Which sign-in methods should this first version support?
+
+- [ ] (A) Email and password only
+- [ ] (B) Google SSO only
+- [ ] (C) Email/password and Google SSO together
+- [ ] (D) Magic link only
+- [ ] (E) Other (describe)
+
+**Recommended answer(s):** [(A)]
+
+**Why these are recommended:**
+
+- `(A)` is the smallest demoable slice and keeps the first spec focused on one complete authentication path.
+- `(A)` reduces ambiguity in validation, proof artifacts, and edge cases compared with `(C)`, which adds a second auth flow immediately.
+- `(B)` and `(D)` may still be valid product choices, but they introduce external-provider or email-delivery dependencies that are usually unnecessary unless the user explicitly wants them.
+- If the user already knows SSO is a hard requirement, they should override this recommendation.
 ```
 
 ### Questions File Process
 
+Only follow this process when clarification is insufficient.
+
 1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
-2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
-3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
-4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
-5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+2. **Augment With Recommendations**: For every question, include recommended answer(s) and short justification notes comparing the recommendation to the other options.
+3. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
+4. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
+5. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
+6. **Re-run Sufficiency Check**: Reassess whether the combined context is now sufficient to generate the spec.
+7. **Follow-Up Rounds**: If answers reveal new material ambiguity, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
 
 **Iterative Process:**
 
-- If a user's answer reveals new questions or areas needing clarification, ask follow-up questions in a new questions file.
+- If a user's answer reveals new material questions or areas needing clarification, ask follow-up questions in a new questions file.
 - Build on previous answers - use context from earlier responses to inform subsequent questions.
 - **CRITICAL**: After creating any questions file, you MUST STOP and wait for the user to provide answers before proceeding.
 - Only proceed to Step 5 after:
   - You have received and reviewed all user answers to clarifying questions
+  - You have re-run the Clarification Sufficiency Check
   - You have enough detail to populate all spec sections (User Stories, Demoable Units with functional requirements, etc.).
 
 ## Step 5: Spec Generation
@@ -365,12 +459,13 @@ Iterate based on feedback until the user is satisfied.
 - Assume technical details without asking the user
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
-- Skip the clarifying questions phase, even if the prompt seems clear
+- Skip the clarification sufficiency check, even if the prompt seems clear
 - Ignore existing repository patterns and conventions
 
 **ALWAYS:**
 
-- Ask clarifying questions before generating the spec
+- Run the clarification sufficiency check before generating the spec
+- Ask clarifying questions when material ambiguity remains
 - Validate scope appropriateness before proceeding
 - Use the exact spec structure provided above
 - Ensure the spec is understandable by a junior developer

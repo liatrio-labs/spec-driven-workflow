@@ -92,7 +92,7 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 
 ### Quick "try it" flow
 
-1. Run `/SDD-1-generate-spec` and describe the feature you want.
+1. Run `/SDD-1-generate-spec` and describe the feature you want. If the AI determines material clarification is needed, answer the generated questions file before continuing.
 2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec; complete task generation, baseline planning commit, planning audit, and user-approved remediation if needed.
 3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits) after the SDD-2 audit required gates pass.
 4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
@@ -102,8 +102,8 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 Each step uses a different prompt file and produces specific artifacts in `docs/specs/`.
 
 1. **Generate a spec** ([`prompts/SDD-1-generate-spec.md`](./prompts/SDD-1-generate-spec.md))
-   - **What it does**: asks structured clarifying questions, checks scope, and writes a junior-friendly spec with demo criteria
-   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
+   - **What it does**: checks scope, determines whether clarification is needed, optionally creates a questions file for material ambiguities with recommended answers and justification notes, and writes a junior-friendly spec with demo criteria
+   - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md` and, when needed, `docs/specs/[NN]-spec-[feature-name]/[NN]-questions-[N]-[feature-name].md`
    - **Why**: aligns humans + AI on what to build before any code changes
 
 2. **Generate a task list** ([`prompts/SDD-2-generate-task-list-from-spec.md`](./prompts/SDD-2-generate-task-list-from-spec.md))
@@ -137,7 +137,7 @@ Spec-Driven Development (SDD) keeps AI collaborators and human developers aligne
 
 ## Guiding Principles
 
-- **Clarify intent before delivery:** The spec prompt enforces clarifying questions so requirements are explicit and junior-friendly.
+- **Clarify intent before delivery:** The spec prompt requires a clarification sufficiency check so material ambiguities are resolved before planning, while minor uncertainty can remain explicit in the spec.
 - **Ship demoable slices:** Every stage pushes toward thin, end-to-end increments with clear demo criteria and proof artifacts.
 - **Make work transparent:** Tasks live in versioned markdown files so stakeholders can review, comment, and adjust scope anytime.
 - **Progress one slice at a time:** The management prompt enforces single-threaded execution to reduce churn and unfinished work-in-progress.
@@ -148,12 +148,15 @@ Spec-Driven Development (SDD) keeps AI collaborators and human developers aligne
 Each prompt writes Markdown outputs into `docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.), giving you a lightweight backlog that is easy to review, share, and implement.
 
 - **Specs:** `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
+- **Questions files (when needed):** `docs/specs/[NN]-spec-[feature-name]/[NN]-questions-[N]-[feature-name].md`
 - **Task lists:** `docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 - **Audit reports:** `docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`
 - **Proof artifacts:** `docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/[NN]-task-[TT]-proofs.md`
 - **Validation reports:** `docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
 
 Example directory structure:
+
+`[NN]-questions-[N]-[feature-name].md` is optional and appears only when the spec prompt determines a clarification round is required.
 
 ```bash
 docs/specs
