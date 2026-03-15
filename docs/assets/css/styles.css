@@ -1992,6 +1992,107 @@ footer a:hover {
     margin-left: 0.75rem;
 }
 
+/* AI Techniques Page */
+.techniques-overview-section {
+    position: relative;
+    background-color: var(--bg-section);
+    background-image: radial-gradient(circle at top right, rgba(137, 223, 0, 0.12), transparent 28%), linear-gradient(180deg, rgba(45, 51, 56, 0.96) 0%, rgba(31, 36, 41, 0.96) 100%);
+    overflow: hidden;
+}
+
+.techniques-overview-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26, 31, 35, 0.18) 0%, rgba(26, 31, 35, 0.42) 100%);
+    pointer-events: none;
+}
+
+.techniques-overview-section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.technique-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.technique-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.technique-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 24px rgba(137, 223, 0, 0.1);
+}
+
+.technique-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    border-radius: 10px;
+    color: var(--accent-green);
+    background: linear-gradient(135deg, rgba(137, 223, 0, 0.18) 0%, rgba(137, 223, 0, 0.05) 100%);
+    box-shadow: inset 0 0 0 1px rgba(137, 223, 0, 0.16);
+}
+
+.technique-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.technique-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.technique-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.prompt-pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.prompt-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background-color: rgba(137, 223, 0, 0.12);
+    border: 1px solid rgba(137, 223, 0, 0.18);
+    color: var(--accent-green);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -2073,6 +2174,10 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
+    .technique-grid {
+        grid-template-columns: 1fr;
+    }
+
     .next-step-actions {
         flex-direction: column;
     }
@@ -2145,6 +2250,10 @@ footer a:hover {
     }
 
     .reference-card {
+        padding: 1.5rem;
+    }
+
+    .technique-card {
         padding: 1.5rem;
     }
 
