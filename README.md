@@ -102,7 +102,7 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 Each step uses a different prompt file and produces specific artifacts in `docs/specs/`.
 
 1. **Generate a spec** ([`prompts/SDD-1-generate-spec.md`](./prompts/SDD-1-generate-spec.md))
-   - **What it does**: checks scope, determines whether clarification is needed, optionally creates a questions file for material ambiguities with recommended answers and justification notes, and writes a junior-friendly spec with demo criteria
+   - **What it does**: checks scope, researches current best practices for relevant technologies, determines whether clarification is needed, optionally creates a questions file for material ambiguities with recommended answers and justification notes, and writes a junior-friendly spec with demo criteria
    - **Output**: `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md` and, when needed, `docs/specs/[NN]-spec-[feature-name]/[NN]-questions-[N]-[feature-name].md`
    - **Why**: aligns humans + AI on what to build before any code changes
 
@@ -138,6 +138,7 @@ Spec-Driven Development (SDD) keeps AI collaborators and human developers aligne
 ## Guiding Principles
 
 - **Clarify intent before delivery:** The spec prompt requires a clarification sufficiency check so material ambiguities are resolved before planning, while minor uncertainty can remain explicit in the spec.
+- **Ground plans in current guidance:** The spec prompt combines repository pattern discovery with current external best-practice research for material technologies, then asks follow-up questions when those signals still leave meaningful choices open.
 - **Ship demoable slices:** Every stage pushes toward thin, end-to-end increments with clear demo criteria and proof artifacts.
 - **Make work transparent:** Tasks live in versioned markdown files so stakeholders can review, comment, and adjust scope anytime.
 - **Progress one slice at a time:** The management prompt enforces single-threaded execution to reduce churn and unfinished work-in-progress.
