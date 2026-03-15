@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Techniques in SDD - Spec-Driven Development</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+</head>
+
+<body>
+    <header>
+        <!-- Navigation will be injected by navigation.js -->
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>AI Techniques Inside SDD</h1>
+                <p class="hero-subtitle">How Liatrio's four prompts turn effective AI collaboration patterns into a
+                    readable workflow teams can study, discuss, and adapt</p>
+                <div class="hero-content">
+                    <p>Spec-Driven Development is not just a four-step checklist. It is a practical implementation of
+                        reusable AI techniques that make work more inspectable, more teachable, and easier to resume
+                        without losing the thread.</p>
+                    <p>This matters because SDD exposes those techniques directly in markdown prompts, files, and review
+                        points. Instead of asking teams to trust a product's hidden behavior, it gives them a concrete
+                        operating model they can read, borrow, and refine.</p>
+                    <p>The sections below show the core techniques, where they appear across <code>SDD-1</code> through
+                        <code>SDD-4</code>, and how they contribute to a more reliable AI-assisted implementation loop.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reference-grid-section techniques-overview-section">
+            <div class="container">
+                <h2 class="section-title">The 8 Techniques at a Glance</h2>
+                <p class="section-intro">These are the core AI collaboration techniques the workflow makes explicit.
+                    Each one can be studied on its own, but they become most useful when combined into a single,
+                    reviewable delivery loop.</p>
+
+                <div class="technique-grid">
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 3v18M5 8h14M5 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Task Decomposition</h3>
+                        <p>Break work into a small set of demoable units before expanding into ordered tasks that can
+                            produce explicit proof.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4 20V4M4 20h16M8 16l4-4 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Progressive Disclosure</h3>
+                        <p>Reveal complexity in stages so the workflow only expands from questions to specs to tasks
+                            when the human or the AI is ready to process new information.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M7 3h10l4 4v14H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                                <path d="M17 3v5h4M10 12h8M10 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Structured Outputs</h3>
+                        <p>Standardize specs, task lists, proof artifacts, and validation reports so they stay easy to
+                            review, diff, and reason about.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <ellipse cx="12" cy="5" rx="7" ry="3" stroke="currentColor" stroke-width="2" />
+                                <path d="M5 5v6c0 1.66 3.13 3 7 3s7-1.34 7-3V5M5 11v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <h3>Serialized External State</h3>
+                        <p>Persist workflow state in deterministic artifacts during the implementation loop so work can
+                            pause, resume, be reviewed, and be validated across sessions.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4 12a8 8 0 0 1 14-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M18 3v4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M20 12a8 8 0 0 1-14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M6 21v-4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Dynamic Context Injection</h3>
+                        <p>Load only the codebase context, files, and constraints needed for the current step instead of
+                            front-loading everything at once.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Human / Resumable Checkpoints</h3>
+                        <p>Insert explicit stop-and-wait gates where a human can review, approve, redirect, or resume the
+                            workflow without guessing what happened.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                                <circle cx="11" cy="11" r="3" stroke="currentColor" stroke-width="2" />
+                                <path d="M20 11h-2M11 2v2M16.66 5.34l-1.41 1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Evidence-Based Validation</h3>
+                        <p>Treat verification as a first-class deliverable by requiring proof artifacts, command output,
+                            and explicit quality gates before calling work done.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-3</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+
+                    <article class="technique-card">
+                        <div class="technique-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 3c4.42 0 8 3.13 8 7 0 2.1-1.05 3.98-2.71 5.26V21l-4.19-2.1c-.36.06-.73.1-1.1.1-4.42 0-8-3.13-8-7s3.58-7 8-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                                <path d="M9.5 10.5h5M9.5 13.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Reasoning Protocols</h3>
+                        <p>Improve reliability by guiding the assistant through defined analysis sequences and keeping
+                            final outputs focused on evidence-backed conclusions.</p>
+                        <div class="prompt-pill-list">
+                            <span class="prompt-pill">SDD-1</span>
+                            <span class="prompt-pill">SDD-2</span>
+                            <span class="prompt-pill">SDD-4</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>How the Techniques Map to the Four Steps</h2>
+                <p class="section-intro">Each prompt emphasizes a different part of the workflow, but the techniques
+                    overlap. The point is not to memorize jargon. It is to notice the repeatable patterns SDD uses to
+                    keep AI work aligned, reviewable, and resumable.</p>
+
+                <div class="phases-grid">
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">01</span>
+                            <h3>SDD-1: Clarify and Scope</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p><strong>Primary techniques:</strong> Progressive Disclosure, Task Decomposition, Dynamic
+                                Context Injection</p>
+                            <p><strong>Also supports:</strong> Structured Outputs, Serialized External State, Human /
+                                Resumable Checkpoints, Reasoning Protocols</p>
+                            <p><strong>Example:</strong> Start with clarifying questions, stop for answers, review the
+                                repo only as needed, then define 2-4 demoable units before locking the spec.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">02</span>
+                            <h3>SDD-2: Plan in Reviewable Steps</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p><strong>Primary techniques:</strong> Task Decomposition, Progressive Disclosure,
+                                Structured Outputs</p>
+                            <p><strong>Also supports:</strong> Serialized External State, Dynamic Context Injection,
+                                Human / Resumable Checkpoints, Reasoning Protocols</p>
+                            <p><strong>Example:</strong> Generate parent tasks first, wait for approval, then expand to
+                                sub-tasks only after the plan is aligned and the relevant files are known.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">03</span>
+                            <h3>SDD-3: Execute with Proof</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p><strong>Primary techniques:</strong> Serialized External State, Human / Resumable
+                                Checkpoints, Evidence-Based Validation</p>
+                            <p><strong>Also supports:</strong> Task Decomposition, Structured Outputs, Dynamic Context
+                                Injection, Progressive Disclosure</p>
+                            <p><strong>Example:</strong> Re-read the task state, implement one unit at a time, capture
+                                proof immediately, update status markers, and pause at checkpoints before moving on.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">04</span>
+                            <h3>SDD-4: Validate with Gates</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p><strong>Primary techniques:</strong> Evidence-Based Validation, Structured Outputs,
+                                Reasoning Protocols</p>
+                            <p><strong>Also supports:</strong> Serialized External State, Dynamic Context Injection,
+                                Human / Resumable Checkpoints, Task Decomposition</p>
+                            <p><strong>Example:</strong> Discover the current state, verify artifacts independently,
+                                apply PASS/FAIL gates, and produce a coverage matrix with explicit conclusions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reactive-art progression-section">
+            <div class="container">
+                <h2>What This Looks Like in Practice</h2>
+                <p>These techniques become concrete when you see them in the prompts and artifacts themselves. The goal
+                    is not to sound sophisticated. The goal is to make the AI's working method explicit enough that a
+                    human can review it, learn from it, and redirect it when needed.</p>
+
+                <div class="ai-workflow-section">
+                    <h3>Four Practical Examples from the Workflow</h3>
+
+                    <div class="workflow-item">
+                        <h4>Parent Tasks Before Sub-Tasks</h4>
+                        <p><strong>Techniques:</strong> Task Decomposition, Progressive Disclosure, Human /
+                            Resumable Checkpoints</p>
+                        <p>SDD-2 deliberately reveals the plan in two passes. First it proposes parent tasks for
+                            strategic alignment. Only after approval does it expand them into detailed sub-tasks.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Deterministic Files for Resumable Work</h4>
+                        <p><strong>Techniques:</strong> Serialized External State, Structured Outputs</p>
+                        <p>Specs, tasks, proofs, and validation live in predictable files while the implementation loop
+                            is active. That makes it possible to pause, resume, review progress, and keep evidence tied
+                            to the work without relying on one chat session's memory.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Just-In-Time Repository Grounding</h4>
+                        <p><strong>Techniques:</strong> Dynamic Context Injection, Reasoning Protocols</p>
+                        <p>Instead of front-loading every repo detail, the prompts instruct the assistant to inspect the
+                            current codebase, patterns, and relevant files at the moment they become useful for the next
+                            decision.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Proof and Validation as First-Class Outputs</h4>
+                        <p><strong>Techniques:</strong> Evidence-Based Validation, Structured Outputs</p>
+                        <p>SDD-3 and SDD-4 do not treat verification as an afterthought. They require proof artifacts,
+                            command output, explicit gates, and a final validation report so completion is grounded in
+                            evidence rather than confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>What You Can Borrow Even If You Do Not Adopt All of SDD</h2>
+                <p class="section-intro">One of the advantages of exposing the workflow in markdown is that teams can
+                    reuse the parts that fit their environment. You do not need to adopt the whole playbook to benefit
+                    from the underlying patterns.</p>
+
+                <div class="adaptability-grid">
+                    <div class="shift-item">
+                        <h4>Add explicit stop points</h4>
+                        <p>Before an assistant expands scope or starts implementation, make it pause for review. This
+                            alone can reduce drift dramatically.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Persist state outside the chat</h4>
+                        <p>Store the working spec, task list, or proof notes in deterministic files so the process can
+                            survive interruptions and handoffs.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Use strict output structures</h4>
+                        <p>Templates, checklists, and status markers make AI output easier to review and far less likely
+                            to dissolve into vague prose.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h4>Require evidence before "done"</h4>
+                        <p>Ask for command output, proof artifacts, and clear gates. It is one of the simplest ways to
+                            improve trust in AI-assisted work.</p>
+                    </div>
+                </div>
+
+                <div class="next-step-cta">
+                    <h3>Study the Techniques in a Real Run</h3>
+                    <p>See the cspell example artifacts, then compare the workflow to other structured development
+                        approaches or install the prompts in your own repository.</p>
+                    <div class="next-step-actions">
+                        <a class="next-step-link next-step-link-primary" href="reference-materials.html">Browse
+                            Reference Materials</a>
+                        <a class="next-step-link" href="comparison.html">View the Comparison</a>
+                        <a class="next-step-link" href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
+                            target="_blank" rel="noopener noreferrer">Read the Prompts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer will be injected by footer.js -->
+    </footer>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/footer.js"></script>
+</body>
+
+</html>
