@@ -28,7 +28,12 @@
                         adaptability. This evidence-based FAQ addresses common objections to Liatrio's Spec-Driven
                         Development (SDD) using a concrete example: implementing a cspell pre-commit hook for
                         spell-checking. By analyzing specifications, task lists, proof artifacts, and validation
-                        reports, we demonstrate how well-executed SDD works in practice.</p>
+                        reports, we demonstrate how well-executed SDD works in practice. You can inspect the full
+                        example in <a href="reference-materials.html">Reference Materials</a>.</p>
+                    <p>It also highlights something easy to miss: <em>SDD keeps its method visible</em>. The workflow is not
+                        hidden behind a product layer, allowing teams to inspect the prompts and understand the
+                        patterns that drive the workflow. This accessibility enables teams to improve their skills
+                        with AI as they learn SDD.</p>
                 </div>
             </div>
         </section>
@@ -39,8 +44,8 @@
                 <h2>Does Spec-Driven Development Add Unnecessary Overhead?</h2>
                 <p class="section-intro">Structured processes often face criticism for introducing bureaucratic
                     overhead. However, the cspell hook implementation proves that SDD structure is an investment, not a
-                    cost. By mandating upfront clarity, it prevents ambiguity and rework—the true sources of
-                    delay—ultimately increasing development velocity.</p>
+                    cost. By forcing the hardest thinking into the first two steps when correction is cheapest, it
+                    prevents ambiguity and rework. These are the true sources of delay. Mandating upfront clarity ultimately increases development velocity.</p>
 
                 <div class="objection-content-grid">
                     <div class="objection-card">
@@ -53,10 +58,10 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                        <h4>Upfront Planning Prevents Waste</h4>
-                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope. This
-                            protected the team from scope creep and unexpected requirements, concentrating effort
-                            exclusively on agreed-upon value.</p>
+                        <h4>Upfront Planning Prevents Costly Rework</h4>
+                        <p>The specification clearly established Goals and Non-Goals, defining what's out of scope.
+                            That early clarity protected the team from scope creep and unexpected requirements, when it
+                            was still cheap to make adjustments.</p>
                     </div>
 
                     <div class="objection-card">
@@ -69,8 +74,8 @@
                         </div>
                         <h4>Structured Work Creates Velocity</h4>
                         <p>Git history shows implementation took under 6 minutes—from first commit (09:57:02) to final
-                            commit (10:02:41). This remarkable speed was enabled by a clear plan breaking work into four
-                            distinct tasks.</p>
+                            commit (10:02:41). That speed was enabled by Step 2 turning the approved spec into four
+                            distinct tasks before implementation began.</p>
                     </div>
 
                     <div class="objection-card">
@@ -92,7 +97,7 @@
 
                 <div class="non-goals-box">
                     <h3>Non-Goals Defined Clear Boundaries</h3>
-                    <div class="non-goals-content">
+                    <div class="non-goals-content non-goals-split">
                         <div class="non-goals-column">
                             <p><strong>Explicitly Out of Scope:</strong></p>
                             <ul class="non-goals-list">
@@ -274,6 +279,9 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     <p>SDD provides a robust framework that enhances clarity, guarantees verifiability, and gracefully
                         accommodates change. The initial investment in structured planning and documentation delivers
                         more predictable, successful outcomes with reduced rework and increased stakeholder confidence.
+                        Because the workflow is exposed in readable prompts and artifacts, it also helps engineers learn
+                        the patterns of effective AI-assisted development instead of treating them as hidden product
+                        behavior.
                     </p>
 
                     <div class="metrics-grid">
@@ -297,8 +305,80 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                     <blockquote class="quote">
                         <strong>Key Takeaway:</strong> The evidence from this real-world implementation demonstrates
                         that SDD's structured approach is not overhead—it's an investment that pays dividends through
-                        clarity, velocity, and quality assurance.
+                        clarity, velocity, quality assurance, and a more teachable way of working with AI.
                     </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>Are Specs, Tasks, and Proofs Supposed To Live in the Repo Forever?</h2>
+                <p class="section-intro">No. In SDD, these artifacts are process scaffolding for an implementation
+                    loop, not living documentation that must stay perfectly synchronized forever. Their job is to help a
+                    human and an AI align on the work, verify progress, and make the reasoning process explicit while
+                    the feature is being built.</p>
+
+                <div class="objection-content-grid">
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h4>Process Artifacts, Not Product Docs</h4>
+                        <p>Specs, tasks, proofs, and validation reports exist to guide the current implementation loop.
+                            Once that loop is complete, the durable source of truth becomes the code and tests.</p>
+                    </div>
+
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h4>Storage and Retention Are Flexible</h4>
+                        <p>Some teams keep artifacts in <code>docs/specs/</code>, some archive them, and some map them
+                            to Jira, GitHub issues, or other systems. SDD stays intentionally unopinionated so teams can
+                            manage context the way that fits their environment.</p>
+                    </div>
+
+                    <div class="objection-card">
+                        <div class="objection-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+                                    stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <h4>They Still Matter After the Run</h4>
+                        <p>Even when they are not maintained forever, these artifacts still provide value as an audit
+                            trail and a teaching surface that shows how the work was framed and verified.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>How To Think About PR Feedback</h3>
+                    <h4>Implementation Feedback</h4>
+                    <p>Feedback like "use a different test structure" or "refactor this code path" stays inside the
+                        current implementation and review loop. The original artifacts already did their job by getting
+                        the work to a reviewable state.</p>
+                    <h4>Directional Feedback</h4>
+                    <p>Feedback like "this should use a different technology" or "the scope should be different"
+                        signals that the earlier framing was off. That usually means going back upstream, clarifying the
+                        direction, and starting a new spec for a new implementation loop.</p>
+                    <p>You can think of specs and proofs like the recipe notes and test batches used to bake a tray of
+                        cookies. They help you get the current batch right, but once the batch is baked, the next major
+                        change is usually a new batch, not an edit to the old dough.</p>
                 </div>
             </div>
         </section>
@@ -359,18 +439,20 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                             <code>SDD1️⃣ I'll help you generate a specification...</code> or
                             <code>SDD3️⃣ Let me start implementing task 1.0...</code>. This is expected behavior and
                             indicates the verification system is working correctly. The markers add minimal overhead
-                            (1-2 tokens) while providing immediate visual feedback.
+                            (1-2 tokens) while providing immediate visual feedback. They also model a broader SDD
+                            principle: effective AI workflows should make important operating logic explicit and easy to
+                            inspect.
                         </p>
                     </div>
                 </div>
 
                 <div class="non-goals-box">
                     <h3>Technical Background</h3>
-                    <div class="non-goals-content">
-                        <p>This verification technique was shared by Lada Kesseler at AI Native Dev Con Fall 2025 as a
+                    <div class="non-goals-content technical-background-content">
+                        <p class="technical-background-intro">This verification technique was shared by Lada Kesseler at AI Native Dev Con Fall 2025 as a
                             practical solution for detecting context rot in production AI workflows. The technique
                             provides:</p>
-                        <ul class="non-goals-list">
+                        <ul class="non-goals-list technical-background-list">
                             <li><strong>Immediate feedback:</strong> Visual confirmation that instructions are being
                                 followed</li>
                             <li><strong>Low overhead:</strong> Minimal token cost (1-2 tokens per response)</li>
@@ -378,10 +460,21 @@ CSpell: Files checked: 1, Issues found: 2 in 1 file.</code></pre>
                             <li><strong>Failure detection:</strong> Absence of marker immediately signals instruction
                                 loss</li>
                         </ul>
-                        <p style="margin-top: 1rem;">For detailed research and technical information, see the <a
+                        <p class="technical-background-link">For detailed research and technical information, see the <a
                                 href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/docs/emoji-context-verification-research.md"
                                 target="_blank" rel="noopener noreferrer">context verification research
                                 documentation</a>.</p>
+                    </div>
+                </div>
+
+                <div class="next-step-cta">
+                    <h3>Continue Evaluating the Workflow</h3>
+                    <p>Watch the short walkthrough next, then dive into the real prompts, proofs, and validation
+                        artifacts behind the workflow.</p>
+                    <div class="next-step-actions">
+                        <a class="next-step-link next-step-link-primary" href="video-overview.html">Watch the Overview
+                            Video</a>
+                        <a class="next-step-link" href="reference-materials.html">Browse Reference Materials</a>
                     </div>
                 </div>
             </div>
