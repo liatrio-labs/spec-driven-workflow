@@ -129,7 +129,7 @@ When all sub-tasks are `[x]`, complete these steps IN ORDER:
 [ ] **Create Proof Artifacts**: Create a single markdown file with all evidence for the task in `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` (where `[NN]` is a two-digit, zero-padded number, e.g., `01`, `02`, etc.)
    - **File naming**: `[spec-number]-task-[task-number]-proofs.md` (e.g., `03-task-01-proofs.md`)
    - **Include all evidence**: CLI output, test results, screenshots, configuration examples
-   - **Format**: Use markdown code blocks with clear section headers
+   - **Format**: Use reviewer-friendly markdown with a descriptive title, summary-first sections, and code blocks only after context is established
    - **Execute commands immediately**: Capture command output directly in the markdown file
    - **Verify creation**: Confirm the markdown file exists and contains all required evidence
 [ ] **Verify Proof Artifacts**: Confirm all proof artifacts demonstrate required functionality
@@ -217,6 +217,15 @@ Each parent task must include artifacts that:
 - **Enable validation** (provide evidence for `/SDD-4-validate-spec-implementation`)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
+Proof artifacts must be optimized for fast human review, not just raw evidence storage.
+
+- Lead with what the task proves before showing raw output.
+- Use descriptive headings that name the task outcome, not just the proof filename.
+- Explain why each artifact matters before presenting commands, logs, or screenshots.
+- Keep raw evidence intact, but front-load interpretation so a reviewer can understand the result quickly.
+- For screenshots, always show the artifact path above the image and embed the image inline in the proof file.
+- If output is long, summarize the important result first and then include the most relevant excerpt or reference to the full artifact path.
+
 ### Security Warning
 
 **CRITICAL**: Proof artifacts will be committed to the repository. Never include sensitive data:
@@ -236,22 +245,116 @@ For each parent task completion:
 [ ] **Directory Ready**: `./docs/specs/[NN]-spec-[feature-name]/[NN]-proofs/` exists
 [ ] **Review Task Requirements**: Check what proof artifacts the task specifically requires
 [ ] **Create Single Proof File**: Create `[spec-number]-task-[task-number]-proofs.md`
-[ ] **Include All Evidence in One File**:
-   - ## CLI Output section with command results
-   - ## Test Results section with test output
-   - ## Screenshots section with image references
-   - ## Configuration section with config examples
-   - ## Verification section showing proof artifacts demonstrate required functionality
+[ ] **Use A Reviewable Structure**:
+   - `# Task [TT] Proofs - [descriptive task outcome]`
+   - `## Task Summary` explaining what was built and why this task matters
+   - `## What This Task Proves` mapping the task to the key behaviors now working
+   - `## Evidence Summary` giving a short reviewer-oriented overview before raw artifacts
+[ ] **Document Each Artifact With Context Before Evidence**:
+   - `## Artifact: [descriptive name]`
+   - `**What it proves:** [specific behavior or requirement validated]`
+   - `**Why it matters:** [why a reviewer should care about this artifact]`
+   - `**Command**` or `**Artifact path**`
+   - `**Result summary:** [1-3 sentence interpretation of the evidence]`
+   - Raw evidence block or inline image
+[ ] **Present Screenshots For Fast Review**:
+   - Show the screenshot file path in its own line above the image
+   - Embed every screenshot inline using standard markdown image syntax
+   - Use alt text that describes the visible behavior being proven
+[ ] **Keep Verification Context Near The Top**:
+   - Do not rely on a bottom-only `Verification` section to explain relevance
+   - Place interpretation before the raw command output, logs, or screenshots
+[ ] **End With A Short Reviewer Conclusion**:
+   - State the final conclusion the reviewer should draw from the combined evidence
 [ ] **Format with Markdown**: Use code blocks, headers, and clear organization
 [ ] **Verify File Content**: Ensure the markdown file contains all required evidence
 [ ] **Security Check**: Scan proof file for API keys, tokens, passwords, or other sensitive data and replace with placeholders
 
 **SIMPLE VERIFICATION**: One file per task, all evidence included
-**CONTENT VERIFICATION**: Check the markdown file contains required sections
+**CONTENT VERIFICATION**: Check the markdown file contains both context-setting summary sections and raw evidence
 **VERIFICATION**: Ensure proof artifact file demonstrates all required functionality
 **SECURITY VERIFICATION**: Confirm no real credentials or sensitive data are present
 
 **The single markdown proof file must be created BEFORE the parent task commit**
+```
+
+### Recommended Proof File Shape
+
+Use this structure unless the task requires a clearly better equivalent.
+
+```markdown
+# Task 02 Proofs - Metabase bootstrap and first-run setup
+
+## Task Summary
+
+This task proves the bootstrap flow can start Metabase, wait for readiness, complete first-run admin setup, and expose a usable local instance without manual setup steps.
+
+## What This Task Proves
+
+- The bootstrap command starts a Metabase container and waits until it becomes reachable.
+- The first-run setup flow succeeds and returns a usable local Metabase URL.
+- The bootstrap orchestration is covered by automated tests for both success and failure paths.
+
+## Evidence Summary
+
+- A successful bootstrap CLI run returns `status: ok` and a local Metabase URL.
+- The health endpoint returns `{"status":"ok"}`, confirming the container is reachable after bootstrap.
+- The task-specific pytest suite passes, confirming the orchestration logic is covered automatically.
+
+## Artifact: Successful bootstrap CLI run
+
+**What it proves:** The bootstrap flow can start Metabase, complete readiness polling, and return a usable handoff payload.
+
+**Why it matters:** This is the main end-to-end proof that the task's core runtime behavior works.
+
+**Command:**
+
+~~~bash
+python3 ...
+~~~
+
+**Artifact path:** `artifacts/.../cli.txt`
+
+**Result summary:** The command returned `status: ok`, exposed a local Metabase URL, and included sanitized handoff details plus cleanup commands.
+
+~~~json
+{ ... }
+~~~
+
+## Artifact: Metabase health endpoint
+
+**What it proves:** The started Metabase instance is reachable after bootstrap.
+
+**Why it matters:** A successful bootstrap is not enough if the service is not actually available to the user.
+
+**Command:**
+
+~~~bash
+curl -s http://127.0.0.1:3000/api/health
+~~~
+
+**Result summary:** The endpoint returned `{"status":"ok"}`, confirming the local instance is healthy.
+
+~~~json
+{"status":"ok"}
+~~~
+
+## Artifact: Database list screenshot
+
+**What it proves:** The configured database appears in the Metabase UI after bootstrap.
+
+**Why it matters:** This confirms the feature is visible in the actual user-facing interface, not just in backend or CLI output.
+
+**Artifact path:** `artifacts/.../database-list.png`
+
+**Result summary:** The screenshot shows the connected database in the Metabase database list, confirming the setup is visible to a human reviewer.
+
+![Database list showing connected Metabase source](artifacts/.../database-list.png)
+
+## Reviewer Conclusion
+
+These artifacts show the task's runtime behavior works end-to-end: Metabase starts successfully, becomes reachable, and is backed by automated orchestration tests.
+
 ```
 
 ## Git Workflow Protocol

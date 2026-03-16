@@ -109,7 +109,7 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 - **R2 Proof Artifacts:** Each Proof Artifact is accessible and demonstrates the required functionality.
 - **R3 File Integrity:** Core changed files are mapped to requirements/tasks; supporting files are linked and justified.
 - **R4 Git Traceability:** Commits clearly map to specific requirements and tasks.
-- **R5 Evidence Quality:** Evidence includes proof artifact test results and file existence checks.
+- **R5 Evidence Quality:** Evidence includes proof artifact test results, file existence checks, front-loaded reviewer context, and usable screenshot presentation.
 - **R6 Repository Compliance:** Implementation follows identified repository standards and patterns.
 
 ## Validation Process (step-by-step chain-of-thought)
@@ -161,6 +161,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
    - Verify proof artifact files exist (from task list)
    - Test that each Proof Artifact (URLs, CLI commands, test references) demonstrates what it claims
    - Verify file existence for "Relevant Files" listed in task list
+   - Check that proof docs explain what each artifact proves before presenting raw evidence
    - Check repository pattern compliance (via proof artifacts, file checks, and commit log analysis)
 3) Record **evidence** (proof artifact test results, file existence checks, commit references).
 4) Mark each item **Verified**, **Failed**, or **Unknown**.
@@ -174,11 +175,14 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
    - Out-of-scope core files without linkage are blockers
 
 2) **Proof Artifact Verification**
-   - URLs are accessible and return expected content
-   - CLI commands execute successfully with expected output
-   - Test references exist and can be executed
-   - Screenshots/demos show required functionality
-   - **Security Check**: Proof artifacts contain no real API keys, tokens, passwords, or sensitive data
+    - URLs are accessible and return expected content
+    - CLI commands execute successfully with expected output
+    - Test references exist and can be executed
+    - Screenshots/demos show required functionality
+    - Proof docs use descriptive titles and front-load task context before raw evidence
+    - Screenshot artifacts show the file path and embed the image inline in the proof doc
+    - Raw evidence is preceded by a short explanation of what it proves and why it matters
+    - **Security Check**: Proof artifacts contain no real API keys, tokens, passwords, or sensitive data
 
 3) **Requirement Coverage**
    - Proof Artifacts exist for each Functional Requirement
@@ -262,6 +266,7 @@ For each issue, provide:
 | HIGH | Proof Artifact URL returns 404. `task-list.md#L45` references `https://example.com/demo`. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found" | Functionality cannot be verified | Update URL in task list or deploy missing endpoint |
 | CRITICAL | Unmapped out-of-scope core file. `src/auth.ts` created with no task/FR linkage. Evidence: `git log --name-only` shows file created; no mapping in tasks/report/commit notes | Implementation scope creep | Add explicit FR/task mapping and rationale, or remove unrelated core change |
 | MEDIUM | Supporting-file linkage missing. `docs/specs/.../proofs/*.md` changed but no explicit linkage to core task in notes. Evidence: changed-file list vs task metadata | Traceability gap, verification still possible | Add linkage note in task list or validation report appendix |
+| MEDIUM | Proof artifact is hard to review quickly. `docs/specs/.../01-proofs/01-task-03-proofs.md` uses a filename-only title, lists screenshot paths without inline images, and explains relevance only at the bottom. Evidence: proof doc structure review | Human verification is slowed and context is easy to miss | Rewrite the proof doc with a descriptive title, summary-first sections, inline screenshots, and per-artifact interpretation before raw evidence |
 
 **Note:** Do not report issues that are already clearly marked in the Coverage Matrix unless additional context is needed. Focus on actionable problems that need resolution.
 
