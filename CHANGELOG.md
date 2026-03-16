@@ -2,6 +2,61 @@
 
 <!-- version list -->
 
+## v1.12.3 (2026-03-16)
+
+### Bug Fixes
+
+- **docs**: Overhaul comparison page with balanced competitor analysis
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+### Documentation
+
+- Added readme instructions for installing SDD workflow on Windows devices via PowerShell
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Added readme instructions for installing SDD workflow on Window…
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Fixed linting issues with docs
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Updated readme based on linter preferences
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- **site**: Add next-step navigation across docs pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Clarify spec lifecycle across workflow pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Emphasize spec-first workflow across docs
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine comparison page external references
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine SDD messaging and overhaul comparison page
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine SDD workflow messaging across site pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refresh docs page layouts and styling
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+
 ## v1.12.2 (2026-02-11)
 
 ### Bug Fixes
