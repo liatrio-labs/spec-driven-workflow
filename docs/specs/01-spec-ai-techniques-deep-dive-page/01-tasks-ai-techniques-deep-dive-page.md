@@ -29,7 +29,7 @@
 - [x] 1.3 Build the opening sections that explain the "AI-native development primitives" framing, relate it to software-development primitives, and position the page as the deeper companion to `docs/ai-techniques.html`.
 - [x] 1.4 Add an orientation section that explains how readers should use the page: learn the concepts, study SDD-specific examples, and reuse the patterns outside full SDD adoption.
 
-### [ ] 2.0 Add deep-dive teaching sections for all eight techniques
+### [x] 2.0 Add deep-dive teaching sections for all eight techniques
 
 #### 2.0 Proof Artifact(s)
 
@@ -39,10 +39,10 @@
 
 #### 2.0 Tasks
 
-- [ ] 2.1 Define a reusable section pattern for each technique that covers what it is, why it matters, how SDD uses it, one SDD-specific example, and one broader software-development or AI-assisted engineering example.
-- [ ] 2.2 Write deep-dive sections for Task Decomposition, Progressive Disclosure, Structured Outputs, and Serialized External State using the agreed teaching pattern and concrete examples.
-- [ ] 2.3 Write deep-dive sections for Dynamic Context Injection, Human / Resumable Checkpoints, Evidence-Based Validation, and Reasoning Protocols using the same teaching pattern and concrete examples.
-- [ ] 2.4 Review all eight sections for consistency, beginner-friendly wording, and balanced use of SDD-specific versus broader engineering examples.
+- [x] 2.1 Define a reusable section pattern for each technique that covers what it is, why it matters, how SDD uses it, one SDD-specific example, and one broader software-development or AI-assisted engineering example.
+- [x] 2.2 Write deep-dive sections for Task Decomposition, Progressive Disclosure, Structured Outputs, and Serialized External State using the agreed teaching pattern and concrete examples.
+- [x] 2.3 Write deep-dive sections for Dynamic Context Injection, Human / Resumable Checkpoints, Evidence-Based Validation, and Reasoning Protocols using the same teaching pattern and concrete examples.
+- [x] 2.4 Review all eight sections for consistency, beginner-friendly wording, and balanced use of SDD-specific versus broader engineering examples.
 
 ### [ ] 3.0 Connect the techniques to workflow behavior and reusable practice
 
