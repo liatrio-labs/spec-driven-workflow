@@ -59,7 +59,7 @@
 - [x] 3.3 Add a practical reuse section that explains which primitives teams can borrow independently, with examples outside the exact SDD workflow.
 - [x] 3.4 Verify that the page avoids hidden chain-of-thought framing and instead describes observable workflow behaviors, checkpoints, and evidence patterns.
 
-### [ ] 4.0 Integrate the page into the docs experience and visual system
+### [x] 4.0 Integrate the page into the docs experience and visual system
 
 #### 4.0 Proof Artifact(s)
 
@@ -70,7 +70,7 @@
 
 #### 4.0 Tasks
 
-- [ ] 4.1 Add the new page to `docs/assets/js/navigation.js` and update `docs/ai-techniques.html` so readers can move from the overview page into the deep-dive companion.
-- [ ] 4.2 Update `docs/reference-materials.html` to frame the new page as a reference companion for studying how the primitives appear in a real SDD run.
-- [ ] 4.3 Add or extend shared styles in `docs/assets/css/styles.css` for the deep-dive page sections, ensuring the new page feels distinct from the overview page while staying within the site's visual system.
-- [ ] 4.4 Verify the new page and its entry points on desktop and narrow-width layouts, focusing on the new page's readability and navigation flow without expanding scope into a broader mobile-site remediation effort.
+- [x] 4.1 Add the new page to `docs/assets/js/navigation.js` and update `docs/ai-techniques.html` so readers can move from the overview page into the deep-dive companion.
+- [x] 4.2 Update `docs/reference-materials.html` to frame the new page as a reference companion for studying how the primitives appear in a real SDD run.
+- [x] 4.3 Add or extend shared styles in `docs/assets/css/styles.css` for the deep-dive page sections, ensuring the new page feels distinct from the overview page while staying within the site's visual system.
+- [x] 4.4 Verify the new page and its entry points on desktop and narrow-width layouts, focusing on the new page's readability and navigation flow without expanding scope into a broader mobile-site remediation effort.
