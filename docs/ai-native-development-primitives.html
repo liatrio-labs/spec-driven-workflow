@@ -87,6 +87,219 @@
                 </div>
             </div>
         </section>
+
+        <section class="reference-grid-section techniques-overview-section">
+            <div class="container">
+                <h2 class="section-title">The Eight Primitives in Depth</h2>
+                <p class="section-intro">These sections are intentionally longer than the overview page. The goal is not
+                    just recognition. It is understanding.</p>
+
+                <div class="primitive-detail-grid">
+                    <article class="primitive-detail-card">
+                        <h3>Task Decomposition</h3>
+                        <h4>What it is</h4>
+                        <p>Task decomposition turns a large objective into smaller units that are easier to reason about,
+                            implement, and verify. In AI-native work, that usually means creating slices that can be
+                            reviewed independently instead of handing the model one huge instruction and hoping it stays
+                            aligned.</p>
+                        <h4>Why it matters</h4>
+                        <p>AI systems often perform better when the work is bounded and sequenced. Smaller units make it
+                            easier to spot misunderstanding early, isolate defects, and preserve momentum when the
+                            implementation needs to change direction.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>SDD first breaks work into demoable units in the spec, then turns those units into parent
+                            tasks, then expands them into sub-tasks during planning and implementation. The workflow
+                            never asks the assistant to hold the whole project as one undifferentiated block.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-1` asks for two to four demoable units instead of a vague feature blob. `SDD-2` then
+                            turns those units into parent tasks that can each become a checkpoint, proof file, and
+                            commit boundary.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Breaking a migration into schema change, backfill, read-path switch, and cleanup instead
+                                of one risky cutover.</li>
+                            <li>Splitting an AI code-review workflow into file discovery, policy checks, diff analysis,
+                                and summary generation so each step has a clearer success condition.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Progressive Disclosure</h3>
+                        <h4>What it is</h4>
+                        <p>Progressive disclosure reveals complexity in stages. Instead of exposing every detail at once,
+                            the workflow expands only when the current layer is understood and approved.</p>
+                        <h4>Why it matters</h4>
+                        <p>AI-native workflows can become noisy fast. Progressive disclosure reduces cognitive overload
+                            for both the human and the model, keeps the current decision in focus, and limits how often a
+                            workflow runs ahead of alignment.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>SDD starts with questions, then a spec, then parent tasks, then sub-tasks, then implementation,
+                            then validation. It does not try to surface everything in one jump.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-2` explicitly generates parent tasks first and waits for confirmation before expanding into
+                            sub-tasks. That pause is not ceremony; it is a deliberate control point.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Having an AI assistant propose an API contract before generating handlers, tests, and
+                                client code.</li>
+                            <li>Reviewing a deployment plan before exposing the detailed rollback checklist and step-level
+                                execution commands.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Structured Outputs</h3>
+                        <h4>What it is</h4>
+                        <p>Structured outputs require the AI to produce results in a predictable shape. That shape might
+                            be markdown sections, a checklist, a report template, or a strict machine-readable schema.</p>
+                        <h4>Why it matters</h4>
+                        <p>Without structure, outputs drift into impressive-sounding prose that is hard to verify. With
+                            structure, reviews get faster, gaps become easier to spot, and the workflow can move from
+                            discussion to execution with less translation work.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>Specs, task lists, proof files, and validation reports all follow explicit formats. That makes
+                            them readable by humans and dependable as handoff artifacts between workflow stages.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-4` requires a specific validation report shape with a coverage matrix, explicit statuses,
+                            and reviewer-oriented conclusions instead of an informal "looks good" summary.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Using JSON schema outputs for extraction or routing instead of asking the model to
+                                "respond in valid JSON" and hoping it stays consistent.</li>
+                            <li>Standardizing incident-review templates so AI-generated summaries always include impact,
+                                timeline, contributing factors, and next actions.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Serialized External State</h3>
+                        <h4>What it is</h4>
+                        <p>Serialized external state means storing workflow state outside the live chat in deterministic,
+                            reviewable artifacts. The model no longer needs to remember everything from conversation
+                            history alone.</p>
+                        <h4>Why it matters</h4>
+                        <p>AI sessions are interruptible, context windows are finite, and long tasks lose clarity when all
+                            memory stays implicit. External state makes work resumable, reviewable, and less dependent on
+                            one uninterrupted interaction.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>Specs, tasks, proofs, and validation documents persist the implementation loop as files. They
+                            act as working state while the feature is being built, even though they are not meant to be
+                            permanent living documentation forever.</p>
+                        <h4>SDD example</h4>
+                        <p>`docs/specs/[NN]-spec-[feature-name]/` gives every run a predictable home. A later step can
+                            recover the current state by reading files instead of reconstructing intent from memory.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Keeping an AI-maintained `NOTES.md` or `TODO.md` file during a long debugging session so a
+                                restart does not erase the working model of the problem.</li>
+                            <li>Persisting deployment checkpoints, generated configs, and rollout decisions outside the
+                                agent session during infrastructure automation.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Dynamic Context Injection</h3>
+                        <h4>What it is</h4>
+                        <p>Dynamic context injection loads the right context when it becomes useful instead of front-loading
+                            every possibly relevant file, rule, and artifact at the start.</p>
+                        <h4>Why it matters</h4>
+                        <p>More context is not always better context. Large, low-signal prompts can create confusion and
+                            slow the model down. Well-timed retrieval keeps attention focused on what matters now.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>The prompts repeatedly instruct the assistant to inspect the repo, relevant files, and current
+                            state as part of the active step. This lets the workflow ground itself in reality without
+                            flooding every stage with unnecessary detail.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-1` uses a context assessment to review existing docs and repo patterns before finalizing a
+                            spec. `SDD-3` and `SDD-4` re-read task state and proof requirements just in time for the next
+                            implementation or validation decision.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Loading only the files touched by a pull request before generating a code review instead of
+                                dropping the entire repository into context.</li>
+                            <li>Querying a production runbook or architecture note only when a deployment issue points to
+                                that subsystem.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Human / Resumable Checkpoints</h3>
+                        <h4>What it is</h4>
+                        <p>Human and resumable checkpoints are explicit pause points where the workflow waits for review,
+                            confirmation, or correction before moving on.</p>
+                        <h4>Why it matters</h4>
+                        <p>Unchecked momentum is one of the easiest ways for AI-assisted work to go off-track. Checkpoints
+                            keep humans in the decision loop and make interruptions less costly because the workflow knows
+                            where it can safely resume.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>SDD bakes in stop points after questions, after parent tasks, during implementation based on
+                            checkpoint mode, and before validation handoff. These pauses are part of the design, not a
+                            sign that the workflow is incomplete.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-1` stops after creating a questions file. `SDD-2` waits for explicit approval before
+                            generating sub-tasks. `SDD-3` lets the user choose continuous, task, or batch checkpoints.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Requiring a human sign-off on a generated migration plan before any write operation runs
+                                against production data.</li>
+                            <li>Pausing an AI incident assistant after triage so an operator can confirm impact before the
+                                assistant drafts customer-facing updates.</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Evidence-Based Validation</h3>
+                        <h4>What it is</h4>
+                        <p>Evidence-based validation treats proof as a first-class deliverable. A task is not complete
+                            because the model sounds confident; it is complete because a reviewer can inspect artifacts,
+                            commands, tests, and outcomes.</p>
+                        <h4>Why it matters</h4>
+                        <p>AI can be persuasive even when it is wrong. Validation grounded in observable evidence creates
+                            a stronger trust model and makes later review possible without replaying the whole session.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>SDD requires proof files, test output, quality-gate results, and a final validation report.
+                            The workflow assumes that shipping without evidence is a risk, not a shortcut.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-3` creates one proof file per parent task. `SDD-4` then checks those artifacts against the
+                            spec, task list, and repository standards before producing a coverage matrix.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Requiring an AI-generated refactor to include passing targeted tests, lint output, and a
+                                diff summary before review.</li>
+                            <li>Using eval datasets and judge outputs to compare prompt or workflow changes instead of
+                                choosing the version that merely "feels better."</li>
+                        </ul>
+                    </article>
+
+                    <article class="primitive-detail-card">
+                        <h3>Reasoning Protocols</h3>
+                        <h4>What it is</h4>
+                        <p>Reasoning protocols are explicit sequences for how the assistant should analyze a task. They do
+                            not require hidden reasoning dumps; they define the observable steps that keep problem
+                            solving disciplined.</p>
+                        <h4>Why it matters</h4>
+                        <p>Without a protocol, the model can jump to an answer before checking scope, evidence, or repo
+                            constraints. A reasoning protocol slows the workflow down just enough to avoid avoidable
+                            mistakes.</p>
+                        <h4>How SDD uses it</h4>
+                        <p>Each prompt defines a sequence such as context assessment, scope evaluation, standards review,
+                            task preparation, evidence checks, or coverage analysis. The workflow separates those steps so
+                            the output is grounded in process rather than improvisation.</p>
+                        <h4>SDD example</h4>
+                        <p>`SDD-4` follows a discovery, analysis, evidence verification, and reporting loop. The point is
+                            not to expose hidden chain-of-thought; it is to ensure the validation behavior follows a
+                            defined method.</p>
+                        <h4>Broader examples</h4>
+                        <ul>
+                            <li>Asking an AI deployment assistant to always check environment, diff, rollback path, and
+                                blast radius before proposing rollout steps.</li>
+                            <li>Using a fixed debugging flow: reproduce, inspect logs, isolate likely fault domain, test a
+                                hypothesis, then summarize the result.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
