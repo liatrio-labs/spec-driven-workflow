@@ -14,7 +14,7 @@
 
 ## Tasks
 
-### [ ] 1.0 Create the deep-dive page scaffold and primitives framing
+### [x] 1.0 Create the deep-dive page scaffold and primitives framing
 
 #### 1.0 Proof Artifact(s)
 
@@ -24,10 +24,10 @@
 
 #### 1.0 Tasks
 
-- [ ] 1.1 Finalize the public-facing page name, file path, and navigation label using the spec answers (`AI-Native Development Primitives`) so implementation uses one consistent label everywhere.
-- [ ] 1.2 Create `docs/ai-native-development-primitives.html` with the shared site shell (`head`, injected navigation/footer, shared assets, and page title metadata) to match the docs-site architecture.
-- [ ] 1.3 Build the opening sections that explain the "AI-native development primitives" framing, relate it to software-development primitives, and position the page as the deeper companion to `docs/ai-techniques.html`.
-- [ ] 1.4 Add an orientation section that explains how readers should use the page: learn the concepts, study SDD-specific examples, and reuse the patterns outside full SDD adoption.
+- [x] 1.1 Finalize the public-facing page name, file path, and navigation label using the spec answers (`AI-Native Development Primitives`) so implementation uses one consistent label everywhere.
+- [x] 1.2 Create `docs/ai-native-development-primitives.html` with the shared site shell (`head`, injected navigation/footer, shared assets, and page title metadata) to match the docs-site architecture.
+- [x] 1.3 Build the opening sections that explain the "AI-native development primitives" framing, relate it to software-development primitives, and position the page as the deeper companion to `docs/ai-techniques.html`.
+- [x] 1.4 Add an orientation section that explains how readers should use the page: learn the concepts, study SDD-specific examples, and reuse the patterns outside full SDD adoption.
 
 ### [ ] 2.0 Add deep-dive teaching sections for all eight techniques
 
