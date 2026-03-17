@@ -208,7 +208,7 @@ After sub-task generation is complete:
    - **Regression-risk blind spots (FLAG):** Flag if validation only covers happy-path behavior where regression risk exists.
    - **Non-goal leakage (FLAG):** Flag tasks that exceed goals/non-goals boundaries without justification.
 3. Use compact exception-only reporting:
-   - Gateboard first, no long narrative
+   - Gate overview first, no long narrative
    - At most 3 REQUIRED failures and 2 FLAG findings in the main report
    - Include only exceptions and conflicts; omit empty sections
 4. Present findings and remediation items to the user.
@@ -403,7 +403,7 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 
 If all REQUIRED gates pass on the first audit run, keep the report minimal:
 
-- Include only `Executive Summary` and `Gateboard`.
+- Include only `Executive Summary` and `Gate Overview`.
 - Omit empty `Findings`, `User-Approved Remediation Plan`, and `Re-Audit Delta` sections.
 
 ## Interaction Model
