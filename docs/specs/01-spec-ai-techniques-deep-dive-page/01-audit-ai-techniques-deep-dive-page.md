@@ -6,7 +6,7 @@
 - Required Gate Failures: 0
 - Flagged Risks: 0
 
-## Gateboard
+## Gate Overview
 
 | Gate | Status | Why it failed (<=10 words) | Exact fix target |
 | --- | --- | --- | --- |

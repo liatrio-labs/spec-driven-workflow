@@ -13,7 +13,7 @@
 | Requirement ID/Name | Status (Verified/Failed/Unknown) | Evidence (file:lines, commit, or artifact) |
 | --- | --- | --- |
 | FR-1 Standalone deep-dive page exists | Verified | `docs/ai-native-development-primitives.html:19-37`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-01-proofs.md`; commit `b5c749c` |
-| FR-2 Primitives framing is foundational without overclaiming | Verified | `docs/ai-native-development-primitives.html:21-45`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-01-proofs.md`; commit `b5c749c` |
+| FR-2 Primitives framing is foundational without overstating the claim | Verified | `docs/ai-native-development-primitives.html:21-45`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-01-proofs.md`; commit `b5c749c` |
 | FR-3 Software-primitives analogy is explained in plain language | Verified | `docs/ai-native-development-primitives.html:25-28`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-01-proofs.md`; commit `b5c749c` |
 | FR-4 Page is framed as companion to overview page | Verified | `docs/ai-native-development-primitives.html:32-34`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-01-proofs.md`; commit `b5c749c` |
 | FR-5 All eight techniques have dedicated subsections | Verified | `docs/ai-native-development-primitives.html:93-300`; proof artifact `docs/specs/01-spec-ai-techniques-deep-dive-page/01-proofs/01-task-02-proofs.md`; commit `b0d45df` |
@@ -71,7 +71,7 @@ No validation issues found.
   - `b55962d` `docs(site): connect AI primitives page to SDD workflow`
   - `ddc300e` `docs(site): integrate AI primitives page into docs flow`
 - **Changed-file scope since spec creation:** `git diff --name-only 5405638^..HEAD` showed 19 linked files: 5 core docs files and 14 supporting spec/proof artifacts.
-- **Core file integrity result:** All changed core files were predeclared in `## Relevant Files` of `docs/specs/01-spec-ai-techniques-deep-dive-page/01-tasks-ai-techniques-deep-dive-page.md`.
+- **Core file integrity result:** All changed core files were listed in advance in `## Relevant Files` of `docs/specs/01-spec-ai-techniques-deep-dive-page/01-tasks-ai-techniques-deep-dive-page.md`.
 - **Supporting file linkage result:** Supporting files are limited to spec/task/audit artifacts and proof docs/screenshots inside the matching spec directory; each is explicitly linked by task numbering and commit messages referencing `T1`-`T4` in Spec `01`.
 - **Proof artifact structure check:** A Python validation script confirmed all four proof docs include `Task Summary`, `What This Task Proves`, and `Evidence Summary`, and that all embedded screenshot paths resolve to existing files.
 - **URL checks executed:**
