@@ -191,165 +191,16 @@
                         </div>
                     </article>
                 </div>
-            </div>
-        </section>
-
-        <section class="phases-detailed">
-            <div class="container">
-                <h2>How the Techniques Map to the Four Steps</h2>
-                <p class="section-intro">Each prompt emphasizes a different part of the workflow, but the techniques
-                    overlap. The point is not to memorize jargon. It is to notice the repeatable patterns SDD uses to
-                    keep AI work aligned, reviewable, and resumable.</p>
-
-                <div class="phases-grid">
-                    <div class="phase-card">
-                        <div class="phase-card-header">
-                            <span class="phase-number-badge">01</span>
-                            <h3>SDD-1: Clarify and Scope</h3>
-                        </div>
-                        <div class="phase-card-content">
-                            <p><strong>Primary techniques:</strong> Progressive Disclosure, Task Decomposition, Dynamic
-                                Context Injection</p>
-                            <p><strong>Also supports:</strong> Structured Outputs, Serialized External State, Human /
-                                Resumable Checkpoints, Reasoning Protocols</p>
-                            <p><strong>Example:</strong> Start with clarifying questions, stop for answers, review the
-                                repo only as needed, then define 2-4 demoable units before locking the spec.</p>
-                        </div>
-                    </div>
-
-                    <div class="phase-card">
-                        <div class="phase-card-header">
-                            <span class="phase-number-badge">02</span>
-                            <h3>SDD-2: Plan in Reviewable Steps</h3>
-                        </div>
-                        <div class="phase-card-content">
-                            <p><strong>Primary techniques:</strong> Task Decomposition, Progressive Disclosure,
-                                Structured Outputs</p>
-                            <p><strong>Also supports:</strong> Serialized External State, Dynamic Context Injection,
-                                Human / Resumable Checkpoints, Reasoning Protocols</p>
-                            <p><strong>Example:</strong> Generate parent tasks first, wait for approval, then expand to
-                                sub-tasks only after the plan is aligned and the relevant files are known.</p>
-                        </div>
-                    </div>
-
-                    <div class="phase-card">
-                        <div class="phase-card-header">
-                            <span class="phase-number-badge">03</span>
-                            <h3>SDD-3: Execute with Proof</h3>
-                        </div>
-                        <div class="phase-card-content">
-                            <p><strong>Primary techniques:</strong> Serialized External State, Human / Resumable
-                                Checkpoints, Evidence-Based Validation</p>
-                            <p><strong>Also supports:</strong> Task Decomposition, Structured Outputs, Dynamic Context
-                                Injection, Progressive Disclosure</p>
-                            <p><strong>Example:</strong> Re-read the task state, implement one unit at a time, capture
-                                proof immediately, update status markers, and pause at checkpoints before moving on.</p>
-                        </div>
-                    </div>
-
-                    <div class="phase-card">
-                        <div class="phase-card-header">
-                            <span class="phase-number-badge">04</span>
-                            <h3>SDD-4: Validate with Gates</h3>
-                        </div>
-                        <div class="phase-card-content">
-                            <p><strong>Primary techniques:</strong> Evidence-Based Validation, Structured Outputs,
-                                Reasoning Protocols</p>
-                            <p><strong>Also supports:</strong> Serialized External State, Dynamic Context Injection,
-                                Human / Resumable Checkpoints, Task Decomposition</p>
-                            <p><strong>Example:</strong> Discover the current state, verify artifacts independently,
-                                apply PASS/FAIL gates, and produce a coverage matrix with explicit conclusions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="reactive-art progression-section">
-            <div class="container">
-                <h2>What This Looks Like in Practice</h2>
-                <p>These techniques become concrete when you see them in the prompts and artifacts themselves. The goal
-                    is not to sound sophisticated. The goal is to make the AI's working method explicit enough that a
-                    human can review it, learn from it, and redirect it when needed.</p>
-
-                <div class="ai-workflow-section">
-                    <h3>Four Practical Examples from the Workflow</h3>
-
-                    <div class="workflow-item">
-                        <h4>Parent Tasks Before Sub-Tasks</h4>
-                        <p><strong>Techniques:</strong> Task Decomposition, Progressive Disclosure, Human /
-                            Resumable Checkpoints</p>
-                        <p>SDD-2 deliberately reveals the plan in two passes. First it proposes parent tasks for
-                            strategic alignment. Only after approval does it expand them into detailed sub-tasks.</p>
-                    </div>
-
-                    <div class="workflow-item">
-                        <h4>Deterministic Files for Resumable Work</h4>
-                        <p><strong>Techniques:</strong> Serialized External State, Structured Outputs</p>
-                        <p>Specs, tasks, proofs, and validation live in predictable files while the implementation loop
-                            is active. That makes it possible to pause, resume, review progress, and keep evidence tied
-                            to the work without relying on one chat session's memory.</p>
-                    </div>
-
-                    <div class="workflow-item">
-                        <h4>Just-In-Time Repository Grounding</h4>
-                        <p><strong>Techniques:</strong> Dynamic Context Injection, Reasoning Protocols</p>
-                        <p>Instead of front-loading every repo detail, the prompts instruct the assistant to inspect the
-                            current codebase, patterns, and relevant files at the moment they become useful for the next
-                            decision.</p>
-                    </div>
-
-                    <div class="workflow-item">
-                        <h4>Proof and Validation as First-Class Outputs</h4>
-                        <p><strong>Techniques:</strong> Evidence-Based Validation, Structured Outputs</p>
-                        <p>SDD-3 and SDD-4 do not treat verification as an afterthought. They require proof artifacts,
-                            command output, explicit gates, and a final validation report so completion is grounded in
-                            evidence rather than confidence.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="phases-detailed">
-            <div class="container">
-                <h2>What You Can Borrow Even If You Do Not Adopt All of SDD</h2>
-                <p class="section-intro">One of the advantages of exposing the workflow in markdown is that teams can
-                    reuse the parts that fit their environment. You do not need to adopt the whole playbook to benefit
-                    from the underlying patterns.</p>
-
-                <div class="adaptability-grid">
-                    <div class="shift-item">
-                        <h4>Add explicit stop points</h4>
-                        <p>Before an assistant expands scope or starts implementation, make it pause for review. This
-                            alone can reduce drift dramatically.</p>
-                    </div>
-                    <div class="shift-item">
-                        <h4>Persist state outside the chat</h4>
-                        <p>Store the working spec, task list, or proof notes in deterministic files so the process can
-                            survive interruptions and handoffs.</p>
-                    </div>
-                    <div class="shift-item">
-                        <h4>Use strict output structures</h4>
-                        <p>Templates, checklists, and status markers make AI output easier to review and far less likely
-                            to dissolve into vague prose.</p>
-                    </div>
-                    <div class="shift-item">
-                        <h4>Require evidence before "done"</h4>
-                        <p>Ask for command output, proof artifacts, and clear gates. It is one of the simplest ways to
-                            improve trust in AI-assisted work.</p>
-                    </div>
-                </div>
 
                 <div class="next-step-cta">
-                    <h3>Keep Going From Overview to Practice</h3>
-                    <p>Move from the at-a-glance map to the deeper teaching version, then study a real SDD run and the
-                        prompts that make the workflow visible.</p>
+                    <h3>Go From the Map to the Full Teaching Version</h3>
+                    <p>Use this page as the quick orientation, then move into the deeper primitives guide and the
+                        reference materials when you want examples, workflow details, and real artifacts.</p>
                     <div class="next-step-actions">
                         <a class="next-step-link next-step-link-primary"
                             href="ai-native-development-primitives.html">Read the Deep Dive</a>
                         <a class="next-step-link next-step-link-primary" href="reference-materials.html">Browse
                             Reference Materials</a>
-                        <a class="next-step-link" href="comparison.html">View the Comparison</a>
                         <a class="next-step-link" href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
                             target="_blank" rel="noopener noreferrer">Read the Prompts</a>
                     </div>
