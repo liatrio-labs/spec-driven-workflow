@@ -137,7 +137,7 @@ nav {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
@@ -1992,6 +1992,71 @@ footer a:hover {
     margin-left: 0.75rem;
 }
 
+/* AI Techniques and Primitives Pages */
+.primitives-framing-section {
+    background:
+        radial-gradient(circle at top left, rgba(137, 223, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, rgba(26, 31, 35, 0.98) 0%, rgba(31, 36, 41, 0.98) 100%);
+}
+
+.primitives-how-to-use {
+    margin-top: 2rem;
+}
+
+.primitive-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.primitive-detail-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primitive-detail-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(137, 223, 0, 0.28);
+    box-shadow: 0 10px 26px rgba(137, 223, 0, 0.08);
+}
+
+.primitive-detail-card h3 {
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.primitive-detail-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-top: 0.5rem;
+}
+
+.primitive-detail-card p,
+.primitive-detail-card li {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+}
+
+.primitive-detail-card ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
 /* AI Techniques Page */
 .techniques-overview-section {
     position: relative;
@@ -2178,6 +2243,10 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
+    .primitive-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
     .next-step-actions {
         flex-direction: column;
     }
@@ -2254,6 +2323,10 @@ footer a:hover {
     }
 
     .technique-card {
+        padding: 1.5rem;
+    }
+
+    .primitive-detail-card {
         padding: 1.5rem;
     }
 
