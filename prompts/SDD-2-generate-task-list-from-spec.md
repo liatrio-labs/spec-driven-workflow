@@ -191,9 +191,9 @@ Do not proceed to Phase 2 until you produce a standards evidence table with:
 
 Wait for explicit user confirmation before generating sub-tasks. Then:
 
-1. **Identify Relevant Files:** List all files that will need creation or modification
+1. **Identify Relevant Files:** Capture all files that will need creation or modification in a markdown table
 2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
-3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files table sections
 
 ### Phase 4: Planning Audit Gate (Required)
 
@@ -291,12 +291,14 @@ After user confirmation in Phase 3, update the file with this complete structure
 ```markdown
 ## Relevant Files
 
-- `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).
-- `path/to/file1.test.ts` - Unit tests for `file1.ts`.
-- `path/to/another/file.tsx` - Brief description (e.g., API route handler for data submission).
-- `path/to/another/file.test.tsx` - Unit tests for `another/file.tsx`.
-- `lib/utils/helpers.ts` - Brief description (e.g., Utility functions needed for calculations).
-- `lib/utils/helpers.test.ts` - Unit tests for `helpers.ts`.
+| File | Why It Is Relevant |
+| --- | --- |
+| `path/to/potential/file1.ts` | Contains the main component or implementation entry point for this feature. |
+| `path/to/file1.test.ts` | Unit tests for `file1.ts`. |
+| `path/to/another/file.tsx` | API route handler or UI entry point for data submission. |
+| `path/to/another/file.test.tsx` | Unit tests for `another/file.tsx`. |
+| `lib/utils/helpers.ts` | Utility functions needed for calculations or shared behavior. |
+| `lib/utils/helpers.test.ts` | Unit tests for `helpers.ts`. |
 
 ### Notes
 
@@ -437,7 +439,7 @@ Before finalizing your task list, verify:
 - [ ] Tasks are appropriately scoped (not too large/small)
 - [ ] Dependencies are logical and sequential
 - [ ] Sub-tasks are actionable and unambiguous
-- [ ] Relevant files are comprehensive and accurate
+- [ ] Relevant files table is comprehensive, accurate, and easy to scan
 - [ ] Format follows the exact structure specified above
 - [ ] Repository standards and patterns are identified and incorporated
 - [ ] Implementation will follow established coding conventions and workflows
@@ -457,7 +459,7 @@ Only after REQUIRED audit gates pass, instruct the user to run `/SDD-3-manage-ta
 3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
 5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
-6. Identify all relevant files for creation/modification
+6. Identify all relevant files for creation/modification and present them in the required markdown table format
 7. Run the planning audit gate and create `[NN]-audit-[feature-name].md`
 8. Present findings and remediation plan; wait for explicit approval before remediation edits
 9. Run the Chain-of-Verification check before handoff decisions
