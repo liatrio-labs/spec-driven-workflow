@@ -44,7 +44,7 @@
 - [x] 2.3 Write deep-dive sections for Dynamic Context Injection, Human / Resumable Checkpoints, Evidence-Based Validation, and Reasoning Protocols using the same teaching pattern and concrete examples.
 - [x] 2.4 Review all eight sections for consistency, beginner-friendly wording, and balanced use of SDD-specific versus broader engineering examples.
 
-### [ ] 3.0 Connect the techniques to workflow behavior and reusable practice
+### [x] 3.0 Connect the techniques to workflow behavior and reusable practice
 
 #### 3.0 Proof Artifact(s)
 
@@ -54,10 +54,10 @@
 
 #### 3.0 Tasks
 
-- [ ] 3.1 Add a section that maps the eight primitives to `SDD-1` through `SDD-4`, making it clear that these are broader AI-native development patterns that power SDD and other workflows.
-- [ ] 3.2 Add sections that connect the page back to real SDD artifacts and prompt behavior, including concise references to the existing overview page, reference materials, and relevant prompt resources.
-- [ ] 3.3 Add a practical reuse section that explains which primitives teams can borrow independently, with examples outside the exact SDD workflow.
-- [ ] 3.4 Verify that the page avoids hidden chain-of-thought framing and instead describes observable workflow behaviors, checkpoints, and evidence patterns.
+- [x] 3.1 Add a section that maps the eight primitives to `SDD-1` through `SDD-4`, making it clear that these are broader AI-native development patterns that power SDD and other workflows.
+- [x] 3.2 Add sections that connect the page back to real SDD artifacts and prompt behavior, including concise references to the existing overview page, reference materials, and relevant prompt resources.
+- [x] 3.3 Add a practical reuse section that explains which primitives teams can borrow independently, with examples outside the exact SDD workflow.
+- [x] 3.4 Verify that the page avoids hidden chain-of-thought framing and instead describes observable workflow behaviors, checkpoints, and evidence patterns.
 
 ### [ ] 4.0 Integrate the page into the docs experience and visual system
 

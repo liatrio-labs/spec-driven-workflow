@@ -300,6 +300,124 @@
                 </div>
             </div>
         </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>How These Primitives Power SDD</h2>
+                <p class="section-intro">SDD is one visible implementation of these broader AI-native development
+                    patterns. The prompts make them easy to study because the workflow exposes each step instead of
+                    hiding the method behind product behavior.</p>
+
+                <div class="phases-grid">
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">01</span>
+                            <h3>SDD-1: Clarify and Scope</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The first prompt leans on progressive disclosure, task decomposition, dynamic context
+                                injection, and reasoning protocols so the spec starts grounded instead of speculative.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">02</span>
+                            <h3>SDD-2: Plan in Reviewable Steps</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The second prompt turns the spec into structured, reviewable parent tasks and sub-tasks with
+                                human checkpoints and explicit proof expectations.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">03</span>
+                            <h3>SDD-3: Execute with Proof</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The implementation loop uses serialized state, checkpoints, structured outputs, and
+                                evidence-based validation so progress can be resumed, reviewed, and committed cleanly.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">04</span>
+                            <h3>SDD-4: Validate with Gates</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The validation step applies reasoning protocols, observable evidence, and explicit gates so
+                                implementation quality is checked against the spec rather than inferred from confidence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-cta">
+                    <p><strong>Want the shorter version?</strong> Start with <a href="ai-techniques.html">AI Techniques
+                            Inside SDD</a> for the at-a-glance overview, then return here when you want the full teaching
+                        version.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reactive-art progression-section">
+            <div class="container">
+                <h2>What You Can Reuse Outside Full SDD</h2>
+                <p>One reason these patterns matter is that they are portable. A team can borrow one or two primitives
+                    and still become more reliable without adopting the entire workflow.</p>
+
+                <div class="ai-workflow-section">
+                    <h3>Four Reusable Patterns</h3>
+
+                    <div class="workflow-item">
+                        <h4>Use progressive disclosure in planning</h4>
+                        <p>Ask an assistant to propose a high-level plan first, then wait for review before expanding it.
+                            This is a low-friction way to reduce drift in any AI-assisted delivery process.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Persist state in deterministic files</h4>
+                        <p>Store specs, task lists, notes, or checkpoints outside the chat so interruptions do not erase
+                            the workflow's working memory.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Require structured outputs for handoffs</h4>
+                        <p>Whether you are planning work, reviewing a PR, or summarizing an incident, a stable output
+                            shape makes AI assistance much easier to review and reuse.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Make evidence part of done</h4>
+                        <p>Ask for tests, commands, screenshots, or eval results before declaring completion. This is one
+                            of the fastest ways to move from AI confidence to engineering trust.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>Study the Primitives in Real SDD Artifacts</h2>
+                <p class="section-intro">If you want to see these patterns in the wild, the cspell example shows the full
+                    sequence from conversation to spec, tasks, proofs, and validation.</p>
+
+                <div class="next-step-cta">
+                    <h3>Continue the Learning Path</h3>
+                    <p>Compare the overview, the reference run, and the actual prompts to see how the same primitives
+                        repeat across the workflow.</p>
+                    <div class="next-step-actions">
+                        <a class="next-step-link next-step-link-primary" href="reference-materials.html">Browse
+                            Reference Materials</a>
+                        <a class="next-step-link" href="ai-techniques.html">Return to the Overview</a>
+                        <a class="next-step-link" href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
+                            target="_blank" rel="noopener noreferrer">Read the Prompts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
