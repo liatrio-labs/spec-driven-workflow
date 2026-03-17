@@ -33,6 +33,8 @@ overrides:
       - Kiro
       - SpecKit
       - speckit
+      - Tessl
+      - BMAD
 
   - filename: docs/index.html
     words:
