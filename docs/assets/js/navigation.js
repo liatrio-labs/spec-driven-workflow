@@ -16,6 +16,8 @@
     const navLinks = [
         { href: basePath + 'index.html', text: 'SDD Playbook' },
         { href: basePath + 'comparison.html', text: 'Comparison' },
+        { href: basePath + 'ai-techniques.html', text: 'AI Techniques' },
+        { href: basePath + 'ai-native-development-primitives.html', text: 'AI-Native Primitives' },
         { href: basePath + 'developer-experience.html', text: 'Developer Experience' },
         { href: basePath + 'common-questions.html', text: 'Common Questions' },
         { href: basePath + 'video-overview.html', text: 'Video Overview' },

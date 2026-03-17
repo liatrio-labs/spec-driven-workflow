@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Native Development Primitives - Spec-Driven Development</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+</head>
+
+<body>
+    <header>
+        <!-- Navigation will be injected by navigation.js -->
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>AI-Native Development Primitives</h1>
+                <p class="hero-subtitle">Broader AI-native development patterns that power SDD and other modern,
+                    reviewable ways of working with AI</p>
+                <div class="hero-content">
+                    <p>Software development has its own building blocks: conditionals, loops, functions, arrays, and
+                        modules. AI-native development has building blocks too. They are not syntax primitives, but they
+                        shape how work gets framed, how context is managed, how outputs stay reviewable, and how trust
+                        gets earned.</p>
+                    <p>Spec-Driven Development makes the use of these primitives intentionally visible. The prompts, files,
+                        checkpoints, and proof artifacts expose the working method directly so teams can study the
+                        patterns behind the workflow instead of only seeing the final output.</p>
+                    <p>This page is the teaching companion to <a href="ai-techniques.html">AI Techniques Inside SDD</a>.
+                        The overview page shows the map. This page slows down and explains what each primitive is, why
+                        it matters, how SDD applies it, and where software teams can apply it in other work.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>Why Call These Primitives?</h2>
+                <p class="section-intro">Because they operate below any one tool, vendor, or prompt. If your team swaps
+                    models, moves from chat to IDE or CLI agents, or adapts the workflow to Jira and GitHub issues, these
+                    patterns still matter. They are part of the operating logic of AI-native delivery, not just one
+                    product's feature list.</p>
+
+                <div class="adaptability-grid primitives-benefits-grid">
+                    <div class="shift-item">
+                        <h3>They shape behavior</h3>
+                        <p>A prompt can ask for many things, but primitives like structured outputs, progressive
+                            disclosure, and evidence-based validation determine whether the workflow stays reliable under
+                            real pressure.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h3>They travel across tools</h3>
+                        <p>You can apply the same primitive in Claude Code, ChatGPT, Cursor, Windsurf, or an internal
+                            agent platform. The form changes, but the patterns stay recognizable.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h3>They are teachable</h3>
+                        <p>Because SDD exposes these patterns in markdown, engineers can learn how to collaborate with AI
+                            more effectively instead of treating good outcomes like a lucky prompt.</p>
+                    </div>
+                    <div class="shift-item">
+                        <h3>They create shared language</h3>
+                        <p>Once a team is familiar with these primitives, it becomes easier to discuss why a workflow drifted,
+                            why a review passed, or what pattern should be added to improve reliability.</p>
+                    </div>
+                </div>
+
+                <div class="scope-validation-section primitives-how-to-use">
+                    <h3>How To Read This Page</h3>
+                    <p>Each primitive below uses the same structure: what it is, why it matters, how SDD uses it, and
+                        other real-world examples. One example stays inside SDD so you can see the exact workflow behavior. One
+                        or more broader examples show how the same primitive appears in software development or other
+                        AI-assisted engineering work.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reference-grid-section techniques-overview-section" id="eight-primitives-depth">
+            <div class="container">
+                <h2 class="section-title">The Eight Primitives in Depth</h2>
+                <p class="section-intro">These sections are intentionally longer than the overview page. The goal is understanding, not
+                    just recognition.</p>
+
+                <div class="primitive-jump-nav" aria-label="Jump to a primitive">
+                    <a class="primitive-jump-link" href="#task-decomposition">Task Decomposition</a>
+                    <a class="primitive-jump-link" href="#progressive-disclosure">Progressive Disclosure</a>
+                    <a class="primitive-jump-link" href="#structured-outputs">Structured Outputs</a>
+                    <a class="primitive-jump-link" href="#serialized-external-state">Serialized External State</a>
+                    <a class="primitive-jump-link" href="#dynamic-context-injection">Dynamic Context Injection</a>
+                    <a class="primitive-jump-link" href="#human-resumable-checkpoints">Human / Resumable Checkpoints</a>
+                    <a class="primitive-jump-link" href="#evidence-based-validation">Evidence-Based Validation</a>
+                    <a class="primitive-jump-link" href="#reasoning-protocols">Reasoning Protocols</a>
+                </div>
+
+                <div class="primitive-panel-stack">
+                    <article class="primitive-panel" id="task-decomposition">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">01</span>
+                                <div>
+                                    <h3>Task Decomposition</h3>
+                                    <p class="primitive-panel-summary">Break work into bounded, reviewable units before asking AI to execute it.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Task decomposition turns a large objective into smaller units that are easier to reason about, implement, and verify. In AI-native work, that usually means creating slices that can be reviewed independently instead of handing the model one huge instruction and hoping it stays aligned.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>AI systems often perform better when the work is bounded and sequenced. Smaller units make it easier to spot misunderstanding early, isolate defects, and preserve momentum when the implementation needs to change direction.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>SDD first breaks work into demoable units in the spec, then turns those units into parent tasks, then expands them into sub-tasks during planning and implementation. The workflow never asks the assistant to hold the whole project as one undifferentiated block.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-1</code> asks for two to four demoable units instead of a vague feature blob. <code>SDD-2</code> then turns those units into parent tasks that can each become a checkpoint, proof file, and commit boundary.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Breaking a migration into schema change, backfill, read-path switch, and cleanup instead of one risky switchover.</li>
+                                        <li>Splitting an AI code-review workflow into file discovery, policy checks, diff analysis, and summary generation so each step has a clearer success condition.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="progressive-disclosure">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">02</span>
+                                <div>
+                                    <h3>Progressive Disclosure</h3>
+                                    <p class="primitive-panel-summary">Reveal complexity in stages so alignment happens before expansion.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Progressive disclosure reveals complexity in stages. Instead of exposing every detail at once, the workflow expands only when the current layer is understood and approved.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>AI-native workflows can become noisy fast. Progressive disclosure reduces cognitive overload for both the human and the model, keeps the current decision in focus, and limits how often a workflow runs ahead of alignment.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>SDD starts with questions, then a spec, then parent tasks, then sub-tasks, then implementation, then validation. It does not try to surface everything in one jump.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-2</code> explicitly generates parent tasks first and waits for confirmation before expanding into sub-tasks. That pause is not ceremony; it is a deliberate control point.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Having an AI assistant propose an API contract before generating handlers, tests, and client code.</li>
+                                        <li>Reviewing a deployment plan before exposing the detailed rollback checklist and step-level execution commands.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="structured-outputs">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">03</span>
+                                <div>
+                                    <h3>Structured Outputs</h3>
+                                    <p class="primitive-panel-summary">Force outputs into stable shapes that are easier to review, diff, and reuse.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Structured outputs require the AI to produce results in a predictable shape. That shape might be markdown sections, a checklist, a report template, or a strict machine-readable schema.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>Without structure, outputs drift into impressive-sounding prose that is hard to verify. With structure, reviews get faster, gaps become easier to spot, and the workflow can move from discussion to execution with less translation work.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>Specs, task lists, proof files, and validation reports all follow explicit formats. That makes them readable by humans and dependable as handoff artifacts between workflow stages.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-4</code> requires a specific validation report shape with a coverage matrix, explicit statuses, and reviewer-oriented conclusions instead of an informal "looks good" summary.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Using JSON schema outputs for extraction or routing instead of asking the model to "respond in valid JSON" and hoping it stays consistent.</li>
+                                        <li>Standardizing incident-review templates so AI-generated summaries always include impact, timeline, contributing factors, and next actions.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="serialized-external-state">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">04</span>
+                                <div>
+                                    <h3>Serialized External State</h3>
+                                    <p class="primitive-panel-summary">Persist workflow state in files so progress survives interruptions and handoffs.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Serialized external state means storing workflow state outside the live chat in deterministic, reviewable artifacts. The model no longer needs to remember everything from conversation history alone.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>AI sessions can be interrupted, context windows are finite, and long tasks lose clarity when all memory stays implicit. External state makes work resumable, reviewable, and less dependent on one uninterrupted interaction.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>Specs, tasks, proofs, and validation documents persist the implementation loop as files. They act as working state while the feature is being built, even though they are not meant to be permanent living documentation.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>docs/specs/[NN]-spec-[feature-name]/</code> gives every run a predictable home. A later step can recover the current state by reading files instead of reconstructing intent from memory.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Keeping an AI-maintained <code>NOTES.md</code> or <code>TODO.md</code> file during a long debugging session so a restart does not erase the working model of the problem.</li>
+                                        <li>Persisting deployment checkpoints, generated configs, and rollout decisions outside the agent session during infrastructure automation.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="dynamic-context-injection">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">05</span>
+                                <div>
+                                    <h3>Dynamic Context Injection</h3>
+                                    <p class="primitive-panel-summary">Load the right context at the right moment instead of flooding every step upfront.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Dynamic context injection loads the right context when it becomes useful instead of front-loading every possibly relevant file, rule, and artifact at the start.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>More context is not always better context. Large, low-signal prompts can create confusion and slow the model down. Well-timed retrieval keeps attention focused on what matters now.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>The prompts repeatedly instruct the assistant to inspect the repo, relevant files, and current state as part of the active step. This lets the workflow ground itself in reality without flooding every stage with unnecessary detail.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-1</code> uses a context assessment to review existing docs and repo patterns before finalizing a spec. <code>SDD-3</code> and <code>SDD-4</code> re-read task state and proof requirements just in time for the next implementation or validation decision.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Loading only the files touched by a pull request before generating a code review instead of dropping the entire repository into context.</li>
+                                        <li>Querying a production runbook or architecture note only when a deployment issue points to that subsystem.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="human-resumable-checkpoints">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">06</span>
+                                <div>
+                                    <h3>Human / Resumable Checkpoints</h3>
+                                    <p class="primitive-panel-summary">Insert explicit pause points so humans can review, redirect, and resume safely.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Human and resumable checkpoints are explicit pause points where the workflow waits for review, confirmation, or correction before moving on.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>Unchecked momentum is one of the easiest ways for AI-assisted work to go off-track. Checkpoints keep humans in the decision loop and make interruptions less costly because the workflow knows where it can safely resume.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>SDD bakes in stop points after questions, after parent tasks, during implementation based on checkpoint mode, and before validation handoff. These pauses are part of the design, not a sign that the workflow is incomplete.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-1</code> stops after creating a questions file. <code>SDD-2</code> waits for explicit approval before generating sub-tasks. <code>SDD-3</code> lets the user choose continuous, task, or batch checkpoints.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Requiring a human sign-off on a generated migration plan before any write operation runs against production data.</li>
+                                        <li>Pausing an AI incident assistant after triage so an operator can confirm impact before the assistant drafts customer-facing updates.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="evidence-based-validation">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">07</span>
+                                <div>
+                                    <h3>Evidence-Based Validation</h3>
+                                    <p class="primitive-panel-summary">Treat proof as part of done, not as cleanup after the fact.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-3</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Evidence-based validation treats proof as a first-class deliverable. A task is not complete because the model sounds confident; it is complete because a reviewer can inspect artifacts, commands, tests, and outcomes.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>AI can be persuasive even when it is wrong. Validation grounded in observable evidence creates a stronger trust model and makes later review possible without replaying the whole session.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>SDD requires proof files, test output, quality-gate results, and a final validation report. The workflow assumes that shipping without evidence is a risk, not a shortcut.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-3</code> creates one proof file per parent task. <code>SDD-4</code> then checks those artifacts against the spec, task list, and repository standards before producing a coverage matrix.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Requiring an AI-generated refactor to include passing targeted tests, lint output, and a diff summary before review.</li>
+                                        <li>Using eval datasets and judge outputs to compare prompt or workflow changes instead of choosing the version that merely "feels better."</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+
+                    <article class="primitive-panel" id="reasoning-protocols">
+                        <div class="primitive-panel-header">
+                            <div class="primitive-panel-title-group">
+                                <span class="primitive-panel-index">08</span>
+                                <div>
+                                    <h3>Reasoning Protocols</h3>
+                                    <p class="primitive-panel-summary">Define the analysis sequence so the assistant follows a method, not a hunch.</p>
+                                </div>
+                            </div>
+                            <div class="primitive-panel-controls">
+                                <a class="primitive-back-link" href="#eight-primitives-depth">Back to the list</a>
+                                <div class="prompt-pill-list">
+                                    <code>SDD-1</code>
+                                    <code>SDD-2</code>
+                                    <code>SDD-4</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="primitive-panel-body">
+                            <div class="primitive-panel-core">
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">What it is</p>
+                                    <p>Reasoning protocols are explicit sequences for how the assistant should analyze a task. They do not require hidden reasoning dumps; they define the observable steps that keep problem solving disciplined.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">Why it matters</p>
+                                    <p>Without a protocol, the model can jump to an answer before checking scope, evidence, or repo constraints. A reasoning protocol slows the workflow down just enough to avoid avoidable mistakes.</p>
+                                </div>
+                                <div class="primitive-info-block">
+                                    <p class="primitive-label">How SDD uses it</p>
+                                    <p>Each prompt defines a sequence such as context assessment, scope evaluation, standards review, task preparation, evidence checks, or coverage analysis. The workflow separates those steps so the output is grounded in process rather than improvisation.</p>
+                                </div>
+                            </div>
+
+                            <aside class="primitive-panel-side">
+                                <div class="primitive-example-callout">
+                                    <p class="primitive-label">SDD example</p>
+                                    <p><code>SDD-4</code> follows a discovery, analysis, evidence verification, and reporting loop. The point is not to expose hidden chain-of-thought; it is to ensure the validation behavior follows a defined method.</p>
+                                </div>
+
+                                <div class="primitive-example-list">
+                                    <p class="primitive-label">Broader examples</p>
+                                    <ul>
+                                        <li>Asking an AI deployment assistant to always check environment, diff, rollback path, and blast radius before proposing rollout steps.</li>
+                                        <li>Using a fixed debugging flow: reproduce, inspect logs, isolate likely fault domain, test a hypothesis, then summarize the result.</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>How These Primitives Power SDD</h2>
+                <p class="section-intro">SDD is one visible implementation of these broader AI-native development
+                    patterns. The prompts make them easy to study because the workflow exposes each step instead of
+                    hiding the method behind product behavior.</p>
+
+                <div class="phases-grid">
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">01</span>
+                            <h3>SDD-1: Clarify and Scope</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The first prompt leans on progressive disclosure, task decomposition, dynamic context
+                                injection, and reasoning protocols so the spec starts grounded instead of speculative.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">02</span>
+                            <h3>SDD-2: Plan in Reviewable Steps</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The second prompt turns the spec into structured, reviewable parent tasks and sub-tasks with
+                                human checkpoints and explicit proof expectations.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">03</span>
+                            <h3>SDD-3: Execute with Proof</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The implementation loop uses serialized state, checkpoints, structured outputs, and
+                                evidence-based validation so progress can be resumed, reviewed, and committed cleanly.</p>
+                        </div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-card-header">
+                            <span class="phase-number-badge">04</span>
+                            <h3>SDD-4: Validate with Gates</h3>
+                        </div>
+                        <div class="phase-card-content">
+                            <p>The validation step applies reasoning protocols, observable evidence, and explicit gates so
+                                implementation quality is checked against the spec rather than inferred from confidence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-cta">
+                    <p><strong>Want the shorter version?</strong> Start with <a href="ai-techniques.html">AI Techniques
+                            Inside SDD</a> for the at-a-glance overview, then return here when you want the full teaching
+                        version.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reactive-art progression-section">
+            <div class="container">
+                <h2>What You Can Reuse Outside Full SDD</h2>
+                <p>One reason these patterns matter is that they are portable. A team can borrow one or two primitives
+                    and still become more reliable without adopting the entire workflow.</p>
+
+                <div class="ai-workflow-section">
+                    <h3>Four Reusable Patterns</h3>
+
+                    <div class="workflow-item">
+                        <h4>Use progressive disclosure in planning</h4>
+                        <p>Ask an assistant to propose a high-level plan first, then wait for review before expanding it.
+                            This is a low-friction way to reduce drift in any AI-assisted delivery process.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Persist state in deterministic files</h4>
+                        <p>Store specs, task lists, notes, or checkpoints outside the chat so interruptions do not erase
+                            the workflow's working memory.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Require structured outputs for handoffs</h4>
+                        <p>Whether you are planning work, reviewing a PR, or summarizing an incident, a stable output
+                            shape makes AI assistance much easier to review and reuse.</p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <h4>Make evidence part of done</h4>
+                        <p>Ask for tests, commands, screenshots, or eval results before declaring completion. This is one
+                            of the fastest ways to move from AI confidence to engineering trust.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="phases-detailed">
+            <div class="container">
+                <h2>Study the Primitives in Real SDD Artifacts</h2>
+                <p class="section-intro">If you want to see these patterns in the wild, the cspell example shows the full
+                    sequence from conversation to spec, tasks, proofs, and validation.</p>
+
+                <div class="next-step-cta">
+                    <h3>Continue the Learning Path</h3>
+                    <p>Compare the overview, the reference run, and the actual prompts to see how the same primitives
+                        repeat across the workflow.</p>
+                    <div class="next-step-actions">
+                        <a class="next-step-link next-step-link-primary" href="reference-materials.html">Browse
+                            Reference Materials</a>
+                        <a class="next-step-link" href="ai-techniques.html">Return to the Overview</a>
+                        <a class="next-step-link" href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
+                            target="_blank" rel="noopener noreferrer">Read the Prompts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer will be injected by footer.js -->
+    </footer>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/footer.js"></script>
+</body>
+
+</html>
