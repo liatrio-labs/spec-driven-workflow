@@ -64,8 +64,8 @@ If the user did not include an initial input or reference for the spec, ask the 
 1. **Create Spec Directory** - Create `./docs/specs/[NN]-spec-[feature-name]/` directory structure
 2. **Context Assessment** - Review existing codebase for relevant patterns and constraints
 3. **Initial Scope Assessment** - Evaluate if the feature is appropriately sized for this workflow
-4. **Clarifying Questions** - Gather detailed requirements through structured inquiry
-5. **Spec Generation** - Create the detailed specification document
+4. **Clarifying Questions (CONDITIONAL)** - Ask only when context cannot resolve genuine ambiguity
+5. **Spec Generation** - Create the detailed specification document following reference patterns
 6. **Review and Refine** - Validate completeness and clarity with the user
 
 ## Step 1: Create Spec Directory
@@ -82,27 +82,74 @@ Create the spec directory structure before proceeding with any other steps. This
 
 ## Step 2: Context Assessment
 
-If working in a pre-existing project, conduct research to understand the codebase. This is the PRIMARY research phase - gather the context needed to generate a comprehensive, accurate spec that follows repository patterns.
+If working in a pre-existing project, begin by reviewing the codebase and existing docs to understand both general repository patterns and spec-specific precedents.
 
-**What to Understand:**
+### What to Review
 
-- **Project Spec Standards**: Understand the structure, detail level, and conventions used in specs for this project from:
-  - Completed specs in `docs/specs/`
-- **Architecture Patterns and Conventions**: Understand the system structure and design patterns from:
-  - Project documentation (README.md, CONTRIBUTING.md, ARCHITECTURE.md, docs/)
-  - AI-specific documentation (AGENTS.md, CLAUDE.md)
-  - Existing code structure and module organization
-- **Testing Standards and Practices**: Understand testing requirements and patterns from:
-  - TESTING.md or testing documentation
-  - Existing test files and test structure
-  - Quality assurance practices
-- **Repository Standards**: Understand coding standards and development practices from:
-  - Configuration files (package.json, Cargo.toml, pyproject.toml, pom.xml, etc.)
-  - Code naming conventions and file organization
+**Repository-Level Context:**
+- Current architecture patterns and conventions
+- Relevant existing components or features
+- Integration constraints or dependencies
+- Files that might need modification or extension
+- **Repository Standards and Patterns**: Identify existing coding standards, architectural patterns, and development practices from:
+  - Project documentation (README.md, CONTRIBUTING.md, docs/)
+  - AI specific documentation (AGENTS.md, CLAUDE.md)
+  - Configuration files (package.json, Cargo.toml, pyproject.toml, etc.)
+  - Existing code structure and naming conventions
+  - Testing patterns and quality assurance practices
   - Commit message conventions and development workflows
-- **Related Implementations**: Search for existing code that implements similar operations, data models, or workflows
 
-**Use this context to inform all aspects of the spec - scope, requirements, and technical approach. Follow the repository's established patterns and technical decisions rather than asking questions about them.**
+**Existing Spec Patterns (if applicable):**
+- **Look for completed spec directories** in `./docs/specs/`
+  - Specs with validation reports and proof artifacts are completed
+  - Examine file naming patterns across multiple specs
+  - Review spec document structure (sections, formatting, level of detail)
+  - Study proof artifact organization (directory structure, file naming)
+  - Note task breakdown patterns (granularity, naming conventions)
+  - Identify validation report format (structure, evidence requirements)
+
+**Similar Features Analysis:**
+- Search codebase for similar functionality to the feature you're specifying
+- Example: For "add export feature" → look for existing export/download features
+- Example: For "add validation" → look for existing validation patterns
+- Example: For "add search field" → look for existing search implementations
+
+**Use this context to inform scope validation and requirements, not to drive technical decisions.** Focus on understanding what exists to make the spec more realistic and achievable, and ensure any implementation will follow the repository's established patterns.
+
+### Context Assessment Output
+
+**Summarize key findings for the user.** Focus on what's relevant to this feature. Include only the categories that have meaningful information:
+
+**Established Patterns Identified** (if relevant):
+- Framework/stack, architecture pattern, testing approach, UI framework, i18n/l10n
+
+**Decisions Already Made by Repository** (if relevant):
+- Code style, testing requirements, error handling, validation approach
+
+**Spec File Patterns** (if existing specs found):
+- File naming, section order, demoable units structure, level of detail
+
+**Similar Features & Implementation Patterns** (if found):
+- Similar feature location, architectural approach, UI patterns, testing patterns, components to modify, patterns to follow
+
+**Keep it concise.** Only mention findings that will inform the spec or question decisions.
+
+### Decision: Skip or Ask Questions?
+
+Based on your analysis, determine which approach to take in Step 4 (Clarifying Questions):
+
+**SKIP questions and proceed directly to spec generation if you can answer these:**
+- ✅ **Pattern clarity**: Can you identify consistent patterns across existing specs (file structure, section organization, level of detail)?
+- ✅ **Similar features**: Does a similar feature exist that demonstrates the architectural approach?
+- ✅ **Documentation coverage**: Do repository docs (README, CONTRIBUTING, AGENTS.md, etc.) answer technical questions?
+- ✅ **Standard practices**: Are remaining decisions covered by industry standards or framework conventions?
+
+**ASK questions (Step 4: Clarifying Questions) only if you encounter genuinely ambiguous decisions:**
+- ❓ **Business logic ambiguity**: Core behavior is undefined (e.g., "What makes two records duplicates?")
+- ❓ **Multiple valid approaches**: Several architectures are equally valid and no pattern exists to choose
+- ❓ **User preference needed**: UX decisions where no clear pattern exists (e.g., modal vs inline confirmation)
+- ❓ **Novel functionality**: Feature type has no precedent in codebase or documentation
+- ❓ **Conflicting patterns**: Existing code shows inconsistent approaches and you need direction
 
 ## Step 3: Initial Scope Assessment
 
@@ -151,55 +198,51 @@ Evaluate whether this feature request is appropriately sized for this spec-drive
 - **ALWAYS** inform the user of the result of the scope assessment.
 - If the scope appears inappropriate, **ALWAYS** pause the conversation to suggest alternatives and get input from the user.
 
-## Step 4: Identify Information Gaps
+## Step 4: Clarifying Questions (CONDITIONAL)
 
-Determine what additional information is needed to generate the spec beyond what was learned in Step 2. Use a two-phase approach: first identify what information is needed and check if Step 2 research already provided it, then ask the user only about genuine gaps.
+**⚠️ IMPORTANT: This step may be skipped based on Step 2 analysis.**
 
-### Phase A: Identify Information Gaps (REQUIRED)
+### Before Creating Questions
 
-Using ONLY the context gathered in Step 2 (do not do new research), determine what additional information is needed to generate the spec.
+Review your Step 2 decision. If you decided to skip questions, proceed directly to Step 5 (Spec Generation) using the reference patterns you identified.
 
-1. **Identify what information is needed** to write this spec:
-   - How should this be tested?
-   - What UI/UX patterns should be followed?
-   - What technical approach should be used?
-   - How should data be validated?
-   - What error handling is needed?
-   - What edge cases need to be handled?
-   - What proof artifacts will demonstrate it works?
+### If Questions Are Needed
 
-2. **Check if Step 2 research already answered these**:
-   - If Step 2 provided ANY relevant information → consider it answered
-   - Only mark as "needs user input" if Step 2 context provides ZERO guidance
+**Question Philosophy: Prefer zero questions when context is sufficient**
 
-3. **Identify genuine gaps**:
-   - Business logic that cannot be inferred from existing patterns
-   - Product decisions that require user choice
-   - Novel functionality without precedent in the codebase
+Ask clarifying questions ONLY for decisions that cannot be inferred from existing patterns or documentation. Each question should address genuine ambiguity that blocks spec creation. Focus on understanding the "what" and "why" rather than the "how."
 
-### Phase B: Create Questions File (If Needed)
+### What TO Ask (High Priority)
 
-After completing Phase A, create a questions file only if there is information that cannot be determined from Step 2 context.
+**Business Logic Decisions:**
+- "What defines [ambiguous concept]?" (e.g., "What makes two records duplicates?")
+- "Should we [approach A] or [approach B]?" when both are equally valid
 
-**Only create questions for information that cannot be determined from context:**
-- Business logic ambiguity (e.g., "What defines a duplicate?")
-- Choices between valid technical approaches (e.g., "Cascade delete or block delete?")
-- Novel functionality without precedent in the codebase
-- Edge cases without established patterns
+**User Preference Questions:**
+- UI placement when no clear pattern exists
+- Confirmation style (modal vs inline) when both are used
+- Behavior choices that affect UX significantly
 
-**Do NOT ask questions about:**
-- Technical decisions already made by the repository (frameworks, tools, patterns)
-- Testing approaches documented in TESTING.md or visible in existing tests
-- UI/UX patterns that match existing implementations
-- File structure and naming conventions that follow established patterns
-- i18n support that already exists in the codebase
+**Data/Behavior Ambiguity:**
+- Cascade delete vs block delete vs soft delete decisions
+- Empty state behavior when not established
+- Error handling for genuinely novel scenarios
 
-**Progressive Disclosure:** Focus on essential questions only. The number of questions will vary based on available context:
-- **Mature codebases** (3+ completed specs, clear patterns): Aim for 0-5 questions, or skip questions entirely if all requirements are clear
-- **New codebases** (limited context): May require 8-12 questions to establish requirements
-- **Always prioritize**: Questions about business logic, product decisions, and novel functionality over technical implementation details
+### What NOT to Ask (Infer from Context)
 
-**If no questions are needed:** Skip directly to Step 5 (Spec Generation). Use the context gathered in Step 2 and Phase A to inform the spec.
+**DO NOT ask if the codebase already shows the answer:**
+- ❌ "Should we use [Framework X]?" → Already using Framework X
+- ❌ "Should we support internationalization?" → Already have i18n files
+- ❌ "What testing approach?" → TESTING.md or existing tests show approach
+- ❌ "Where should files go?" → Existing structure shows conventions
+- ❌ "What error handling?" → Existing error handlers show pattern
+- ❌ "What validation approach?" → Existing validators show pattern
+- ❌ "What UI framework?" → Already using specific framework
+
+**DO NOT ask about implementation details:**
+- ❌ "Which HTTP status code?" → Use REST conventions
+- ❌ "How to structure the class?" → Follow existing architecture
+- ❌ "What variable names?" → Follow existing naming conventions
 
 ### Questions File Format
 
@@ -231,13 +274,16 @@ Please answer each question below (select one or more options, or add your own n
 - [ ] (E) Other (describe)
 ```
 
-### Questions File Process
+### Questions File Process (If Questions Are Needed)
+
+**Remember: If you're asking many questions, you're likely asking about things you should infer from context.**
 
 1. **Create Questions File**: Save questions to a file named `[NN]-questions-[N]-[feature-name].md` where `[N]` is the round number (starting at 1, incrementing for each new round).
 2. **Point User to File**: Direct the user to the questions file and instruct them to answer the questions directly in the file.
 3. **STOP AND WAIT**: Do not proceed to Step 5. Wait for the user to indicate they have saved their answers.
 4. **Read Answers**: After the user indicates they have saved their answers, read the file and continue the conversation.
 5. **Follow-Up Rounds**: If answers reveal new questions, create a new questions file with incremented round number (`[NN]-questions-[N+1]-[feature-name].md`) and repeat the process (return to step 3).
+   - **Note**: Follow-up rounds should be rare. If you need a second round, you likely asked the wrong questions in round 1.
 
 **Iterative Process:**
 
@@ -372,23 +418,23 @@ Iterate based on feedback until the user is satisfied.
 **NEVER:**
 
 - Start implementing the spec; only create the specification document
-- Ask questions about technical decisions already made by the repository (frameworks, tools, patterns)
+- Ask questions about things you can infer from the codebase or existing specs
 - Create specs that are too large or too small without addressing scope issues
 - Use jargon or technical terms that a junior developer wouldn't understand
-- Skip context-based question resolution (Phase A) before asking questions
-- Ask questions about things clearly answered by existing codebase patterns
+- Ask questions that can be answered by examining existing code, specs, or documentation
 - Ignore existing repository patterns and conventions
+- Ask about frameworks/tools already in use (check first!)
 
 **ALWAYS:**
 
-- Conduct thorough research in Step 2 to gather context before Step 4
-- Use Step 2 context to determine requirements in Phase A (do not do new research in Step 4)
-- Only create questions file if genuine user input is needed; skip to spec generation if all requirements are clear
+- Review existing completed specs before asking questions (Step 2)
+- Make clarifying questions conditional - skip if patterns are clear
 - Validate scope appropriateness before proceeding
-- Use the exact spec structure provided above
+- Follow reference spec structure if available (adapt the template to match)
 - Ensure the spec is understandable by a junior developer
 - Include proof artifacts for each work unit that demonstrate what will be shown
 - Follow identified repository standards and patterns in all requirements
+- Justify why you're asking each question (what can't be inferred)
 
 ## What Comes Next
 
