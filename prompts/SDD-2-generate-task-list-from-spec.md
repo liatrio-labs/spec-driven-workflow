@@ -1,6 +1,6 @@
 ---
 name: SDD-2-generate-task-list-from-spec
-description: "Generate a task list from a Spec"
+description: "Generate a task list from a Spec with mandatory planning audit gate"
 tags:
   - planning
   - tasks
@@ -31,7 +31,8 @@ This task list serves as the **execution blueprint** for the entire SDD workflow
 **Value Chain Flow:**
 
 - **Spec → Tasks**: Translates requirements into implementable units
-- **Tasks → Implementation**: Provides structured approach with clear milestones
+- **Tasks → Planning Audit**: Validates plan quality before implementation
+- **Planning Audit → Implementation**: Prevents avoidable planning defects from reaching implementation
 - **Implementation → Validation**: Proof artifacts enable verification and evidence collection
 
 **Critical Dependencies:**
@@ -39,11 +40,13 @@ This task list serves as the **execution blueprint** for the entire SDD workflow
 - **Parent tasks** become implementation checkpoints in `/SDD-3-manage-tasks`
 - **Proof Artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
 - **Task boundaries** determine git commit points and progress markers
+- **Audit findings** determine whether planning is ready for `/SDD-3-manage-tasks`
 
 **What Breaks the Chain:**
 
 - Poorly defined proof artifacts → implementation verification fails
 - Missing proof artifacts → validation cannot be completed
+- Missing requirement coverage in tasks → spec cannot be fully implemented
 - Overly large tasks → loss of incremental progress and demo capability
 - Unclear task dependencies → implementation sequence becomes confusing
 
@@ -53,7 +56,7 @@ You are a **Senior Software Engineer and Technical Lead** responsible for transl
 
 ## Goal
 
-Create a detailed, step-by-step task list in Markdown format based on an existing Specification (Spec). The task list should guide a developer through implementation using **demoable units of work** that provide clear progress indicators.
+Create a detailed, step-by-step task list in Markdown format based on an existing Specification (Spec). Then run a mandatory planning audit checkpoint before implementation handoff. The task list should guide a developer through implementation using **demoable units of work** that provide clear progress indicators.
 
 ## Critical Constraints
 
@@ -61,6 +64,16 @@ Create a detailed, step-by-step task list in Markdown format based on an existin
 ⚠️ **DO NOT** begin implementation - this prompt is for planning only
 ⚠️ **DO NOT** create tasks that are too large (multi-day) or too small (single-line changes)
 ⚠️ **DO NOT** skip the user confirmation step after parent task generation
+⚠️ **DO NOT** apply remediation edits until the user explicitly approves the remediation plan
+⚠️ **DO NOT** hand off to `/SDD-3-manage-tasks` while any REQUIRED audit gate is failing
+
+## Execution Defaults (Positive Directives)
+
+- **ALWAYS** prioritize concise, actionable output over long narrative explanation.
+- **ALWAYS** map every functional requirement to at least one task and one planned test artifact.
+- **ALWAYS** provide exact file sections for remediation targets.
+- **ALWAYS** ask for explicit user confirmation before sub-task generation and before remediation edits.
+- **ALWAYS** re-run the audit after approved remediation changes.
 
 ## Why Two-Phase Task Generation?
 
@@ -80,6 +93,7 @@ Ensure complete spec coverage by:
 3. **Map technical considerations** to implementation details
 4. **Identify gaps** where spec requirements aren't covered
 5. **Validate acceptance criteria** are testable through proof artifacts
+6. **Ensure each functional requirement** has at least one planned test artifact in tasks
 
 ## Proof Artifacts
 
@@ -91,6 +105,20 @@ Proof artifacts provide evidence of task completion and are essential for the up
 - **Support troubleshooting** (logs, error messages, configuration states)
 
 **Security Note**: When planning proof artifacts, remember that they will be committed to the repository. Artifacts should use placeholder values for API keys, tokens, and other sensitive data rather than real credentials.
+
+## Evidence Quality Bar (Required)
+
+For each parent task, proof artifacts must satisfy all four checks:
+
+1. **Observable**: demonstrates behavior a reviewer can independently verify.
+2. **Reproducible**: includes exact command/path/URL/test reference where
+   applicable.
+3. **Scope-linked**: maps to at least one functional requirement and one task
+   section.
+4. **Sanitized**: contains no secrets, credentials, or private identifiers.
+
+Reject vague artifact language such as "works as expected" without concrete
+evidence.
 
 ## Chain-of-Thought Analysis Process
 
@@ -107,6 +135,7 @@ Before generating any tasks, you must follow this reasoning process:
 - **Format:** Markdown (`.md`)
 - **Location:** `./docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.)
 - **Filename:** `[NN]-tasks-[feature-name].md` (e.g., if the Spec is `01-spec-user-profile-editing.md`, save as `01-tasks-user-profile-editing.md`)
+- **Audit Filename:** `[NN]-audit-[feature-name].md`
 
 ## Process
 
@@ -124,6 +153,29 @@ Before generating any tasks, you must follow this reasoning process:
 4. **Define Demoable Units:** Identify thin, end-to-end vertical slices. Each parent task must be demonstrable.
 5. **Evaluate Scope:** Ensure tasks are appropriately sized (not too large, not too small)
 
+### Repository Standards Discovery (Required)
+
+Before task generation or audit, locate and read repository guidance files.
+
+Required search targets (if present):
+
+- `AGENTS.md` (repository root and nearest parent directories)
+- `README.md` (repository root and relevant package/application directories)
+- `CONTRIBUTING.md`
+- `.github/pull_request_template.md`
+- lint/format/test policy files (for example: `.pre-commit-config.yaml`, `eslint*`, `pyproject.toml`, `package.json` scripts, CI workflow files)
+
+You MUST NOT infer repository standards from spec/tasks artifacts alone.
+
+### Blocking Checkpoint: Standards Evidence (Required)
+
+Do not proceed to Phase 2 until you produce a standards evidence table with:
+
+- source file path
+- read status (`yes`, `not found`, or `access error`)
+- 1-3 standards extracted per file when read
+- conflicts detected (if any)
+
 ### Phase 2: Parent Task Generation
 
 1. **Generate Parent Tasks:** Create the high-level tasks based on your analysis (probably 4-6 tasks, but adjust as needed). Each task must:
@@ -139,9 +191,54 @@ Before generating any tasks, you must follow this reasoning process:
 
 Wait for explicit user confirmation before generating sub-tasks. Then:
 
-1. **Identify Relevant Files:** List all files that will need creation or modification
+1. **Identify Relevant Files:** Capture all files that will need creation or modification in a markdown table
 2. **Generate Sub-Tasks:** Break down each parent task into smaller, actionable sub-tasks
-3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files sections
+3. **Update Task List:** Update the existing `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` file with the sub-tasks and relevant files table sections
+
+### Phase 4: Planning Audit Gate (Required)
+
+After sub-task generation is complete:
+
+1. Create audit report file at `./docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`.
+2. Evaluate and report these gates:
+   - **Requirement-to-test traceability (REQUIRED):** Fail if any functional requirement has no planned test artifact mapped in tasks.
+   - **Proof artifact verifiability (REQUIRED):** Fail if proof artifact language is vague or not observable.
+   - **Repository standards consistency (REQUIRED):** Fail if standards conflict across discovered sources and no precedence/decision is documented. Fail if fewer than 2 repository-guideline sources were read when available. Fail if `AGENTS.md` or root `README.md` exists but was not reviewed.
+   - **Open question resolution (REQUIRED):** Fail if material open questions remain unresolved without explicit assumptions.
+   - **Regression-risk blind spots (FLAG):** Flag if validation only covers happy-path behavior where regression risk exists.
+   - **Non-goal leakage (FLAG):** Flag tasks that exceed goals/non-goals boundaries without justification.
+3. Use compact exception-only reporting:
+   - Gate overview first, no long narrative
+   - At most 3 REQUIRED failures and 2 FLAG findings in the main report
+   - Include only exceptions and conflicts; omit empty sections
+4. Present findings and remediation items to the user.
+5. Wait for explicit user approval before remediation edits.
+6. Re-audit after approved remediation edits.
+7. Only proceed when all REQUIRED gates pass.
+
+### Phase 4A: Chain-of-Verification Check (Required Before Handoff)
+
+Before handing off to `/SDD-3-manage-tasks`, run this verification loop:
+
+1. **Initial assessment:** complete the audit and draft findings.
+2. **Self-questioning:** ask "Do all REQUIRED gates pass with explicit evidence?"
+3. **Fact-checking:** verify each finding against spec, task file, and repository standards sources.
+4. **Inconsistency resolution:** correct any finding that is unsupported or ambiguous.
+5. **Final synthesis:** publish the final audit status and next action.
+
+### Failure Handling
+
+If you cannot evaluate a REQUIRED gate due to missing artifacts or unclear standards:
+
+1. Mark gate as `FAIL` with reason `insufficient evidence`.
+2. Add one concrete remediation item that resolves the evidence gap.
+3. Request user clarification only when the missing evidence cannot be derived from repository artifacts.
+
+If repository guideline files are missing or unreadable:
+
+1. Record exact file paths searched and result (`not found` or `access error`).
+2. Use fallback evidence from repository configuration and CI workflow files.
+3. Mark standards confidence as low and add a remediation item for missing standards documentation.
 
 ## Phase 2 Output Format (Parent Tasks Only)
 
@@ -194,12 +291,14 @@ After user confirmation in Phase 3, update the file with this complete structure
 ```markdown
 ## Relevant Files
 
-- `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).
-- `path/to/file1.test.ts` - Unit tests for `file1.ts`.
-- `path/to/another/file.tsx` - Brief description (e.g., API route handler for data submission).
-- `path/to/another/file.test.tsx` - Unit tests for `another/file.tsx`.
-- `lib/utils/helpers.ts` - Brief description (e.g., Utility functions needed for calculations).
-- `lib/utils/helpers.test.ts` - Unit tests for `helpers.ts`.
+| File | Why It Is Relevant |
+| --- | --- |
+| `path/to/potential/file1.ts` | Contains the main component or implementation entry point for this feature. |
+| `path/to/file1.test.ts` | Unit tests for `file1.ts`. |
+| `path/to/another/file.tsx` | API route handler or UI entry point for data submission. |
+| `path/to/another/file.test.tsx` | Unit tests for `another/file.tsx`. |
+| `lib/utils/helpers.ts` | Utility functions needed for calculations or shared behavior. |
+| `lib/utils/helpers.test.ts` | Unit tests for `helpers.ts`. |
 
 ### Notes
 
@@ -250,13 +349,71 @@ After user confirmation in Phase 3, update the file with this complete structure
 - [ ] 3.2 [Sub-task description 3.2]
 ```
 
+## Audit Report Format (Phase 4 and Later)
+
+Use this structure in `[NN]-audit-[feature-name].md`:
+
+```markdown
+# [NN]-audit-[feature-name].md
+
+## Executive Summary
+
+- Overall Status: PASS/FAIL
+- Required Gate Failures: [count]
+- Flagged Risks: [count]
+
+## Gateboard
+
+| Gate | Status | Why it failed (<=10 words) | Exact fix target |
+| --- | --- | --- | --- |
+| Requirement-to-test traceability | FAIL | FR-2 has no mapped test artifact | `## Tasks > 2.0` |
+
+## Standards Evidence Table (Required)
+
+| Source File | Read | Standards Extracted | Conflicts |
+| --- | --- | --- | --- |
+| `AGENTS.md` | yes | Follow context markers; honor local skill triggers | none |
+| `README.md` | yes | Use documented workflow order and artifact paths | none |
+
+## Findings (Only include when non-empty)
+
+### REQUIRED Failures (max 3 in main report)
+
+1. [Issue]
+   - Missing item:
+   - File section to edit:
+   - Acceptance condition:
+
+### FLAG Findings (max 2 in main report)
+
+1. [Issue]
+   - Risk:
+   - Suggested remediation:
+
+## User-Approved Remediation Plan
+
+- Pending approval | Approved | Completed
+
+## Re-Audit Delta (Runs 2+ only)
+
+- Changed gate statuses since previous run (only changed items):
+- Still-failing REQUIRED gates:
+- Newly introduced findings (if any):
+```
+
+If all REQUIRED gates pass on the first audit run, keep the report minimal:
+
+- Include only `Executive Summary` and `Gate Overview`.
+- Omit empty `Findings`, `User-Approved Remediation Plan`, and `Re-Audit Delta` sections.
+
 ## Interaction Model
 
-**Critical:** This is a two-phase process that requires explicit user confirmation:
+**Critical:** This process includes explicit approval checkpoints:
 
 1. **Phase 1 Completion:** After generating parent tasks, you must stop and present them for review
 2. **Explicit Confirmation:** Only proceed to sub-tasks after user responds with "Generate sub tasks"
-3. **No Auto-progression:** Never automatically proceed to sub-tasks or implementation
+3. **Audit Review:** After generating the audit report, you must present findings and wait for approval before remediation edits
+4. **No Auto-progression:** Never proceed to `/SDD-3-manage-tasks` while REQUIRED audit gates fail
 
 **Example interaction:**
 > "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes proof artifacts that demonstrate what will be shown. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Respond with 'Generate sub tasks' to continue."
@@ -282,14 +439,18 @@ Before finalizing your task list, verify:
 - [ ] Tasks are appropriately scoped (not too large/small)
 - [ ] Dependencies are logical and sequential
 - [ ] Sub-tasks are actionable and unambiguous
-- [ ] Relevant files are comprehensive and accurate
+- [ ] Relevant files table is comprehensive, accurate, and easy to scan
 - [ ] Format follows the exact structure specified above
 - [ ] Repository standards and patterns are identified and incorporated
 - [ ] Implementation will follow established coding conventions and workflows
+- [ ] Every functional requirement maps to planned test artifacts
+- [ ] Audit report exists and is current
+- [ ] REQUIRED audit gates are passing
+- [ ] Any remediation edits were explicitly user-approved
 
 ## What Comes Next
 
-Once this task list is complete and approved, instruct the user to run `/SDD-3-manage-tasks` to begin implementation. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
+Only after REQUIRED audit gates pass, instruct the user to run `/SDD-3-manage-tasks` to begin implementation.
 
 ## Final Instructions
 
@@ -298,7 +459,10 @@ Once this task list is complete and approved, instruct the user to run `/SDD-3-m
 3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
 4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
 5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
-6. Identify all relevant files for creation/modification
-7. Review with user and refine until satisfied
-8. Guide user to the next workflow step (`/SDD-3-manage-tasks`)
-9. Stop working once user confirms task list is complete
+6. Identify all relevant files for creation/modification and present them in the required markdown table format
+7. Run the planning audit gate and create `[NN]-audit-[feature-name].md`
+8. Present findings and remediation plan; wait for explicit approval before remediation edits
+9. Run the Chain-of-Verification check before handoff decisions
+10. Re-audit until all REQUIRED gates pass
+11. Guide user to the next workflow step (`/SDD-3-manage-tasks`) only when audit is passing
+12. Stop working once user confirms task list is complete

@@ -80,9 +80,26 @@ If no spec is provided, follow this exact sequence:
 - **GATE A (blocker):** Any **CRITICAL** or **HIGH** issue → **FAIL**.
 - **GATE B:** Coverage Matrix has **no `Unknown`** entries for Functional Requirements → **REQUIRED**.
 - **GATE C:** All Proof Artifacts are accessible and functional → **REQUIRED**.
-- **GATE D:** All changed files are either in "Relevant Files" list OR explicitly justified in git commit messages → **REQUIRED**.
+- **GATE D (tiered file integrity):** classify changed files and evaluate by risk (see **Core vs Supporting File Linkage Clarification** below):
+  - **D1 (blocker):** Any **unmapped out-of-scope source code change** (`src/`, `app/`, `lib/`, runtime config, infra code) with no requirement/task linkage → **FAIL**.
+  - **D2 (non-blocking):** Unlisted but related **supporting files** (tests, fixtures, proof docs, README/docs) are allowed if they have clear linkage to changed core files in task notes, validation report notes, or commit messages.
+  - **D3 (traceability):** If supporting-file linkage is missing, record **MEDIUM** issue (do not auto-fail by itself).
 - **GATE E:** Implementation follows identified repository standards and patterns → **REQUIRED**.
 - **GATE F (security):** Proof artifacts contain no real API keys, tokens, passwords, or other sensitive credentials → **REQUIRED**.
+
+## Core vs Supporting File Linkage Clarification
+
+To keep validation portable across repositories:
+
+- Treat source/runtime-impacting changes as **core** and require explicit
+  requirement/task linkage.
+- Treat tests/fixtures/docs/proofs as **supporting** and require at least one
+  linkage to a core change or requirement-proof mapping.
+- Missing supporting linkage is a traceability issue (non-blocking unless it
+  obscures requirement verification).
+- Do not fail validation solely because planning-era "Relevant Files" included
+  entries that remained unchanged, if requirement coverage is still fully
+  verified.
 
 ## Evaluation Rubric (score each 0–3 to guide severity)
 
@@ -90,9 +107,9 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 
 - **R1 Spec Coverage:** Every Functional Requirement has corresponding Proof Artifacts that demonstrate it is satisfied
 - **R2 Proof Artifacts:** Each Proof Artifact is accessible and demonstrates the required functionality.
-- **R3 File Integrity:** All changed files are listed in "Relevant Files" and vice versa.
+- **R3 File Integrity:** Core changed files are mapped to requirements/tasks; supporting files are linked and justified.
 - **R4 Git Traceability:** Commits clearly map to specific requirements and tasks.
-- **R5 Evidence Quality:** Evidence includes proof artifact test results and file existence checks.
+- **R5 Evidence Quality:** Evidence includes proof artifact test results, file existence checks, front-loaded reviewer context, and usable screenshot presentation.
 - **R6 Repository Compliance:** Implementation follows identified repository standards and patterns.
 
 ## Validation Process (step-by-step chain-of-thought)
@@ -121,6 +138,20 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 - **Also**, parse Repository Standards from the Spec
 - **Finally**, parse all Proof Artifacts from the task list
 
+### File Classification Rules (for GATE D)
+
+Classify each changed file before deciding PASS/FAIL:
+
+1. **Core implementation files** (high risk): production code, runtime config, infra code, schema/contracts that affect runtime behavior.
+2. **Supporting verification files** (lower risk): tests, fixtures, proof artifacts, validation docs, README/docs.
+3. **Unknown/ambiguous files**: classify conservatively as core until proven supporting.
+
+Validation expectation:
+
+- Core files must map to Functional Requirements/tasks.
+- Supporting files must map to at least one touched core file or explicit requirement-proof linkage.
+- Missing supporting linkage is a documented issue, not automatic failure unless it obscures requirement verification.
+
 ### Step 4 — Evidence Verification
 
 For each Functional Requirement, Demoable Unit, and Repository Standard:
@@ -130,6 +161,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
    - Verify proof artifact files exist (from task list)
    - Test that each Proof Artifact (URLs, CLI commands, test references) demonstrates what it claims
    - Verify file existence for "Relevant Files" listed in task list
+   - Check that proof docs explain what each artifact proves before presenting raw evidence
    - Check repository pattern compliance (via proof artifacts, file checks, and commit log analysis)
 3) Record **evidence** (proof artifact test results, file existence checks, commit references).
 4) Mark each item **Verified**, **Failed**, or **Unknown**.
@@ -137,16 +169,20 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 ## Detailed Checks
 
 1) **File Integrity**
-   - All changed files appear in "Relevant Files" section OR are justified in commit messages
-   - All "Relevant Files" that should be changed are actually changed
-   - Files outside scope must have clear justification in git history
+   - Core changed files appear in "Relevant Files" section OR have explicit requirement/task linkage
+   - Supporting changed files may be outside "Relevant Files" if linked in task notes, validation notes, or commit messages
+   - "Relevant Files" are planning guidance; unchanged entries are acceptable when validated as not requiring modifications
+   - Out-of-scope core files without linkage are blockers
 
 2) **Proof Artifact Verification**
-   - URLs are accessible and return expected content
-   - CLI commands execute successfully with expected output
-   - Test references exist and can be executed
-   - Screenshots/demos show required functionality
-   - **Security Check**: Proof artifacts contain no real API keys, tokens, passwords, or sensitive data
+    - URLs are accessible and return expected content
+    - CLI commands execute successfully with expected output
+    - Test references exist and can be executed
+    - Screenshots/demos show required functionality
+    - Proof docs use descriptive titles and front-load task context before raw evidence
+    - Screenshot artifacts show the file path and embed the image inline in the proof doc
+    - Raw evidence is preceded by a short explanation of what it proves and why it matters
+    - **Security Check**: Proof artifacts contain no real API keys, tokens, passwords, or sensitive data
 
 3) **Requirement Coverage**
    - Proof Artifacts exist for each Functional Requirement
@@ -167,7 +203,7 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 ## Red Flags (auto CRITICAL/HIGH)
 
 - Missing or non-functional Proof Artifacts
-- Changed files not listed in "Relevant Files" without justification in commit messages
+- Unmapped out-of-scope **core/source** file changes with no requirement/task linkage
 - Functional Requirements with no proof artifacts
 - Git commits unrelated to spec implementation
 - Any `Unknown` entries in the Coverage Matrix
@@ -228,8 +264,9 @@ For each issue, provide:
 | Severity | Issue | Impact | Recommendation |
 | --- | --- | --- | --- |
 | HIGH | Proof Artifact URL returns 404. `task-list.md#L45` references `https://example.com/demo`. Evidence: `curl -I https://example.com/demo` → "HTTP/1.1 404 Not Found" | Functionality cannot be verified | Update URL in task list or deploy missing endpoint |
-| CRITICAL | Changed file not in "Relevant Files". `src/auth.ts` created but not listed in task list. Evidence: `git log --name-only` shows file created; task list only references `src/user.ts` | Implementation scope creep | Update task list to include `src/auth.ts` or revert unauthorized changes |
-| MEDIUM | Missing proof artifact for FR-2. Task list specifies test file `src/feature/x.test.ts` but file does not exist. Evidence: File check shows `src/feature/x.test.ts` missing | Requirement verification incomplete | Add test file `src/feature/x.test.ts` as specified in task list |
+| CRITICAL | Unmapped out-of-scope core file. `src/auth.ts` created with no task/FR linkage. Evidence: `git log --name-only` shows file created; no mapping in tasks/report/commit notes | Implementation scope creep | Add explicit FR/task mapping and rationale, or remove unrelated core change |
+| MEDIUM | Supporting-file linkage missing. `docs/specs/.../proofs/*.md` changed but no explicit linkage to core task in notes. Evidence: changed-file list vs task metadata | Traceability gap, verification still possible | Add linkage note in task list or validation report appendix |
+| MEDIUM | Proof artifact is hard to review quickly. `docs/specs/.../01-proofs/01-task-03-proofs.md` uses a filename-only title, lists screenshot paths without inline images, and explains relevance only at the bottom. Evidence: proof doc structure review | Human verification is slowed and context is easy to miss | Rewrite the proof doc with a descriptive title, summary-first sections, inline screenshots, and per-artifact interpretation before raw evidence |
 
 **Note:** Do not report issues that are already clearly marked in the Coverage Matrix unless additional context is needed. Focus on actionable problems that need resolution.
 
