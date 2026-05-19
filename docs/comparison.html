@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparison: Liatrio's Prompts vs. Other Structured Development Tools - Spec-Driven Development</title>
+    <title>Comparison: Liatrio SDD vs. Other Structured Development Tools - Spec-Driven Development</title>
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
@@ -25,9 +25,9 @@
                 <h1>Comparing SDD to Other Structured Development Tools</h1>
                 <div class="hero-content">
                     <p>Kiro, SpecKit, and Taskmaster each add structure to AI-assisted development, but they do so
-                        through very different operating models. This page compares Liatrio's four repo-local SDD
-                        prompts with those tools, with a focus on setup, workflow fit, and day-to-day adoption cost.</p>
-                    <p>A second distinction matters just as much: SDD exposes its logic in plain markdown, so teams can
+                        through very different operating models. This page compares Liatrio's repo-local SDD workflow
+                        with those tools, with a focus on setup, workflow fit, and day-to-day adoption cost.</p>
+                    <p>A second distinction matters just as much: SDD exposes its prompt and skill logic in plain markdown, so teams can
                         learn the patterns behind effective AI collaboration instead of depending on a product to hide
                         or mediate them.</p>
                 </div>
@@ -37,8 +37,8 @@
         <!-- Comparison Section -->
         <section class="phases-detailed">
             <div class="container">
-                <h2>Comparison: Liatrio's Prompts vs. Other Structured Development Tools</h2>
-                <p class="section-intro">The table below compares Liatrio's prompts with three other structured
+                <h2>Comparison: Liatrio SDD vs. Other Structured Development Tools</h2>
+                <p class="section-intro">The table below compares Liatrio's SDD workflow with three other structured
                     development approaches. The emphasis is less on feature lists and more on the practical cost of
                     adopting each system inside an existing engineering workflow, including whether the workflow itself
                     is something engineers can inspect and learn from.</p>
@@ -48,7 +48,7 @@
                         <thead>
                             <tr>
                                 <th>Feature</th>
-                                <th>Liatrio's SDD Prompts</th>
+                                <th>Liatrio SDD Workflow</th>
                                 <th>Kiro</th>
                                 <th>SpecKit</th>
                                 <th>Taskmaster</th>
@@ -58,8 +58,7 @@
                             <tr>
                                 <td><strong>Setup & Installation</strong></td>
                                 <td>✅ <a href="https://github.com/liatrio-labs/spec-driven-workflow" target="_blank"
-                                        rel="noopener noreferrer">Four markdown files
-                                        added as prompts within your existing workflow</a></td>
+                                        rel="noopener noreferrer">A simple 4-phase workflow installed as custom prompts or a single skill</a></td>
                                 <td>❌ <a href="https://kiro.dev/downloads/" target="_blank"
                                         rel="noopener noreferrer">Requires installing Kiro, signing in, and
                                         learning its product-specific workflow model</a>
@@ -74,14 +73,14 @@
                             </tr>
                             <tr>
                                 <td><strong>Editor/IDE Dependency</strong></td>
-                                <td>✅ Works in editors that support prompts or slash commands</td>
+                                <td>✅ Works in editors that support prompts, slash commands, or skill-native workflows</td>
                                 <td>❌ Structured workflow assumes the Kiro IDE as the primary environment</td>
                                 <td>⚠️ Runs in existing editors through generated agent commands</td>
                                 <td>⚠️ Works in existing editors through CLI or MCP integration</td>
                             </tr>
                             <tr>
                                 <td><strong>AI Assistant Compatibility</strong></td>
-                                <td>✅ Works with assistants that support custom prompts or slash commands</td>
+                                <td>✅ Works with assistants that support custom prompts, slash commands, or agent skills</td>
                                 <td>⚠️ Uses Kiro's built-in agent experience, model options, and product-specific modes
                                 </td>
                                 <td>⚠️ Works through supported agent integrations and slash commands</td>
@@ -89,7 +88,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Learning Curve</strong></td>
-                                <td>✅ Uses a guided four-prompt workflow layered onto your existing workflow</td>
+                                <td>✅ Uses a guided four-phase workflow layered onto your existing workflow</td>
                                 <td>❌ Requires learning Kiro's broader vocabulary and workflow model
                                     (<code>specs</code>,
                                     <code>steering</code>, <code>hooks</code>, <code>powers</code>,
@@ -104,8 +103,8 @@
                             </tr>
                             <tr>
                                 <td><strong>Transparency</strong></td>
-                                <td>✅ Prompts are plain markdown, so the workflow logic is directly readable, editable,
-                                    and teachable</td>
+                                <td>✅ Prompt and skill instructions are plain markdown, so the workflow logic is directly readable,
+                                    editable, and teachable</td>
                                 <td>⚠️ Some files are editable, but core behavior, modes, and workflow concepts live in
                                     the product</td>
                                 <td>⚠️ Workflow files and templates are published on GitHub, but much of the method is
@@ -115,7 +114,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Flexibility</strong></td>
-                                <td>✅ Prompt text can be edited to match team or project conventions</td>
+                                <td>✅ Prompt or skill text can be adapted to match team or project conventions</td>
                                 <td>⚠️ Steering files, hooks, and modes are configurable within Kiro's product model
                                 </td>
                                 <td>⚠️ Templates can be adapted, but the workflow, artifacts, and process vocabulary
@@ -148,7 +147,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Speed</strong></td>
-                                <td>✅ Minimal setup overhead once prompts are installed</td>
+                                <td>✅ Minimal setup overhead once the prompt or skill path is selected</td>
                                 <td>❌ Front-loaded overhead is high because teams must learn the product model before
                                     moving quickly</td>
                                 <td>❌ Front-loaded overhead is high because the workflow generates and coordinates many
@@ -158,7 +157,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Cost</strong></td>
-                                <td>✅ Markdown files are free to use</td>
+                                <td>✅ Markdown prompt and skill files are free to use</td>
                                 <td>⚠️ Free tier available, but usage is managed through sign-in, credits, and paid
                                     usage tiers</td>
                                 <td>✅ Open source</td>
@@ -175,20 +174,16 @@
             <div class="container">
                 <div class="installation-highlight">
                     <h2>Repo-Native Setup</h2>
-                    <p>The SDD workflow prompts can be installed
-                        in any AI assistant in seconds using the <a
-                            href="https://github.com/liatrio-labs/slash-command-manager" target="_blank"
-                            rel="noopener noreferrer">slash-command-manager</a>. This open-source tool from Liatrio
-                        makes it straightforward
-                        to add the prompts as slash commands in VS Code, Cursor, Claude Code, and many other AI tools
-                        that support custom commands.</p>
+                    <p>The SDD workflow can enter a repo through the path that best fits the assistant: prompt files
+                        for slash/custom command workflows, a skill folder for skill-native agents, or manual
+                        copy-paste for teams that want no installation at all.</p>
                     <p>Because the workflow is plain markdown, teams can adopt it without taking on a new IDE, a
                         generated artifact model, or a separate task-orchestration system. See the <a
                             href="https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart" target="_blank"
-                            rel="noopener noreferrer">installation instructions in the README</a> to get started.</p>
-                    <p>That same simplicity also makes SDD useful as a teaching tool: engineers can read the prompts,
-                        understand the workflow patterns they encode, and reuse those patterns when working with AI in
-                        other contexts.</p>
+                            rel="noopener noreferrer">GitHub README quickstart</a> for current setup details.</p>
+                    <p>That same simplicity also makes SDD useful as a teaching tool: engineers can read the workflow
+                        instructions, understand the patterns they encode, and reuse those patterns when working with AI
+                        in other contexts.</p>
                 </div>
             </div>
         </section>
@@ -198,13 +193,13 @@
             <div class="container">
                 <h2>The Bottom Line</h2>
                 <p>For teams working in existing enterprise codebases, the main tradeoff is not whether a tool offers
-                    structure, but how much new product or process it asks engineers to adopt. Liatrio's prompts aim to
+                    structure, but how much new product or process it asks engineers to adopt. Liatrio's SDD workflow aims to
                     provide structure in a repo-native form: readable markdown, editable conventions, and a workflow
                     that can sit on top of existing tools rather than replace them.</p>
                 <p>This pattern extends beyond Kiro, SpecKit, and Taskmaster. Other spec-driven frameworks such as
                     Tessl and BMAD also add structure by introducing a larger system around the developer: more
                     tooling, more workflow machinery, and more framework-specific concepts to absorb. Liatrio's SDD
-                    prompts are intentionally different. They expose the workflow logic directly in markdown, so teams
+                    workflow is intentionally different. It exposes the workflow logic directly in markdown, so teams
                     can inspect it, adapt it, and internalize better AI collaboration patterns instead of depending on
                     a mediated system.</p>
 

@@ -16,7 +16,7 @@ Use one of three paths: install `prompts/` as slash commands for assistants with
 
 ## Do we need any prerequisites?
 
-The workflow runs with minimal setup—many teams start with the prompts alone and layer in automation when they are ready.
+The workflow runs with minimal setup—many teams start with prompts, the skill path, or manual copy-paste and layer in automation when they are ready.
 
 ## How does it work with different tools?
 
@@ -24,15 +24,15 @@ The workflow is designed to be usable with many different AI agents and work‑t
 
 ## What makes it different from documentation templates?
 
-Templates stay static; the workflow ships as a versioned package that you upgrade like any package, so improvements arrive without overwriting your customizations. The workflow also provides working commands and tools, not just documentation guidelines.
+Templates stay static; the workflow ships as a versioned package that you upgrade like any package, so improvements arrive without overwriting your customizations. The workflow also provides working commands, skill guidance, and tools, not just documentation guidelines.
 
 ## What if we already have an established process?
 
-You keep it. The workflow provides commands that wire into your existing project structure—your current ADR folders, ticket conventions, or roadmaps. You don't need to rewrite your documentation or reorganize your repos. The workflow layers consistency on top of what is already working.
+You keep it. The workflow provides commands or skill guidance that wire into your existing project structure—your current ADR folders, ticket conventions, or roadmaps. You don't need to rewrite your documentation or reorganize your repos. The workflow layers consistency on top of what is already working.
 
 ## How does it guide iteration size?
 
-Commands and scaffolds steer teams toward skateboard‑to‑scooter increments: create small testable slices, validate learning, and only then scale. Prompts explicitly ask you to define the skateboard (minimal testable value), scooter (enhanced but still lean), and car (complete product) so teams discuss iteration sizes up front.
+Commands, skill guidance, and scaffolds steer teams toward skateboard‑to‑scooter increments: create small testable slices, validate learning, and only then scale. Prompts explicitly ask you to define the skateboard (minimal testable value), scooter (enhanced but still lean), and car (complete product) so teams discuss iteration sizes up front.
 
 ## Can it work entirely in Markdown in one repo?
 
@@ -56,7 +56,7 @@ Through layering. Local overrides and configuration live outside the distributed
 
 ## What's the learning curve?
 
-Minimal. If you can write Markdown, you can use the workflow. The templates and commands guide you through the process. Most teams are productive in their first session.
+Minimal. If you can write Markdown, you can use the workflow. The prompts, skill guidance, and commands guide you through the process. Most teams are productive in their first session.
 
 ## Why adopt a spec‑driven workflow now?
 
