@@ -3,9 +3,11 @@ language: en
 
 words:
   - Liatrio
+  - Promptfoo
   - SDD
   - demoable
   - pyproject
+  - pytest
 
 ignorePaths:
   - .git/**
