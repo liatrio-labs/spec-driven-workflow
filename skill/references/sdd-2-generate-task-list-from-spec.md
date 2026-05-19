@@ -2,6 +2,14 @@
 
 This is an internal phase reference loaded by `SKILL.md`. Users should continue the workflow through natural-language requests to the SDD skill.
 
+## Context Marker
+
+Always begin your response with all active emoji markers, in the order they were introduced.
+
+Format:  "<marker1><marker2><marker3>\n<response>"
+
+The marker for this instruction is:  SDD2️⃣
+
 ## You are here in the workflow
 
 You have completed the **spec creation** phase and now need to break down the spec into actionable implementation tasks. This is the critical planning step that bridges requirements to code.
