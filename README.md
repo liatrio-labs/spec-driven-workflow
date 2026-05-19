@@ -100,20 +100,20 @@ npx skills add liatrio-labs/spec-driven-workflow --list
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd
 
 # Install the SDD skill non-interactively
-npx -y skills add liatrio-labs/spec-driven-workflow --skill sdd
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd --yes
 
 # Install to specific agents
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 
 # Install globally instead of project scope
-npx skills add liatrio-labs/spec-driven-workflow --skill sdd -g
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
 ```
 
 The skill router reassesses the workspace on each invocation, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
 
 Compatibility notes:
 
-- Agent support for skills and allowed tools varies by assistant.
+- Agent support for skills and allowed tools varies by agent harness.
 - Use `DISABLE_TELEMETRY=1` or `DO_NOT_TRACK=1` to opt out of telemetry when running the `skills.sh` CLI.
 
 #### Option C: Manual Copy-Paste (No Installation)
@@ -121,6 +121,15 @@ Compatibility notes:
 Copy the contents of a prompt file directly from `prompts/` and paste it into your AI chat. The AI will follow the structured instructions in the prompt.
 
 ### Quick "try it" flow
+
+For the slash-command installs via `slash-man`, invoke each step individually:
+
+1. Run `/SDD-1-generate-spec` and describe the feature you want. If the AI determines material clarification is needed, answer the generated questions file before continuing.
+2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec; complete task generation, baseline planning commit, planning audit, and user-approved remediation if needed.
+3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits) after the SDD-2 audit required gates pass.
+4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
+
+If using the skill version, simply invoke the skill via your agent harness, usually `/sdd`. If in `codex`, it will be `$sdd`. You can supply a feature/idea/task along with the skill invocation to guide the skill, or just let the skill auto-detect the appropriate stage for you.
 
 1. Start SDD for a new feature.
 2. Continue SDD with task planning.
