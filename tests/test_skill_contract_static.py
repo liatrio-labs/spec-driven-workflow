@@ -24,7 +24,8 @@ def test_router_requires_workspace_root_assessor_invocation():
     text = SKILL_MD.read_text()
 
     assert "Before routing, run the bundled assessor script while the current working directory is the target repository/workspace root" in text
-    assert "python {{skill_dir}}/scripts/assess-sdd-state.py ." in text
+    assert "python3 {{skill_dir}}/scripts/assess-sdd-state.py ." in text
+    assert "python {{skill_dir}}/scripts/assess-sdd-state.py ." not in text
     assert "SDD artifacts are assessed from the workspace path argument (`.`" in text
 
 

@@ -24,7 +24,7 @@ If multiple active specs exist and the user request does not clearly identify on
 Before routing, run the bundled assessor script while the current working directory is the target repository/workspace root:
 
 ```bash
-python {{skill_dir}}/scripts/assess-sdd-state.py .
+python3 {{skill_dir}}/scripts/assess-sdd-state.py .
 ```
 
 `{{skill_dir}}` locates bundled skill assets only; SDD artifacts are assessed from the workspace path argument (`.` in the command above). The script outputs JSON describing active specs and a recommended phase. Use that output as the default source of truth for routing.
