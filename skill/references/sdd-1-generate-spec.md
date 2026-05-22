@@ -197,7 +197,7 @@ Proceed without a questions file only if all of the following are true:
 - Demoable Units and Proof Artifacts can be specified without guessing.
 - Known repository context and user-provided constraints are sufficient to avoid inventing requirements.
 - Relevant latest-standards research has been completed for material technologies, and it does not introduce unresolved approach choices that need user confirmation.
-- Any remaining uncertainty is minor and can safely be recorded in the spec's `Open Questions` section without reducing spec quality.
+- Any remaining uncertainty is minor, non-blocking, and can safely be recorded in the spec's `Open Questions` section without reducing spec quality.
 
 Create a questions file if any of the following are true:
 
@@ -208,6 +208,22 @@ Create a questions file if any of the following are true:
 - The user intent or direction could reasonably lead to different implementation paths.
 - Current best practices or standards for a relevant technology suggest multiple valid approaches, and the choice would materially affect the spec.
 - Repository patterns appear to conflict with current external guidance, and the correct direction is not obvious from the user's request.
+
+### Open Questions Boundary
+
+Open Questions are only for non-blocking uncertainties that do not prevent a high-quality, actionable spec. Use them to document assumptions, deferred nice-to-have details, or follow-up context the user can refine later without changing the core scope, requirements, Demoable Units, Proof Artifacts, or acceptance criteria.
+
+Do not use `Open Questions` to defer material ambiguity that belongs in a questions file. If the answer could materially change the feature scope, implementation path, acceptance criteria, validation strategy, security posture, operational behavior, or proof artifacts, create a questions file instead and stop for user input.
+
+Here are examples of decisions that cannot be left materially unresolved and would merit a questions file:
+
+- Whether the feature is advisory/report-only or can take mutating actions such as publishing, deploying, tagging, approving, merging, notifying, creating releases, dispatching workflows, or changing remote/service state.
+- Which execution surface is in scope when materially different options are plausible, such as CLI, CI job, GitHub App, web UI, background service, scheduled agent, or local script.
+- Who or what has authority to decide that something is safe enough, ready, approved, blocked, or eligible for automation.
+- Which external system of record is primary when several could drive the workflow, such as GitHub, CI/CD, ticketing, Slack, deployment tooling, package registries, or cloud services.
+- What credential scope or write permissions are acceptable when the implementation may need access to external systems.
+
+Do not answer a question by punting it to SDD2 or later phases. Phase 1 must either resolve the uncertainty as a clearly labeled assumption, ask the user through a questions file, or record it as a non-blocking Open Question that does not affect implementation planning.
 
 ### Clarification Status Declaration (Required)
 
@@ -223,7 +239,7 @@ Before choosing `sufficient`, explicitly verify:
 - [ ] I am not guessing at missing requirements.
 - [ ] I can populate all major spec sections with grounded, user-aligned content.
 - [ ] I have reviewed relevant current best practices for material technologies, or I have explicitly determined that no external standards research is needed.
-- [ ] Any remaining uncertainty is non-blocking and belongs in `Open Questions` rather than a blocking questions round.
+- [ ] Any remaining uncertainty is non-blocking, does not materially affect the implementation plan, and belongs in `Open Questions` rather than a blocking questions round.
 
 If any check fails, create a questions file.
 
@@ -437,10 +453,10 @@ If no specific security considerations, state "No specific security consideratio
 
 ## Open Questions
 
-[List any remaining questions or areas needing clarification. If none, state "No open questions at this time."]
+[List only non-blocking questions or assumptions that can be refined later without changing core scope, requirements, Demoable Units, Proof Artifacts, or acceptance criteria. If none, state "No open questions at this time."]
 
-1. [Question 1]
-2. [Question 2]
+1. [Non-blocking question or assumption 1]
+2. [Non-blocking question or assumption 2]
 ```
 
 ## Step 6: Review and Refinement
@@ -464,7 +480,7 @@ If any item fails, revise wording to be framework-agnostic and context-aware.
 
 After generating the spec, present it to the user and ask them to review the spec as the source of truth for implementation. Ask for feedback on whether the feature goal, scope, non-goals, requirements, acceptance criteria, demoable units, and proof artifacts match their intent and are specific enough to plan implementation without guessing.
 
-Explicitly call out the `Open Questions` section. If the spec includes open questions, ask the user to answer them before continuing or identify which ones can remain as non-blocking assumptions.
+Explicitly call out the `Open Questions` section. If the spec includes open questions, confirm they are non-blocking and ask the user to answer them before continuing or identify which ones can remain as non-blocking assumptions.
 
 Iterate based on feedback until the user is satisfied.
 
