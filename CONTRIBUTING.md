@@ -100,19 +100,13 @@ pre-commit run cspell --all-files
 
 ## Testing
 
-Before submitting a PR, run:
+Before submitting a PR, follow [`docs/TESTING.md`](docs/TESTING.md):
 
 ```bash
-# Run all pre-commit checks
 pre-commit run --all-files
 ```
 
-This will:
-
-- Check YAML syntax
-- Fix Markdown formatting issues
-- Spell-check public-facing documentation and workflow prompts
-- Validate commit message format (on commit)
+The pre-commit gate runs the deterministic pytest suite, checks YAML syntax, fixes Markdown formatting issues, spell-checks public-facing documentation and workflow prompts, scans committed content for secrets, and validates commit message format on commit. CI also runs the skill tests as a dedicated step before the full pre-commit gate.
 
 ## Branching and Commit Conventions
 

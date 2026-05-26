@@ -25,34 +25,40 @@
                 <h1>The Spec-Driven Development (SDD) Playbook</h1>
                 <div class="hero-content">
                     <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is
-                        <strong>just 4 markdown prompts</strong> that help developers guide an AI assistant through
+                        <strong>four lightweight phases available as prompts or an agent skill</strong> that help developers guide an AI assistant through
                         implementing their day-to-day work with structure, clarity, and evidence.
                     </p>
-                    <p>These prompts are <strong>transparent</strong> and <strong>learnable</strong>: you can read
-                        every prompt, understand the workflow logic it applies, and adapt the patterns to your own team
-                        and projects. Instead of hiding the method inside a product, SDD exposes it in markdown.</p>
-                    <p>They are also <strong>tool-agnostic</strong> (works with any AI assistant) and
-                        <strong>lightweight</strong> (no installation, no dependencies). They create a simple file
-                        structure in <code>docs/specs/</code> that doesn't pollute your repo.
+                    <p>The workflow instructions are <strong>transparent</strong> and <strong>learnable</strong>: you can read
+                        the prompt and skill source, understand the workflow logic it applies, and adapt the patterns to
+                        your own team and projects. Instead of hiding the method inside a product, SDD exposes it in markdown.</p>
+                    <p>They are also <strong>tool-agnostic</strong>: use prompt files for assistants with slash/custom
+                        prompt support, and a skill folder for assistants with skill-native workflows. They create a
+                        simple file structure in <code>docs/specs/</code> that doesn't pollute your repo.
                     </p>
-                    <p>View the prompts on GitHub: <a
+                    <p>Choose the path that fits your assistant—prompt files, the skill folder, or manual copy-paste—and
+                        use the <a href="https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart"
+                            target="_blank" rel="noopener noreferrer">GitHub README quickstart</a> for setup details.</p>
+                    <p>View the source artifacts on GitHub: <a
                             href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
                             target="_blank"
-                            rel="noopener noreferrer">github.com/liatrio-labs/spec-driven-workflow/prompts</a></p>
+                            rel="noopener noreferrer">prompts/</a> and <a
+                            href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/skill"
+                            target="_blank"
+                            rel="noopener noreferrer">skill/</a></p>
                 </div>
 
                 <!-- Flow Input Section -->
                 <div class="flow-input-section">
                     <h3>What You Bring: Flow Input</h3>
-                    <p>Start with anything: an idea, a Jira story, a GitHub issue, or a feature request. The prompts
-                        adapt to your input and guide you through the workflow. No special format required—just describe
+                    <p>Start with anything: an idea, a Jira story, a GitHub issue, or a feature request. The workflow
+                        adapts to your input and guides you through each phase. No special format required—just describe
                         what you want to build.</p>
                 </div>
 
                 <!-- Scope Validation Section -->
                 <div class="scope-validation-section">
                     <h3>Built-in Scope Validation</h3>
-                    <p>The prompts automatically check if your work is appropriately sized. If it's <strong>too
+                    <p>The workflow automatically checks if your work is appropriately sized. If it's <strong>too
                             large</strong>, they'll suggest splitting it into smaller specs. If it's <strong>too
                             small</strong>, they'll suggest direct implementation. Perfect for well-scoped features that
                         are ready to implement.</p>
@@ -79,13 +85,14 @@
         <section class="phases-detailed">
             <div class="container">
                 <h2>The Four Steps</h2>
-                <p class="section-intro">One person runs through these 4 prompts sequentially with an AI assistant. In
+                <p class="section-intro">One person runs through these four workflow phases sequentially with an AI assistant. In
                     the <a href="reference-materials.html">cspell pre-commit hook example</a> featured across this
                     site, the end-to-end workflow took less than 15 minutes from start to finish. The highest-leverage
                     work happens in Step 1 and Step 2: when the spec is clear and the task plan is concrete,
                     implementation and validation are far more likely to run smoothly without human rescue. Because the
-                    prompts are readable, the workflow also doubles as a guide for learning how to scope work, guide
-                    AI, and verify results more effectively.</p>
+                    workflow instructions are readable, SDD also doubles as a guide for learning how to scope work,
+                    guide AI, and verify results more effectively. Prompt installs expose the individual phase files;
+                    skill installs route through the same phase logic from the skill source.</p>
 
                 <div class="phases-grid">
                     <div class="phase-card">
@@ -96,13 +103,13 @@
                         <div class="phase-card-content">
                             <p><strong>Focus:</strong> Lock down scope, intent, and success criteria before any code is
                                 written.</p>
-                            <p><strong>What It Does:</strong> The prompt validates scope (too large/too small/just
+                            <p><strong>What It Does:</strong> The phase validates scope (too large/too small/just
                                 right), resolves ambiguous context, and generates a specification document with clear
                                 boundaries.</p>
                             <p><strong>Output:</strong> A markdown spec file in
                                 <code>docs/specs/[NN]-spec-[feature-name]/</code>
                             </p>
-                            <p><strong>Prompt:</strong> <a
+                            <p><strong>Prompt reference:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-1-generate-spec.md"
                                     target="_blank" rel="noopener noreferrer">SDD-1-generate-spec.md</a></p>
                         </div>
@@ -121,7 +128,7 @@
                                 caught before implementation starts.</p>
                             <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact
                                 requirements</p>
-                            <p><strong>Prompt:</strong> <a
+                            <p><strong>Prompt reference:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-2-generate-task-list-from-spec.md"
                                     target="_blank" rel="noopener noreferrer">SDD-2-generate-task-list-from-spec.md</a>
                             </p>
@@ -140,7 +147,7 @@
                                 (continuous/task/batch), creates proof artifacts, and manages git commits.</p>
                             <p><strong>Output:</strong> Working code, proof artifact files, and task-aligned git commits
                             </p>
-                            <p><strong>Prompt:</strong> <a
+                            <p><strong>Prompt reference:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-3-manage-tasks.md"
                                     target="_blank" rel="noopener noreferrer">SDD-3-manage-tasks.md</a></p>
                         </div>
@@ -158,7 +165,7 @@
                                 checks file integrity, and produces a validation report.</p>
                             <p><strong>Output:</strong> A validation report with PASS/FAIL gates and evidence-based
                                 coverage matrix</p>
-                            <p><strong>Prompt:</strong> <a
+                            <p><strong>Prompt reference:</strong> <a
                                     href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-4-validate-spec-implementation.md"
                                     target="_blank" rel="noopener noreferrer">SDD-4-validate-spec-implementation.md</a>
                             </p>
@@ -178,7 +185,7 @@
                         <ul>
                             <li>Built-in scope validation prevents oversized work</li>
                             <li>Early clarification makes later course correction cheaper and less likely</li>
-                            <li>Readable prompts expose patterns teams can study and adapt</li>
+                            <li>Readable workflow instructions expose patterns teams can study and adapt</li>
                             <li>Tool-agnostic—works with any AI assistant</li>
                             <li>Artifact storage stays lightweight and can adapt to your environment</li>
                             <li>Context verification markers detect instruction loss early</li>
@@ -198,7 +205,7 @@
                 <!-- Context Verification Section -->
                 <div class="scope-validation-section" style="margin-top: 2rem;">
                     <h3>Built-in Context Verification</h3>
-                    <p>Each prompt includes a verification marker (SDD1️⃣, SDD2️⃣, SDD3️⃣, SDD4️⃣) that appears at the
+                    <p>Each phase includes a verification marker (SDD1️⃣, SDD2️⃣, SDD3️⃣, SDD4️⃣) that appears at the
                         start of AI responses. These markers help detect <strong>context rot</strong>—a silent failure
                         mode where AI performance degrades as input context length increases, even when tasks remain
                         simple.</p>
@@ -208,16 +215,16 @@
                 </div>
 
                 <div class="comparison-cta">
-                    <p><strong>How does this compare to other structured development tools?</strong> See our <a
+                    <p><strong>How does this compare to other structured development tools?</strong></p><br><p> See our <a
                             href="comparison.html">comparison against Kiro, SpecKit, and Taskmaster</a> to understand
-                        why Liatrio's prompts fit better into the typical workflow of software developers doing
+                        why Liatrio's SDD workflow fits better into the typical workflow of software developers doing
                         day-to-day work, and why exposing the workflow logic matters just as much as lightweight
                         adoption.</p>
                 </div>
-
+                <br>
                 <div class="comparison-cta">
-                    <p><strong>Want to study the patterns behind the workflow?</strong> Explore <a
-                            href="ai-techniques.html">AI Techniques in SDD</a> to see how the prompts use task
+                    <p><strong>Want to study the patterns behind the workflow?</strong></p><br><p>Explore <a
+                            href="ai-techniques.html">AI Techniques in SDD</a> to see how the workflow uses task
                         decomposition, progressive disclosure, structured outputs, and evidence-based validation to make
                         AI-assisted work more teachable.</p>
                 </div>
@@ -270,7 +277,7 @@
         <section class="reactive-art progression-section">
             <div class="container">
                 <h2>From Reactive Art to Predictable Engineering</h2>
-                <p>By consistently using these four prompts, developers transform small feature work from reactive
+                <p>By consistently using these four phases, developers transform small feature work from reactive
                     coding into predictable, evidence-based implementation. Liatrio's Spec-Driven Development workflow
                     creates a self-documenting, auditable process that systematically drives up quality, reduces
                     ambiguity, and ensures every feature delivered is a feature validated—all in minutes, not days.</p>
