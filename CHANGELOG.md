@@ -2,6 +2,49 @@
 
 <!-- version list -->
 
+## v1.14.0 (2026-05-26)
+
+### Bug Fixes
+
+- **skill**: Invoke SDD assessor with python3
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Continuous Integration
+
+- Enforce deterministic skill tests
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Documentation
+
+- **readme**: Clarify SDD install flow
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **site**: Align SDD playbook with skill workflow
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **site**: Align workflow source CTAs
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **skill**: Clarify Phase 1 open questions boundary
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Features
+
+- Add SDD agent skill install option
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **skill**: Restore SDD context markers
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+
 ## v1.13.0 (2026-04-09)
 
 ### Continuous Integration
