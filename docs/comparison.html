@@ -27,7 +27,7 @@
                     <p>Kiro, SpecKit, and Taskmaster each add structure to AI-assisted development, but they do so
                         through very different operating models. This page compares Liatrio's repo-local SDD workflow
                         with those tools, with a focus on setup, workflow fit, and day-to-day adoption cost.</p>
-                    <p>A second distinction matters just as much: SDD exposes its prompt and skill logic in plain markdown, so teams can
+                    <p>A second distinction matters just as much: SDD exposes its skill and prompt logic in plain markdown, so teams can
                         learn the patterns behind effective AI collaboration instead of depending on a product to hide
                         or mediate them.</p>
                 </div>
@@ -58,7 +58,7 @@
                             <tr>
                                 <td><strong>Setup & Installation</strong></td>
                                 <td>✅ <a href="https://github.com/liatrio-labs/spec-driven-workflow" target="_blank"
-                                        rel="noopener noreferrer">A simple 4-phase workflow installed as custom prompts or a single skill</a></td>
+                                        rel="noopener noreferrer">A simple 4-phase workflow installed first as an explicit-invocation agent skill, with custom prompts still available</a></td>
                                 <td>❌ <a href="https://kiro.dev/downloads/" target="_blank"
                                         rel="noopener noreferrer">Requires installing Kiro, signing in, and
                                         learning its product-specific workflow model</a>
@@ -73,14 +73,14 @@
                             </tr>
                             <tr>
                                 <td><strong>Editor/IDE Dependency</strong></td>
-                                <td>✅ Works in editors that support prompts, slash commands, or skill-native workflows</td>
+                                <td>✅ Skill-first; prompt and slash-command installs remain available for compatible editors</td>
                                 <td>❌ Structured workflow assumes the Kiro IDE as the primary environment</td>
                                 <td>⚠️ Runs in existing editors through generated agent commands</td>
                                 <td>⚠️ Works in existing editors through CLI or MCP integration</td>
                             </tr>
                             <tr>
                                 <td><strong>AI Assistant Compatibility</strong></td>
-                                <td>✅ Works with assistants that support custom prompts, slash commands, or agent skills</td>
+                                <td>✅ Works best with assistants that support agent skills; also supports custom prompts and slash commands</td>
                                 <td>⚠️ Uses Kiro's built-in agent experience, model options, and product-specific modes
                                 </td>
                                 <td>⚠️ Works through supported agent integrations and slash commands</td>
@@ -103,7 +103,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Transparency</strong></td>
-                                <td>✅ Prompt and skill instructions are plain markdown, so the workflow logic is directly readable,
+                                <td>✅ Skill and prompt instructions are plain markdown, so the workflow logic is directly readable,
                                     editable, and teachable</td>
                                 <td>⚠️ Some files are editable, but core behavior, modes, and workflow concepts live in
                                     the product</td>
@@ -114,7 +114,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Flexibility</strong></td>
-                                <td>✅ Prompt or skill text can be adapted to match team or project conventions</td>
+                                <td>✅ Skill or prompt text can be adapted to match team or project conventions</td>
                                 <td>⚠️ Steering files, hooks, and modes are configurable within Kiro's product model
                                 </td>
                                 <td>⚠️ Templates can be adapted, but the workflow, artifacts, and process vocabulary
@@ -147,7 +147,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Speed</strong></td>
-                                <td>✅ Minimal setup overhead once the prompt or skill path is selected</td>
+                                <td>✅ Minimal setup overhead with the recommended skill path; prompt installs remain available when needed</td>
                                 <td>❌ Front-loaded overhead is high because teams must learn the product model before
                                     moving quickly</td>
                                 <td>❌ Front-loaded overhead is high because the workflow generates and coordinates many
@@ -157,7 +157,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Cost</strong></td>
-                                <td>✅ Markdown prompt and skill files are free to use</td>
+                                <td>✅ Markdown skill and prompt files are free to use</td>
                                 <td>⚠️ Free tier available, but usage is managed through sign-in, credits, and paid
                                     usage tiers</td>
                                 <td>✅ Open source</td>
@@ -174,9 +174,9 @@
             <div class="container">
                 <div class="installation-highlight">
                     <h2>Repo-Native Setup</h2>
-                    <p>The SDD workflow can enter a repo through the path that best fits the assistant: prompt files
-                        for slash/custom command workflows, a skill folder for skill-native agents, or manual
-                        copy-paste for teams that want no installation at all.</p>
+                    <p>The recommended entry point is the agent skill for skill-native assistants. Prompt files remain
+                        available for slash/custom command workflows, and manual copy-paste remains available for teams
+                        that want no installation at all.</p>
                     <p>The skill path is intentionally user-invoked rather than automatic: once called, it performs
                         the same repository-state assessment and phase routing as the prompt workflow.</p>
                     <p>Because the workflow is plain markdown, teams can adopt it without taking on a new IDE, a
