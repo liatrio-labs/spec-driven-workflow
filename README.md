@@ -122,12 +122,13 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 
 ### Quick "try it" flow
 
-For the recommended skill install, explicitly invoke the skill via your agent harness, usually `/sdd`. In Codex, use `$sdd`. You can supply a feature/idea/task along with the invocation, or invoke the skill without extra detail and let its internal router detect the appropriate SDD phase from persisted artifacts.
+For the recommended skill install, explicitly invoke the skill via your agent harness, usually `/sdd`. In Codex, use `$sdd`. You can supply a feature/idea/task along with the invocation, or invoke the skill without extra detail and let its internal router detect the appropriate SDD phase from persisted artifacts. Here are some example invocations:
 
-1. Start SDD for a new feature.
-2. Continue SDD with task planning.
-3. Continue SDD with implementation.
-4. Continue SDD with validation.
+- `/sdd review issue #123 and start creating a spec for it`
+- `/sdd generate tasks for the latest spec`
+- `/sdd run a validation for the latest spec`
+
+Or just invoke the skill with `/sdd` and let the skill guide you through the appropriate phase based on the repo context.
 
 For slash-command installs, invoke each step individually:
 

@@ -10,7 +10,7 @@ Engineering teams adopting AI coding assistants face a challenge: each developer
 
 ## The Solution: Workflow as a Versioned Component
 
-Liatrio’s Spec‑Driven Workflow treats your development process like any other library in your stack. Adopt it through the recommended agent skill, use slash-command prompts when your assistant needs prompt files, or fall back to manual Markdown guidance; all paths wire consistent structured context, work breakdown patterns and AI‑agent guidance into your project — whether you’re working on a weekend prototype or a multi‑repo platform. It provides a stable foundation even as teams use different or evolving AI tools, creating consistency where tool diversity surfaces friction.
+Liatrio’s Spec‑Driven Workflow treats your development process like any other library in your stack. Adopt it through the recommended agent skill, use slash‑command prompts when your assistant needs prompt files, or fall back to manual Markdown guidance; all paths wire consistent structured context, work breakdown patterns and AI‑agent guidance into your project — whether you’re working on a weekend prototype or a multi‑repo platform. It provides a stable foundation even as teams use different or evolving AI tools, creating consistency where tool diversity surfaces friction.
 
 The workflow features:
 
@@ -31,5 +31,5 @@ The workflow scales from solo developers to enterprise platforms:
 - **Single repository**: Keep everything local in Markdown files.
 - **Multi‑repository**: Maintain consistent context across repos with 1:1 mappings between context artifacts.
 - **External context storage**: Context can live outside repos entirely while maintaining the same structure.
-- **Skill‑first, prompt-compatible**: Works without heavy platform tooling.
+- **Skill‑first, prompt‑compatible**: Works without heavy platform tooling.
 - **Multi‑tool**: Use different AI agents and work‑tracking systems together in the same project.
