@@ -27,7 +27,8 @@ pre-commit install
 
 - Install pre-commit hooks once with `pre-commit install`.
 - Keep changes small and focused; prefer incremental PRs.
-- All prompts are plain Markdown files in the `prompts/` directory.
+- Prompt workflows are plain Markdown files in the `prompts/` directory.
+- The alternate SDD skill lives in `skill/` and is explicit-invocation only; it should not be described as an automatically loaded or dynamically triggered helper skill.
 
 ### Recommended: Secret Scanning Pre-commit Hooks
 

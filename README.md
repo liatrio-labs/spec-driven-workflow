@@ -109,7 +109,7 @@ npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
 ```
 
-The skill router reassesses the workspace on each invocation, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
+The SDD skill is explicit-invocation only: users should intentionally invoke it through their agent harness, such as `/sdd` or `$sdd`. It is not designed to be dynamically loaded or automatically triggered by the agent. Once explicitly invoked, the skill router reassesses the workspace, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
 
 Compatibility notes:
 
@@ -129,7 +129,7 @@ For the slash-command installs via `slash-man`, invoke each step individually:
 3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits) after the SDD-2 audit required gates pass.
 4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
 
-If using the skill version, simply invoke the skill via your agent harness, usually `/sdd`. If in `codex`, it will be `$sdd`. You can supply a feature/idea/task along with the skill invocation to guide the skill, or just let the skill auto-detect the appropriate stage for you.
+If using the skill version, explicitly invoke the skill via your agent harness, usually `/sdd`. If in `codex`, it will be `$sdd`. You can supply a feature/idea/task along with the invocation, or invoke the skill without extra detail and let its internal router detect the appropriate SDD phase from persisted artifacts.
 
 1. Start SDD for a new feature.
 2. Continue SDD with task planning.

@@ -12,7 +12,7 @@ Any team trying to level up AI‑native delivery. You can adopt the workflow a p
 
 ## How is it installed?
 
-Use one of three paths: install `prompts/` as slash commands for assistants with slash/custom prompt support, install `skill/` as an agent skill for assistants with skill-native workflows, or manually copy prompt contents into an AI chat. All paths keep workflow artifacts in `docs/specs/` so teams can maintain context, drive consistent work breakdown, and keep AI agents operating inside agreed guardrails.
+Use one of three paths: install `prompts/` as slash commands for assistants with slash/custom prompt support, install `skill/` as an agent skill for assistants with skill-native workflows, or manually copy prompt contents into an AI chat. The skill path is explicit-invocation only: users should call the installed SDD skill intentionally, then the skill determines the next phase from repository artifacts. All paths keep workflow artifacts in `docs/specs/` so teams can maintain context, drive consistent work breakdown, and keep AI agents operating inside agreed guardrails.
 
 ## Do we need any prerequisites?
 
