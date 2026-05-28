@@ -64,7 +64,7 @@ npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
 ```
 
-<img max-width="500" alt="Example of separate slash commands installed in Claude Code" src="docs/assets/images/claude-example-single-skill.png" />
+<img max-width="500" alt="Example of the single SDD skill installed in Claude Code" src="docs/assets/images/claude-example-single-skill.png" />
 
 The SDD skill is explicit-invocation only: users should intentionally invoke it through their agent harness, such as `/sdd` or `$sdd`. It is not designed to be dynamically loaded or automatically triggered by the agent. Once explicitly invoked, the skill router reassesses the workspace, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
 
