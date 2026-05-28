@@ -28,4 +28,4 @@ The PR title will be validated automatically.
 - [ ] Linked relevant spec/task IDs (e.g., `tasks/0002-spec-open-source-ready.md`)
 - [ ] Ran tests: `uv run pytest`
 - [ ] Ran linters/hooks: `uv run pre-commit run --all-files`
-- [ ] Updated docs or prompts if behavior changed
+- [ ] Updated docs, prompts, or skill metadata if behavior changed

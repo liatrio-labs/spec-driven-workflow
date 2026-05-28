@@ -1,11 +1,11 @@
 <div align="center">
-    <img src="./misc/header.png" alt="Spec Driven Development header" width="400"/>
+    <img src="./misc/sdd-workflow-hero.png" alt="Spec-Driven Development workflow from idea to verified delivery" width="900"/>
     <h1>🧭 Spec-Driven Development Workflow</h1>
     <h3><em>Build predictable software with a repeatable AI-guided workflow.</em></h3>
 </div>
 
 <p align="center">
-    <strong>Spec-driven development prompts for collaborating with AI agents to deliver reliable outcomes.</strong>
+    <strong>A skill-first spec-driven development workflow for collaborating with AI agents to deliver reliable outcomes.</strong>
 </p>
 
 <p align="center">
@@ -16,14 +16,14 @@
 
 ## Overview
 
-This repository provides **structured prompts** and an alternate **agent skill** that guide AI assistants through a complete software development workflow:
+This repository provides a **primary agent skill** plus **structured prompt files** that guide AI assistants through a complete software development workflow:
 
 - **Define intent**: generate a reviewed spec with clear demo criteria
 - **Plan**: break work into demoable tasks and subtasks, then run a planning audit gate
 - **Execute**: implement with checkpoints and proof artifacts
 - **Validate**: verify implementation against the spec with evidence
 
-Think of these prompts as reusable playbooks that keep AI agents focused and consistent across long conversations.
+Think of the skill and the prompt files that power it as reusable playbooks that keep AI agents focused and consistent across long conversations.
 
 ## Table of Contents
 
@@ -41,9 +41,41 @@ Think of these prompts as reusable playbooks that keep AI agents focused and con
 
 ### Installation options
 
-#### Option A: Install as Slash Commands (Recommended)
+#### Option A: Install as Agent Skill (Recommended)
 
-Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
+Install `skill/` when your AI assistant supports skill folders or skill-native workflows. This is the primary recommended path because the single `sdd` skill can reassess repository state, load the right phase reference, and continue from persisted artifacts without making users remember four separate phase commands.
+
+Install the SDD skill using the [`skills.sh`](https://skills.sh) CLI:
+
+```bash
+# List available skills in this repository without installing
+npx skills add liatrio-labs/spec-driven-workflow --list
+
+# Install the SDD skill
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd
+
+# Install the SDD skill non-interactively
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd --yes
+
+# Install to specific agents
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
+
+# Install globally instead of project scope
+npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
+```
+
+<img max-width="500" alt="Example of the single SDD skill installed in Claude Code" src="docs/assets/images/claude-example-single-skill.png" />
+
+The SDD skill is explicit-invocation only: users should intentionally invoke it through their agent harness, such as `/sdd` or `$sdd`. It is not designed to be dynamically loaded or automatically triggered by the agent. Once explicitly invoked, the skill router reassesses the workspace, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
+
+Compatibility notes:
+
+- Agent support for skills and allowed tools varies by agent harness.
+- Use `DISABLE_TELEMETRY=1` or `DO_NOT_TRACK=1` to opt out of telemetry when running the `skills.sh` CLI.
+
+#### Option B: Install as Slash Commands
+
+Use `prompts/` as slash commands when your assistant does not support skills or when your team specifically wants separate phase commands. Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
 
 **Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/). Install uv first if you don’t already have it:
 
@@ -78,43 +110,11 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager `
 - Downloads the prompt files for each supported tool from the `prompts/` directory
 - Installs them as slash commands for each supported tool
 
-**Result:** you can now type `/SDD-1-generate-spec` in your AI assistant to start the workflow.
+**Result:** you can now type `/SDD-1-generate-spec` in your AI assistant to start the prompt-command workflow.
 
 **Where to use the slash commands:** in AI chat UIs (e.g., Windsurf, Claude Code) type `/` in the chat input. Some AI assistants require being in "Agent" or "Code" mode for slash commands to appear.
 
-<img max-width="500" alt="Example of slash commands installed in Claude Code" src="docs/assets/images/slash-command-example-claude.png" />
-
-<img max-width="500" alt="Example of slash commands installed in Windsurf" src="docs/assets/images/slash-command-example-windsurf.png" />
-
-#### Option B: Install as Agent Skill
-
-Use this option for AI assistants that support skill folders or skill-native workflows, especially environments where custom prompts or slash-command prompt packs are unavailable or deprecated.
-
-Install the SDD skill using the [`skills.sh`](https://skills.sh) CLI:
-
-```bash
-# List available skills in this repository without installing
-npx skills add liatrio-labs/spec-driven-workflow --list
-
-# Install the SDD skill
-npx skills add liatrio-labs/spec-driven-workflow --skill sdd
-
-# Install the SDD skill non-interactively
-npx skills add liatrio-labs/spec-driven-workflow --skill sdd --yes
-
-# Install to specific agents
-npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
-
-# Install globally instead of project scope
-npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
-```
-
-The skill router reassesses the workspace on each invocation, loads the correct SDD phase reference, and continues from persisted artifacts in `docs/specs/`.
-
-Compatibility notes:
-
-- Agent support for skills and allowed tools varies by agent harness.
-- Use `DISABLE_TELEMETRY=1` or `DO_NOT_TRACK=1` to opt out of telemetry when running the `skills.sh` CLI.
+<img max-width="500" alt="Example of separate slash commands installed in Claude Code" src="docs/assets/images/claude-example-separate-prompts.png" />
 
 #### Option C: Manual Copy-Paste (No Installation)
 
@@ -122,25 +122,24 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 
 ### Quick "try it" flow
 
-For the slash-command installs via `slash-man`, invoke each step individually:
+For the recommended skill install, explicitly invoke the skill via your agent harness, usually `/sdd`. In Codex, use `$sdd`. You can supply a feature/idea/task along with the invocation, or invoke the skill without extra detail and let its internal router detect the appropriate SDD phase from persisted artifacts. Here are some example invocations:
+
+- `/sdd review issue #123 and start creating a spec for it`
+- `/sdd generate tasks for the latest spec`
+- `/sdd run a validation for the latest spec`
+
+Or just invoke the skill with `/sdd` and let the skill guide you through the appropriate phase based on the repo context.
+
+For slash-command installs, invoke each step individually:
 
 1. Run `/SDD-1-generate-spec` and describe the feature you want. If the AI determines material clarification is needed, answer the generated questions file before continuing.
 2. Next, use `/SDD-2-generate-task-list-from-spec` pointing it at the generated spec; complete task generation, baseline planning commit, planning audit, and user-approved remediation if needed.
 3. Then execute `/SDD-3-manage-tasks` to implement tasks one at a time (creating proof artifacts before commits) after the SDD-2 audit required gates pass.
 4. Finally, apply `/SDD-4-validate-spec-implementation` to verify the implementation against the spec.
 
-If using the skill version, simply invoke the skill via your agent harness, usually `/sdd`. If in `codex`, it will be `$sdd`. You can supply a feature/idea/task along with the skill invocation to guide the skill, or just let the skill auto-detect the appropriate stage for you.
-
-1. Start SDD for a new feature.
-2. Continue SDD with task planning.
-3. Continue SDD with implementation.
-4. Continue SDD with validation.
-
-For slash-command installs, the equivalent commands are `/SDD-1-generate-spec`, `/SDD-2-generate-task-list-from-spec`, `/SDD-3-manage-tasks`, and `/SDD-4-validate-spec-implementation`.
-
 ## Details for the 4-step workflow
 
-Each step uses a different prompt file and produces specific artifacts in `docs/specs/`.
+Each phase is available through the recommended `sdd` skill router and, for slash-command installs, through an equivalent prompt file. The workflow produces specific artifacts in `docs/specs/`.
 
 1. **Generate a spec** ([`prompts/SDD-1-generate-spec.md`](./prompts/SDD-1-generate-spec.md))
    - **What it does**: checks scope, researches current best practices for relevant technologies, determines whether clarification is needed, optionally creates a questions file for material ambiguities with recommended answers and justification notes, and writes a junior-friendly spec with demo criteria
@@ -166,15 +165,15 @@ Each step uses a different prompt file and produces specific artifacts in `docs/
 
 ## Highlights
 
-- **Prompt-first workflow:** Use curated prompts to go from idea → spec → task list → implementation-ready backlog.
+- **Skill-first workflow:** Use the `sdd` skill to route from idea → spec → task list → implementation-ready backlog, with prompt files available for assistants that need slash/custom prompts.
 - **Planning quality gate:** SDD-2 includes a mandatory audit with human-approved remediation before implementation starts.
 - **Predictable delivery:** Every step emphasizes demoable slices, proof artifacts, and collaboration with junior developers in mind.
-- **Flexible install paths:** Use prompt files for assistants with slash/custom prompt support, and a skill folder for assistants with skill-native workflows.
+- **Flexible install paths:** Install the skill for skill-native agents first; use prompt files when slash/custom prompt support is the better fit.
 - **Context verification:** Built-in emoji markers (SDD1️⃣-SDD4️⃣) detect when AI responses follow critical instructions, helping identify context rot issues early.
 
 ## Why Spec-Driven Development?
 
-Spec-Driven Development (SDD) keeps AI collaborators and human developers aligned around a shared source of truth. This repository provides a lightweight, prompt-centric workflow that turns an idea into a reviewed specification, an actionable plan, and a disciplined execution loop. By centering on markdown artifacts instead of tooling, the workflow travels with you—across projects, models, and collaboration environments.
+Spec-Driven Development (SDD) keeps AI collaborators and human developers aligned around a shared source of truth. This repository provides a lightweight, skill-first workflow that turns an idea into a reviewed specification, an actionable plan, and a disciplined execution loop. By centering on markdown artifacts instead of heavy platform tooling, the workflow travels with you—across projects, models, and collaboration environments.
 
 ## Guiding Principles
 
@@ -183,11 +182,11 @@ Spec-Driven Development (SDD) keeps AI collaborators and human developers aligne
 - **Ship demoable slices:** Every stage pushes toward thin, end-to-end increments with clear demo criteria and proof artifacts.
 - **Make work transparent:** Tasks live in versioned markdown files so stakeholders can review, comment, and adjust scope anytime.
 - **Progress one slice at a time:** The management prompt enforces single-threaded execution to reduce churn and unfinished work-in-progress.
-- **Stay automation ready:** While SDD works with plain Markdown, the prompts are structured for MCP, IDE agents, or other AI integrations.
+- **Stay automation ready:** While SDD works with plain Markdown, the skill and prompts are structured for MCP, IDE agents, or other AI integrations.
 
 ## Artifacts and directory layout
 
-Each prompt writes Markdown outputs into `docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.), giving you a lightweight backlog that is easy to review, share, and implement.
+Each SDD run writes Markdown outputs into `docs/specs/[NN]-spec-[feature-name]/` (where `[NN]` is a zero-padded 2-digit number: 01, 02, 03, etc.), giving you a lightweight backlog that is easy to review, share, and implement.
 
 - **Specs:** `docs/specs/[NN]-spec-[feature-name]/[NN]-spec-[feature-name].md`
 - **Questions files (when needed):** `docs/specs/[NN]-spec-[feature-name]/[NN]-questions-[N]-[feature-name].md`
@@ -258,7 +257,7 @@ Proof artifacts are committed to your repository and may be publicly visible. **
 - **Sanitize command output**: Review CLI output and logs for accidentally captured credentials before committing
 - **Consider pre-commit hooks**: Tools like [gitleaks](https://github.com/gitleaks/gitleaks), [truffleHog](https://github.com/trufflesecurity/truffleHog), or [talisman](https://github.com/thoughtworks/talisman) can automatically scan for secrets before commits
 
-The SDD workflow prompts include built-in reminders about security, but ultimate responsibility lies with the developer to review artifacts before committing or pushing to remotes.
+The SDD skill and prompt files include built-in reminders about security, but ultimate responsibility lies with the developer to review artifacts before committing or pushing to remotes.
 
 ## Contributing
 

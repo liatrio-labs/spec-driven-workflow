@@ -25,26 +25,26 @@
                 <h1>The Spec-Driven Development (SDD) Playbook</h1>
                 <div class="hero-content">
                     <p>Complete a feature in minutes, not days. Liatrio's Spec-Driven Development workflow is
-                        <strong>four lightweight phases available as prompts or an agent skill</strong> that help developers guide an AI assistant through
+                        <strong>a skill-first, four-phase workflow with prompt-file fallbacks</strong> that help developers guide an AI assistant through
                         implementing their day-to-day work with structure, clarity, and evidence.
                     </p>
                     <p>The workflow instructions are <strong>transparent</strong> and <strong>learnable</strong>: you can read
-                        the prompt and skill source, understand the workflow logic it applies, and adapt the patterns to
+                        the skill and prompt source, understand the workflow logic it applies, and adapt the patterns to
                         your own team and projects. Instead of hiding the method inside a product, SDD exposes it in markdown.</p>
-                    <p>They are also <strong>tool-agnostic</strong>: use prompt files for assistants with slash/custom
-                        prompt support, and a skill folder for assistants with skill-native workflows. They create a
+                    <p>They are also <strong>tool-agnostic</strong>: install the skill folder first for assistants with
+                        skill-native workflows, or use prompt files for assistants with slash/custom prompt support. They create a
                         simple file structure in <code>docs/specs/</code> that doesn't pollute your repo.
                     </p>
-                    <p>Choose the path that fits your assistant—prompt files, the skill folder, or manual copy-paste—and
-                        use the <a href="https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart"
+                    <p>Start with the recommended skill install when your assistant supports skills; use prompt files or
+                        manual copy-paste when that better fits your harness. Use the <a href="https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart"
                             target="_blank" rel="noopener noreferrer">GitHub README quickstart</a> for setup details.</p>
                     <p>View the source artifacts on GitHub: <a
-                            href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
-                            target="_blank"
-                            rel="noopener noreferrer">prompts/</a> and <a
                             href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/skill"
                             target="_blank"
-                            rel="noopener noreferrer">skill/</a></p>
+                            rel="noopener noreferrer">skill/</a> and <a
+                            href="https://github.com/liatrio-labs/spec-driven-workflow/tree/main/prompts"
+                            target="_blank"
+                            rel="noopener noreferrer">prompts/</a></p>
                 </div>
 
                 <!-- Flow Input Section -->
@@ -91,8 +91,11 @@
                     work happens in Step 1 and Step 2: when the spec is clear and the task plan is concrete,
                     implementation and validation are far more likely to run smoothly without human rescue. Because the
                     workflow instructions are readable, SDD also doubles as a guide for learning how to scope work,
-                    guide AI, and verify results more effectively. Prompt installs expose the individual phase files;
-                    skill installs route through the same phase logic from the skill source.</p>
+                    guide AI, and verify results more effectively.</p>
+                <p class="section-intro">Skill installs are the recommended path: the user explicitly invokes the
+                    skill, and it routes through the same phase logic. Prompt installs expose the individual phase
+                    files for assistants where slash or custom prompts are the better fit. The skill is not designed
+                    for automatic agent routing or dynamic background loading.</p>
 
                 <div class="phases-grid">
                     <div class="phase-card">
@@ -109,9 +112,9 @@
                             <p><strong>Output:</strong> A markdown spec file in
                                 <code>docs/specs/[NN]-spec-[feature-name]/</code>
                             </p>
-                            <p><strong>Prompt reference:</strong> <a
-                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-1-generate-spec.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-1-generate-spec.md</a></p>
+                            <p><strong>Skill phase reference:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/skill/references/sdd-1-generate-spec.md"
+                                    target="_blank" rel="noopener noreferrer">sdd-1-generate-spec.md</a></p>
                         </div>
                     </div>
 
@@ -128,9 +131,9 @@
                                 caught before implementation starts.</p>
                             <p><strong>Output:</strong> A task list markdown file with demo criteria and proof artifact
                                 requirements</p>
-                            <p><strong>Prompt reference:</strong> <a
-                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-2-generate-task-list-from-spec.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-2-generate-task-list-from-spec.md</a>
+                            <p><strong>Skill phase reference:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/skill/references/sdd-2-generate-task-list-from-spec.md"
+                                    target="_blank" rel="noopener noreferrer">sdd-2-generate-task-list-from-spec.md</a>
                             </p>
                         </div>
                     </div>
@@ -147,9 +150,9 @@
                                 (continuous/task/batch), creates proof artifacts, and manages git commits.</p>
                             <p><strong>Output:</strong> Working code, proof artifact files, and task-aligned git commits
                             </p>
-                            <p><strong>Prompt reference:</strong> <a
-                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-3-manage-tasks.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-3-manage-tasks.md</a></p>
+                            <p><strong>Skill phase reference:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/skill/references/sdd-3-manage-tasks.md"
+                                    target="_blank" rel="noopener noreferrer">sdd-3-manage-tasks.md</a></p>
                         </div>
                     </div>
 
@@ -165,9 +168,9 @@
                                 checks file integrity, and produces a validation report.</p>
                             <p><strong>Output:</strong> A validation report with PASS/FAIL gates and evidence-based
                                 coverage matrix</p>
-                            <p><strong>Prompt reference:</strong> <a
-                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/prompts/SDD-4-validate-spec-implementation.md"
-                                    target="_blank" rel="noopener noreferrer">SDD-4-validate-spec-implementation.md</a>
+                            <p><strong>Skill phase reference:</strong> <a
+                                    href="https://github.com/liatrio-labs/spec-driven-workflow/blob/main/skill/references/sdd-4-validate-spec-implementation.md"
+                                    target="_blank" rel="noopener noreferrer">sdd-4-validate-spec-implementation.md</a>
                             </p>
                         </div>
                     </div>

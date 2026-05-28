@@ -1,6 +1,6 @@
 ---
 name: sdd
-description: "Execute the Spec-Driven Development (SDD) workflow as a skill-native alternate install option for agents that support skills instead of custom prompts."
+description: "Execute the Liatrio Spec-Driven Development (SDD) workflow when explicitly invoked by the user. NOTE: this skill is NOT intended to be dynamically loaded or automatically triggered; it should only ever be explicitly called by the user."
 ---
 
 # Spec-Driven Workflow Orchestrator
