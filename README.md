@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./misc/header.png" alt="Spec Driven Development header" width="400"/>
+    <img src="./misc/sdd-workflow-hero.png" alt="Spec-Driven Development workflow from idea to verified delivery" width="900"/>
     <h1>🧭 Spec-Driven Development Workflow</h1>
     <h3><em>Build predictable software with a repeatable AI-guided workflow.</em></h3>
 </div>
