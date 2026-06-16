@@ -146,6 +146,28 @@ def assess_spec_dir(spec_path):
 
     return state
 
+# A new feature (no spec yet) always routes to Phase 1.
+_NEW_FEATURE_SELECTED = {
+    "phase": 1,
+    "detailed_state": "S1_START",
+    "action": "Generate Spec (Phase 1)",
+    "feature": None,
+    "sequence": None,
+}
+
+
+def _selected_from_target(target):
+    """Project a chosen spec state into the compact 'selected' shape consumed by
+    the telemetry emitter (maps action_required -> action)."""
+    return {
+        "phase": target.get("phase", 0),
+        "detailed_state": target.get("detailed_state", "unknown"),
+        "action": target.get("action_required", "unknown"),
+        "feature": target.get("feature"),
+        "sequence": target.get("sequence"),
+    }
+
+
 def main(base_path=None):
     specs_dir = get_specs_dir(base_path)
 
@@ -153,7 +175,10 @@ def main(base_path=None):
         "specs_directory_exists": specs_dir.exists(),
         "specs_directory": str(specs_dir),
         "active_specs": [],
-        "recommendation": ""
+        "recommendation": "",
+        # The single phase/feature the orchestrator should act on. Always present
+        # so downstream consumers (routing + telemetry) have a stable contract.
+        "selected": dict(_NEW_FEATURE_SELECTED),
     }
 
     if not specs_dir.exists():
@@ -195,6 +220,7 @@ def main(base_path=None):
             # Everything is S4_COMPLETE
             target = active[0]
             result["recommendation"] = f"Phase 4 (Complete): {target['action_required']} for feature '{target['feature']}' (Sequence {target['sequence']}). OR start Phase 1 for a new feature."
+        result["selected"] = _selected_from_target(target)
     else:
         result["recommendation"] = "Phase 1: No valid specs found. A new feature specification is required."
 
@@ -202,4 +228,15 @@ def main(base_path=None):
 
 if __name__ == "__main__":
     result = main(sys.argv[1] if len(sys.argv) > 1 else None)
+    # stdout carries the routing JSON ONLY; nothing else may be printed here.
     print(json.dumps(result, indent=2))
+
+    # Coarse phase-level telemetry, anchored to this deterministic step. Off by
+    # default (no endpoint = no emission) and contractually silent on stdout and
+    # incapable of raising, so a misconfigured collector can never break routing.
+    try:
+        from emit_sdd_event import emit_phase_event
+
+        emit_phase_event(result)
+    except Exception:
+        pass

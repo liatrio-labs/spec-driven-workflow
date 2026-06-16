@@ -75,3 +75,8 @@ overrides:
   - filename: .github/pull_request_template.md
     words:
       - pytest
+
+  - filename: docs/TELEMETRY.md
+    words:
+      - omittable
+      - Stdlib

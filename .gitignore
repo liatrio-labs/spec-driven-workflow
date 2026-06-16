@@ -10,3 +10,6 @@ coverage.xml
 # Misc
 temp/
 /artifacts/site-export
+
+# SDD telemetry local fallback (written when telemetry is enabled with no OTLP endpoint)
+sdd-otel-events.jsonl
