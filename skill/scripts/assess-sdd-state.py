@@ -6,6 +6,41 @@ import json
 
 import sys
 
+def _authoritative_verdict(text):
+    """Return the authoritative PASS/FAIL verdict for an audit/validation report.
+
+    The report's Executive Summary carries the verdict on an
+    ``Overall Status: PASS/FAIL`` line (audits) or ``Overall: PASS/FAIL`` line
+    (validations). That line is authoritative; retained run history elsewhere in
+    the report (e.g. a Re-Audit Delta noting ``FAIL -> PASS``) or prose that
+    merely mentions the word FAIL must not flip the verdict.
+
+    Strategy:
+      1. If an "Overall" line exists, the FIRST PASS/FAIL token on it wins --
+         that is the status stated right after the colon. A parenthetical note
+         such as ``PASS (was FAIL on run 1)`` therefore stays PASS, and
+         run-to-run history (kept in a separate Re-Audit Delta section, never on
+         the Overall line) is ignored.
+      2. Otherwise fall back to a per-gate scan: any FAIL marks the report
+         failed (preserves behaviour for reports without a summary line).
+
+    Returns "PASS", "FAIL", or None when no verdict can be determined.
+    """
+    overall_line = re.compile(r'^.*\boverall\b[^\n]*?:[^\n]*$', re.IGNORECASE | re.MULTILINE)
+    token = re.compile(r'\b(PASS|FAIL)\b')
+
+    for line in overall_line.findall(text):
+        found = token.findall(line)
+        if found:
+            return found[0].upper()
+
+    # No authoritative line: fall back to a whole-document gate scan.
+    if re.search(r'\*\*FAIL\*\*|\bFAIL\b', text):
+        return "FAIL"
+    if re.search(r'\bPASS\b', text):
+        return "PASS"
+    return None
+
 def get_specs_dir(base_path=None):
     """Locate the specs directory starting from the current location or provided base_path."""
     current = Path(base_path) if base_path else Path.cwd()
@@ -85,12 +120,12 @@ def assess_spec_dir(spec_path):
             state["detailed_state"] = "S2_SUBTASKS_DONE"
             state["action_required"] = "Generate Planning Audit (Phase 2)"
     else:
-        # Check audit gates for FAIL
+        # Check audit gates for FAIL using the authoritative verdict line
         audit_path = spec_dir / audit_file
         audit_failed = False
         try:
             with open(audit_path, 'r', encoding='utf-8') as f:
-                if re.search(r'\*\*FAIL\*\*|\bFAIL\b', f.read()):
+                if _authoritative_verdict(f.read()) == "FAIL":
                     audit_failed = True
         except Exception:
             pass
@@ -127,12 +162,12 @@ def assess_spec_dir(spec_path):
         else:
             state["phase"] = 4
 
-            # Check validation for FAIL
+            # Check validation for FAIL using the authoritative verdict line
             val_path = spec_dir / validation_file
             val_failed = False
             try:
                 with open(val_path, 'r', encoding='utf-8') as f:
-                    if re.search(r'\*\*FAIL\*\*|\bFAIL\b', f.read()):
+                    if _authoritative_verdict(f.read()) == "FAIL":
                         val_failed = True
             except Exception:
                 pass
