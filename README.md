@@ -14,6 +14,9 @@
     <a href="https://github.com/liatrio-labs/spec-driven-workflow/stargazers"><img src="https://img.shields.io/github/stars/liatrio-labs/spec-driven-workflow?style=social" alt="GitHub stars"/></a>
 </p>
 
+> [!IMPORTANT]
+> **SDD is now skill-first.** If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill so your agent can route through the right workflow phase from repository state. Start with the [migration guide](./MIGRATION.md), or update an existing skill install with `npx skills update sdd --yes`.
+
 ## Overview
 
 This repository provides a **primary agent skill** plus **structured prompt files** that guide AI assistants through a complete software development workflow:
