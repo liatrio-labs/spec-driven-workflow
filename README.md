@@ -28,6 +28,7 @@ Think of the skill and the prompt files that power it as reusable playbooks that
 ## Table of Contents
 
 - [TLDR / Quickstart](#tldr--quickstart)
+- [Migrating from prompt-based installs](#migrating-from-prompt-based-installs)
 - [Details for the 4-step workflow](#details-for-the-4-step-workflow)
 - [Artifacts and directory layout](#artifacts-and-directory-layout)
 - [Documentation](#documentation)
@@ -119,6 +120,12 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager `
 #### Option C: Manual Copy-Paste (No Installation)
 
 Copy the contents of a prompt file directly from `prompts/` and paste it into your AI chat. The AI will follow the structured instructions in the prompt.
+
+## Migrating from prompt-based installs
+
+If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill when your agent supports skills. Existing project artifacts in `docs/specs/` do not need to be converted; the skill reads the same artifact structure and routes to the right phase from repository state.
+
+See [`MIGRATION.md`](./MIGRATION.md) for step-by-step migration and cleanup instructions. See [`docs/glossary.md`](./docs/glossary.md) for definitions of skill-first install, prompt-based install, Slash Command Manager, and SDD artifacts.
 
 ### Quick "try it" flow
 
