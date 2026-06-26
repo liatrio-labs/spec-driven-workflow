@@ -14,6 +14,9 @@
     <a href="https://github.com/liatrio-labs/spec-driven-workflow/stargazers"><img src="https://img.shields.io/github/stars/liatrio-labs/spec-driven-workflow?style=social" alt="GitHub stars"/></a>
 </p>
 
+> [!IMPORTANT]
+> **SDD is now skill-first.** If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill so your agent can route through the right workflow phase from repository state. Start with the [migration guide](./MIGRATION.md), or update an existing skill install with `npx skills update sdd --yes`.
+
 ## Overview
 
 This repository provides a **primary agent skill** plus **structured prompt files** that guide AI assistants through a complete software development workflow:
@@ -28,6 +31,7 @@ Think of the skill and the prompt files that power it as reusable playbooks that
 ## Table of Contents
 
 - [TLDR / Quickstart](#tldr--quickstart)
+- [Migrating from prompt-based installs](#migrating-from-prompt-based-installs)
 - [Details for the 4-step workflow](#details-for-the-4-step-workflow)
 - [Artifacts and directory layout](#artifacts-and-directory-layout)
 - [Documentation](#documentation)
@@ -62,6 +66,9 @@ npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 
 # Install globally instead of project scope
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
+
+# Update an existing SDD skill install
+npx skills update sdd --yes
 ```
 
 <img max-width="500" alt="Example of the single SDD skill installed in Claude Code" src="docs/assets/images/claude-example-single-skill.png" />
@@ -119,6 +126,12 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager `
 #### Option C: Manual Copy-Paste (No Installation)
 
 Copy the contents of a prompt file directly from `prompts/` and paste it into your AI chat. The AI will follow the structured instructions in the prompt.
+
+## Migrating from prompt-based installs
+
+If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill when your agent supports skills. Existing project artifacts in `docs/specs/` do not need to be converted; the skill reads the same artifact structure and routes to the right phase from repository state.
+
+See [`MIGRATION.md`](./MIGRATION.md) for step-by-step migration, update, and cleanup instructions.
 
 ### Quick "try it" flow
 
