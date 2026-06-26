@@ -1,7 +1,5 @@
 # Migrate Spec-Driven Development from slash-command prompts to the `sdd` skill
 
-## BLUF
-
 If you previously installed Spec-Driven Development (SDD) as four slash-command prompts, you can now install it as one agent skill:
 
 ```bash
@@ -136,6 +134,26 @@ You can install to more than one agent at once:
 ```bash
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 ```
+
+## Update an existing `sdd` skill install
+
+If you already installed the `sdd` skill and want the latest published version, run:
+
+```bash
+npx skills update sdd --yes
+```
+
+The `skills` CLI also supports scope-specific updates:
+
+```bash
+# Update only project-scoped skills
+npx skills update sdd --project --yes
+
+# Update only globally installed skills
+npx skills update sdd --global --yes
+```
+
+Restart your agent after updating so it reloads the refreshed skill files.
 
 ## Restart and verify
 
@@ -387,6 +405,12 @@ Permission/symlink fallback:
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a claude-code --copy
 ```
 
+Update an existing `sdd` skill install:
+
+```bash
+npx skills update sdd --yes
+```
+
 Verify inside Claude Code:
 
 ```text
@@ -423,6 +447,6 @@ uvx --from git+https://github.com/liatrio-labs/slash-command-manager \
 
 - SDD repository: <https://github.com/liatrio-labs/spec-driven-workflow>
 - SDD README quickstart: <https://github.com/liatrio-labs/spec-driven-workflow#tldr--quickstart>
-- Slash Command Manager: <https://github.com/liatrio-labs/slash-command-manager>
 - SDD Playbook: <https://liatrio-labs.github.io/spec-driven-workflow/index.html>
 - Forge SDD install docs: <https://liatrio-labs.github.io/forge-immersive-ai-mastery-program/docs/introduction/1.3-install-sdd-workflow>
+- Slash Command Manager: <https://github.com/liatrio-labs/slash-command-manager>

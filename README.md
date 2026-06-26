@@ -63,6 +63,9 @@ npx skills add liatrio-labs/spec-driven-workflow --skill sdd -a cursor -a codex
 
 # Install globally instead of project scope
 npx skills add liatrio-labs/spec-driven-workflow --skill sdd --global
+
+# Update an existing SDD skill install
+npx skills update sdd --yes
 ```
 
 <img max-width="500" alt="Example of the single SDD skill installed in Claude Code" src="docs/assets/images/claude-example-single-skill.png" />
@@ -125,7 +128,7 @@ Copy the contents of a prompt file directly from `prompts/` and paste it into yo
 
 If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill when your agent supports skills. Existing project artifacts in `docs/specs/` do not need to be converted; the skill reads the same artifact structure and routes to the right phase from repository state.
 
-See [`MIGRATION.md`](./MIGRATION.md) for step-by-step migration and cleanup instructions. See [`docs/glossary.md`](./docs/glossary.md) for definitions of skill-first install, prompt-based install, Slash Command Manager, and SDD artifacts.
+See [`MIGRATION.md`](./MIGRATION.md) for step-by-step migration, update, and cleanup instructions.
 
 ### Quick "try it" flow
 
