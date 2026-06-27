@@ -1,5 +1,7 @@
 # Migrate Spec-Driven Development from slash-command prompts to the `sdd` skill
 
+> **Stable link for sharing:** use <https://github.com/liatrio-labs/spec-driven-workflow/blob/main/MIGRATION.md>. Avoid sharing links to temporary PR branches because those branch links may stop working after the PR is merged and the branch is deleted.
+
 If you previously installed Spec-Driven Development (SDD) as four slash-command prompts, you can now install it as one agent skill:
 
 ```bash

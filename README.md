@@ -15,7 +15,7 @@
 </p>
 
 > [!IMPORTANT]
-> **SDD is now skill-first.** If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill so your agent can route through the right workflow phase from repository state. Start with the [migration guide](./MIGRATION.md), or update an existing skill install with `npx skills update sdd --yes`.
+> **SDD is now skill-first.** If you previously installed SDD as separate `/SDD-*` slash-command prompts, migrate to the recommended `sdd` skill so your agent can route through the right workflow phase from repository state. Start with the [migration guide](./MIGRATION.md). When sharing the guide outside this repo, use the stable `main` link: <https://github.com/liatrio-labs/spec-driven-workflow/blob/main/MIGRATION.md>. To update an existing skill install, run `npx skills update sdd --yes`.
 
 ## Overview
 
