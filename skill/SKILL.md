@@ -1,6 +1,7 @@
 ---
 name: sdd
 description: "Execute the Liatrio Spec-Driven Development (SDD) workflow when explicitly invoked by the user. NOTE: this skill is NOT intended to be dynamically loaded or automatically triggered; it should only ever be explicitly called by the user."
+invoke: none
 ---
 
 # Spec-Driven Workflow Orchestrator
