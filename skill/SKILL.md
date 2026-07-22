@@ -19,6 +19,10 @@ This skill manages one SDD phase per invocation unless the loaded phase explicit
 4. Execute the phase instructions or stop at a required approval gate.
 5. Tell the user the selected spec, detected state, current phase, chosen phase reference path, created or updated artifacts, and next recommended natural-language request.
 
+## Delegation Reminder
+
+Whenever you delegate SDD work to a subagent, include explicit instructions for that subagent to read the relevant SDD phase reference file before beginning delegated work. This preserves phase-specific rules when implementation, review, remediation, validation, or artifact generation happens outside the main orchestrator context.
+
 If multiple active specs exist and the user request does not clearly identify one, ask the user which spec to continue before modifying files. If the selection is unambiguous, state why that spec was selected.
 
 ## State Assessment

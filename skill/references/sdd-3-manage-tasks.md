@@ -65,9 +65,43 @@ Execute a structured task list to implement a Specification while maintaining cl
    - Pros: Maximum momentum, fastest completion
    - Cons: Less oversight, potential for going off-track
 
+4. **Batch Mode with Subagents**: Complete all tasks sequentially using an implement → review → remediate → repeat loop, with a separate subagent for each part of the loop. See the [Batch Mode with Subagents](#batch-mode-with-subagents) section below for more details.
+   - Best for: larger implementation phases where independent implementation/review/remediation passes improve quality without pausing after every parent task
+   - Pros: preserves batch momentum while adding explicit review pressure and remediation gates
+   - Cons: requires careful orchestration, clean handoffs, and commit verification between subagents
+
 **Default**: If the user doesn't specify, use Task Mode.
 
 **Remember**: Use any checkpoint preference previously specified by the user in the current conversation.
+
+## Batch Mode with Subagents
+
+Use this mode when the user asks for advanced batch mode, requests subagent-driven implementation, or otherwise asks to complete all SDD-3 tasks through an implement/review/remediate loop. The main agent remains the orchestrator and is responsible for sequencing, commit verification, and final reporting.
+
+### Orchestration Rules
+
+1. **Run tasks sequentially**: Work one parent task at a time. Do not start the next parent task until the current task has completed implementation, review, any needed remediation, proof artifact creation, task-state updates, quality gates, and commit verification.
+2. **Use separate subagents for each loop part**:
+   - **Implement subagent**: implements the current parent task using this SDD-3 reference, updates task status, creates/updates proof artifacts, runs relevant tests and quality gates, and commits implementation/proof/task-file changes before returning.
+   - **Review subagent**: reviews the committed implementation against the task list, spec, audit, proof artifacts, repository standards, and this SDD-3 reference. It records actionable findings in a review artifact or task note and commits those review artifacts if any are created.
+   - **Remediate subagent**: fixes only the review findings for the current parent task, reruns the required verification, updates proof artifacts if evidence changed, and commits remediation changes before returning.
+3. **Repeat review/remediate until clean**: After remediation, launch a fresh review subagent. Continue review → remediate until the review subagent reports no blocking findings for the current parent task.
+4. **Require SDD-3 context in every subagent prompt**: Every implementation, review, and remediation subagent prompt must explicitly instruct the subagent to read `skill/references/sdd-3-manage-tasks.md` (or the installed skill's equivalent SDD-3 phase reference) before starting work and to follow its proof, task-state, quality-gate, and commit requirements.
+5. **Verify commits between loop parts**: Before launching the next subagent, the main orchestrator must run `git status --short` and `git log --oneline -1` (or equivalent) to confirm the prior subagent committed its changes and did not leave unintended dirty work. If a loop part intentionally has no file changes, record that explicitly in the orchestrator notes before proceeding.
+6. **Keep commits attributable to SDD boundaries**: Implementation and remediation commits should reference the current parent task and spec number. Review commits, when needed, should clearly identify the reviewed task and whether findings are blocking or advisory.
+7. **Report completion only after all tasks are complete**: When the final parent task has a clean review, verify all tasks are `[x]`, all proof artifacts exist, the final quality gates pass, and the working tree is clean. Then report that all SDD-3 tasks are complete and hand off to validation.
+
+### Subagent Prompt Minimums
+
+Every modified-batch subagent prompt must include:
+
+- selected spec directory and task file path
+- current parent task number and scope
+- instruction to read the SDD-3 phase reference before beginning
+- required role for this loop part: implement, review, or remediate
+- expected commit behavior before returning
+- verification commands or repository quality gates to run
+- expected return summary: files changed, proof artifacts touched, tests/gates run, commit hash, and remaining blockers
 
 ## Implementation Workflow with Self-Verification
 
