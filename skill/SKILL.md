@@ -1,6 +1,7 @@
 ---
 name: sdd
 description: "Execute the Liatrio Spec-Driven Development (SDD) workflow when explicitly invoked by the user. NOTE: this skill is NOT intended to be dynamically loaded or automatically triggered; it should only ever be explicitly called by the user."
+# Note that the as of 2026-07-22 the disable-model-invocation parameter is only supported by the Claude and Cursor harnesses and is not yet part of the official agent skills spec. See https://code.claude.com/docs/en/skills#control-who-invokes-a-skill, https://cursor.com/docs/skills#disabling-automatic-invocation, and https://github.com/agentskills/agentskills/issues/105
 disable-model-invocation: true
 ---
 
