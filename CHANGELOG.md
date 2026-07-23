@@ -2,6 +2,53 @@
 
 <!-- version list -->
 
+## v1.14.1 (2026-07-23)
+
+### Bug Fixes
+
+- **sdd**: Disable model invocation
+  ([#60](https://github.com/liatrio-labs/spec-driven-workflow/pull/60),
+  [`19ad8ff`](https://github.com/liatrio-labs/spec-driven-workflow/commit/19ad8ff4e9cbfe9e1d89354550ecd2c3371682d6))
+
+### Documentation
+
+- Add prompt-to-skill migration guide
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- Highlight SDD skill migration in README
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- Refine prompt-to-skill migration guide
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- **readme**: Fix skill image alt text and drop orphaned header
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **readme**: Update SDD workflow hero
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **sdd**: Apply suggestion from @ryderstorm
+  ([#60](https://github.com/liatrio-labs/spec-driven-workflow/pull/60),
+  [`19ad8ff`](https://github.com/liatrio-labs/spec-driven-workflow/commit/19ad8ff4e9cbfe9e1d89354550ecd2c3371682d6))
+
+- **skill**: Clarify explicit SDD skill invocation
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **skill**: Make SDD skill install primary
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **skill**: Polish skill-first messaging from review feedback
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+
 ## v1.14.0 (2026-05-26)
 
 ### Bug Fixes
