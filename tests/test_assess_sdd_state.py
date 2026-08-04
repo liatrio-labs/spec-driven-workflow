@@ -290,6 +290,28 @@ def test_audit_overall_fail_still_traps(workspace):
     assert spec["detailed_state"] == "S2_AUDIT_FAILED"
 
 
+def test_audit_non_status_overall_pass_does_not_bypass_failed_gate(workspace):
+    """Only a documented status label may bypass the fallback gate scan."""
+    body = "## Overall discussion: PASS\n\n- GATE A: FAIL\n"
+    _spec_with_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_FAILED"
+
+
+def test_audit_non_status_overall_fail_does_not_override_current_pass(workspace):
+    """Historical prose cannot override the documented current audit status."""
+    body = "## Overall notes: FAIL on run 1\n\n- Overall Status: PASS\n"
+    _spec_with_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_MIDFLIGHT"
+
+
 def _spec_with_validation(workspace, validation_body):
     """Create a workspace whose single spec is complete through validation."""
     feature_dir = workspace / "docs" / "specs" / "01-spec-auth"

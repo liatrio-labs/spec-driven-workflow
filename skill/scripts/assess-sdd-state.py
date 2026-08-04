@@ -7,7 +7,7 @@ import json
 import sys
 
 def _authoritative_verdict(text):
-    """Return the authoritative PASS/FAIL verdict for an audit/validation report.
+    r"""Return the authoritative PASS/FAIL verdict for an audit/validation report.
 
     The report's Executive Summary carries the verdict on an
     ``Overall Status: PASS/FAIL`` line (audits) or ``Overall: PASS/FAIL`` line
@@ -15,24 +15,63 @@ def _authoritative_verdict(text):
     the report (e.g. a Re-Audit Delta noting ``FAIL -> PASS``) or prose that
     merely mentions the word FAIL must not flip the verdict.
 
+    The authoritative-line regex accepts optional indentation, a Markdown list
+    marker, and bold formatting around ``Overall`` / ``Overall Status`` and the
+    verdict. It deliberately requires a colon followed immediately by the
+    captured verdict, so prose such as ``Overall notes: FAIL on run 1`` cannot
+    override an explicit current status.
+
+    Regex anatomy (``^`` / ``$`` apply per line; matching is case-insensitive)::
+
+    ^\s*
+    │ │
+    │ └─ Allow leading whitespace
+    └── Start at the beginning of a line
+    (?:[-*+]\s*)?
+    │
+    └─ Optional Markdown list marker:
+    "- ", "* ", or "+ "
+    (?:\*\*)?
+    │
+    └─ Optional opening bold marker: "**"
+    overall
+    │
+    └─ Require the literal label "overall"
+    (?:\s+status)?
+    │
+    └─ Optionally allow the word "status":
+    "Overall"         ✓
+    "Overall Status"  ✓
+    (?:\*\*)?\s*:
+    │       │       │
+    │       │       └─ Require a colon
+    │       └───────── Allow whitespace before it
+    └───────────────── Optional closing bold marker
+    \s*(?:\*\*)?\s*(PASS|FAIL)\b
+    │    │              │          │
+    │    │              │          └─ Prevent matches like "FAILED"
+    │    │              └──────────── Capture the verdict
+    │    └─────────────────────────── Allow bold verdicts: "**PASS**"
+    └──────────────────────────────── Allow spaces after ":"
+
     Strategy:
-      1. If an "Overall" line exists, the FIRST PASS/FAIL token on it wins --
-         that is the status stated right after the colon. A parenthetical note
-         such as ``PASS (was FAIL on run 1)`` therefore stays PASS, and
-         run-to-run history (kept in a separate Re-Audit Delta section, never on
-         the Overall line) is ignored.
+      1. Search for the first explicitly formatted status line and return the
+         PASS/FAIL token immediately after its colon. A parenthetical note such
+         as ``PASS (was FAIL on run 1)`` therefore stays PASS.
       2. Otherwise fall back to a per-gate scan: any FAIL marks the report
          failed (preserves behaviour for reports without a summary line).
 
     Returns "PASS", "FAIL", or None when no verdict can be determined.
     """
-    overall_line = re.compile(r'^.*\boverall\b[^\n]*?:[^\n]*$', re.IGNORECASE | re.MULTILINE)
-    token = re.compile(r'\b(PASS|FAIL)\b')
+    status_line = re.compile(
+        r'^\s*(?:[-*+]\s*)?(?:\*\*)?overall(?:\s+status)?(?:\*\*)?\s*:'
+        r'\s*(?:\*\*)?\s*(PASS|FAIL)\b',
+        re.IGNORECASE | re.MULTILINE,
+    )
 
-    for line in overall_line.findall(text):
-        found = token.findall(line)
-        if found:
-            return found[0].upper()
+    match = status_line.search(text)
+    if match:
+        return match.group(1).upper()
 
     # No authoritative line: fall back to a whole-document gate scan.
     if re.search(r'\*\*FAIL\*\*|\bFAIL\b', text):
