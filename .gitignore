@@ -9,4 +9,7 @@ coverage.xml
 
 # Misc
 temp/
+
+# IDE specific files
+.vscode/
 /artifacts/site-export

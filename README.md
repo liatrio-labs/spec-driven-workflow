@@ -84,9 +84,9 @@ Compatibility notes:
 
 Use `prompts/` as slash commands when your assistant does not support skills or when your team specifically wants separate phase commands. Install these prompts as native `/slash-commands` in your AI assistant (Cursor, Windsurf, Claude Code, etc.) using the [slash-command-manager](https://github.com/liatrio-labs/slash-command-manager) utility:
 
-**Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/). Install uv first if you don’t already have it:
+**Prerequisite:** `uvx` comes from [uv](https://docs.astral.sh/uv/getting-started/installation/). Ensure it is installed first:
 
-- (Mac): `brew install uv`
+- (Mac & Linux): `brew install uv`
 - (Windows): `winget install astral-sh.uv`
 
 ##### Install SDD w/ Bash (Mac)
