@@ -2,6 +2,29 @@
 
 <!-- version list -->
 
+## v1.14.2 (2026-08-04)
+
+### Bug Fixes
+
+- Wording tweak ([#40](https://github.com/liatrio-labs/spec-driven-workflow/pull/40),
+  [`902321a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/902321a4fb63a233d08acc31b498e8121b9879a1))
+
+### Chores
+
+- Add .vscode/ to gitignore ([#40](https://github.com/liatrio-labs/spec-driven-workflow/pull/40),
+  [`902321a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/902321a4fb63a233d08acc31b498e8121b9879a1))
+
+- Add .vscode/ to gitignore (from #24)
+  ([#40](https://github.com/liatrio-labs/spec-driven-workflow/pull/40),
+  [`902321a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/902321a4fb63a233d08acc31b498e8121b9879a1))
+
+### Documentation
+
+- Improve uv installation instructions
+  ([#40](https://github.com/liatrio-labs/spec-driven-workflow/pull/40),
+  [`902321a`](https://github.com/liatrio-labs/spec-driven-workflow/commit/902321a4fb63a233d08acc31b498e8121b9879a1))
+
+
 ## v1.14.1 (2026-07-23)
 
 ### Bug Fixes
