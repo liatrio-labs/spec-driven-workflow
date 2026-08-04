@@ -4,10 +4,10 @@ Thanks for your interest in contributing! This guide explains how to set up your
 
 ## Overview
 
-This repository provides prompts that enable a spec‑driven development workflow. Contributions generally fall into one of these areas:
+This repository provides a primary SDD agent skill and prompt-file fallbacks that enable a spec‑driven development workflow. Contributions generally fall into one of these areas:
 
 - Documentation improvements
-- Prompt and workflow improvements
+- Skill and prompt workflow improvements
 - Examples and use cases
 
 Please open an issue first for significant changes to discuss the approach.
@@ -27,7 +27,8 @@ pre-commit install
 
 - Install pre-commit hooks once with `pre-commit install`.
 - Keep changes small and focused; prefer incremental PRs.
-- All prompts are plain Markdown files in the `prompts/` directory.
+- The primary SDD skill lives in `skill/` and is explicit-invocation only; it should not be described as an automatically loaded or dynamically triggered helper skill.
+- Prompt workflow fallbacks are plain Markdown files in the `prompts/` directory.
 
 ### Recommended: Secret Scanning Pre-commit Hooks
 
@@ -77,34 +78,36 @@ See the [pre-commit hooks documentation](https://pre-commit.com/hooks.html) for 
 ### Common Commands
 
 ```bash
+# Preview the docs site locally with hot reload
+uvx livereload --port 8012 docs/
+
 # Run full pre-commit checks across the repo
 pre-commit run --all-files
 
 # Run markdown linting only
 pre-commit run markdownlint-fix --all-files
+
+# Run docs, skill, and prompt spell checking only
+pre-commit run cspell --all-files
 ```
 
 ## Style and Quality
 
 - Markdown is linted using markdownlint (via pre-commit). Keep lines reasonably short and headings well structured.
+- Public-facing docs plus workflow skill and prompt artifacts are spell-checked with cspell. Add broadly reusable project terms to `cspell.config.yaml` and prefer file-specific config for one-off names.
 - YAML files are validated for syntax errors.
 - Commit messages must follow Conventional Commits specification (enforced via commitlint).
 - Keep documentation consistent with `README.md`.
 
 ## Testing
 
-Before submitting a PR, run:
+Before submitting a PR, follow [`docs/TESTING.md`](docs/TESTING.md):
 
 ```bash
-# Run all pre-commit checks
 pre-commit run --all-files
 ```
 
-This will:
-
-- Check YAML syntax
-- Fix Markdown formatting issues
-- Validate commit message format (on commit)
+The pre-commit gate runs the deterministic pytest suite, checks YAML syntax, fixes Markdown formatting issues, spell-checks public-facing documentation plus workflow skill and prompt artifacts, scans committed content for secrets, and validates commit message format on commit. CI also runs the skill tests as a dedicated step before the full pre-commit gate.
 
 ## Branching and Commit Conventions
 

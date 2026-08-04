@@ -1,17 +1,6 @@
----
-name: SDD-4-validate-spec-implementation
-description: "Focused validation of code changes against Spec and Proof Artifacts with evidence-based coverage matrix"
-tags:
-  - validation
-  - verification
-  - quality-assurance
-arguments: []
-meta:
-  category: verification
-  allowed-tools: Glob, Grep, LS, Read, Edit, MultiEdit, Write, WebFetch, WebSearch, Terminal, Git
----
+# Phase 4 — Validate Spec Implementation
 
-# Validate Spec Implementation
+This is an internal phase reference loaded by `SKILL.md`. Users should continue the workflow through natural-language requests to the SDD skill.
 
 ## Context Marker
 
@@ -67,13 +56,12 @@ Validate that the **code changes** conform to the Spec and Task List by verifyin
 
 If no spec is provided, follow this exact sequence:
 
-1. Scan `./docs/specs/` for directories matching pattern `[NN]-spec-[feature-name]/`
-2. Identify spec directories with corresponding `[NN]-tasks-[feature-name].md` files
-3. Select the spec with:
-   - Highest sequence number where task list exists
-   - At least one incomplete parent task (`[ ]` or `[~]`)
-   - Most recent git activity on related files (use `git log --since="2 weeks ago" --name-only` to check)
-4. If multiple specs qualify, select the one with the most recent git commit
+1. Scan `./docs/specs/` for directories matching pattern `[NN]-spec-[feature-name]/`.
+2. Identify spec directories with a spec file, task list, and planning audit.
+3. Select a spec whose planning audit has passed all required gates and whose implementation tasks are complete (`[x]`).
+4. Prefer specs where the validation report is missing or contains failing gates.
+5. If multiple specs qualify, select the one with the most recent related implementation activity. Use `git log --since="2 weeks ago" --name-only` when git history is available; otherwise use provided implementation history or changed-file evidence.
+6. If multiple specs still qualify and the user did not identify one, ask before creating or updating a validation report.
 
 ## Validation Gates (mandatory to apply)
 
@@ -112,7 +100,7 @@ Map score to severity: 0→CRITICAL, 1→HIGH, 2→MEDIUM, 3→OK.
 - **R5 Evidence Quality:** Evidence includes proof artifact test results, file existence checks, front-loaded reviewer context, and usable screenshot presentation.
 - **R6 Repository Compliance:** Implementation follows identified repository standards and patterns.
 
-## Validation Process (step-by-step chain-of-thought)
+## Validation Process (step-by-step private analysis)
 
 > Keep internal reasoning private; **report only evidence, commands, and conclusions**.
 
@@ -291,11 +279,17 @@ After generation is complete:
 **Filename:** `[NN]-validation-[feature-name].md` (e.g., if the Spec is `01-spec-user-authentication.md`, save as `01-validation-user-authentication.md`)
 **Full Path:** `./docs/specs/[NN]-spec-[feature-name]/[NN]-validation-[feature-name].md`
 
-## What Comes Next
+## How to Continue the SDD Workflow
 
-Once validation is complete and all issues are resolved, the implementation is ready for merge. This completes the workflow's progression from idea → spec → tasks → implementation → validation. Instruct the user to do a final code review before merging the changes.
+Likely next phase action: this feature's SDD workflow is complete; the next SDD action would be starting Phase 1 for a new feature.
 
----
+To continue the workflow in this chat, reply with:
+
+`Start SDD for a new feature.`
+
+You can also continue in a new chat if you want to keep context lean; the SDD skill will reassess repository state from the persisted spec/task/audit/proof/validation artifacts.
+
+Before merging, instruct the user to do a final code review of the completed implementation and validation report.
 
 **Validation Completed:** [Date+Time]
 **Validation Performed By:** [AI Model]

@@ -3,6 +3,15 @@ default_install_hook_types: [pre-commit, pre-push, commit-msg]
 default_stages: [pre-commit]
 
 repos:
+  - repo: local
+    hooks:
+      - id: pytest-skill-tests
+        name: run deterministic skill tests
+        entry: python -m pytest -q
+        language: system
+        pass_filenames: false
+        always_run: true
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -18,6 +27,14 @@ repos:
     hooks:
       - id: markdownlint-fix
         exclude: "CHANGELOG.md|LICENSE"
+
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v9.7.0
+    hooks:
+      - id: cspell
+        name: spell check docs and prompts with cspell
+        files: ^(README\.md|CONTRIBUTING\.md|CODE_OF_CONDUCT\.md|\.github/pull_request_template\.md|prompts/.*\.md|docs/.*\.(md|html))$
+        exclude: ^docs/(references|assets)/
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.23.0

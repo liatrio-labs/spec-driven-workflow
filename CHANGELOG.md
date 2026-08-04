@@ -2,6 +2,290 @@
 
 <!-- version list -->
 
+## v1.14.1 (2026-07-23)
+
+### Bug Fixes
+
+- **sdd**: Disable model invocation
+  ([#60](https://github.com/liatrio-labs/spec-driven-workflow/pull/60),
+  [`19ad8ff`](https://github.com/liatrio-labs/spec-driven-workflow/commit/19ad8ff4e9cbfe9e1d89354550ecd2c3371682d6))
+
+### Documentation
+
+- Add prompt-to-skill migration guide
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- Highlight SDD skill migration in README
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- Refine prompt-to-skill migration guide
+  ([#57](https://github.com/liatrio-labs/spec-driven-workflow/pull/57),
+  [`56864d9`](https://github.com/liatrio-labs/spec-driven-workflow/commit/56864d9b13dedbb9560dc9f2b9e69b0adc7f588e))
+
+- **readme**: Fix skill image alt text and drop orphaned header
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **readme**: Update SDD workflow hero
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **sdd**: Apply suggestion from @ryderstorm
+  ([#60](https://github.com/liatrio-labs/spec-driven-workflow/pull/60),
+  [`19ad8ff`](https://github.com/liatrio-labs/spec-driven-workflow/commit/19ad8ff4e9cbfe9e1d89354550ecd2c3371682d6))
+
+- **skill**: Clarify explicit SDD skill invocation
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **skill**: Make SDD skill install primary
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+- **skill**: Polish skill-first messaging from review feedback
+  ([#55](https://github.com/liatrio-labs/spec-driven-workflow/pull/55),
+  [`984650c`](https://github.com/liatrio-labs/spec-driven-workflow/commit/984650c00e3622060e97513e4977cd0b8a0e4973))
+
+
+## v1.14.0 (2026-05-26)
+
+### Bug Fixes
+
+- **skill**: Invoke SDD assessor with python3
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Continuous Integration
+
+- Enforce deterministic skill tests
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Documentation
+
+- **readme**: Clarify SDD install flow
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **site**: Align SDD playbook with skill workflow
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **site**: Align workflow source CTAs
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **skill**: Clarify Phase 1 open questions boundary
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+### Features
+
+- Add SDD agent skill install option
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+- **skill**: Restore SDD context markers
+  ([#52](https://github.com/liatrio-labs/spec-driven-workflow/pull/52),
+  [`52a9f53`](https://github.com/liatrio-labs/spec-driven-workflow/commit/52a9f535121fe23191976a86f4eba974df4850bd))
+
+
+## v1.13.0 (2026-04-09)
+
+### Continuous Integration
+
+- Add cspell spell-check for public documentation
+  ([#48](https://github.com/liatrio-labs/spec-driven-workflow/pull/48),
+  [`900f0be`](https://github.com/liatrio-labs/spec-driven-workflow/commit/900f0becb623ca4b7688eb9e9c90d0840f39ed15))
+
+### Documentation
+
+- Add local docs preview command
+  ([#48](https://github.com/liatrio-labs/spec-driven-workflow/pull/48),
+  [`900f0be`](https://github.com/liatrio-labs/spec-driven-workflow/commit/900f0becb623ca4b7688eb9e9c90d0840f39ed15))
+
+- Document planning audit gate and remediation flow
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- Fix AI techniques cspell violations
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **prompts**: Refine validation file-integrity gate
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Rename Gateboard references
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **site**: Add AI primitives page scaffold
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Add AI techniques explainer page
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Add deep-dive primitive sections
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Connect AI primitives page to SDD workflow
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Improve AI primitives heading hierarchy
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Integrate AI primitives page into docs flow
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Refine AI primitives page readability
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Refresh docs flow and add AI primitives guides
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Remove AI primitives next-step CTA
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **site**: Trim AI techniques overview page
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **specs**: Add planning artifacts for AI primitives page
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **specs**: Add task 1 screenshot proof
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+- **specs**: Add validation report for AI primitives page
+  ([#51](https://github.com/liatrio-labs/spec-driven-workflow/pull/51),
+  [`5e46538`](https://github.com/liatrio-labs/spec-driven-workflow/commit/5e465388e054aeda61218a45801147ae1ced3072))
+
+### Features
+
+- **prompts**: Add compact audit mode and reset gate
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Add latest standards grounding
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Add mandatory planning audit workflow
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Format relevant files as table
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Harden SDD planning, clarification, and review workflows
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Harden SDD-2 planning audit reliability
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Improve proof artifact reviewability
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Refine spec clarification workflow
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+- **prompts**: Strengthen SDD validation guardrails
+  ([#50](https://github.com/liatrio-labs/spec-driven-workflow/pull/50),
+  [`792d826`](https://github.com/liatrio-labs/spec-driven-workflow/commit/792d826a068d5fd337881e9efbe4ec4a5332b589))
+
+
+## v1.12.3 (2026-03-16)
+
+### Bug Fixes
+
+- **docs**: Overhaul comparison page with balanced competitor analysis
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+### Documentation
+
+- Added readme instructions for installing SDD workflow on Windows devices via PowerShell
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Added readme instructions for installing SDD workflow on Window…
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Fixed linting issues with docs
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- Updated readme based on linter preferences
+  ([#44](https://github.com/liatrio-labs/spec-driven-workflow/pull/44),
+  [`a937949`](https://github.com/liatrio-labs/spec-driven-workflow/commit/a937949537703a252df44938545f5255d8381086))
+
+- **site**: Add next-step navigation across docs pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Clarify spec lifecycle across workflow pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Emphasize spec-first workflow across docs
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine comparison page external references
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine SDD messaging and overhaul comparison page
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refine SDD workflow messaging across site pages
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+- **site**: Refresh docs page layouts and styling
+  ([#49](https://github.com/liatrio-labs/spec-driven-workflow/pull/49),
+  [`822b940`](https://github.com/liatrio-labs/spec-driven-workflow/commit/822b9404e1e1027a494499ce9f5308d1b6f2d2f2))
+
+
+## v1.12.2 (2026-02-11)
+
+### Bug Fixes
+
+- **ci**: Show modified files when pre-commit hooks fail
+  ([#45](https://github.com/liatrio-labs/spec-driven-workflow/pull/45),
+  [`4783668`](https://github.com/liatrio-labs/spec-driven-workflow/commit/4783668fe822c27714b6eef71bd26df8e5002762))
+
+
+## v1.12.1 (2026-01-12)
+
+### Bug Fixes
+
+- Update task name references to be consistent with new SDD- prefixes for slash commands
+  ([#41](https://github.com/liatrio-labs/spec-driven-workflow/pull/41),
+  [`ea91731`](https://github.com/liatrio-labs/spec-driven-workflow/commit/ea9173157273a2d49194eb61e945c25bf9d4eade))
+
+
 ## v1.12.0 (2025-12-16)
 
 ### Documentation

@@ -1,16 +1,6 @@
----
-name: SDD-2-generate-task-list-from-spec
-description: "Generate a task list from a Spec with mandatory planning audit gate"
-tags:
-  - planning
-  - tasks
-arguments: []
-meta:
-  category: spec-development
-  allowed-tools: Glob, Grep, LS, Read, Edit, MultiEdit, Write, WebFetch, WebSearch
----
+# Phase 2 — Generate Task List and Planning Audit
 
-# Generate Task List From Spec
+This is an internal phase reference loaded by `SKILL.md`. Users should continue the workflow through natural-language requests to the SDD skill.
 
 ## Context Marker
 
@@ -37,10 +27,10 @@ This task list serves as the **execution blueprint** for the entire SDD workflow
 
 **Critical Dependencies:**
 
-- **Parent tasks** become implementation checkpoints in `/SDD-3-manage-tasks`
-- **Proof Artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
+- **Parent tasks** become implementation checkpoints in the implementation phase
+- **Proof Artifacts** guide implementation verification and become the evidence source for the validation phase
 - **Task boundaries** determine git commit points and progress markers
-- **Audit findings** determine whether planning is ready for `/SDD-3-manage-tasks`
+- **Audit findings** determine whether planning is ready for the implementation phase
 
 **What Breaks the Chain:**
 
@@ -61,11 +51,11 @@ Create a detailed, step-by-step task list in Markdown format based on an existin
 ## Critical Constraints
 
 ⚠️ **DO NOT** generate sub-tasks until explicitly requested by the user
-⚠️ **DO NOT** begin implementation - this prompt is for planning only
+⚠️ **DO NOT** begin implementation - this phase is for planning only
 ⚠️ **DO NOT** create tasks that are too large (multi-day) or too small (single-line changes)
 ⚠️ **DO NOT** skip the user confirmation step after parent task generation
 ⚠️ **DO NOT** apply remediation edits until the user explicitly approves the remediation plan
-⚠️ **DO NOT** hand off to `/SDD-3-manage-tasks` while any REQUIRED audit gate is failing
+⚠️ **DO NOT** continue to the implementation phase while any REQUIRED audit gate is failing
 
 ## Execution Defaults (Positive Directives)
 
@@ -101,7 +91,7 @@ Proof artifacts provide evidence of task completion and are essential for the up
 
 - **Demonstrate functionality** (screenshots, URLs, CLI output)
 - **Verify quality** (test results, lint output, performance metrics)
-- **Enable validation** (provide evidence for `/SDD-4-validate-spec-implementation`)
+- **Enable validation** (provide evidence for the validation phase)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
 **Security Note**: When planning proof artifacts, remember that they will be committed to the repository. Artifacts should use placeholder values for API keys, tokens, and other sensitive data rather than real credentials.
@@ -120,7 +110,7 @@ For each parent task, proof artifacts must satisfy all four checks:
 Reject vague artifact language such as "works as expected" without concrete
 evidence.
 
-## Chain-of-Thought Analysis Process
+## Private Analysis Process
 
 Before generating any tasks, you must follow this reasoning process:
 
@@ -185,7 +175,7 @@ Do not proceed to Phase 2 until you produce a standards evidence table with:
    - Be implementable in a reasonable timeframe
 2. **Save Initial Task List:** Save the parent tasks to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md` before proceeding
 3. **Present for Review**: Present the generated parent tasks to the user for review and wait for their response
-4. **Wait for Confirmation**: Pause and wait for user to respond with "Generate sub tasks"
+4. **Wait for Confirmation**: Pause and wait for explicit user approval to generate sub-tasks, such as “Generate the sub-tasks” or an equivalent natural-language confirmation
 
 ### Phase 3: Sub-Task Generation
 
@@ -218,7 +208,7 @@ After sub-task generation is complete:
 
 ### Phase 4A: Chain-of-Verification Check (Required Before Handoff)
 
-Before handing off to `/SDD-3-manage-tasks`, run this verification loop:
+Before continuing to the implementation phase, run this verification loop:
 
 1. **Initial assessment:** complete the audit and draft findings.
 2. **Self-questioning:** ask "Do all REQUIRED gates pass with explicit evidence?"
@@ -372,7 +362,7 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 
 | Source File | Read | Standards Extracted | Conflicts |
 | --- | --- | --- | --- |
-| `AGENTS.md` | yes | Follow context markers; honor local skill triggers | none |
+| `AGENTS.md` | yes | Follow repository workflow conventions | none |
 | `README.md` | yes | Use documented workflow order and artifact paths | none |
 
 ## Findings (Only include when non-empty)
@@ -411,12 +401,12 @@ If all REQUIRED gates pass on the first audit run, keep the report minimal:
 **Critical:** This process includes explicit approval checkpoints:
 
 1. **Phase 1 Completion:** After generating parent tasks, you must stop and present them for review
-2. **Explicit Confirmation:** Only proceed to sub-tasks after user responds with "Generate sub tasks"
+2. **Explicit Confirmation:** Only proceed to sub-tasks after explicit user approval, such as “Generate the sub-tasks” or an equivalent natural-language confirmation
 3. **Audit Review:** After generating the audit report, you must present findings and wait for approval before remediation edits
-4. **No Auto-progression:** Never proceed to `/SDD-3-manage-tasks` while REQUIRED audit gates fail
+4. **No Auto-progression:** Never continue to the implementation phase while REQUIRED audit gates fail
 
 **Example interaction:**
-> "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes proof artifacts that demonstrate what will be shown. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Respond with 'Generate sub tasks' to continue."
+> "I have analyzed the spec and generated [X] parent tasks that represent demoable units of work. Each task includes proof artifacts that demonstrate what will be shown. Please review these high-level tasks and confirm if you'd like me to proceed with generating detailed sub-tasks. Confirm in natural language, such as 'Generate the sub-tasks', to continue."
 
 ## Target Audience
 
@@ -448,21 +438,27 @@ Before finalizing your task list, verify:
 - [ ] REQUIRED audit gates are passing
 - [ ] Any remediation edits were explicitly user-approved
 
-## What Comes Next
+## How to Continue the SDD Workflow
 
-Only after REQUIRED audit gates pass, instruct the user to run `/SDD-3-manage-tasks` to begin implementation.
+Likely next phase action: the skill will route to Phase 3 and execute the task list using TDD, implement the planned changes, and generate the required proof artifacts.
+
+To continue the workflow in this chat, reply with:
+
+`Continue SDD with implementation.`
+
+You can also continue in a new chat if you want to keep context lean; the SDD skill will reassess the repository state from the persisted spec/task/audit artifacts.
 
 ## Final Instructions
 
-1. Follow the Chain-of-Thought Analysis Process before generating any tasks
+1. Follow the Private Analysis Process before generating any tasks
 2. Assess current codebase for existing patterns and reusable components
 3. Generate high-level tasks that represent demoable units of work (adjust count based on spec complexity) and save them to `./docs/specs/[NN]-spec-[feature-name]/[NN]-tasks-[feature-name].md`
-4. **CRITICAL**: Stop after generating parent tasks and wait for "Generate sub tasks" confirmation before proceeding.
+4. **CRITICAL**: Stop after generating parent tasks and wait for explicit natural-language confirmation before proceeding to sub-task generation.
 5. Ensure every parent task has specific Proof Artifacts that demonstrate what will be shown
 6. Identify all relevant files for creation/modification and present them in the required markdown table format
 7. Run the planning audit gate and create `[NN]-audit-[feature-name].md`
 8. Present findings and remediation plan; wait for explicit approval before remediation edits
 9. Run the Chain-of-Verification check before handoff decisions
 10. Re-audit until all REQUIRED gates pass
-11. Guide user to the next workflow step (`/SDD-3-manage-tasks`) only when audit is passing
+11. Guide user to the next workflow step (the implementation phase) only when audit is passing
 12. Stop working once user confirms task list is complete

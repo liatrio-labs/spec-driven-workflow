@@ -12,11 +12,11 @@ Any team trying to level up AI‑native delivery. You can adopt the workflow a p
 
 ## How is it installed?
 
-Teams install the workflow via package managers or MCP, then use its commands to maintain context, drive consistent work breakdown, and keep AI agents operating inside agreed guardrails.
+Use the `skill/` agent skill as the primary installation path for assistants with skill-native workflows. The skill path is explicit-invocation only: users should call the installed SDD skill intentionally, then the skill determines the next phase from repository artifacts. If your assistant does not support skills, install `prompts/` as slash commands for assistants with slash/custom prompt support, or manually copy prompt contents into an AI chat. All paths keep workflow artifacts in `docs/specs/` so teams can maintain context, drive consistent work breakdown, and keep AI agents operating inside agreed guardrails.
 
 ## Do we need any prerequisites?
 
-The workflow runs with minimal setup—many teams start with the prompts alone and layer in automation when they are ready.
+The workflow runs with minimal setup—many teams start with the skill path, then fall back to prompts or manual copy-paste only when their assistant lacks skill support.
 
 ## How does it work with different tools?
 
@@ -24,19 +24,27 @@ The workflow is designed to be usable with many different AI agents and work‑t
 
 ## What makes it different from documentation templates?
 
-Templates stay static; the workflow ships as a versioned package that you upgrade like any package, so improvements arrive without overwriting your customizations. The workflow also provides working commands and tools, not just documentation guidelines.
+Templates stay static; the workflow ships as a versioned package that you upgrade like any package, so improvements arrive without overwriting your customizations. The workflow also provides a primary skill, prompt-command fallbacks, and tools, not just documentation guidelines.
 
 ## What if we already have an established process?
 
-You keep it. The workflow provides commands that wire into your existing project structure—your current ADR folders, ticket conventions, or roadmaps. You don't need to rewrite your documentation or reorganize your repos. The workflow layers consistency on top of what is already working.
+You keep it. The workflow provides skill guidance or prompt commands that wire into your existing project structure—your current ADR folders, ticket conventions, or roadmaps. You don't need to rewrite your documentation or reorganize your repos. The workflow layers consistency on top of what is already working.
 
 ## How does it guide iteration size?
 
-Commands and scaffolds steer teams toward skateboard‑to‑scooter increments: create small testable slices, validate learning, and only then scale. Prompts explicitly ask you to define the skateboard (minimal testable value), scooter (enhanced but still lean), and car (complete product) so teams discuss iteration sizes up front.
+Skill guidance, prompt commands, and scaffolds steer teams toward skateboard‑to‑scooter increments: create small testable slices, validate learning, and only then scale. SDD explicitly asks you to define the skateboard (minimal testable value), scooter (enhanced but still lean), and car (complete product) so teams discuss iteration sizes up front.
 
 ## Can it work entirely in Markdown in one repo?
 
 Yes. You can keep everything in a single repository using Markdown files with no external dependencies. Tool integrations and multi‑repo features are optional.
+
+## How does the workflow prevent low-quality planning from reaching implementation?
+
+The planning step includes a mandatory audit gate after task generation. The AI produces an audit report that checks requirement coverage, proof artifact quality, repository standards consistency, open-question handling, and context alignment against related docs (such as specs, PRDs, or roadmaps). Required failures block implementation handoff until remediated.
+
+## Is remediation fully automated?
+
+No. Remediation is human-in-the-loop. The AI presents findings and a concrete remediation plan, then waits for explicit user approval before editing planning artifacts. After approved edits, the AI reruns the audit. This loop repeats until required audit gates pass.
 
 ## Can solo developers use it?
 
@@ -48,7 +56,7 @@ Through layering. Local overrides and configuration live outside the distributed
 
 ## What's the learning curve?
 
-Minimal. If you can write Markdown, you can use the workflow. The templates and commands guide you through the process. Most teams are productive in their first session.
+Minimal. If you can write Markdown, you can use the workflow. The skill, prompts, and commands guide you through the process. Most teams are productive in their first session.
 
 ## Why adopt a spec‑driven workflow now?
 

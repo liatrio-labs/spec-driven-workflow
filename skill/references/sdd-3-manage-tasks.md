@@ -1,16 +1,6 @@
----
-name: SDD-3-manage-tasks
-description: "Execute structured task implementation with built-in verification and progress tracking"
-tags:
-  - execution
-  - tasks
-arguments: []
-meta:
-  category: task-management
-  allowed-tools: Glob, Grep, LS, Read, Edit, MultiEdit, Write, WebFetch, WebSearch
----
+# Phase 3 — Manage Task Implementation
 
-# Manage Tasks
+This is an internal phase reference loaded by `SKILL.md`. Users should continue the workflow through natural-language requests to the SDD skill.
 
 ## Context Marker
 
@@ -37,9 +27,9 @@ This implementation phase serves as the **execution engine** for the entire SDD 
 **Critical Dependencies:**
 
 - **Parent tasks** become implementation checkpoints and commit boundaries
-- **Proof artifacts** guide implementation verification and become the evidence source for `/SDD-4-validate-spec-implementation`
+- **Proof artifacts** guide implementation verification and become the evidence source for the validation phase
 - **Task boundaries** determine git commit points and progress markers
-- **Planning audit report** from `/SDD-2-generate-task-list-from-spec` confirms planning quality gates passed before implementation starts
+- **Planning audit report** from the task planning phase confirms planning quality gates passed before implementation starts
 
 **What Breaks the Chain:**
 
@@ -92,12 +82,16 @@ For each parent task, follow this structured workflow with built-in verification
 [ ] Locate audit file: `./docs/specs/[NN]-spec-[feature-name]/[NN]-audit-[feature-name].md`
 [ ] Verify audit report exists and is current for this spec
 [ ] Verify all REQUIRED planning audit gates are PASS
-[ ] If REQUIRED gates are not PASS, stop and return to `/SDD-2-generate-task-list-from-spec`
+[ ] If REQUIRED gates are not PASS, stop and return to the task planning phase
 [ ] Read current task status and identify next sub-task
 [ ] Verify checkpoint mode preference with user
 [ ] Review proof artifacts required for current parent task
 [ ] Review repository standards and patterns identified in spec
 [ ] Verify required tools and dependencies are available
+[ ] Verify the workspace is a git repository before the first implementation commit
+[ ] Run `git status --short` before first implementation changes and stop for user guidance if the workspace has unrelated dirty or untracked work
+[ ] If the workspace is intentionally new and has no `.git/`, initialize a local repository, configure a local non-personal bot identity if needed, and document that initialization in the first proof/commit
+[ ] Add or verify ignore rules before the first test run so generated artifacts such as `.venv/`, `__pycache__/`, `*.py[cod]`, and test caches are not committed
 ```
 
 ### Phase 2: Sub-Task Execution
@@ -214,7 +208,7 @@ Each parent task must include artifacts that:
 
 - **Demonstrate functionality** (screenshots, URLs, CLI output)
 - **Verify quality** (test results, lint output, performance metrics)
-- **Enable validation** (provide evidence for `/SDD-4-validate-spec-implementation`)
+- **Enable validation** (provide evidence for the validation phase)
 - **Support troubleshooting** (logs, error messages, configuration states)
 
 Proof artifacts must be optimized for fast human review, not just raw evidence storage.
@@ -405,7 +399,7 @@ After completing all tasks in the task list:
 2. **Proof Artifact Validation**: Verify all proof artifacts demonstrate functionality from original spec
 3. **Test Suite**: Run final comprehensive test suite
 4. **Documentation**: Update any relevant documentation
-5. **Handoff**: Instruct user to proceed to `/SDD-4-validate-spec-implementation`
+5. **Handoff**: Instruct user to continue to the validation phase
 
 The validation phase will use your proof artifacts as evidence to verify that the spec has been fully and correctly implemented.
 
@@ -457,6 +451,12 @@ Implementation is successful when:
 - Task file accurately reflects final status
 - Implementation follows established repository patterns and conventions
 
-## What Comes Next
+## How to Continue the SDD Workflow
 
-Once this task implementation is complete and all proof artifacts are created, instruct the user to run `/SDD-4-validate-spec-implementation` to verify the implementation meets all spec requirements. This maintains the workflow's progression from idea → spec → tasks → implementation → validation.
+Likely next phase action: the skill will route to Phase 4 and validate the implementation against the spec and proof artifacts using strict pass/fail gates.
+
+To continue the workflow in this chat, reply with:
+
+`Continue SDD with validation.`
+
+You can also continue in a new chat if you want to keep context lean; the SDD skill will reassess repository state from the persisted spec/task/audit/proof artifacts.
