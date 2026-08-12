@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.14.3 (2026-08-12)
+
+### Bug Fixes
+
+- **skill**: Read audit/validation verdict from authoritative Overall line
+  ([#56](https://github.com/liatrio-labs/spec-driven-workflow/pull/56),
+  [`eaef541`](https://github.com/liatrio-labs/spec-driven-workflow/commit/eaef541fd92374bcc7209c71efb73c5781c62bcf))
+
+- **skill**: Read authoritative verdict status
+  ([#56](https://github.com/liatrio-labs/spec-driven-workflow/pull/56),
+  [`eaef541`](https://github.com/liatrio-labs/spec-driven-workflow/commit/eaef541fd92374bcc7209c71efb73c5781c62bcf))
+
+
 ## v1.14.2 (2026-08-04)
 
 ### Bug Fixes
