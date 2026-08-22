@@ -38,15 +38,26 @@ def _strip_code_fences(text):
 
     Counting those as real unchecked boxes strands a finished spec in Phase 3
     forever, so every content scan runs on the stripped text.
+
+    A fence that is opened and never closed is not treated as a block: its lines
+    are restored, because a truncated task file must not be able to hide
+    unfinished work behind a missing closing fence.
     """
     kept = []
-    in_fence = False
+    pending = None  # lines held inside a fence that has not closed yet
     for line in text.splitlines():
         if _FENCE.match(line):
-            in_fence = not in_fence
+            pending = [] if pending is None else None
             continue
-        if not in_fence:
+        if pending is None:
             kept.append(line)
+        else:
+            pending.append(line)
+    if pending:
+        # The final fence never closed, so it does not delimit a block. Restoring
+        # its lines keeps a truncated task file from hiding real task state:
+        # dropping them would make an unfinished spec look finished.
+        kept.extend(pending)
     return "\n".join(kept)
 
 
@@ -62,11 +73,23 @@ def _is_placeholder(text, match):
 
 
 def _status_value_tokens(text):
-    """Yield PASS/FAIL tokens that appear in a status-value position."""
+    """Yield PASS/FAIL tokens that appear in a status-value position.
+
+    The qualifying prefix must sit on the *same line* as the token. Scanning
+    backwards across newlines would let a bare ``PASS`` inherit the colon, pipe,
+    or bold marker of an earlier line, so prose such as::
+
+        ## Notes:
+
+        PASS
+
+    would be read as a verdict and open the planning gate.
+    """
     for match in _ANY_VERDICT_TOKEN.finditer(text):
         if _is_placeholder(text, match):
             continue
-        before = text[:match.start()].rstrip()
+        line_start = text.rfind("\n", 0, match.start()) + 1
+        before = text[line_start:match.start()].rstrip()
         if before.endswith(_STATUS_VALUE_PREFIXES):
             yield match.group(1).upper()
 

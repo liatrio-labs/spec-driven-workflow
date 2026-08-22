@@ -468,6 +468,28 @@ def test_pass_fail_column_legend_does_not_trap_a_passing_audit(workspace):
     assert spec["phase"] == 3
 
 
+def test_bare_verdict_after_a_colon_line_is_not_a_status_value(workspace):
+    """A qualifying prefix must share the token's line, not precede it."""
+    body = "# Audit\n\n## Notes:\n\nPASS\n"
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
+def test_bare_verdict_after_a_table_row_is_not_a_status_value(workspace):
+    """A token on its own line cannot inherit the pipe of the row above it."""
+    body = "# Audit\n\n| Gate | Status |\n| --- | --- |\n\nPASS\n"
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
 # ---------------------------------------------------------------------------
 # Content-scan precision: markdown prose and fenced examples are not state
 # ---------------------------------------------------------------------------
@@ -518,6 +540,24 @@ def test_checkbox_inside_a_code_fence_is_not_an_incomplete_task(workspace):
 def test_heading_style_incomplete_parent_task_is_detected(workspace):
     """Regression guard: `### [ ] 1.0` is a real unchecked task, fences aside."""
     _spec_through_audit(workspace, PASSING_AUDIT, "### [ ] 1.0 Parent\n\n- [ ] 1.1 todo\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_MIDFLIGHT"
+
+
+def test_unclosed_fence_does_not_hide_incomplete_tasks(workspace):
+    """A truncated task file must not look finished.
+
+    Dropping every line after an unterminated fence would hide real unchecked
+    boxes, so an unterminated fence is not treated as a block at all.
+    """
+    tasks = (
+        "### [x] 1.0 Parent\n\n- [x] 1.1 done\n\n"
+        "```markdown\n- [ ] 2.1 still open\n### [ ] 2.0 Parent two\n"
+    )
+    _spec_through_audit(workspace, PASSING_AUDIT, tasks)
 
     spec = assess.main(base_path=workspace)["active_specs"][0]
 
