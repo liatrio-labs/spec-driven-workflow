@@ -19,6 +19,27 @@ def workspace():
         workspace_path = Path(temp_dir)
         yield workspace_path
 
+# A minimal audit report that actually records a passing verdict. An empty or
+# verdict-less audit file is not a passing gate, so fixtures that need the
+# workflow to advance past Phase 2 must supply a real verdict.
+PASSING_AUDIT = """# 01-audit-auth.md
+
+## Executive Summary
+
+- Overall Status: PASS
+- Required Gate Failures: 0
+"""
+
+
+def write_proof(feature_dir, sequence="01", task=1):
+    """Create the proof artifact a completed parent task is required to produce."""
+    proofs_dir = feature_dir / f"{sequence}-proofs"
+    proofs_dir.mkdir(exist_ok=True)
+    path = proofs_dir / f"{sequence}-task-{task:02d}-proofs.md"
+    path.write_text(f"# Task {task:02d} Proofs\n")
+    return path
+
+
 def test_no_specs_dir(workspace):
     """Test S1_START: Empty Workspace"""
     result = assess.main(base_path=workspace)
@@ -59,7 +80,7 @@ def test_phase_3_start(workspace):
     feature_dir.mkdir(parents=True)
 
     (feature_dir / "01-spec-auth.md").touch()
-    (feature_dir / "01-audit-auth.md").touch()
+    (feature_dir / "01-audit-auth.md").write_text(PASSING_AUDIT)
 
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [ ] Task 1\n- [x] Task 2")
@@ -80,10 +101,12 @@ def test_phase_4_start_selects_completed_unvalidated_spec(workspace):
     feature_dir.mkdir(parents=True)
 
     (feature_dir / "01-spec-auth.md").touch()
-    (feature_dir / "01-audit-auth.md").touch()
+    (feature_dir / "01-audit-auth.md").write_text(PASSING_AUDIT)
 
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [x] Task 1\n- [x] Task 2")
+
+    write_proof(feature_dir)
 
     result = assess.main(base_path=workspace)
     spec = result["active_specs"][0]
@@ -152,10 +175,12 @@ def test_S4_FAILED(workspace):
     feature_dir.mkdir(parents=True)
 
     (feature_dir / "01-spec-auth.md").touch()
-    (feature_dir / "01-audit-auth.md").touch()
+    (feature_dir / "01-audit-auth.md").write_text(PASSING_AUDIT)
 
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [x] Task 1")
+
+    write_proof(feature_dir)
 
     validation_dir = docs_specs / "01-validation-auth"
     validation_dir.mkdir(parents=True, exist_ok=True)
@@ -176,7 +201,7 @@ def test_S4_COMPLETE(workspace):
     feature_dir.mkdir(parents=True)
 
     (feature_dir / "01-spec-auth.md").touch()
-    (feature_dir / "01-audit-auth.md").touch()
+    (feature_dir / "01-audit-auth.md").write_text(PASSING_AUDIT)
 
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [x] Task 1")
@@ -343,3 +368,324 @@ def test_validation_pass_with_fail_word_in_body_is_complete(workspace):
 
     assert spec["phase"] == 4
     assert spec["detailed_state"] == "S4_COMPLETE"
+
+
+# ---------------------------------------------------------------------------
+# Fail-closed gate regression tests
+#
+# The planning audit is the workflow's only barrier between planning and
+# implementation. Absence of a verdict is not a passing verdict: every report
+# the assessor cannot read as an explicit PASS must hold the spec in Phase 2.
+# ---------------------------------------------------------------------------
+
+DOCUMENTED_TASKS_ONE_PARENT_DONE = """## Tasks
+
+### [x] 1.0 Add the CLI flag
+
+#### 1.0 Proof Artifact(s)
+
+- CLI: `tool --new-flag` returns expected output demonstrates feature works
+
+#### 1.0 Tasks
+
+- [x] 1.1 Implement the flag
+- [x] 1.2 Add the test
+"""
+
+
+def _spec_through_audit(workspace, audit_body, tasks_body, sequence="01", feature="auth"):
+    """Create one spec directory with spec, tasks, and audit files."""
+    feature_dir = workspace / "docs" / "specs" / f"{sequence}-spec-{feature}"
+    feature_dir.mkdir(parents=True)
+    (feature_dir / f"{sequence}-spec-{feature}.md").write_text("# Spec\n")
+    (feature_dir / f"{sequence}-tasks-{feature}.md").write_text(tasks_body)
+    (feature_dir / f"{sequence}-audit-{feature}.md").write_text(audit_body)
+    return feature_dir
+
+
+def test_empty_audit_file_does_not_open_the_gate(workspace):
+    """An audit file truncated by an interrupted session is not a passing gate."""
+    _spec_through_audit(workspace, "", "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+    assert any("empty" in blocker for blocker in spec["blockers"])
+
+
+def test_unfilled_pass_slash_fail_placeholder_does_not_open_the_gate(workspace):
+    """The literal template line `Overall Status: PASS/FAIL` records no verdict."""
+    body = (
+        "## Executive Summary\n\n"
+        "- Overall Status: PASS/FAIL\n"
+        "- Required Gate Failures: 3\n"
+    )
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
+def test_unfilled_placeholder_with_failing_gateboard_reads_as_failed(workspace):
+    """A placeholder verdict falls through to the gateboard, which says FAIL."""
+    body = (
+        "## Executive Summary\n\n"
+        "- Overall Status: PASS/FAIL\n\n"
+        "## Gateboard\n\n"
+        "| Gate | Status |\n| --- | --- |\n"
+        "| Requirement-to-test traceability | FAIL |\n"
+    )
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_FAILED"
+
+
+def test_audit_whose_failure_is_only_in_prose_does_not_open_the_gate(workspace):
+    """Lowercase prose is not a verdict, so the gate stays closed rather than open."""
+    body = "# Audit\n\nResult: two required gates failed and must be remediated.\n"
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
+@pytest.mark.skipif(
+    hasattr(os, "geteuid") and os.geteuid() == 0,
+    reason="root can read files regardless of mode bits",
+)
+def test_unreadable_audit_does_not_open_the_gate(workspace):
+    """A read error must surface as a blocker, not be swallowed into a pass."""
+    feature_dir = _spec_through_audit(
+        workspace, "- Overall Status: FAIL\n", "# Tasks\n- [ ] Task 1"
+    )
+    audit_path = feature_dir / "01-audit-auth.md"
+    audit_path.chmod(0o000)
+    try:
+        spec = assess.main(base_path=workspace)["active_specs"][0]
+    finally:
+        audit_path.chmod(0o644)
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+    assert any("unreadable" in blocker for blocker in spec["blockers"])
+
+
+def test_pass_fail_column_legend_does_not_trap_a_passing_audit(workspace):
+    """A `Status (PASS/FAIL)` column header is a legend, not a failing gate."""
+    body = (
+        "# Audit\n\n"
+        "| Gate | Status (PASS/FAIL) |\n| --- | --- |\n"
+        "| Requirement-to-test traceability | PASS |\n"
+        "| Proof artifact verifiability | PASS |\n"
+    )
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["detailed_state"] == "S3_MIDFLIGHT"
+    assert spec["phase"] == 3
+
+
+def test_bare_verdict_after_a_colon_line_is_not_a_status_value(workspace):
+    """A qualifying prefix must share the token's line, not precede it."""
+    body = "# Audit\n\n## Notes:\n\nPASS\n"
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
+def test_bare_verdict_after_a_table_row_is_not_a_status_value(workspace):
+    """A token on its own line cannot inherit the pipe of the row above it."""
+    body = "# Audit\n\n| Gate | Status |\n| --- | --- |\n\nPASS\n"
+    _spec_through_audit(workspace, body, "# Tasks\n- [ ] Task 1")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 2
+    assert spec["detailed_state"] == "S2_AUDIT_UNVERIFIED"
+
+
+# ---------------------------------------------------------------------------
+# Content-scan precision: markdown prose and fenced examples are not state
+# ---------------------------------------------------------------------------
+
+def test_tbd_inside_a_subtask_does_not_revert_to_parents_only(workspace):
+    """The word TBD in a sub-task must not erase generated sub-tasks."""
+    docs_specs = workspace / "docs" / "specs" / "01-spec-auth"
+    docs_specs.mkdir(parents=True)
+    (docs_specs / "01-spec-auth.md").write_text("# Spec\n")
+    (docs_specs / "01-tasks-auth.md").write_text(
+        "### [x] 1.0 Parent\n\n#### 1.0 Tasks\n\n- [x] 1.1 Replace the TBD placeholder in config\n"
+    )
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["detailed_state"] == "S2_SUBTASKS_DONE"
+    assert spec["action_required"] == "Generate Planning Audit (Phase 2)"
+
+
+def test_bare_tbd_line_still_detects_parents_only(workspace):
+    """Regression guard: the template's bare TBD line still means parents-only."""
+    docs_specs = workspace / "docs" / "specs" / "01-spec-auth"
+    docs_specs.mkdir(parents=True)
+    (docs_specs / "01-spec-auth.md").write_text("# Spec\n")
+    (docs_specs / "01-tasks-auth.md").write_text(
+        "### [ ] 1.0 Parent\n\n#### 1.0 Tasks\n\nTBD\n"
+    )
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["detailed_state"] == "S2_PARENTS_DONE"
+
+
+def test_checkbox_inside_a_code_fence_is_not_an_incomplete_task(workspace):
+    """A fenced template example must not strand a finished spec in Phase 3."""
+    tasks = (
+        "### [x] 1.0 Parent\n\n#### 1.0 Tasks\n\n- [x] 1.1 done\n\n"
+        "Sub-task format:\n\n```markdown\n- [ ] N.N description\n```\n"
+    )
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, tasks)
+    write_proof(feature_dir)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_START"
+
+
+def test_heading_style_incomplete_parent_task_is_detected(workspace):
+    """Regression guard: `### [ ] 1.0` is a real unchecked task, fences aside."""
+    _spec_through_audit(workspace, PASSING_AUDIT, "### [ ] 1.0 Parent\n\n- [ ] 1.1 todo\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_MIDFLIGHT"
+
+
+def test_unclosed_fence_does_not_hide_incomplete_tasks(workspace):
+    """A truncated task file must not look finished.
+
+    Dropping every line after an unterminated fence would hide real unchecked
+    boxes, so an unterminated fence is not treated as a block at all.
+    """
+    tasks = (
+        "### [x] 1.0 Parent\n\n- [x] 1.1 done\n\n"
+        "```markdown\n- [ ] 2.1 still open\n### [ ] 2.0 Parent two\n"
+    )
+    _spec_through_audit(workspace, PASSING_AUDIT, tasks)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_MIDFLIGHT"
+
+
+# ---------------------------------------------------------------------------
+# Proof artifacts are the evidence the workflow promises; the router must look
+# for them on disk instead of trusting a checked box.
+# ---------------------------------------------------------------------------
+
+def test_completed_parent_task_without_proof_artifact_blocks_validation(workspace):
+    """Tasks marked done with no proof file on disk are not ready to validate."""
+    _spec_through_audit(workspace, PASSING_AUDIT, DOCUMENTED_TASKS_ONE_PARENT_DONE)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_PROOFS_MISSING"
+    assert spec["blockers"] == ["missing proof artifact: 01-task-01-proofs.md"]
+
+
+def test_completed_parent_task_with_proof_artifact_reaches_validation(workspace):
+    """With the proof file present the spec advances to validation."""
+    feature_dir = _spec_through_audit(
+        workspace, PASSING_AUDIT, DOCUMENTED_TASKS_ONE_PARENT_DONE
+    )
+    write_proof(feature_dir)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_START"
+    assert spec["blockers"] == []
+
+
+def test_undocumented_task_format_still_requires_at_least_one_proof_artifact(workspace):
+    """Evidence is unconditional: an unmappable task file still owes one proof."""
+    _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_PROOFS_MISSING"
+    assert spec["blockers"] == [
+        "missing proof artifact: 01-proofs/01-task-NN-proofs.md (at least one)"
+    ]
+
+
+def test_undocumented_task_format_advances_once_a_proof_exists(workspace):
+    """One proof artifact satisfies the fallback requirement."""
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+    write_proof(feature_dir)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_START"
+
+
+def test_passing_validation_is_not_reopened_by_the_proof_gate(workspace):
+    """A spec that already cleared validation is reported complete, not reopened.
+
+    The proof gate guards the route *into* validation. Retroactively dragging a
+    spec that already carries a passing validation report back to Phase 3 would
+    reopen shipped work, so the stronger later gate wins.
+    """
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+    (feature_dir / "01-validation-auth.md").write_text("- **Overall:** PASS\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_COMPLETE"
+
+
+# ---------------------------------------------------------------------------
+# Selection order
+# ---------------------------------------------------------------------------
+
+def test_highest_sequence_wins_within_the_same_phase(workspace):
+    """Two specs in the same phase: the newest sequence is the active one."""
+    for sequence, feature in (("01", "older"), ("02", "newer")):
+        _spec_through_audit(
+            workspace, PASSING_AUDIT, "# Tasks\n- [ ] Task 1", sequence, feature
+        )
+
+    result = assess.main(base_path=workspace)
+
+    assert "Sequence 02" in result["recommendation"]
+    assert "newer" in result["recommendation"]
+
+
+def test_validation_without_a_verdict_is_not_complete(workspace):
+    """A validation report with no readable verdict does not close the workflow."""
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1")
+    write_proof(feature_dir)
+    (feature_dir / "01-validation-auth.md").write_text("# Validation\n\nLooks good to me.\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_UNVERIFIED"

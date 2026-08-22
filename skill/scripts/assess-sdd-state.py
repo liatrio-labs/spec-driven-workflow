@@ -1,13 +1,101 @@
 #!/usr/bin/env python3
-import os
 import re
 from pathlib import Path
 import json
 
 import sys
 
-def _authoritative_verdict(text):
-    r"""Return the authoritative PASS/FAIL verdict for an audit/validation report.
+# Verdicts. A report that yields UNVERIFIED has no trustworthy verdict and must
+# not be treated as a passing gate.
+PASS = "PASS"
+FAIL = "FAIL"
+UNVERIFIED = "UNVERIFIED"
+
+_FENCE = re.compile(r'^\s*(?:```|~~~)')
+
+_AUTHORITATIVE_STATUS = re.compile(
+    r'^\s*(?:[-*+]\s*)?(?:\*\*)?overall(?:\s+status)?(?:\*\*)?\s*:'
+    r'\s*(?:\*\*)?\s*(PASS|FAIL)\b',
+    re.IGNORECASE | re.MULTILINE,
+)
+
+_ANY_VERDICT_TOKEN = re.compile(r'\b(PASS|FAIL)\b', re.IGNORECASE)
+
+# A verdict token is only a status *value* when it sits where a value goes: after
+# a colon, inside a table cell, or wrapped in bold. Bare prose ("no gate returned
+# FAIL", "all required gates pass") is not a verdict.
+_STATUS_VALUE_PREFIXES = (":", "|", "**")
+
+
+def _strip_code_fences(text):
+    """Drop fenced code blocks so template examples cannot be read as state.
+
+    Task files legitimately contain fenced examples such as::
+
+        ```markdown
+        - [ ] N.N description
+        ```
+
+    Counting those as real unchecked boxes strands a finished spec in Phase 3
+    forever, so every content scan runs on the stripped text.
+
+    A fence that is opened and never closed is not treated as a block: its lines
+    are restored, because a truncated task file must not be able to hide
+    unfinished work behind a missing closing fence.
+    """
+    kept = []
+    pending = None  # lines held inside a fence that has not closed yet
+    for line in text.splitlines():
+        if _FENCE.match(line):
+            pending = [] if pending is None else None
+            continue
+        if pending is None:
+            kept.append(line)
+        else:
+            pending.append(line)
+    if pending:
+        # The final fence never closed, so it does not delimit a block. Restoring
+        # its lines keeps a truncated task file from hiding real task state:
+        # dropping them would make an unfinished spec look finished.
+        kept.extend(pending)
+    return "\n".join(kept)
+
+
+def _is_placeholder(text, match):
+    """True when the captured verdict is the unfilled `PASS/FAIL` template.
+
+    The documented report template ships the literal line
+    ``- Overall Status: PASS/FAIL``. Read naively that parses as PASS, so an
+    audit whose verdict was never filled in reads as a passing gate. Treat the
+    slash form as "no verdict recorded" instead.
+    """
+    return text[match.end():match.end() + 1] == "/" or text[max(0, match.start() - 1):match.start()] == "/"
+
+
+def _status_value_tokens(text):
+    """Yield PASS/FAIL tokens that appear in a status-value position.
+
+    The qualifying prefix must sit on the *same line* as the token. Scanning
+    backwards across newlines would let a bare ``PASS`` inherit the colon, pipe,
+    or bold marker of an earlier line, so prose such as::
+
+        ## Notes:
+
+        PASS
+
+    would be read as a verdict and open the planning gate.
+    """
+    for match in _ANY_VERDICT_TOKEN.finditer(text):
+        if _is_placeholder(text, match):
+            continue
+        line_start = text.rfind("\n", 0, match.start()) + 1
+        before = text[line_start:match.start()].rstrip()
+        if before.endswith(_STATUS_VALUE_PREFIXES):
+            yield match.group(1).upper()
+
+
+def _report_verdict(text):
+    r"""Return PASS, FAIL, or UNVERIFIED for an audit/validation report.
 
     The report's Executive Summary carries the verdict on an
     ``Overall Status: PASS/FAIL`` line (audits) or ``Overall: PASS/FAIL`` line
@@ -55,30 +143,140 @@ def _authoritative_verdict(text):
     └──────────────────────────────── Allow spaces after ":"
 
     Strategy:
-      1. Search for the first explicitly formatted status line and return the
-         PASS/FAIL token immediately after its colon. A parenthetical note such
-         as ``PASS (was FAIL on run 1)`` therefore stays PASS.
-      2. Otherwise fall back to a per-gate scan: any FAIL marks the report
-         failed (preserves behaviour for reports without a summary line).
-
-    Returns "PASS", "FAIL", or None when no verdict can be determined.
+      1. Return the first authoritative status line's verdict. A parenthetical
+         note such as ``PASS (was FAIL on run 1)`` therefore stays PASS. An
+         unfilled ``PASS/FAIL`` placeholder is skipped, not read as PASS.
+      2. Otherwise scan for verdict tokens in status-value position (after a
+         colon, in a table cell, or bolded): any FAIL wins, else PASS. Bare
+         prose is ignored, and the ``(PASS/FAIL)`` column legend is ignored.
+      3. Otherwise return UNVERIFIED. Callers must treat that as "gate not
+         satisfied", never as a pass.
     """
-    status_line = re.compile(
-        r'^\s*(?:[-*+]\s*)?(?:\*\*)?overall(?:\s+status)?(?:\*\*)?\s*:'
-        r'\s*(?:\*\*)?\s*(PASS|FAIL)\b',
-        re.IGNORECASE | re.MULTILINE,
+    body = _strip_code_fences(text)
+
+    for match in _AUTHORITATIVE_STATUS.finditer(body):
+        if not _is_placeholder(body, match):
+            return match.group(1).upper()
+
+    tokens = set(_status_value_tokens(body))
+    if FAIL in tokens:
+        return FAIL
+    if PASS in tokens:
+        return PASS
+    return UNVERIFIED
+
+
+def _read_report_verdict(path):
+    """Read one report and return (verdict, error).
+
+    An unreadable or empty report is UNVERIFIED with a reason, never a silent
+    pass. `error` is None on a clean read.
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return UNVERIFIED, f"{path.name}: not found"
+    except OSError as exc:
+        return UNVERIFIED, f"{path.name}: unreadable ({exc.strerror})"
+    except UnicodeDecodeError:
+        return UNVERIFIED, f"{path.name}: not valid UTF-8"
+
+    if not text.strip():
+        return UNVERIFIED, f"{path.name}: file is empty"
+
+    verdict = _report_verdict(text)
+    if verdict is UNVERIFIED:
+        return verdict, f"{path.name}: no authoritative 'Overall Status: PASS' line found"
+    return verdict, None
+
+
+def _read_text(path):
+    """Read a task file, returning (text, error)."""
+    try:
+        return path.read_text(encoding="utf-8"), None
+    except FileNotFoundError:
+        return "", f"{path.name}: not found"
+    except OSError as exc:
+        return "", f"{path.name}: unreadable ({exc.strerror})"
+    except UnicodeDecodeError:
+        return "", f"{path.name}: not valid UTF-8"
+
+
+def _is_parents_only(tasks_text):
+    """True when sub-tasks are still placeholders.
+
+    The Phase 2 template writes a bare ``TBD`` line under each parent task's
+    Tasks heading. Requiring the whole line to be TBD keeps a sub-task that
+    merely mentions the word ("replace the TBD placeholder in config") from
+    reverting a fully planned spec back to parent-tasks-only.
+    """
+    return any(
+        line.strip().lstrip("#").strip() == "TBD"
+        for line in _strip_code_fences(tasks_text).splitlines()
     )
 
-    match = status_line.search(text)
-    if match:
-        return match.group(1).upper()
 
-    # No authoritative line: fall back to a whole-document gate scan.
-    if re.search(r'\*\*FAIL\*\*|\bFAIL\b', text):
-        return "FAIL"
-    if re.search(r'\bPASS\b', text):
-        return "PASS"
-    return None
+_CHECKBOX = re.compile(r'^\s*(?:[-*+]\s+|#{1,6}\s+)?\[([ x~])\]', re.IGNORECASE)
+_PARENT_TASK = re.compile(
+    r'^\s*(?:[-*+]\s+|#{1,6}\s+)?\[([ x~])\]\s*(\d+)\.0\b',
+    re.IGNORECASE,
+)
+
+
+def _has_incomplete_tasks(tasks_text):
+    """True when any real checkbox is still `[ ]` or `[~]` (fences excluded)."""
+    for line in _strip_code_fences(tasks_text).splitlines():
+        match = _CHECKBOX.match(line)
+        if match and match.group(1).lower() in (" ", "~"):
+            return True
+    return False
+
+
+def _completed_parent_tasks(tasks_text):
+    """Return the numbers of parent tasks marked complete, e.g. [1, 2].
+
+    Recognises the documented ``### [x] N.0 Title`` form. Task files that do not
+    use it yield no parent tasks, in which case the proof gate falls back to
+    requiring at least one proof artifact rather than a per-task mapping.
+    """
+    completed = []
+    for line in _strip_code_fences(tasks_text).splitlines():
+        match = _PARENT_TASK.match(line)
+        if match and match.group(1).lower() == "x":
+            completed.append(int(match.group(2)))
+    return completed
+
+
+def _missing_proof_artifacts(spec_dir, seq_num, tasks_text):
+    """Return the proof artifacts an implemented spec still owes.
+
+    Phase 3 requires one proof file per completed parent task at
+    ``[NN]-proofs/[NN]-task-[TT]-proofs.md``, created *before* the task's
+    commit. Without this check the router advances to validation with zero
+    evidence on disk, which is the one thing the workflow promises never to do.
+
+    Evidence is required unconditionally. When the task file uses the documented
+    ``### [x] N.0`` headings, each completed parent task must have its own proof
+    file. When it does not, the per-task mapping cannot be derived, so the gate
+    falls back to the weakest requirement that is still a requirement: the spec
+    must have produced at least one proof artifact.
+    """
+    proofs_dir = spec_dir / f"{seq_num}-proofs"
+    completed_parents = _completed_parent_tasks(tasks_text)
+
+    if completed_parents:
+        return [
+            expected
+            for expected in (
+                f"{seq_num}-task-{parent:02d}-proofs.md" for parent in completed_parents
+            )
+            if not (proofs_dir / expected).is_file()
+        ]
+
+    if not any(proofs_dir.glob(f"{seq_num}-task-*-proofs.md")):
+        return [f"{proofs_dir.name}/{seq_num}-task-NN-proofs.md (at least one)"]
+    return []
+
 
 def get_specs_dir(base_path=None):
     """Locate the specs directory starting from the current location or provided base_path."""
@@ -123,7 +321,8 @@ def assess_spec_dir(spec_path):
         },
         "phase": 0,
         "detailed_state": "",
-        "action_required": ""
+        "action_required": "",
+        "blockers": []
     }
 
     # Logic matching SKILL.md state assessment
@@ -135,88 +334,91 @@ def assess_spec_dir(spec_path):
         else:
             state["detailed_state"] = "S1_START"
             state["action_required"] = "Generate Spec (Phase 1)"
-    elif not state["files_found"]["tasks"]:
+        return state
+
+    if not state["files_found"]["tasks"]:
         state["phase"] = 2
         state["detailed_state"] = "S2_START"
         state["action_required"] = "Generate Task List (Phase 2)"
-    elif not state["files_found"]["audit"]:
+        return state
+
+    tasks_text, tasks_error = _read_text(spec_dir / tasks_file)
+    if tasks_error:
         state["phase"] = 2
+        state["detailed_state"] = "S2_TASKS_UNREADABLE"
+        state["action_required"] = "Repair the task list before continuing (Phase 2)"
+        state["blockers"].append(tasks_error)
+        return state
 
-        # Check if tasks are parents only (TBD marker)
-        tasks_path = spec_dir / tasks_file
-        has_tbd = False
-        try:
-            with open(tasks_path, 'r', encoding='utf-8') as f:
-                if re.search(r'## TBD|\bTBD\b', f.read()):
-                    has_tbd = True
-        except Exception:
-            pass
-
-        if has_tbd:
+    if not state["files_found"]["audit"]:
+        state["phase"] = 2
+        if _is_parents_only(tasks_text):
             state["detailed_state"] = "S2_PARENTS_DONE"
             state["action_required"] = "Review Parent Tasks & Generate Sub-tasks (Phase 2)"
         else:
             state["detailed_state"] = "S2_SUBTASKS_DONE"
             state["action_required"] = "Generate Planning Audit (Phase 2)"
+        return state
+
+    # The planning audit is a gate: it opens only on an explicit PASS verdict.
+    audit_verdict, audit_error = _read_report_verdict(spec_dir / audit_file)
+    if audit_verdict == FAIL:
+        state["phase"] = 2
+        state["detailed_state"] = "S2_AUDIT_FAILED"
+        state["action_required"] = "Fix Planning Audit Failures (Phase 2)"
+        return state
+    if audit_verdict != PASS:
+        state["phase"] = 2
+        state["detailed_state"] = "S2_AUDIT_UNVERIFIED"
+        state["action_required"] = (
+            "Planning audit verdict could not be verified; re-run the audit and record "
+            "'Overall Status: PASS' before implementation (Phase 2)"
+        )
+        state["blockers"].append(audit_error)
+        return state
+
+    state["detailed_state"] = "S2_COMPLETE"
+
+    if _has_incomplete_tasks(tasks_text):
+        state["phase"] = 3
+        state["detailed_state"] = "S3_MIDFLIGHT"
+        state["action_required"] = "Implement Tasks (Phase 3)"
+        return state
+
+    # A spec that already carries a passing validation report has cleared a
+    # later and stronger gate, so it is reported as complete rather than
+    # reopened. Every other route into validation requires evidence on disk.
+    validation_verdict, validation_error = (None, None)
+    if state["files_found"]["validation"]:
+        validation_verdict, validation_error = _read_report_verdict(spec_dir / validation_file)
+        if validation_verdict == PASS:
+            state["phase"] = 4
+            state["detailed_state"] = "S4_COMPLETE"
+            state["action_required"] = "Validation Complete. Start next feature (Phase 1)"
+            return state
+
+    missing_proofs = _missing_proof_artifacts(spec_dir, seq_num, tasks_text)
+    if missing_proofs:
+        state["phase"] = 3
+        state["detailed_state"] = "S3_PROOFS_MISSING"
+        state["action_required"] = "Create the missing proof artifacts before validation (Phase 3)"
+        state["blockers"].extend(f"missing proof artifact: {name}" for name in missing_proofs)
+        return state
+
+    state["phase"] = 4
+    if not state["files_found"]["validation"]:
+        state["detailed_state"] = "S4_START"
+        state["action_required"] = "Validate Implementation (Phase 4)"
+    elif validation_verdict == FAIL:
+        state["detailed_state"] = "S4_FAILED"
+        state["action_required"] = "Fix Validation Failures (Phase 4)"
     else:
-        # Check audit gates for FAIL using the authoritative verdict line
-        audit_path = spec_dir / audit_file
-        audit_failed = False
-        try:
-            with open(audit_path, 'r', encoding='utf-8') as f:
-                if _authoritative_verdict(f.read()) == "FAIL":
-                    audit_failed = True
-        except Exception:
-            pass
-
-        if audit_failed:
-            state["phase"] = 2
-            state["detailed_state"] = "S2_AUDIT_FAILED"
-            state["action_required"] = "Fix Planning Audit Failures (Phase 2)"
-            return state # Return early to trap it in Phase 2
-        else:
-            state["detailed_state"] = "S2_COMPLETE"
-
-        # Check task completion
-        tasks_path = spec_dir / tasks_file
-        incomplete_tasks = False
-        try:
-            with open(tasks_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-                # Look for incomplete markdown checkboxes
-                if re.search(r'\[\s\]', content) or re.search(r'\[~\]', content):
-                    incomplete_tasks = True
-        except Exception:
-            pass
-
-        if incomplete_tasks:
-            state["phase"] = 3
-            state["action_required"] = "Implement Tasks (Phase 3)"
-            # At this point, we could probably detect midflight vs start, but both are Phase 3
-            state["detailed_state"] = "S3_MIDFLIGHT"
-        elif not state["files_found"]["validation"]:
-            state["phase"] = 4
-            state["detailed_state"] = "S4_START"
-            state["action_required"] = "Validate Implementation (Phase 4)"
-        else:
-            state["phase"] = 4
-
-            # Check validation for FAIL using the authoritative verdict line
-            val_path = spec_dir / validation_file
-            val_failed = False
-            try:
-                with open(val_path, 'r', encoding='utf-8') as f:
-                    if _authoritative_verdict(f.read()) == "FAIL":
-                        val_failed = True
-            except Exception:
-                pass
-
-            if val_failed:
-                state["detailed_state"] = "S4_FAILED"
-                state["action_required"] = "Fix Validation Failures (Phase 4)"
-            else:
-                state["detailed_state"] = "S4_COMPLETE"
-                state["action_required"] = "Validation Complete. Start next feature (Phase 1)"
+        state["detailed_state"] = "S4_UNVERIFIED"
+        state["action_required"] = (
+            "Validation verdict could not be verified; re-run validation and record "
+            "'Overall: PASS' (Phase 4)"
+        )
+        state["blockers"].append(validation_error)
 
     return state
 
@@ -254,17 +456,19 @@ def main(base_path=None):
 
     active = sorted(
         [s for s in result["active_specs"] if s.get("phase", 0) in [1, 2, 3, 4]],
-        key=lambda x: (x["phase"], -int(x["sequence"])), # Prioritize highest phase, then highest sequence
+        key=lambda x: (x["phase"], int(x["sequence"])), # Prioritize highest phase, then highest sequence
         reverse=True
     )
 
     if active:
         # Prioritize any incomplete phases over a completed phase 4
-        incomplete = [s for s in active if s.get("phase", 0) < 4 or s.get("detailed_state") == "S4_FAILED" or s.get("detailed_state") == "S4_START"]
+        incomplete = [s for s in active if s.get("phase", 0) < 4 or s.get("detailed_state") != "S4_COMPLETE"]
 
         if incomplete:
             target = incomplete[0]
             result["recommendation"] = f"Phase {target['phase']}: {target['action_required']} for feature '{target['feature']}' (Sequence {target['sequence']})"
+            if target.get("blockers"):
+                result["recommendation"] += f" | blockers: {'; '.join(target['blockers'])}"
         else:
             # Everything is S4_COMPLETE
             target = active[0]
