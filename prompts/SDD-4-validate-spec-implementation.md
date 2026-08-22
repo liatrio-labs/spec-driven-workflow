@@ -215,9 +215,13 @@ For each Functional Requirement, Demoable Unit, and Repository Standard:
 
 ### 1) Executive Summary
 
-- **Overall:** PASS/FAIL (list gates tripped)
+- **Overall:** [PASS or FAIL] (list gates tripped)
 - **Implementation Ready:** **Yes/No** with one-sentence rationale
 - **Key metrics:** % Requirements Verified, % Proof Artifacts Working, Files Changed vs Expected
+
+The `**Overall:**` line is the report's authoritative verdict. Record exactly one
+of `PASS` or `FAIL` on it, for the same reason the planning audit does: it is the
+line reviewers and tooling read to decide whether the implementation is validated.
 
 ### 2) Coverage Matrix (required)
 

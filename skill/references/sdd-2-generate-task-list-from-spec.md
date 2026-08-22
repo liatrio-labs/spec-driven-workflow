@@ -348,11 +348,11 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 
 ## Executive Summary
 
-- Overall Status: PASS/FAIL
+- Overall Status: [PASS or FAIL]
 - Required Gate Failures: [count]
 - Flagged Risks: [count]
 
-## Gateboard
+## Gate Overview
 
 | Gate | Status | Why it failed (<=10 words) | Exact fix target |
 | --- | --- | --- | --- |
@@ -390,6 +390,11 @@ Use this structure in `[NN]-audit-[feature-name].md`:
 - Still-failing REQUIRED gates:
 - Newly introduced findings (if any):
 ```
+
+The `Overall Status:` line is the report's authoritative verdict. Record exactly
+one of `PASS` or `FAIL` on it. Reviewers and tooling read that line to decide
+whether planning is complete, so leaving the placeholder in place, or stating the
+outcome only in prose elsewhere in the report, leaves the audit with no verdict.
 
 If all REQUIRED gates pass on the first audit run, keep the report minimal:
 
