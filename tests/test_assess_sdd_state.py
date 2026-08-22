@@ -31,6 +31,15 @@ PASSING_AUDIT = """# 01-audit-auth.md
 """
 
 
+def write_proof(feature_dir, sequence="01", task=1):
+    """Create the proof artifact a completed parent task is required to produce."""
+    proofs_dir = feature_dir / f"{sequence}-proofs"
+    proofs_dir.mkdir(exist_ok=True)
+    path = proofs_dir / f"{sequence}-task-{task:02d}-proofs.md"
+    path.write_text(f"# Task {task:02d} Proofs\n")
+    return path
+
+
 def test_no_specs_dir(workspace):
     """Test S1_START: Empty Workspace"""
     result = assess.main(base_path=workspace)
@@ -97,6 +106,7 @@ def test_phase_4_start_selects_completed_unvalidated_spec(workspace):
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [x] Task 1\n- [x] Task 2")
 
+    write_proof(feature_dir)
 
     result = assess.main(base_path=workspace)
     spec = result["active_specs"][0]
@@ -170,6 +180,7 @@ def test_S4_FAILED(workspace):
     with open(feature_dir / "01-tasks-auth.md", "w") as f:
         f.write("# Tasks\n- [x] Task 1")
 
+    write_proof(feature_dir)
 
     validation_dir = docs_specs / "01-validation-auth"
     validation_dir.mkdir(parents=True, exist_ok=True)
@@ -367,6 +378,21 @@ def test_validation_pass_with_fail_word_in_body_is_complete(workspace):
 # the assessor cannot read as an explicit PASS must hold the spec in Phase 2.
 # ---------------------------------------------------------------------------
 
+DOCUMENTED_TASKS_ONE_PARENT_DONE = """## Tasks
+
+### [x] 1.0 Add the CLI flag
+
+#### 1.0 Proof Artifact(s)
+
+- CLI: `tool --new-flag` returns expected output demonstrates feature works
+
+#### 1.0 Tasks
+
+- [x] 1.1 Implement the flag
+- [x] 1.2 Add the test
+"""
+
+
 def _spec_through_audit(workspace, audit_body, tasks_body, sequence="01", feature="auth"):
     """Create one spec directory with spec, tasks, and audit files."""
     feature_dir = workspace / "docs" / "specs" / f"{sequence}-spec-{feature}"
@@ -530,6 +556,7 @@ def test_checkbox_inside_a_code_fence_is_not_an_incomplete_task(workspace):
         "Sub-task format:\n\n```markdown\n- [ ] N.N description\n```\n"
     )
     feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, tasks)
+    write_proof(feature_dir)
 
     spec = assess.main(base_path=workspace)["active_specs"][0]
 
@@ -566,6 +593,76 @@ def test_unclosed_fence_does_not_hide_incomplete_tasks(workspace):
 
 
 # ---------------------------------------------------------------------------
+# Proof artifacts are the evidence the workflow promises; the router must look
+# for them on disk instead of trusting a checked box.
+# ---------------------------------------------------------------------------
+
+def test_completed_parent_task_without_proof_artifact_blocks_validation(workspace):
+    """Tasks marked done with no proof file on disk are not ready to validate."""
+    _spec_through_audit(workspace, PASSING_AUDIT, DOCUMENTED_TASKS_ONE_PARENT_DONE)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_PROOFS_MISSING"
+    assert spec["blockers"] == ["missing proof artifact: 01-task-01-proofs.md"]
+
+
+def test_completed_parent_task_with_proof_artifact_reaches_validation(workspace):
+    """With the proof file present the spec advances to validation."""
+    feature_dir = _spec_through_audit(
+        workspace, PASSING_AUDIT, DOCUMENTED_TASKS_ONE_PARENT_DONE
+    )
+    write_proof(feature_dir)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_START"
+    assert spec["blockers"] == []
+
+
+def test_undocumented_task_format_still_requires_at_least_one_proof_artifact(workspace):
+    """Evidence is unconditional: an unmappable task file still owes one proof."""
+    _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 3
+    assert spec["detailed_state"] == "S3_PROOFS_MISSING"
+    assert spec["blockers"] == [
+        "missing proof artifact: 01-proofs/01-task-NN-proofs.md (at least one)"
+    ]
+
+
+def test_undocumented_task_format_advances_once_a_proof_exists(workspace):
+    """One proof artifact satisfies the fallback requirement."""
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+    write_proof(feature_dir)
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_START"
+
+
+def test_passing_validation_is_not_reopened_by_the_proof_gate(workspace):
+    """A spec that already cleared validation is reported complete, not reopened.
+
+    The proof gate guards the route *into* validation. Retroactively dragging a
+    spec that already carries a passing validation report back to Phase 3 would
+    reopen shipped work, so the stronger later gate wins.
+    """
+    feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1\n")
+    (feature_dir / "01-validation-auth.md").write_text("- **Overall:** PASS\n")
+
+    spec = assess.main(base_path=workspace)["active_specs"][0]
+
+    assert spec["phase"] == 4
+    assert spec["detailed_state"] == "S4_COMPLETE"
+
+
+# ---------------------------------------------------------------------------
 # Selection order
 # ---------------------------------------------------------------------------
 
@@ -585,6 +682,7 @@ def test_highest_sequence_wins_within_the_same_phase(workspace):
 def test_validation_without_a_verdict_is_not_complete(workspace):
     """A validation report with no readable verdict does not close the workflow."""
     feature_dir = _spec_through_audit(workspace, PASSING_AUDIT, "# Tasks\n- [x] Task 1")
+    write_proof(feature_dir)
     (feature_dir / "01-validation-auth.md").write_text("# Validation\n\nLooks good to me.\n")
 
     spec = assess.main(base_path=workspace)["active_specs"][0]

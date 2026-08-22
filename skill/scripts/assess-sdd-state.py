@@ -217,6 +217,10 @@ def _is_parents_only(tasks_text):
 
 
 _CHECKBOX = re.compile(r'^\s*(?:[-*+]\s+|#{1,6}\s+)?\[([ x~])\]', re.IGNORECASE)
+_PARENT_TASK = re.compile(
+    r'^\s*(?:[-*+]\s+|#{1,6}\s+)?\[([ x~])\]\s*(\d+)\.0\b',
+    re.IGNORECASE,
+)
 
 
 def _has_incomplete_tasks(tasks_text):
@@ -226,6 +230,52 @@ def _has_incomplete_tasks(tasks_text):
         if match and match.group(1).lower() in (" ", "~"):
             return True
     return False
+
+
+def _completed_parent_tasks(tasks_text):
+    """Return the numbers of parent tasks marked complete, e.g. [1, 2].
+
+    Recognises the documented ``### [x] N.0 Title`` form. Task files that do not
+    use it yield no parent tasks, in which case the proof gate falls back to
+    requiring at least one proof artifact rather than a per-task mapping.
+    """
+    completed = []
+    for line in _strip_code_fences(tasks_text).splitlines():
+        match = _PARENT_TASK.match(line)
+        if match and match.group(1).lower() == "x":
+            completed.append(int(match.group(2)))
+    return completed
+
+
+def _missing_proof_artifacts(spec_dir, seq_num, tasks_text):
+    """Return the proof artifacts an implemented spec still owes.
+
+    Phase 3 requires one proof file per completed parent task at
+    ``[NN]-proofs/[NN]-task-[TT]-proofs.md``, created *before* the task's
+    commit. Without this check the router advances to validation with zero
+    evidence on disk, which is the one thing the workflow promises never to do.
+
+    Evidence is required unconditionally. When the task file uses the documented
+    ``### [x] N.0`` headings, each completed parent task must have its own proof
+    file. When it does not, the per-task mapping cannot be derived, so the gate
+    falls back to the weakest requirement that is still a requirement: the spec
+    must have produced at least one proof artifact.
+    """
+    proofs_dir = spec_dir / f"{seq_num}-proofs"
+    completed_parents = _completed_parent_tasks(tasks_text)
+
+    if completed_parents:
+        return [
+            expected
+            for expected in (
+                f"{seq_num}-task-{parent:02d}-proofs.md" for parent in completed_parents
+            )
+            if not (proofs_dir / expected).is_file()
+        ]
+
+    if not any(proofs_dir.glob(f"{seq_num}-task-*-proofs.md")):
+        return [f"{proofs_dir.name}/{seq_num}-task-NN-proofs.md (at least one)"]
+    return []
 
 
 def get_specs_dir(base_path=None):
@@ -335,17 +385,30 @@ def assess_spec_dir(spec_path):
         state["action_required"] = "Implement Tasks (Phase 3)"
         return state
 
-    if not state["files_found"]["validation"]:
-        state["phase"] = 4
-        state["detailed_state"] = "S4_START"
-        state["action_required"] = "Validate Implementation (Phase 4)"
+    # A spec that already carries a passing validation report has cleared a
+    # later and stronger gate, so it is reported as complete rather than
+    # reopened. Every other route into validation requires evidence on disk.
+    validation_verdict, validation_error = (None, None)
+    if state["files_found"]["validation"]:
+        validation_verdict, validation_error = _read_report_verdict(spec_dir / validation_file)
+        if validation_verdict == PASS:
+            state["phase"] = 4
+            state["detailed_state"] = "S4_COMPLETE"
+            state["action_required"] = "Validation Complete. Start next feature (Phase 1)"
+            return state
+
+    missing_proofs = _missing_proof_artifacts(spec_dir, seq_num, tasks_text)
+    if missing_proofs:
+        state["phase"] = 3
+        state["detailed_state"] = "S3_PROOFS_MISSING"
+        state["action_required"] = "Create the missing proof artifacts before validation (Phase 3)"
+        state["blockers"].extend(f"missing proof artifact: {name}" for name in missing_proofs)
         return state
 
     state["phase"] = 4
-    validation_verdict, validation_error = _read_report_verdict(spec_dir / validation_file)
-    if validation_verdict == PASS:
-        state["detailed_state"] = "S4_COMPLETE"
-        state["action_required"] = "Validation Complete. Start next feature (Phase 1)"
+    if not state["files_found"]["validation"]:
+        state["detailed_state"] = "S4_START"
+        state["action_required"] = "Validate Implementation (Phase 4)"
     elif validation_verdict == FAIL:
         state["detailed_state"] = "S4_FAILED"
         state["action_required"] = "Fix Validation Failures (Phase 4)"
